@@ -848,6 +848,7 @@ nav { }
   .reviews-list { display: grid; grid-template-columns: repeat(3,1fr); align-items: start; }
 }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 </head>
 <body>
 
@@ -1521,14 +1522,19 @@ nav { }
     <button aria-label="Lukk" class="modal-close" onclick="closeModal('adminModal')">✕</button>
     <div id="adminLoginForm">
       <div style="text-align:center;margin-bottom:1.25rem">
-        
         <h2 style="font-size:1.4rem">Admin innlogging</h2>
-        <p style="font-size:12px;color:var(--gray);margin-top:4px">Yeganeh Style — dashbord</p>
+        <p style="font-size:12px;color:var(--gray);margin-top:4px">Vi sender deg en innloggingslenke på e-post</p>
       </div>
-      <div class="form-group"><label>Brukernavn</label><input type="text" id="adminUser" placeholder="Brukernavn" autocomplete="username"></div>
-      <div class="form-group"><label>Passord</label><input type="password" id="adminPass" placeholder="Passord" autocomplete="current-password" onkeydown="if(event.key==='Enter')doAdminLogin()"></div>
-      <div id="adminErr" style="color:#e07060;font-size:12px;margin-bottom:0.5rem;display:none">Feil brukernavn eller passord</div>
-      <button class="confirm-btn" onclick="doAdminLogin()">Logg inn</button>
+      <div id="adminMagicSent" style="display:none;text-align:center;padding:1.5rem 0;">
+        <div style="font-size:2rem;margin-bottom:0.75rem;">📧</div>
+        <p style="color:var(--accent);font-weight:500;margin-bottom:0.4rem;">Sjekk e-posten din!</p>
+        <p style="font-size:12px;color:var(--gray);">Vi har sendt en innloggingslenke. Klikk på lenken for å åpne dashbordet.</p>
+      </div>
+      <div id="adminMagicForm">
+        <div class="form-group"><label>E-postadresse</label><input type="email" id="adminEmail" placeholder="din@epost.no" autocomplete="email" onkeydown="if(event.key==='Enter')doAdminLogin()"></div>
+        <div id="adminErr" style="color:#e07060;font-size:12px;margin-bottom:0.5rem;display:none">Noe gikk galt. Prøv igjen.</div>
+        <button class="confirm-btn" onclick="doAdminLogin()">Send innloggingslenke</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1536,6 +1542,27 @@ nav { }
 <div class="toast" id="toast"></div>
 
 <script>
+// ── SUPABASE CLIENT ──
+var SB_URL='https://cauftwsojtumogyshmqq.supabase.co';
+var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNhdWZ0d3NvanR1bW9neXNobXFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1OTUzMzgsImV4cCI6MjA5NzE3MTMzOH0.KPjNLzetQGtXfJN9Ps-d5ma4KYX0XN2ey47KTmVObKs';
+var sb=null;
+try{ sb=supabase.createClient(SB_URL,SB_KEY); window.sb=sb; }catch(e){ console.warn('Supabase init failed',e); }
+
+// ── AUTH STATE ──
+var currentUser=null;
+if(sb){
+  sb.auth.getSession().then(function(res){
+    if(res.data&&res.data.session){ currentUser=res.data.session.user; }
+  });
+  sb.auth.onAuthStateChange(function(event,session){
+    currentUser=session?session.user:null;
+    if(event==='SIGNED_IN'&&session){
+      closeModal('adminModal');
+      openAdminPanel();
+    }
+  });
+}
+
 var PRODUCTS = [
   {id:1,name:'Scalp Relief Shampoo',brand:'NAK Hair',cat:'shampoo',price:289,emoji:'🧴',desc:'Beroligende for sensitiv hodebunne',badge:'best',stock:20},
   {id:2,name:'Hydrate Me Shampoo',brand:'NAK Hair',cat:'shampoo',price:259,emoji:'💧',desc:'Intensiv fuktighetsgivende rens',badge:null,stock:20},
@@ -1555,6 +1582,18 @@ var PRODUCTS = [
   {id:16,name:'Volume Mousse',brand:'NAK Hair',cat:'styling',price:219,emoji:'🫙',desc:'Lett mousse for løft og hold',badge:null,stock:20}
 ];
 window.PRODUCTS = PRODUCTS;
+
+// Load products from Supabase (replaces hardcoded list if successful)
+if(sb){
+  sb.from('products').select('*').eq('visible',true).order('sort_order').then(function(res){
+    if(res.data&&res.data.length){
+      window.PRODUCTS=res.data.map(function(p){
+        return {id:p.id,name:p.name,brand:p.brand||'NAK Hair',cat:p.category,price:p.price,oldPrice:p.old_price,emoji:p.emoji||'',desc:p.description,badge:p.badge,stock:p.stock,img:p.image_url||null};
+      });
+      renderProducts();
+    }
+  });
+}
 
 var cart=[], showAll=false, activeFilter='alle';
 
@@ -1724,10 +1763,19 @@ function confirmPayment(){
   }
   var ship=sum>=499?0:59;
   var payNames={vipps:'Vipps',klarna:'Klarna',apple:'Apple Pay',card:'Kort'};
+  var fullName=(fornavn+' '+document.getElementById('ckEtternavn').value.trim()).trim();
+  var orderData={
+    customer_name:fullName,email:epost,phone:telefon,
+    address:adresse+', '+postnr+' '+sted,
+    items:cart.map(function(c){return {name:c.name,qty:c.qty,price:c.price};}),
+    total:sum+ship,shipping:ship,
+    payment_method:payNames[selectedPay]||'Kort',
+    status:'ny'
+  };
+  if(sb) sb.from('orders').insert(orderData).then(function(){});
   if(window.ADMIN_ADD_ORDER && cart.length){
     window.ADMIN_ADD_ORDER({
-      customer:(fornavn+' '+document.getElementById('ckEtternavn').value.trim()).trim(),
-      phone:telefon,email:epost,
+      customer:fullName,phone:telefon,email:epost,
       address:adresse+', '+postnr+' '+sted,
       items:items,total:sum+ship,
       payment:payNames[selectedPay]||'Kort'
@@ -1742,23 +1790,23 @@ function confirmPayment(){
 }
 
 function doAdminLogin(){
-  var u=document.getElementById('adminUser').value.trim();
-  var p=document.getElementById('adminPass').value.trim();
+  var email=(document.getElementById('adminEmail').value||'').trim();
   var errEl=document.getElementById('adminErr');
-  if(u==='admin@yeganeh.no'&&p==='yeganeh2070'){
-    errEl.style.display='none';
-    closeModal('adminModal');
-    openAdminPanel();
-  } else {
-    errEl.style.display='block';
-    errEl.textContent='Feil brukernavn eller passord';
-  }
+  errEl.style.display='none';
+  if(!email){errEl.style.display='block';errEl.textContent='Fyll inn e-postadresse';return;}
+  if(!sb){errEl.style.display='block';errEl.textContent='Tilkobling feilet. Prøv igjen.';return;}
+  sb.auth.signInWithOtp({email:email,options:{emailRedirectTo:window.location.origin}}).then(function(res){
+    if(res.error){errEl.style.display='block';errEl.textContent='Feil: '+res.error.message;return;}
+    document.getElementById('adminMagicForm').style.display='none';
+    document.getElementById('adminMagicSent').style.display='block';
+  });
 }
 
 function openAdminPanel(){
   document.getElementById('adminPanel').style.display='block';
   document.body.style.overflow='hidden';
   if(window.admInit) window.admInit();
+  if(sb&&window.admRefreshData) window.admRefreshData();
 }
 function closeAdminPanel(){
   document.getElementById('adminPanel').style.display='none';
@@ -1809,13 +1857,18 @@ function confirmBooking(){
   var svcPrice=svcText.indexOf(' – ')>-1?svcText.split(' – ')[1]:'';
   var dato=document.getElementById('bookDate').value;
   var datoFmt=dato?dato.split('-').reverse().join('.'):'';
+  var bookingData={
+    customer_name:(fornavn+' '+etternavn).trim(),
+    phone:tlf,service:svcName,service_price:svcPrice,
+    booking_date:dato,
+    booking_time:document.getElementById('bookTime').value,
+    status:'ny'
+  };
+  if(sb) sb.from('bookings').insert(bookingData).then(function(){});
   if(window.ADMIN_ADD_BOOKING){
     window.ADMIN_ADD_BOOKING({
-      customer:(fornavn+' '+etternavn).trim(),
-      phone:tlf,
-      service:svcName,
-      price:svcPrice,
-      date:datoFmt,
+      customer:bookingData.customer_name,phone:tlf,
+      service:svcName,price:svcPrice,date:datoFmt,
       time:document.getElementById('bookTime').value
     });
   }
@@ -1826,6 +1879,15 @@ function openB2B(){openModal('b2bModal');}
 function confirmB2B(){
   var firma=(document.getElementById('b2bFirma').value||'').trim();
   if(!firma){showToast('Fyll inn firmanavn');return;}
+  var b2bPayload={
+    firma:firma,
+    org_nr:(document.getElementById('b2bOrg').value||'').trim(),
+    kontakt:(document.getElementById('b2bKontakt').value||'').trim(),
+    phone:(document.getElementById('b2bTlf').value||'').trim(),
+    email:(document.getElementById('b2bEpost').value||'').trim(),
+    status:'ny'
+  };
+  if(sb) sb.from('b2b_requests').insert(b2bPayload).then(function(){});
   if(!window.B2B_REQUESTS) window.B2B_REQUESTS=[];
   var now=new Date();
   window.B2B_REQUESTS.unshift({
@@ -1862,6 +1924,19 @@ var REVIEWS=[
   {name:'Sara M.',rating:5,text:'Fantastisk balayage! Hadi tok seg virkelig god tid og resultatet ble helt nydelig.',date:'April 2026',approved:true}
 ];
 window.REVIEWS=REVIEWS;
+// Load reviews from Supabase
+if(sb){
+  sb.from('reviews').select('*').eq('approved',true).order('created_at',{ascending:false}).then(function(res){
+    if(res.data&&res.data.length){
+      window.REVIEWS=res.data.map(function(r){
+        var d=new Date(r.created_at);
+        var months=['Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember'];
+        return {id:r.id,name:r.name,rating:r.rating,text:r.text,date:months[d.getMonth()]+' '+d.getFullYear(),approved:true};
+      });
+      renderReviews();
+    }
+  });
+}
 var selectedStars=5;
 
 function renderReviews(){
@@ -1910,7 +1985,7 @@ function submitReview(){
   var now=new Date();
   var months=['Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember'];
   REVIEWS.push({name:name,rating:selectedStars,text:text,date:months[now.getMonth()]+' '+now.getFullYear(),approved:false});
-  // notify admin
+  if(sb) sb.from('reviews').insert({name:name,rating:selectedStars,text:text,approved:false}).then(function(){});
   if(window.ADMIN_NEW_REVIEW) window.ADMIN_NEW_REVIEW();
   document.getElementById('reviewForm').style.display='none';
   document.getElementById('reviewSuccess').classList.add('show');
@@ -1963,7 +2038,10 @@ setupStarPicker();
 <div id="adminPanel" style="display:none;position:fixed;inset:0;z-index:1000;background:#0a1209;overflow-y:auto;-webkit-overflow-scrolling:touch;-webkit-text-size-adjust:100%;font-size:14px;box-sizing:border-box;">
 <div style="position:sticky;top:0;background:rgba(6,12,6,0.97);border-bottom:1px solid #1e2e21;display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1rem;z-index:10;">
   <span style="font-size:14px;font-weight:600;color:#d6e4d0;">Yeganeh Admin</span>
-  <button onclick="closeAdminPanel()" style="background:none;border:1px solid #1e2e21;border-radius:8px;padding:6px 12px;color:#7a9478;font-size:12px;cursor:pointer;">Lukk</button>
+  <div style="display:flex;gap:6px;">
+    <button onclick="if(window.sb){window.sb.auth.signOut().then(function(){closeAdminPanel();if(window.showToast)window.showToast('Logget ut');});}" style="background:none;border:1px solid #1e2e21;border-radius:8px;padding:6px 12px;color:#7a9478;font-size:12px;cursor:pointer;">Logg ut</button>
+    <button onclick="closeAdminPanel()" style="background:none;border:1px solid #1e2e21;border-radius:8px;padding:6px 12px;color:#7a9478;font-size:12px;cursor:pointer;">Lukk</button>
+  </div>
 </div>
 <div id="admTabs" style="display:flex;gap:4px;overflow-x:auto;padding:0.75rem 1rem;background:rgba(8,16,8,0.8);border-bottom:1px solid #1e2e21;-webkit-overflow-scrolling:touch;"></div>
 <div id="admBody" style="padding:1rem;"></div>
@@ -2015,6 +2093,56 @@ var DATA={
 };
 var editProdId=null;
 var activeChatId=null;
+
+// Load real data from Supabase into DATA
+window.admRefreshData=function(){
+  var s=window.sb||null;
+  if(!s) return;
+  s.from('orders').select('*').order('created_at',{ascending:false}).then(function(r){
+    if(r.data&&r.data.length){
+      DATA.orders=r.data.map(function(o){
+        var d=new Date(o.created_at);
+        var fmt=d.getDate()+'.'+(d.getMonth()+1)+'.'+d.getFullYear();
+        var items=Array.isArray(o.items)?o.items.map(function(i){return i.name+' x'+i.qty;}).join(', '):(o.items||'');
+        return {id:'#'+o.id.split('-')[0].toUpperCase(),date:fmt,customer:o.customer_name,phone:o.phone,email:o.email,address:o.address,items:items,total:o.total,status:o.status||'ny',payment:o.payment_method||'Kort'};
+      });
+      if(window.admCurrentTab==='ordre'||window.admCurrentTab==='oversikt') if(window.admGoTab) window.admGoTab(window.admCurrentTab);
+    }
+  });
+  s.from('bookings').select('*').order('created_at',{ascending:false}).then(function(r){
+    if(r.data&&r.data.length){
+      DATA.bookings=r.data.map(function(b,i){
+        return {id:'#B'+i,date:b.booking_date||'',time:b.booking_time||'',customer:b.customer_name,phone:b.phone,service:b.service,price:b.service_price||'',status:b.status||'ny',supaId:b.id};
+      });
+      if(window.admCurrentTab==='timer') if(window.admGoTab) window.admGoTab('timer');
+    }
+  });
+  s.from('b2b_requests').select('*').order('created_at',{ascending:false}).then(function(r){
+    if(r.data){
+      window.B2B_REQUESTS=r.data.map(function(b,i){
+        return {id:'#F'+(i+1),firma:b.firma,org:b.org_nr||'',kontakt:b.kontakt||'',tlf:b.phone||'',epost:b.email||'',dato:new Date(b.created_at).toLocaleDateString('no-NO'),status:b.status||'ny',supaId:b.id};
+      });
+    }
+  });
+  s.from('reviews').select('*').order('created_at',{ascending:false}).then(function(r){
+    if(r.data){
+      window.REVIEWS=r.data.map(function(rv){
+        var d=new Date(rv.created_at);
+        var months=['Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember'];
+        return {id:rv.id,name:rv.name,rating:rv.rating,text:rv.text,date:months[d.getMonth()]+' '+d.getFullYear(),approved:rv.approved,supaId:rv.id};
+      });
+      if(window.renderReviews) window.renderReviews();
+    }
+  });
+  s.from('products').select('*').order('sort_order').then(function(r){
+    if(r.data&&r.data.length){
+      window.PRODUCTS=r.data.map(function(p){
+        return {id:p.id,name:p.name,brand:p.brand||'NAK Hair',cat:p.category,price:p.price,oldPrice:p.old_price,emoji:p.emoji||'',desc:p.description,badge:p.badge,stock:p.stock,img:p.image_url||null,visible:p.visible};
+      });
+      if(window.renderProducts) window.renderProducts();
+    }
+  });
+};
 
 var TABS=[
   {id:'oversikt',label:'Oversikt'},
@@ -2379,17 +2507,27 @@ function viewOkonomi(){
 
 // ── ACTIONS ──
 window.admGo=function(t){go(t);};
-window.admOrd=function(id,s){
-  for(var i=0;i<DATA.orders.length;i++) if(DATA.orders[i].id===id) DATA.orders[i].status=s;
+window.admCurrentTab='oversikt';
+window.admGoTab=function(t){go(t);};
+window.admOrd=function(id,status){
+  var supaClient=window.sb||null;
+  for(var i=0;i<DATA.orders.length;i++){
+    if(DATA.orders[i].id===id){
+      DATA.orders[i].status=status;
+      if(supaClient&&DATA.orders[i].supaId) supaClient.from('orders').update({status:status}).eq('id',DATA.orders[i].supaId).then(function(){});
+    }
+  }
   go('ordre');
-  if(window.showToast) window.showToast('Ordre '+id+': '+s);
+  if(window.showToast) window.showToast('Ordre '+id+': '+status);
 };
 window.admBk=function(i,s){DATA.bookings[i].status=s;go('timer');};
 window.admBkDel=function(i){var n=DATA.bookings[i]?DATA.bookings[i].customer:'';DATA.bookings.splice(i,1);go('timer');if(window.showToast)window.showToast('Time avlyst'+(n?': '+n:''));};
 var admImgData=null;
+var admImgFile=null;
 window.admPImgPreview=function(e){
   var file=e.target.files[0];
   if(!file) return;
+  admImgFile=file;
   var reader=new FileReader();
   reader.onload=function(ev){
     admImgData=ev.target.result;
@@ -2398,7 +2536,7 @@ window.admPImgPreview=function(e){
   reader.readAsDataURL(file);
 };
 window.admNewP=function(){
-  editProdId=null;admImgData=null;
+  editProdId=null;admImgData=null;admImgFile=null;
   el('admProdForm').style.display='block';
   el('admProdFormTitle').textContent='Nytt produkt';
   el('admPName').value='';el('admPPrice').value='';el('admPStock').value='';el('admPDesc').value='';
@@ -2420,30 +2558,53 @@ window.admEditP=function(id){
   el('admPImgPrev').innerHTML=p.img?'<img src="'+p.img+'" alt="'+p.name+'" style="width:60px;height:60px;border-radius:10px;object-fit:cover;">':'';
 };
 window.admSaveP=function(){
-  var name=el('admPName').value;
+  var name=el('admPName').value.trim();
   var price=parseInt(el('admPPrice').value,10);
   if(!name||!price){if(window.showToast)window.showToast('Fyll inn navn og pris');return;}
-  var prods=window.PRODUCTS||[];
-  if(editProdId){
-    for(var i=0;i<prods.length;i++){
-      if(prods[i].id===editProdId){
-        prods[i].name=name;
-        prods[i].price=price;
-        prods[i].stock=parseInt(el('admPStock').value,10)||0;
-        prods[i].cat=el('admPCat').value;
-        prods[i].desc=el('admPDesc').value;
-        if(admImgData) prods[i].img=admImgData;
+  var stock=parseInt(el('admPStock').value,10)||0;
+  var cat=el('admPCat').value;
+  var desc=el('admPDesc').value.trim();
+  var s=window.sb||null;
+
+  function saveWithImageUrl(imgUrl){
+    var productRow={name:name,brand:'NAK Hair',category:cat,price:price,description:desc,stock:stock,visible:true,image_url:imgUrl||null,badge:'new'};
+    if(s){
+      if(editProdId){
+        s.from('products').update(productRow).eq('id',editProdId).then(function(r){
+          if(r.error&&window.showToast) window.showToast('Lagringsfeil: '+r.error.message);
+          else{ if(window.admRefreshData) window.admRefreshData(); go('produkter'); if(window.showToast) window.showToast('Produkt oppdatert!'); }
+        });
+      } else {
+        s.from('products').insert(productRow).select().then(function(r){
+          if(r.error&&window.showToast) window.showToast('Lagringsfeil: '+r.error.message);
+          else{ if(window.admRefreshData) window.admRefreshData(); go('produkter'); if(window.showToast) window.showToast('Produkt lagret og publisert!'); }
+        });
       }
+    } else {
+      // local fallback
+      var prods=window.PRODUCTS||[];
+      if(editProdId){
+        for(var i=0;i<prods.length;i++) if(prods[i].id===editProdId){ prods[i].name=name;prods[i].price=price;prods[i].stock=stock;prods[i].cat=cat;prods[i].desc=desc;if(imgUrl)prods[i].img=imgUrl; }
+      } else {
+        prods.push({id:Date.now(),name:name,brand:'NAK Hair',cat:cat,price:price,oldPrice:null,stock:stock,emoji:'',desc:desc,badge:'new',img:imgUrl||null});
+      }
+      go('produkter'); if(window.renderProducts) window.renderProducts(); if(window.showToast) window.showToast('Produkt lagret!');
     }
-  } else {
-    var np={id:Date.now(),name:name,brand:'NAK Hair',cat:el('admPCat').value,price:price,oldPrice:null,stock:parseInt(el('admPStock').value,10)||0,emoji:'',desc:el('admPDesc').value,badge:'new'};
-    if(admImgData) np.img=admImgData;
-    prods.push(np);
+    admImgData=null; admImgFile=null;
   }
-  admImgData=null;
-  go('produkter');
-  if(window.renderProducts) window.renderProducts();
-  if(window.showToast) window.showToast('Produkt lagret og publisert!');
+
+  if(admImgFile&&s){
+    if(window.showToast) window.showToast('Laster opp bilde...');
+    var ext=admImgFile.name.split('.').pop();
+    var path='product-'+Date.now()+'.'+ext;
+    s.storage.from('product-images').upload(path,admImgFile,{cacheControl:'3600',upsert:false}).then(function(r){
+      if(r.error){ if(window.showToast) window.showToast('Bildeopplasting feilet: '+r.error.message); saveWithImageUrl(admImgData); return; }
+      var pub=s.storage.from('product-images').getPublicUrl(r.data.path);
+      saveWithImageUrl(pub.data.publicUrl);
+    });
+  } else {
+    saveWithImageUrl(admImgData||null);
+  }
 };
 window.admSaleP=function(id){
   var prods=window.PRODUCTS||[];
@@ -2479,10 +2640,16 @@ window.admApplySale=function(id){
   if(window.showToast) window.showToast('Tilbud aktivert: '+nyPris+' kr');
 };
 window.admDelP=function(id){
-  var prods=window.PRODUCTS||[];
-  for(var i=prods.length-1;i>=0;i--) if(prods[i].id===id) prods.splice(i,1);
-  go('produkter');
-  if(window.renderProducts) window.renderProducts();
+  if(!confirm('Slette dette produktet?')) return;
+  var s=window.sb||null;
+  if(s){ s.from('products').delete().eq('id',id).then(function(){ if(window.admRefreshData) window.admRefreshData(); go('produkter'); if(window.showToast) window.showToast('Produkt slettet'); }); }
+  else {
+    var prods=window.PRODUCTS||[];
+    for(var i=prods.length-1;i>=0;i--) if(prods[i].id===id) prods.splice(i,1);
+    go('produkter');
+    if(window.renderProducts) window.renderProducts();
+    if(window.showToast) window.showToast('Produkt slettet');
+  }
 };
 window.admSaveDc=function(){
   var code=el('admDcCode').value.toUpperCase();
@@ -2603,8 +2770,21 @@ window.admPrintLabel=function(){
   pw.document.close();
   pw.print();
 };
-window.admReqDone=function(i){if(window.B2B_REQUESTS&&window.B2B_REQUESTS[i]){window.B2B_REQUESTS[i].status='behandlet';go('foresporsler');if(window.showToast)window.showToast('Markert som behandlet');}};
-window.admReqDel=function(i){if(window.B2B_REQUESTS)window.B2B_REQUESTS.splice(i,1);go('foresporsler');if(window.showToast)window.showToast('Forespørsel slettet');};
+window.admReqDone=function(i){
+  var req=window.B2B_REQUESTS&&window.B2B_REQUESTS[i];
+  if(!req) return;
+  req.status='behandlet';
+  var s=window.sb||null;
+  if(s&&req.supaId) s.from('b2b_requests').update({status:'behandlet'}).eq('id',req.supaId).then(function(){});
+  go('foresporsler');if(window.showToast)window.showToast('Markert som behandlet');
+};
+window.admReqDel=function(i){
+  var req=window.B2B_REQUESTS&&window.B2B_REQUESTS[i];
+  var s=window.sb||null;
+  if(req&&s&&req.supaId) s.from('b2b_requests').delete().eq('id',req.supaId).then(function(){});
+  if(window.B2B_REQUESTS) window.B2B_REQUESTS.splice(i,1);
+  go('foresporsler');if(window.showToast)window.showToast('Forespørsel slettet');
+};
 window.ADMIN_ADD_ORDER=function(o){
   var num=1043;
   for(var i=0;i<DATA.orders.length;i++){
@@ -2628,9 +2808,29 @@ window.ADMIN_ADD_BOOKING=function(b){
     status:'ny'
   });
 };
-window.admRevOk=function(i){if(window.REVIEWS&&window.REVIEWS[i]){window.REVIEWS[i].approved=true;go('anmeldelser');if(window.renderReviews)window.renderReviews();if(window.showToast)window.showToast('Anmeldelse publisert');}};
-window.admRevDel=function(i){if(window.REVIEWS)window.REVIEWS.splice(i,1);go('anmeldelser');if(window.renderReviews)window.renderReviews();if(window.showToast)window.showToast('Anmeldelse slettet');};
-window.admRevHide=function(i){if(window.REVIEWS&&window.REVIEWS[i]){window.REVIEWS[i].approved=false;go('anmeldelser');if(window.renderReviews)window.renderReviews();if(window.showToast)window.showToast('Anmeldelse skjult');}};
+window.admRevOk=function(i){
+  var rev=window.REVIEWS&&window.REVIEWS[i];
+  if(!rev) return;
+  rev.approved=true;
+  var s=window.sb||null;
+  if(s&&rev.supaId) s.from('reviews').update({approved:true}).eq('id',rev.supaId).then(function(){});
+  go('anmeldelser');if(window.renderReviews)window.renderReviews();if(window.showToast)window.showToast('Anmeldelse publisert');
+};
+window.admRevDel=function(i){
+  var rev=window.REVIEWS&&window.REVIEWS[i];
+  var s=window.sb||null;
+  if(rev&&s&&rev.supaId) s.from('reviews').delete().eq('id',rev.supaId).then(function(){});
+  if(window.REVIEWS) window.REVIEWS.splice(i,1);
+  go('anmeldelser');if(window.renderReviews)window.renderReviews();if(window.showToast)window.showToast('Anmeldelse slettet');
+};
+window.admRevHide=function(i){
+  var rev=window.REVIEWS&&window.REVIEWS[i];
+  if(!rev) return;
+  rev.approved=false;
+  var s=window.sb||null;
+  if(s&&rev.supaId) s.from('reviews').update({approved:false}).eq('id',rev.supaId).then(function(){});
+  go('anmeldelser');if(window.renderReviews)window.renderReviews();if(window.showToast)window.showToast('Anmeldelse skjult');
+};
 window.ADMIN_NEW_REVIEW=function(){};
 window.admInit=function(){go('oversikt');};
 })();

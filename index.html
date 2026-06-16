@@ -1654,14 +1654,14 @@ function renderProducts(){
     else if(p.badge==='sale') bHtml='<span class="prod-badge badge-sale">Tilbud</span>';
     var oldHtml=p.oldPrice?'<span class="old">'+p.oldPrice+' kr</span>':'';
     var imgInner=p.img?'<img src="'+p.img+'" alt="'+p.name+'" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">':(p.emoji?'<span class="prod-emoji">'+p.emoji+'</span>':'<span style="font-family:Cormorant Garamond,serif;font-size:2rem;color:var(--accent);">'+p.name.charAt(0)+'</span>');
-    html+='<div class="product-card" onclick="openProduct('+p.id+')">'
+    html+='<div class="product-card" onclick="openProduct(\''+p.id+'\')">'
       +'<div class="prod-img">'+bHtml+imgInner+'</div>'
       +'<div class="prod-info">'
       +'<div class="prod-brand">'+p.brand+'</div>'
       +'<div class="prod-name">'+p.name+'</div>'
       +'<div class="prod-foot">'
       +'<div class="prod-price">'+oldHtml+p.price+' kr</div>'
-      +'<button class="add-btn" onclick="addToCart('+p.id+',event)">+ Legg til</button>'
+      +'<button class="add-btn" onclick="addToCart(\''+p.id+'\',event)">+ Legg til</button>'
       +'</div></div></div>';
   }
   grid.innerHTML=html;
@@ -1681,11 +1681,12 @@ function toggleAll(){
 window.renderProducts=renderProducts;
 function addToCart(id,e){
   if(e) e.stopPropagation();
+  var sid=String(id);
   var p=null;
-  for(var i=0;i<PRODUCTS.length;i++){if(PRODUCTS[i].id===id){p=PRODUCTS[i];break;}}
+  for(var i=0;i<PRODUCTS.length;i++){if(String(PRODUCTS[i].id)===sid){p=PRODUCTS[i];break;}}
   if(!p) return;
   var ex=null;
-  for(var i=0;i<cart.length;i++){if(cart[i].id===id){ex=cart[i];break;}}
+  for(var i=0;i<cart.length;i++){if(String(cart[i].id)===sid){ex=cart[i];break;}}
   if(ex) ex.qty++;
   else cart.push({id:p.id,name:p.name,brand:p.brand,price:p.price,emoji:p.emoji,qty:1});
   updateCartUI();showToast(p.name+' lagt til');
@@ -1708,9 +1709,9 @@ function updateCartUI(){
       +'<div class="cart-item-name">'+item.name+'</div>'
       +'<div class="cart-item-row">'
       +'<div class="qty-ctrl">'
-      +'<button class="qty-btn" onclick="changeQty('+item.id+',-1)">−</button>'
+      +'<button class="qty-btn" onclick="changeQty(\''+item.id+'\',-1)">−</button>'
       +'<span class="qty-num">'+item.qty+'</span>'
-      +'<button class="qty-btn" onclick="changeQty('+item.id+',1)">+</button>'
+      +'<button class="qty-btn" onclick="changeQty(\''+item.id+'\',1)">+</button>'
       +'</div>'
       +'<div class="cart-item-price">'+(item.price*item.qty)+' kr</div>'
       +'</div></div></div>';
@@ -1735,7 +1736,8 @@ function updateCartUI(){
   if(shipEl) shipEl.textContent=sum>=499?'Gratis':'59 kr';
 }
 function changeQty(id,delta){
-  for(var i=0;i<cart.length;i++){if(cart[i].id===id){cart[i].qty+=delta;if(cart[i].qty<=0)cart.splice(i,1);break;}}
+  var sid=String(id);
+  for(var i=0;i<cart.length;i++){if(String(cart[i].id)===sid){cart[i].qty+=delta;if(cart[i].qty<=0)cart.splice(i,1);break;}}
   updateCartUI();
 }
 function openCart(){document.getElementById('cartPanel').classList.add('open');document.getElementById('cartOverlay').classList.add('open');}
@@ -1852,7 +1854,8 @@ function closeAdminPanel(){
 }
 
 function openProduct(id){
-  var p=null;for(var i=0;i<PRODUCTS.length;i++){if(PRODUCTS[i].id===id){p=PRODUCTS[i];break;}}
+  var sid=String(id);
+  var p=null;for(var i=0;i<PRODUCTS.length;i++){if(String(PRODUCTS[i].id)===sid){p=PRODUCTS[i];break;}}
   if(!p) return;
   var oldHtml=p.oldPrice?'<span style="font-size:13px;color:var(--muted);text-decoration:line-through;margin-right:8px">'+p.oldPrice+' kr</span>':'';
   var saveHtml=p.oldPrice?'<span style="font-size:11px;color:#6dca8a;font-weight:600;margin-left:6px">Spar '+(p.oldPrice-p.price)+' kr</span>':'';
@@ -1869,7 +1872,7 @@ function openProduct(id){
     +'<p style="font-size:11px;margin-bottom:1rem">'+stockHtml+'</p>'
     +'<div style="font-size:1.4rem;font-weight:700;margin-bottom:0.5rem">'+oldHtml+p.price+' kr'+saveHtml+'</div>'
     +'<p style="font-size:11px;color:var(--gray);margin-bottom:1.25rem">Gratis frakt over 499 kr · Levering 2–4 virkedager</p>'
-    +'<button class="confirm-btn" onclick="addToCart('+p.id+');closeModal(\'productModal\')">Legg i handlekurv</button>';
+    +'<button class="confirm-btn" onclick="addToCart(\''+p.id+'\');closeModal(\'productModal\')">Legg i handlekurv</button>';
   openModal('productModal');
 }
 function openBooking(){

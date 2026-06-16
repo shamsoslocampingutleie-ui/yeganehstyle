@@ -17,11 +17,17 @@
 <meta property="og:locale" content="nb_NO">
 <meta property="og:url" content="https://www.yeganehstyle.no/">
 <meta name="twitter:card" content="summary_large_image">
-<!-- Preconnect for faster font loading -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<!-- Preconnect: Supabase CDN + fonts.gstatic.com (font files) -->
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://cauftwsojtumogyshmqq.supabase.co" crossorigin>
+<!-- Preload critical woff2 files — latin-ext covers æøå, latin covers A-Z -->
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYp3tKky2F7i6C.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtKky2F7g.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5rDD-htM8A_6pUKz9ugk.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5rDD-iNM8A_6pUKz9.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7W0Q5n-wU.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2">
 <!-- Structured data: local business -->
 <script type="application/ld+json">
 {
@@ -52,6 +58,28 @@
 }
 </script>
 <style>
+/* ── FONTS INLINED — no external CSS request, zero FOUT ── */
+/* Cormorant Garamond 300 normal */
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:300;font-display:block;src:url(https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYp3tKky2F7i6C.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:300;font-display:block;src:url(https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtKky2F7g.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* Cormorant Garamond 400 normal */
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:400;font-display:block;src:url(https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYp3tKky2F7i6C.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Cormorant Garamond';font-style:normal;font-weight:400;font-display:block;src:url(https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtKky2F7g.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* Cormorant Garamond 300 italic */
+@font-face{font-family:'Cormorant Garamond';font-style:italic;font-weight:300;font-display:block;src:url(https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5rDD-htM8A_6pUKz9ugk.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Cormorant Garamond';font-style:italic;font-weight:300;font-display:block;src:url(https://fonts.gstatic.com/s/cormorantgaramond/v21/co3smX5slCNuHLi8bLeY9MK7whWMhyjYrGFEsdtdc62E6zd5rDD-iNM8A_6pUKz9.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* Inter 400 */
+@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:block;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7W0Q5n-wU.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:block;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* Inter 500 */
+@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:block;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7W0Q5n-wU.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Inter';font-style:normal;font-weight:500;font-display:block;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* Inter 600 */
+@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:block;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7W0Q5n-wU.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Inter';font-style:normal;font-weight:600;font-display:block;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+/* Inter 700 (buttons, bold labels) */
+@font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:block;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa25L7W0Q5n-wU.woff2) format('woff2');unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF}
+@font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:block;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 
@@ -848,7 +876,6 @@ nav { }
   .reviews-list { display: grid; grid-template-columns: repeat(3,1fr); align-items: start; }
 }
 </style>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 </head>
 <body>
 
@@ -1542,15 +1569,16 @@ nav { }
 <div class="toast" id="toast"></div>
 
 <script>
-// ── SUPABASE CLIENT ──
+// ── SUPABASE — loaded async, init via callback ──
 var SB_URL='https://cauftwsojtumogyshmqq.supabase.co';
 var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNhdWZ0d3NvanR1bW9neXNobXFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1OTUzMzgsImV4cCI6MjA5NzE3MTMzOH0.KPjNLzetQGtXfJN9Ps-d5ma4KYX0XN2ey47KTmVObKs';
 var sb=null;
-try{ sb=supabase.createClient(SB_URL,SB_KEY); window.sb=sb; }catch(e){ console.warn('Supabase init failed',e); }
-
-// ── AUTH STATE ──
 var currentUser=null;
-if(sb){
+
+window._onSbLoad=function(){
+  try{ sb=supabase.createClient(SB_URL,SB_KEY); window.sb=sb; }
+  catch(e){ console.warn('Supabase init failed',e); return; }
+
   sb.auth.getSession().then(function(res){
     if(res.data&&res.data.session){ currentUser=res.data.session.user; }
   });
@@ -1561,7 +1589,29 @@ if(sb){
       openAdminPanel();
     }
   });
-}
+
+  // Refresh products from DB (replaces static list)
+  sb.from('products').select('*').eq('visible',true).order('sort_order').then(function(res){
+    if(res.data&&res.data.length){
+      window.PRODUCTS=res.data.map(function(p){
+        return {id:p.id,name:p.name,brand:p.brand||'NAK Hair',cat:p.category,price:p.price,oldPrice:p.old_price,emoji:p.emoji||'',desc:p.description,badge:p.badge,stock:p.stock,img:p.image_url||null};
+      });
+      renderProducts();
+    }
+  });
+
+  // Refresh reviews from DB
+  sb.from('reviews').select('*').eq('approved',true).order('created_at',{ascending:false}).then(function(res){
+    if(res.data&&res.data.length){
+      window.REVIEWS=res.data.map(function(r){
+        var d=new Date(r.created_at);
+        var months=['Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember'];
+        return {id:r.id,name:r.name,rating:r.rating,text:r.text,date:months[d.getMonth()]+' '+d.getFullYear(),approved:true};
+      });
+      renderReviews();
+    }
+  });
+};
 
 var PRODUCTS = [
   {id:1,name:'Scalp Relief Shampoo',brand:'NAK Hair',cat:'shampoo',price:289,emoji:'🧴',desc:'Beroligende for sensitiv hodebunne',badge:'best',stock:20},
@@ -1582,18 +1632,6 @@ var PRODUCTS = [
   {id:16,name:'Volume Mousse',brand:'NAK Hair',cat:'styling',price:219,emoji:'🫙',desc:'Lett mousse for løft og hold',badge:null,stock:20}
 ];
 window.PRODUCTS = PRODUCTS;
-
-// Load products from Supabase (replaces hardcoded list if successful)
-if(sb){
-  sb.from('products').select('*').eq('visible',true).order('sort_order').then(function(res){
-    if(res.data&&res.data.length){
-      window.PRODUCTS=res.data.map(function(p){
-        return {id:p.id,name:p.name,brand:p.brand||'NAK Hair',cat:p.category,price:p.price,oldPrice:p.old_price,emoji:p.emoji||'',desc:p.description,badge:p.badge,stock:p.stock,img:p.image_url||null};
-      });
-      renderProducts();
-    }
-  });
-}
 
 var cart=[], showAll=false, activeFilter='alle';
 
@@ -1924,19 +1962,6 @@ var REVIEWS=[
   {name:'Sara M.',rating:5,text:'Fantastisk balayage! Hadi tok seg virkelig god tid og resultatet ble helt nydelig.',date:'April 2026',approved:true}
 ];
 window.REVIEWS=REVIEWS;
-// Load reviews from Supabase
-if(sb){
-  sb.from('reviews').select('*').eq('approved',true).order('created_at',{ascending:false}).then(function(res){
-    if(res.data&&res.data.length){
-      window.REVIEWS=res.data.map(function(r){
-        var d=new Date(r.created_at);
-        var months=['Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember'];
-        return {id:r.id,name:r.name,rating:r.rating,text:r.text,date:months[d.getMonth()]+' '+d.getFullYear(),approved:true};
-      });
-      renderReviews();
-    }
-  });
-}
 var selectedStars=5;
 
 function renderReviews(){
@@ -2836,5 +2861,7 @@ window.admInit=function(){go('oversikt');};
 })();
 
 </script>
+<!-- Supabase loaded async — does NOT block rendering -->
+<script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" onload="if(window._onSbLoad)window._onSbLoad()"></script>
 </body>
 </html>

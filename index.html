@@ -882,6 +882,48 @@ nav { }
   .hero-inner { max-width: 760px; }
   .reviews-list { display: grid; grid-template-columns: repeat(3,1fr); align-items: start; }
 }
+
+/* ── B2B PORTAL ── */
+@keyframes b2pSpin { to { transform: rotate(360deg); } }
+.b2p-spin {
+  width: 36px; height: 36px;
+  border: 3px solid rgba(158,196,154,0.15);
+  border-top-color: #9ec49a;
+  border-radius: 50%;
+  animation: b2pSpin 0.75s linear infinite;
+}
+.b2p-center { display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50vh;text-align:center;padding:2rem 1rem; }
+.b2p-auth-wrap { max-width:460px;margin:0 auto;padding:1rem 1rem 3rem; }
+.b2p-eyebrow { font-size:10px;color:#9ec49a;letter-spacing:0.15em;text-transform:uppercase;font-weight:600;margin-bottom:6px; }
+.b2p-h2 { font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:300;color:#e2eedb;margin:0 0 8px; }
+.b2p-tabs { display:grid;grid-template-columns:1fr 1fr;border:1px solid rgba(80,120,70,0.2);border-radius:10px;overflow:hidden;margin-bottom:1.5rem; }
+.b2p-tab { padding:11px;background:transparent;border:0;color:#7a9478;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.2s; }
+.b2p-tab-a { background:rgba(80,120,70,0.2);color:#9ec49a; }
+.b2p-fi { margin-bottom:0.8rem; }
+.b2p-label { display:block;font-size:10px;color:#7a9478;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;font-weight:500; }
+.b2p-input { width:100%;padding:11px 13px;background:rgba(15,28,15,0.9);border:1px solid rgba(80,120,70,0.3);border-radius:10px;font-size:15px;color:#e2eedb;font-family:inherit;box-sizing:border-box;outline:none;transition:border-color 0.2s; }
+.b2p-input:focus { border-color:rgba(120,190,100,0.55); }
+.b2p-input::placeholder { color:#3a5a38; }
+.b2p-btn-main { display:block;width:100%;padding:13px;background:rgba(80,120,70,0.3);border:1px solid rgba(120,180,100,0.4);border-radius:12px;color:#9ec49a;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:background 0.2s;text-align:center; }
+.b2p-btn-main:hover { background:rgba(80,120,70,0.45); }
+.b2p-btn-sec { padding:9px 20px;background:transparent;border:1px solid rgba(80,120,70,0.25);border-radius:8px;color:#7a9478;font-size:12px;cursor:pointer;font-family:inherit;transition:all 0.2s; }
+.b2p-btn-sec:hover { border-color:rgba(80,120,70,0.5);color:#9ec49a; }
+.b2p-btn-sm { padding:9px 13px;background:rgba(80,120,70,0.15);border:1px solid rgba(80,120,70,0.3);border-radius:8px;color:#9ec49a;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap; }
+.b2p-err { font-size:12px;color:#e07060;padding:9px 12px;background:rgba(220,80,60,0.08);border:1px solid rgba(220,80,60,0.2);border-radius:8px;margin-bottom:0.85rem; }
+.b2p-link { color:#9ec49a;cursor:pointer;text-decoration:underline; }
+.b2p-brreg-ok { background:rgba(80,120,70,0.1);border-radius:8px;padding:8px 10px;border:1px solid rgba(80,120,70,0.2); }
+.b2p-status-icon { width:64px;height:64px;border-radius:50%;border:2px solid rgba(158,196,154,0.4);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 1.25rem; }
+.b2p-welcome-card { background:linear-gradient(135deg,rgba(25,50,20,0.85),rgba(12,24,12,0.85));border:1px solid rgba(80,120,70,0.25);border-radius:16px;padding:1.5rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem; }
+.b2p-campaign { background:linear-gradient(135deg,rgba(201,125,110,0.12),rgba(201,125,110,0.04));border:1px solid rgba(201,125,110,0.2);border-radius:14px;padding:1.25rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap; }
+.b2p-card { background:rgba(10,18,10,0.7);border:1px solid rgba(80,120,70,0.18);border-radius:14px;padding:1.25rem; }
+.b2p-card-title { font-size:12px;font-weight:700;color:#c8dfc4;margin-bottom:0.75rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(80,120,70,0.12);letter-spacing:0.04em; }
+.b2p-cat-head { font-size:9px;color:#9ec49a;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;margin-bottom:0.4rem; }
+.b2p-price-row { display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(80,120,70,0.1);gap:0.75rem; }
+.b2p-price-row:last-child { border-bottom:none; }
+.b2p-price-name { font-size:12px;color:#c0d4bc;flex:1; }
+.b2p-retail { font-size:10px;color:#3a5a38;text-decoration:line-through; }
+.b2p-b2bprice { font-size:14px;font-weight:700;color:#9ec49a; }
+.b2p-disc-badge { font-size:9px;color:#e8c04a;font-weight:600; }
 </style>
 </head>
 <body>
@@ -1222,8 +1264,11 @@ nav { }
   <div class="b2b-icon">B2B</div>
   <div class="b2b-text">
     <h3>Driver du salong eller bedrift?</h3>
-    <p>Få eksklusive B2B-priser på hele NAK Hair-sortimentet. Søk om bedriftskonto og få tilgang til din egen bedriftsportal med spesialpriser og kampanjer.</p>
-    <a class="b2b-link" onclick="openB2B()">Søk om bedriftskonto →</a>
+    <p>Få eksklusive B2B-priser på hele NAK Hair-sortimentet. Registrer din bedrift med org.nr, og få tilgang til din personlige bedriftsportal med spesialpriser, kampanjer og enkel bestilling.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.75rem;">
+      <a class="b2b-link" onclick="openB2B()">Logg inn / Registrer →</a>
+      <a class="b2b-link" style="opacity:0.6;" onclick="b2bSetTab&&b2bSetTab('register');openB2B()">Ny bedriftskonto</a>
+    </div>
   </div>
 </div>
 
@@ -1378,21 +1423,17 @@ nav { }
   </div>
 </div>
 
-<div class="modal-overlay" id="b2bModal" onclick="overlayClick(event,'b2bModal')">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <button aria-label="Lukk" class="modal-close" onclick="closeModal('b2bModal')">✕</button>
-    <h2>Bedriftsportal</h2>
-    <p style="font-size:12px;color:var(--gray);margin-bottom:1.25rem">Få B2B-priser på hele NAK Hair-sortimentet.</p>
-    <div class="form-group"><label>Firmanavn</label><input type="text" id="b2bFirma" placeholder="Din salong AS"></div>
-    <div class="form-group"><label>Org.nr</label><input type="text" id="b2bOrg" placeholder="000 000 000"></div>
-    <div class="form-row">
-      <div class="form-group"><label>Kontaktperson</label><input type="text" id="b2bKontakt" placeholder="Navn"></div>
-      <div class="form-group"><label>Telefon</label><input type="tel" id="b2bTlf" placeholder="+47..."></div>
+<!-- B2B PORTAL (full-screen overlay) -->
+<div id="b2bPortal" style="display:none;position:fixed;inset:0;z-index:960;background:#060d06;overflow-y:auto;-webkit-overflow-scrolling:touch;">
+  <div style="position:sticky;top:0;z-index:10;background:rgba(4,8,4,0.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(60,100,50,0.2);display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem;height:54px;">
+    <div style="display:flex;align-items:center;gap:8px;">
+      <svg viewBox="0 0 32 32" fill="none" style="width:20px;height:20px"><path d="M8 4 Q10 8 16 16" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/><path d="M24 4 Q22 8 16 16" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/><path d="M16 16 Q12 22 10 26" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="27" r="2.5" stroke="#c97d6e" stroke-width="1.8" fill="none"/><path d="M16 16 Q20 22 22 26" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/><circle cx="23" cy="27" r="2.5" stroke="#c97d6e" stroke-width="1.8" fill="none"/><circle cx="16" cy="16" r="1.5" fill="#c97d6e"/></svg>
+      <span style="font-size:13px;font-weight:600;color:#d6e4d0;">Yeganeh Style</span>
+      <span style="font-size:10px;color:#3a5a38;padding:2px 7px;border:1px solid rgba(80,120,70,0.2);border-radius:4px;letter-spacing:0.08em;">B2B</span>
     </div>
-    <div class="form-group"><label>E-post</label><input type="email" id="b2bEpost" placeholder="post@salong.no"></div>
-    <button class="confirm-btn" onclick="confirmB2B()">Send forespørsel</button>
+    <button onclick="closeB2BPortal()" style="background:none;border:1px solid rgba(80,120,70,0.25);border-radius:8px;padding:6px 14px;color:#7a9478;font-size:12px;cursor:pointer;font-family:inherit;">Lukk ✕</button>
   </div>
+  <div id="b2pBody" style="min-height:calc(100vh - 54px);padding:1.5rem 1rem 1rem;"></div>
 </div>
 
 <div class="modal-overlay" id="infoModal" onclick="overlayClick(event,'infoModal')">
@@ -1918,7 +1959,7 @@ function confirmBooking(){
   document.getElementById('bookingForm').style.display='none';
   document.getElementById('bookingSuccess').classList.add('show');
 }
-function openB2B(){openModal('b2bModal');}
+function openB2B(){if(window.openB2BPortalFn)window.openB2BPortalFn();else openModal('b2bModal');}
 function confirmB2B(){
   var firma=(document.getElementById('b2bFirma').value||'').trim();
   if(!firma){showToast('Fyll inn firmanavn');return;}
@@ -2064,6 +2105,357 @@ renderReviews();
 setupStarPicker();
 </script>
 
+<!-- ═══════ B2B PORTAL MODULE ═══════ -->
+<script>
+(function(){
+'use strict';
+
+var BST={user:null,account:null,tab:'login',brreg:null};
+
+function validOrgNr(n){
+  n=(n||'').replace(/[\s -]/g,'');
+  if(!/^\d{9}$/.test(n)) return false;
+  var w=[3,2,7,6,5,4,3,2],s=0;
+  for(var i=0;i<8;i++) s+=parseInt(n[i])*w[i];
+  var c=s%11;c=c===0?0:11-c;
+  return c!==10&&c===parseInt(n[8]);
+}
+function fmtOrg(n){n=(n||'').replace(/\s/g,'');return n.length===9?n.slice(0,3)+' '+n.slice(3,6)+' '+n.slice(6):n;}
+
+async function brregLookup(nr){
+  nr=(nr||'').replace(/\s/g,'');
+  try{var r=await fetch('https://data.brreg.no/enhetsregisteret/api/enheter/'+nr);return r.ok?await r.json():null;}
+  catch(e){return null;}
+}
+
+function smartCheck(data,brreg){
+  var flags=[];
+  if(brreg){
+    if(brreg.konkurs) flags.push('Selskapet er under konkursbehandling');
+    if(brreg.underAvvikling) flags.push('Selskapet er under avvikling');
+    if(brreg.underTvangsavviklingEllerTvangsopplosning) flags.push('Selskapet er under tvangsoppløsning');
+    var bn=(brreg.navn||'').toLowerCase(),fn=(data.firma||'').toLowerCase();
+    var bw=bn.replace(/\bas\b|\bsa\b|\bda\b|\bans\b/g,'').trim();
+    var fw=fn.replace(/\bas\b|\bsa\b|\bda\b|\bans\b/g,'').trim();
+    if(bw&&fw&&bw.length>3&&fw.length>3){
+      var common=0;
+      for(var ci=0;ci<fw.length;ci++) if(bw.includes(fw[ci])) common++;
+      if(common/Math.max(bw.length,fw.length)<0.45&&!bw.includes(fw.split(' ')[0])&&!fw.includes(bw.split(' ')[0])){
+        flags.push('Firmanavn samsvarer lite med registrert navn ('+brreg.navn+')');
+      }
+    }
+  }
+  var tmps=['tempmail','guerrillamail','mailinator','yopmail','throwaway','trashmail','10minutemail','sharklasers','guerrillamailblock'];
+  var dom=(data.email||'').toLowerCase().split('@')[1]||'';
+  if(tmps.some(function(t){return dom.includes(t);})) flags.push('Mistenkelig e-postdomene oppdaget');
+  return {flagged:flags.length>0,reasons:flags};
+}
+
+var B2B_PRICES=[
+  {name:'NAK Hydrate Me Shampoo 250ml',retail:249,b2b:149,cat:'Shampoo'},
+  {name:'NAK Hydrate Me Conditioner 250ml',retail:249,b2b:149,cat:'Conditioner'},
+  {name:'NAK Scalp Relief Shampoo 250ml',retail:269,b2b:159,cat:'Shampoo'},
+  {name:'NAK Colour Shield Shampoo 250ml',retail:259,b2b:155,cat:'Shampoo'},
+  {name:'NAK Bond Complex 150ml',retail:449,b2b:269,cat:'Behandling'},
+  {name:'NAK Repair Treatment 200ml',retail:349,b2b:199,cat:'Behandling'},
+  {name:'NAK Leave-In Conditioning Spray 150ml',retail:279,b2b:169,cat:'Behandling'},
+  {name:'NAK Hair Oil Treatment 100ml',retail:329,b2b:199,cat:'Behandling'},
+  {name:'NAK Style.Me Texture Spray 220ml',retail:229,b2b:139,cat:'Styling'},
+  {name:'NAK Style.Me Styling Cream 150ml',retail:229,b2b:139,cat:'Styling'},
+  {name:'NAK Colour Masque Blonde 200ml',retail:299,b2b:179,cat:'Farge'},
+  {name:'NAK Colour Masque Brunette 200ml',retail:299,b2b:179,cat:'Farge'}
+];
+
+window.openB2BPortalFn=function(){
+  var el=document.getElementById('b2bPortal');
+  if(!el) return;
+  el.style.display='block';
+  document.body.style.overflow='hidden';
+  b2bInit();
+};
+window.closeB2BPortal=function(){
+  var el=document.getElementById('b2bPortal');
+  if(el) el.style.display='none';
+  document.body.style.overflow='';
+};
+
+function render(html){var c=document.getElementById('b2pBody');if(c) c.innerHTML=html;}
+function showSpin(msg){render('<div class="b2p-center"><div class="b2p-spin"></div>'+(msg?'<div style="color:#7a9478;font-size:12px;margin-top:12px;">'+msg+'</div>':'')+'</div>');}
+function showE(id,msg){var e=document.getElementById(id);if(e){e.textContent=msg;e.style.display='block';}}
+function hideE(id){var e=document.getElementById(id);if(e) e.style.display='none';}
+function val(id){var e=document.getElementById(id);return e?e.value:'';}
+function fi(id,label,type,ph,ac){
+  return '<div class="b2p-fi"><label class="b2p-label">'+label+'</label>'
+    +'<input id="'+id+'" type="'+type+'" placeholder="'+ph+'" autocomplete="'+(ac||'on')+'" class="b2p-input"></div>';
+}
+function fiT(id,label,ph){return fi(id,label,'text',ph);}
+
+async function b2bInit(){
+  showSpin('Laster...');
+  if(!window.sb){BST.user=null;BST.account=null;renderAuth();return;}
+  try{
+    var res=await window.sb.auth.getSession();
+    var sess=res&&res.data&&res.data.session;
+    if(sess&&sess.user){
+      var meta=sess.user.user_metadata||{};
+      if(meta.role==='b2b'){
+        BST.user=sess.user;
+        await loadAccount(sess.user.email);
+        return;
+      }
+    }
+    BST.user=null;BST.account=null;renderAuth();
+  }catch(e){BST.user=null;BST.account=null;renderAuth();}
+}
+
+async function loadAccount(email){
+  if(!window.sb){BST.account={status:'pending',email:email,firma:'Din bedrift'};renderPending();return;}
+  var r=await window.sb.from('b2b_applications').select('*').eq('email',email.toLowerCase()).maybeSingle();
+  if(r&&r.data){
+    BST.account=r.data;
+    if(r.data.status==='approved') renderPortal();
+    else if(r.data.status==='rejected') renderRejected();
+    else if(r.data.status==='suspended') renderSuspended();
+    else renderPending();
+  } else {
+    BST.account={status:'pending',email:email,firma:(BST.user&&BST.user.user_metadata&&BST.user.user_metadata.firma)||'Din bedrift'};
+    renderPending();
+  }
+}
+
+// ── AUTH ──
+function renderAuth(){
+  var isL=BST.tab==='login';
+  render('<div class="b2p-auth-wrap">'
+    +'<div style="text-align:center;margin-bottom:1.75rem;">'
+    +'<div class="b2p-eyebrow">Eksklusiv tilgang</div>'
+    +'<h2 class="b2p-h2">Bedriftsportal</h2>'
+    +'<p style="color:#7a9478;font-size:12px;line-height:1.6;margin-top:4px;">Logg inn eller registrer din bedrift for å få tilgang til eksklusive B2B-priser og avtaler.</p>'
+    +'</div>'
+    +'<div class="b2p-tabs">'
+    +'<button class="b2p-tab'+(isL?' b2p-tab-a':'')+'" onclick="b2bSetTab(\'login\')">Logg inn</button>'
+    +'<button class="b2p-tab'+(!isL?' b2p-tab-a':'')+'" onclick="b2bSetTab(\'register\')">Registrer bedrift</button>'
+    +'</div>'
+    +(isL?loginForm():regForm())
+    +'</div>');
+}
+
+function loginForm(){
+  return fi('b2lEmail','E-post','email','post@bedrift.no')
+    +fi('b2lPass','Passord','password','••••••••••','current-password')
+    +'<div id="b2lErr" class="b2p-err" style="display:none;"></div>'
+    +'<button class="b2p-btn-main" onclick="b2bDoLogin()">Logg inn som bedrift →</button>'
+    +'<p style="text-align:center;font-size:11px;color:#3a5a38;margin-top:0.75rem;">Ikke registrert? <span class="b2p-link" onclick="b2bSetTab(\'register\')">Registrer bedrift</span></p>';
+}
+
+function regForm(){
+  return '<div style="display:flex;gap:0.5rem;align-items:flex-end;margin-bottom:0.85rem;">'
+    +'<div style="flex:1;">'+fiT('b2rOrg','Organisasjonsnummer','123 456 789')+'</div>'
+    +'<button id="b2rOrgBtn" class="b2p-btn-sm" style="margin-top:20px;" onclick="b2bCheckOrg()">Sjekk →</button>'
+    +'</div>'
+    +'<div id="b2rOrgRes" style="font-size:11px;min-height:14px;margin-top:-0.5rem;margin-bottom:0.75rem;"></div>'
+    +fiT('b2rFirma','Firmanavn','Din salong AS')
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">'
+    +fiT('b2rKontakt','Kontaktperson','Ola Nordmann')
+    +fiT('b2rPhone','Telefon','+47 000 00 000')
+    +'</div>'
+    +fi('b2rEmail','E-post bedrift','email','post@bedrift.no')
+    +fi('b2rPass','Passord (min. 8 tegn)','password','••••••••••','new-password')
+    +fi('b2rPass2','Bekreft passord','password','••••••••••','new-password')
+    +'<div id="b2rAutoCheck" style="display:none;font-size:11px;padding:9px 12px;background:rgba(232,192,74,0.08);border:1px solid rgba(232,192,74,0.22);border-radius:8px;color:#b8944a;margin-bottom:0.85rem;line-height:1.6;"></div>'
+    +'<div id="b2rErr" class="b2p-err" style="display:none;"></div>'
+    +'<button class="b2p-btn-main" onclick="b2bDoRegister()">Registrer bedriftskonto →</button>'
+    +'<p style="text-align:center;font-size:10px;color:#3a5a38;margin-top:0.75rem;line-height:1.55;">Org.nr verifiseres mot Brønnøysundregistrene.<br>Konto gjennomgås og aktiveres innen 1–2 virkedager.</p>';
+}
+
+// ── STATES ──
+function renderPending(){
+  render('<div class="b2p-center">'
+    +'<div class="b2p-status-icon" style="border-color:rgba(232,192,74,0.5);">⏳</div>'
+    +'<h2 class="b2p-h2">Søknad til behandling</h2>'
+    +'<p style="color:#7a9478;font-size:12px;line-height:1.7;margin-bottom:1.5rem;max-width:380px;">Din søknad er mottatt og gjennomgås av oss. Du vil motta bekreftelse på <b style="color:#a8c4a0;">'+((BST.account||{}).email||'')+'</b> innen 1–2 virkedager.</p>'
+    +'<button class="b2p-btn-sec" onclick="b2bDoLogout()">Logg ut</button>'
+    +'</div>');
+}
+function renderRejected(){
+  render('<div class="b2p-center">'
+    +'<div class="b2p-status-icon" style="border-color:rgba(220,80,60,0.4);">✕</div>'
+    +'<h2 class="b2p-h2">Søknad ikke godkjent</h2>'
+    +'<p style="color:#7a9478;font-size:12px;line-height:1.7;margin-bottom:1.5rem;max-width:380px;">Dessverre ble søknaden avslått. Ta kontakt på <a href="mailto:post@yeganehstyle.no" style="color:#9ec49a;">post@yeganehstyle.no</a> for spørsmål.</p>'
+    +'<button class="b2p-btn-sec" onclick="b2bDoLogout()">Logg ut</button>'
+    +'</div>');
+}
+function renderSuspended(){
+  render('<div class="b2p-center">'
+    +'<div class="b2p-status-icon" style="border-color:rgba(180,80,60,0.4);">🔒</div>'
+    +'<h2 class="b2p-h2">Konto sperret</h2>'
+    +'<p style="color:#7a9478;font-size:12px;line-height:1.7;margin-bottom:1.5rem;max-width:380px;">Kontoen er midlertidig sperret. Kontakt oss på <a href="mailto:post@yeganehstyle.no" style="color:#9ec49a;">post@yeganehstyle.no</a>.</p>'
+    +'<button class="b2p-btn-sec" onclick="b2bDoLogout()">Logg ut</button>'
+    +'</div>');
+}
+
+// ── PORTAL ──
+function renderPortal(){
+  var acc=BST.account||{};
+  var disc=parseInt(acc.discount||0,10);
+  var cats={};
+  B2B_PRICES.forEach(function(p){if(!cats[p.cat])cats[p.cat]=[];cats[p.cat].push(p);});
+  var rows='';
+  Object.keys(cats).forEach(function(cat){
+    rows+='<div style="margin-bottom:1.25rem;"><div class="b2p-cat-head">'+cat+'</div>';
+    cats[cat].forEach(function(p){
+      var fp=disc?Math.round(p.b2b*(1-disc/100)):p.b2b;
+      rows+='<div class="b2p-price-row">'
+        +'<div class="b2p-price-name">'+p.name+'</div>'
+        +'<div style="text-align:right;flex-shrink:0;">'
+        +'<div class="b2p-retail">Veil. '+p.retail+' kr</div>'
+        +'<div class="b2p-b2bprice">'+fp+' kr</div>'
+        +(disc?'<div class="b2p-disc-badge">−'+disc+'%</div>':'')
+        +'</div></div>';
+    });
+    rows+='</div>';
+  });
+  render('<div style="max-width:860px;margin:0 auto;padding:0 0 3rem;">'
+    +'<div class="b2p-welcome-card">'
+    +'<div>'
+    +'<div class="b2p-eyebrow">Bedriftsportal — Eksklusiv tilgang</div>'
+    +'<h2 class="b2p-h2" style="margin-bottom:4px;">'+(acc.firma||'Din bedrift')+'</h2>'
+    +'<div style="font-size:11px;color:#7a9478;">Org.nr: '+fmtOrg(acc.org_nr||'')+(disc?'<span style="margin-left:10px;color:#e8c04a;font-weight:700;">'+disc+'% B2B-rabatt</span>':'')+'</div>'
+    +'</div>'
+    +'<button class="b2p-btn-sec" onclick="b2bDoLogout()">Logg ut</button>'
+    +'</div>'
+    +'<div class="b2p-campaign">'
+    +'<div>'
+    +'<div class="b2p-eyebrow" style="color:#c97d6e;">Bedriftskampanje – Aktiv</div>'
+    +'<div style="font-size:14px;color:#e2eedb;font-weight:600;margin-top:3px;">Kjøp for 5 000 kr+ og få gratis frakt</div>'
+    +'<div style="font-size:11px;color:#7a9478;margin-top:3px;">Gjelder alle B2B-ordrer. Beregnes automatisk på faktura.</div>'
+    +'</div>'
+    +'<div style="font-size:2.5rem;opacity:0.65;">📦</div>'
+    +'</div>'
+    +'<div class="b2p-card">'
+    +'<div class="b2p-card-title">Prisliste for bedriftskunder</div>'
+    +'<div style="font-size:10px;color:#7a9478;margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid rgba(80,120,70,0.1);">Alle priser er eks. mva. Gjelder kun godkjente bedriftskunder.</div>'
+    +rows
+    +'</div>'
+    +'<div class="b2p-card" style="margin-top:1rem;">'
+    +'<div class="b2p-card-title">Bestill eller ta kontakt</div>'
+    +'<p style="font-size:12px;color:#7a9478;line-height:1.7;margin-bottom:1rem;">Send e-post med produktnavn og antall. Angi bedriftsnavn og org.nr i emnefeltet. Vi fakturerer med din bedriftsrabatt.</p>'
+    +'<div style="display:flex;flex-wrap:wrap;gap:0.75rem;">'
+    +'<a href="mailto:post@yeganehstyle.no?subject=B2B+Bestilling+%E2%80%93+'+encodeURIComponent(acc.firma||'Bedrift')+'" class="b2p-btn-main" style="display:inline-flex;align-items:center;gap:7px;text-decoration:none;width:auto;padding:11px 22px;">✉ Send bestilling</a>'
+    +'<a href="tel:+4797855154" class="b2p-btn-sec" style="display:inline-flex;align-items:center;gap:6px;text-decoration:none;">📞 +47 978 55 154</a>'
+    +'</div>'
+    +'</div>'
+    +'</div>');
+}
+
+// ── ACTIONS ──
+window.b2bSetTab=function(t){BST.tab=t;renderAuth();};
+
+window.b2bCheckOrg=async function(){
+  var inp=document.getElementById('b2rOrg');
+  var res=document.getElementById('b2rOrgRes');
+  var btn=document.getElementById('b2rOrgBtn');
+  if(!inp||!res) return;
+  var nr=(inp.value||'').replace(/\s/g,'');
+  if(!nr){res.innerHTML='<span style="color:#e07060;">Skriv inn org.nr</span>';return;}
+  if(!validOrgNr(nr)){res.innerHTML='<span style="color:#e07060;">❌ Ugyldig organisasjonsnummer (kontrollsiffer stemmer ikke)</span>';return;}
+  if(btn){btn.textContent='...';btn.disabled=true;}
+  res.innerHTML='<span style="color:#7a9478;">Sjekker mot Brønnøysundregistrene...</span>';
+  var data=await brregLookup(nr);
+  if(btn){btn.textContent='Sjekk →';btn.disabled=false;}
+  if(!data){res.innerHTML='<span style="color:#e07060;">❌ Organisasjonsnummeret ble ikke funnet i registeret</span>';BST.brreg=null;return;}
+  BST.brreg=data;
+  var dot=data.konkurs||data.underAvvikling?'🔴':'🟢';
+  var stxt=data.konkurs?'Under konkurs':data.underAvvikling?'Under avvikling':'Aktivt selskap';
+  res.innerHTML='<div class="b2p-brreg-ok"><div style="color:#9ec49a;font-weight:600;">'+dot+' '+data.navn+'</div>'
+    +'<div style="color:#7a9478;margin-top:3px;">'+stxt+(data.naeringskode1?' · '+data.naeringskode1.beskrivelse:'')+(data.forretningsadresse?' · '+data.forretningsadresse.poststed:'')+'</div></div>';
+  var fEl=document.getElementById('b2rFirma');
+  if(fEl&&!fEl.value.trim()) fEl.value=data.navn;
+};
+
+window.b2bDoLogin=async function(){
+  var email=(val('b2lEmail')||'').trim().toLowerCase();
+  var pass=val('b2lPass')||'';
+  hideE('b2lErr');
+  if(!email||!pass){showE('b2lErr','Fyll inn e-post og passord.');return;}
+  if(!window.sb){showE('b2lErr','Tilkoblingsfeil. Prøv igjen.');return;}
+  showSpin('Logger inn...');
+  var r=await window.sb.auth.signInWithPassword({email:email,password:pass});
+  if(r.error){
+    BST.tab='login';renderAuth();
+    var m=r.error.message||'';
+    showE('b2lErr',m.toLowerCase().includes('invalid')?'Feil e-post eller passord.':m.toLowerCase().includes('confirm')?'Bekreft e-posten din først (sjekk innboksen).':'Innlogging feilet. Prøv igjen.');
+    return;
+  }
+  var meta=(r.data.user.user_metadata)||{};
+  if(meta.role!=='b2b'){
+    await window.sb.auth.signOut();
+    BST.tab='login';renderAuth();
+    showE('b2lErr','Denne kontoen er ikke registrert som bedriftskunde.');
+    return;
+  }
+  BST.user=r.data.user;
+  await loadAccount(email);
+};
+
+window.b2bDoRegister=async function(){
+  var org=(val('b2rOrg')||'').replace(/\s/g,'');
+  var firma=(val('b2rFirma')||'').trim();
+  var kontakt=(val('b2rKontakt')||'').trim();
+  var phone=(val('b2rPhone')||'').trim();
+  var email=(val('b2rEmail')||'').trim().toLowerCase();
+  var pass=val('b2rPass')||'';
+  var pass2=val('b2rPass2')||'';
+  hideE('b2rErr');
+  if(!org){showE('b2rErr','Skriv inn org.nr og klikk "Sjekk →" for å verifisere.');return;}
+  if(!validOrgNr(org)){showE('b2rErr','Ugyldig organisasjonsnummer. Klikk "Sjekk →" for å validere.');return;}
+  if(!firma){showE('b2rErr','Fyll inn firmanavn.');return;}
+  if(!kontakt){showE('b2rErr','Fyll inn kontaktperson.');return;}
+  if(!email||!email.includes('@')){showE('b2rErr','Fyll inn gyldig e-postadresse.');return;}
+  if(pass.length<8){showE('b2rErr','Passordet må ha minst 8 tegn.');return;}
+  if(pass!==pass2){showE('b2rErr','Passordene stemmer ikke overens.');return;}
+  var brreg=BST.brreg;
+  if(!brreg||brreg.organisasjonsnummer.toString()!==org){
+    showSpin('Verifiserer org.nr...');
+    brreg=await brregLookup(org);
+    if(!brreg){BST.tab='register';renderAuth();showE('b2rErr','Org.nr ikke funnet. Klikk "Sjekk →" for å bekrefte.');return;}
+    BST.brreg=brreg;
+  }
+  if(brreg.konkurs||brreg.underAvvikling){BST.tab='register';renderAuth();showE('b2rErr','Selskapet er under konkurs/avvikling og kan ikke opprette bedriftskonto.');return;}
+  var sc=smartCheck({firma:firma,email:email,phone:phone},brreg);
+  if(!window.sb){BST.tab='register';renderAuth();showE('b2rErr','Tilkoblingsfeil. Prøv igjen.');return;}
+  showSpin('Oppretter konto...');
+  var r=await window.sb.auth.signUp({
+    email:email,password:pass,
+    options:{data:{role:'b2b',firma:firma,org_nr:org,kontakt:kontakt,phone:phone,status:'pending',brreg_navn:brreg.navn,flagged:sc.flagged,flag_reasons:sc.reasons.join('; ')}}
+  });
+  if(r.error){
+    BST.tab='register';renderAuth();
+    var m=r.error.message||'';
+    showE('b2rErr',m.toLowerCase().includes('already')||m.toLowerCase().includes('registered')?'Denne e-postadressen er allerede registrert. Logg inn i stedet.':'Registrering feilet: '+m);
+    return;
+  }
+  window.sb.from('b2b_applications').insert({firma:firma,org_nr:org,kontakt:kontakt,email:email,phone:phone,status:'pending',discount:0,brreg_data:brreg,brreg_navn:brreg.navn,flagged:sc.flagged,flag_reason:sc.reasons.join('; ')}).then(function(){});
+  if(!window.B2B_REQUESTS) window.B2B_REQUESTS=[];
+  window.B2B_REQUESTS.unshift({firma:firma,org:org,kontakt:kontakt,tlf:phone,epost:email,dato:new Date().toLocaleDateString('no-NO'),status:'ny',flagged:sc.flagged,flag_reason:sc.reasons.join('; ')});
+  BST.user=r.data.user;
+  BST.account={status:'pending',email:email,firma:firma,org_nr:org};
+  renderPending();
+};
+
+window.b2bDoLogout=async function(){
+  if(window.sb) await window.sb.auth.signOut();
+  BST.user=null;BST.account=null;BST.tab='login';BST.brreg=null;
+  renderAuth();
+};
+
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){var p=document.getElementById('b2bPortal');if(p&&p.style.display==='block')window.closeB2BPortal();}
+});
+
+})();
+</script>
+
 <!-- ═══════ ADMIN PANEL ═══════ -->
 <div id="adminPanel" style="display:none;position:fixed;inset:0;z-index:1000;background:#0a1209;overflow-y:auto;-webkit-overflow-scrolling:touch;-webkit-text-size-adjust:100%;font-size:14px;box-sizing:border-box;">
 <div style="position:sticky;top:0;background:rgba(6,12,6,0.97);border-bottom:1px solid #1e2e21;display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1rem;z-index:10;">
@@ -2197,10 +2589,29 @@ window.admRefreshData=function(){
     }
   });
   s.from('b2b_requests').select('*').order('created_at',{ascending:false}).then(function(r){
-    if(r.data){
+    if(r.data&&r.data.length){
       window.B2B_REQUESTS=r.data.map(function(b,i){
-        return {id:'#F'+(i+1),firma:b.firma,org:b.org_nr||'',kontakt:b.kontakt||'',tlf:b.phone||'',epost:b.email||'',dato:new Date(b.created_at).toLocaleDateString('no-NO'),status:b.status||'ny',supaId:b.id};
+        return {id:'#F'+(i+1),firma:b.firma,org:b.org_nr||'',kontakt:b.kontakt||'',tlf:b.phone||'',epost:b.email||'',dato:new Date(b.created_at).toLocaleDateString('no-NO'),status:b.status||'ny',supaId:b.id,flagged:b.flagged,flag_reason:b.flag_reason};
       });
+    }
+  });
+  s.from('b2b_applications').select('*').order('created_at',{ascending:false}).then(function(r){
+    if(r.data&&r.data.length){
+      var apps=r.data.map(function(b){
+        return {firma:b.firma,org:b.org_nr||'',kontakt:b.kontakt||'',tlf:b.phone||'',epost:b.email||'',dato:b.created_at?new Date(b.created_at).toLocaleDateString('no-NO'):'',status:b.status||'pending',supaId:b.id,discount:b.discount||0,flagged:b.flagged,flag_reason:b.flag_reason,brreg_navn:b.brreg_navn};
+      });
+      if(!window.B2B_REQUESTS||!window.B2B_REQUESTS.length) window.B2B_REQUESTS=apps;
+      var pending=apps.filter(function(a){return a.status==='pending'||a.status==='ny';});
+      pending.forEach(function(a){
+        if(!window.B2B_REQUESTS.find(function(r){return r.epost===a.epost;})) window.B2B_REQUESTS.push(a);
+      });
+      var approved=apps.filter(function(a){return a.status==='approved';});
+      approved.forEach(function(a){
+        if(!DATA.b2bClients.find(function(c){return c.epost===a.epost;})){
+          DATA.b2bClients.push({firma:a.firma,org:a.org,kontakt:a.kontakt,tlf:a.tlf,epost:a.epost,active:true,discount:a.discount||0,supaId:a.supaId,approvedDate:a.dato});
+        }
+      });
+      if(window.admCurrentTab==='bedriftskunder') if(window.admGoTab) window.admGoTab('bedriftskunder');
     }
   });
   s.from('reviews').select('*').order('created_at',{ascending:false}).then(function(r){
@@ -2645,52 +3056,63 @@ function viewBehandlinger(){
 function viewBedriftskunder(){
   var clients=DATA.b2bClients||[];
   var reqs=window.B2B_REQUESTS||[];
-  var pending=reqs.filter(function(r){return r.status==='ny';});
-  var html='';
+  var pending=reqs.filter(function(r){return r.status==='ny'||r.status==='pending';});
+  var html='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem;">'
+    +'<div><div style="font-size:16px;font-weight:700;color:#d6e4d0;">Bedriftskunder</div>'
+    +'<div style="font-size:11px;color:#7a9478;margin-top:2px;">'+pending.length+' venter godkjenning · '+clients.length+' aktive</div></div>'
+    +'<button onclick="if(window.admRefreshData)window.admRefreshData();" style="'+btnCss('#3a6a3a')+'">↺ Oppdater</button>'
+    +'</div>';
   if(pending.length){
-    html+='<div style="font-size:13px;font-weight:700;color:#e8c04a;margin-bottom:0.5rem;">Venter på godkjenning ('+pending.length+')</div>';
+    html+='<div style="font-size:11px;font-weight:700;color:#e8c04a;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.6rem;">Søknader – venter godkjenning ('+pending.length+')</div>';
     reqs.forEach(function(r,i){
-      if(r.status!=='ny') return;
-      html+='<div style="background:#111f14;border:1px solid #e8c04a44;border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
-        +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">'
-        +'<b style="font-size:14px;color:#d6e4d0;">'+r.firma+'</b>'+badge('ny')+'</div>'
+      if(r.status!=='ny'&&r.status!=='pending') return;
+      var isFlag=r.flagged;
+      html+='<div style="background:#111f14;border:1px solid '+(isFlag?'#e8c04a55':'#e8c04a33')+';border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
+        +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.5rem;">'
+        +'<div><b style="font-size:14px;color:#d6e4d0;">'+r.firma+'</b>'+(r.org?'<span style="font-size:10px;color:#7a9478;margin-left:8px;">org.'+r.org+'</span>':'')+'</div>'
+        +'<div style="display:flex;gap:4px;align-items:center;">'+(isFlag?'<span style="font-size:9px;background:#e8c04a22;border:1px solid #e8c04a55;border-radius:6px;padding:2px 7px;color:#e8c04a;">⚠ Flagget</span>':'')+badge('ny')+'</div>'
+        +'</div>'
+        +(isFlag?'<div style="font-size:11px;background:rgba(232,192,74,0.07);border:1px solid rgba(232,192,74,0.2);border-radius:8px;padding:7px 10px;margin-bottom:0.6rem;color:#b8944a;">'+r.flag_reason+'</div>':'')
         +'<div style="font-size:11px;color:#7a9478;line-height:1.8;">'
-        +(r.org?'Org.nr: '+r.org+'<br>':'')+(r.kontakt?'Kontakt: '+r.kontakt+'<br>':'')
-        +(r.tlf?'<a href="tel:'+r.tlf+'" style="color:#7a9478;text-decoration:none;">'+r.tlf+'</a><br>':'')
-        +(r.epost?'<a href="mailto:'+r.epost+'" style="color:#7a9478;text-decoration:none;">'+r.epost+'</a><br>':'')
+        +(r.brreg_navn&&r.brreg_navn!==r.firma?'Registrert navn: <b style="color:#a8c4a0;">'+r.brreg_navn+'</b><br>':'')
+        +(r.kontakt?'Kontaktperson: '+r.kontakt+'<br>':'')
+        +(r.tlf?'Tlf: <a href="tel:'+r.tlf+'" style="color:#7a9478;">'+r.tlf+'</a><br>':'')
+        +(r.epost?'E-post: <a href="mailto:'+r.epost+'" style="color:#9ec49a;">'+r.epost+'</a><br>':'')
         +'Mottatt: '+r.dato+'</div>'
-        +'<div style="display:flex;gap:3px;margin-top:0.6rem;flex-wrap:wrap;">'
+        +'<div style="display:flex;gap:4px;margin-top:0.6rem;flex-wrap:wrap;">'
         +btn('✓ Godkjenn','admB2bApprove('+i+')','#27ae60')
         +btn('✕ Avvis','admB2bReject('+i+')','#c0392b')
-        +(r.epost?btn('E-post',"window.location.href='mailto:"+r.epost+"'",'#2980b9'):'')
+        +(r.epost?btn('✉ E-post',"window.location.href='mailto:"+r.epost+"'",'#2980b9'):'')
         +'</div></div>';
     });
   }
-  html+='<div style="font-size:13px;font-weight:600;color:#d6e4d0;margin:'+(pending.length?'1rem':'0')+' 0 0.5rem;">Aktive B2B-kunder ('+clients.length+')</div>';
+  html+='<div style="font-size:11px;font-weight:700;color:#7a9478;letter-spacing:0.08em;text-transform:uppercase;margin:'+(pending.length?'1.25rem':'0')+' 0 0.6rem;">Godkjente bedriftskunder ('+clients.length+')</div>';
   if(!clients.length){
-    html+='<div style="background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:2rem;text-align:center;color:#3a5a38;">Ingen aktive bedriftskunder ennå.<br><span style="font-size:11px;">Godkjenn forespørsler ovenfor for å legge til bedriftskunder.</span></div>';
+    html+='<div style="background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:2rem;text-align:center;color:#3a5a38;">Ingen godkjente bedriftskunder ennå.<br><span style="font-size:11px;">Godkjenn søknader ovenfor.</span></div>';
   } else {
     clients.forEach(function(c,j){
       html+='<div style="background:#111f14;border:1px solid '+(c.active?'#1e2e21':'#c0392b33')+';border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
-        +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">'
-        +'<div><b style="font-size:14px;color:#d6e4d0;">'+c.firma+'</b>'+(c.org?'<span style="font-size:10px;color:#7a9478;margin-left:6px;">org.'+c.org+'</span>':'')+'</div>'
-        +badge(c.active?'aktiv':'inaktiv')+'</div>'
+        +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.5rem;">'
+        +'<div><b style="font-size:14px;color:#d6e4d0;">'+c.firma+'</b>'+(c.org?'<span style="font-size:10px;color:#7a9478;margin-left:8px;">org.'+c.org+'</span>':'')+'</div>'
+        +badge(c.active?'godkjent':'sperret')+'</div>'
         +'<div style="font-size:11px;color:#7a9478;line-height:1.8;">'
-        +(c.kontakt?'Kontakt: '+c.kontakt+'<br>':'')
-        +(c.tlf?'<a href="tel:'+c.tlf+'" style="color:#7a9478;text-decoration:none;">'+c.tlf+'</a><br>':'')
-        +(c.epost?'<a href="mailto:'+c.epost+'" style="color:#7a9478;text-decoration:none;">'+c.epost+'</a><br>':'')
-        +(c.discount?'<b style="color:#e8c04a;">Rabatt: '+c.discount+'%</b><br>':'')
+        +(c.kontakt?'Kontaktperson: '+c.kontakt+'<br>':'')
+        +(c.tlf?'Tlf: <a href="tel:'+c.tlf+'" style="color:#7a9478;">'+c.tlf+'</a><br>':'')
+        +(c.epost?'E-post: <a href="mailto:'+c.epost+'" style="color:#9ec49a;">'+c.epost+'</a><br>':'')
+        +(c.discount?'<b style="color:#e8c04a;">B2B-rabatt: '+c.discount+'%</b><br>':'Ingen rabatt satt<br>')
         +'Godkjent: '+(c.approvedDate||'-')+'</div>'
-        +'<div style="display:flex;gap:3px;margin-top:0.6rem;flex-wrap:wrap;">'
-        +btn('Sett rabatt','admB2bDiscount('+j+')','#e8c04a')
-        +btn(c.active?'Deaktiver':'Aktiver','admB2bToggle('+j+')',c.active?'#c0392b':'#27ae60')
-        +(c.epost?btn('E-post',"window.location.href='mailto:"+c.epost+"'",'#2980b9'):'')
+        +'<div style="display:flex;gap:4px;margin-top:0.6rem;flex-wrap:wrap;">'
+        +btn('% Rabatt','admB2bDiscount('+j+')','#e8c04a')
+        +(c.active?btn('Sperre','admB2bSuspend('+j+')','#c0392b'):btn('Aktiver','admB2bToggle('+j+')','#27ae60'))
+        +(c.epost?btn('✉ E-post',"window.location.href='mailto:"+c.epost+"'",'#2980b9'):'')
         +btn('Slett','admB2bDel('+j+')','#c0392b')
         +'</div></div>';
     });
   }
   return html;
 }
+function btnCss(c){return 'padding:6px 12px;background:'+c+'22;border:1px solid '+c+'44;border-radius:8px;font-size:11px;color:'+c+';cursor:pointer;font-family:inherit;';}
+
 
 function viewForesporsler(){
   var reqs=window.B2B_REQUESTS||[];
@@ -3330,15 +3752,30 @@ window.admDelTreat=function(i){if(!confirm('Slette behandlingen?'))return;DATA.t
 window.admB2bApprove=function(i){
   var req=window.B2B_REQUESTS&&window.B2B_REQUESTS[i];if(!req) return;
   req.status='godkjent';
-  DATA.b2bClients.push({firma:req.firma,org:req.org||'',kontakt:req.kontakt||'',tlf:req.tlf||'',epost:req.epost||'',active:true,discount:0,approvedDate:new Date().toLocaleDateString('no-NO')});
-  var s=window.sb||null;if(s&&req.supaId) s.from('b2b_requests').update({status:'godkjent'}).eq('id',req.supaId).then(function(){});
-  go('bedriftskunder');if(window.showToast)window.showToast('Bedriftskunde godkjent: '+req.firma);
+  var disc=parseInt(prompt('Sett B2B-rabatt (%) for '+req.firma+':','0')||'0',10);
+  DATA.b2bClients.push({firma:req.firma,org:req.org||'',kontakt:req.kontakt||'',tlf:req.tlf||'',epost:req.epost||'',active:true,discount:disc,supaId:req.supaId,approvedDate:new Date().toLocaleDateString('no-NO')});
+  var s=window.sb||null;
+  if(s){
+    if(req.supaId) s.from('b2b_requests').update({status:'godkjent'}).eq('id',req.supaId).then(function(){});
+    s.from('b2b_applications').update({status:'approved',discount:disc,approved_at:new Date().toISOString()}).eq('email',req.epost).then(function(){});
+  }
+  go('bedriftskunder');if(window.showToast)window.showToast('Bedriftskunde godkjent: '+req.firma+(disc?' ('+disc+'% rabatt)':''));
 };
 window.admB2bReject=function(i){
   var req=window.B2B_REQUESTS&&window.B2B_REQUESTS[i];if(!req) return;
   req.status='avvist';
-  var s=window.sb||null;if(s&&req.supaId) s.from('b2b_requests').update({status:'avvist'}).eq('id',req.supaId).then(function(){});
-  go('bedriftskunder');if(window.showToast)window.showToast('Forespørsel avvist');
+  var s=window.sb||null;
+  if(s){
+    if(req.supaId) s.from('b2b_requests').update({status:'avvist'}).eq('id',req.supaId).then(function(){});
+    s.from('b2b_applications').update({status:'rejected'}).eq('email',req.epost).then(function(){});
+  }
+  go('bedriftskunder');if(window.showToast)window.showToast('Søknad avvist');
+};
+window.admB2bSuspend=function(i){
+  var c=DATA.b2bClients[i];if(!c) return;
+  c.active=false;
+  var s=window.sb||null;if(s&&c.supaId) s.from('b2b_applications').update({status:'suspended'}).eq('id',c.supaId).then(function(){});
+  go('bedriftskunder');if(window.showToast)window.showToast('Konto sperret: '+c.firma);
 };
 window.admB2bToggle=function(i){DATA.b2bClients[i].active=!DATA.b2bClients[i].active;go('bedriftskunder');if(window.showToast)window.showToast(DATA.b2bClients[i].active?'Konto aktivert':'Konto deaktivert');};
 window.admB2bDiscount=function(i){

@@ -586,24 +586,119 @@ a.contact-card:hover { border-color: var(--accent); }
 .svc-price { font-size: 15px; font-weight: 700; color: var(--accent); white-space: nowrap; }
 .svc-arrow { font-size: 20px; color: var(--accent); }
 
-/* ── B2B ── */
-.b2b-section {
+/* ── B2B PREMIUM HERO SECTION ── */
+.b2b-hero-wrap {
   position: relative; z-index: 1;
-  margin: 0 1.2rem 2rem;
-  background: rgba(10,20,10,0.75);
-  border: 1px solid var(--border);
-  border-radius: 18px; padding: 1.2rem;
-  display: flex; gap: 1rem; align-items: flex-start;
-  backdrop-filter: blur(12px);
+  margin: 0 0 0;
+  background: linear-gradient(160deg, rgba(14,28,12,0.98) 0%, rgba(8,18,8,0.99) 60%, rgba(20,10,8,0.95) 100%);
+  border-top: 1px solid rgba(80,120,70,0.18);
+  border-bottom: 1px solid rgba(80,120,70,0.15);
+  padding: 2.5rem 1.25rem 2.25rem;
+  overflow: hidden;
 }
-.b2b-icon {
-  width: 44px; height: 44px; flex-shrink: 0;
-  background: rgba(20,38,18,0.8); border: 1px solid var(--border);
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+.b2b-hero-wrap::before {
+  content: '';
+  position: absolute; top: -60px; right: -60px;
+  width: 320px; height: 320px;
+  background: radial-gradient(ellipse, rgba(201,125,110,0.07) 0%, transparent 65%);
+  pointer-events: none;
 }
-.b2b-text h3 { font-size: 13px; font-weight: 500; margin-bottom: 3px; }
-.b2b-text p  { font-size: 11px; color: var(--text-dim); line-height: 1.5; }
+.b2b-hero-wrap::after {
+  content: '';
+  position: absolute; bottom: -80px; left: -40px;
+  width: 280px; height: 280px;
+  background: radial-gradient(ellipse, rgba(60,120,50,0.09) 0%, transparent 65%);
+  pointer-events: none;
+}
+.b2b-hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+.b2b-hero-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
+  color: #c97d6e; background: rgba(201,125,110,0.1);
+  border: 1px solid rgba(201,125,110,0.25); border-radius: 20px;
+  padding: 4px 12px; margin-bottom: 1rem;
+}
+.b2b-hero-h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.7rem, 5vw, 2.6rem);
+  font-weight: 300; color: #e8f0e4; line-height: 1.18;
+  margin: 0 0 0.75rem; letter-spacing: -0.01em;
+}
+.b2b-hero-h2 em { color: #9ec49a; font-style: italic; }
+.b2b-hero-sub {
+  font-size: 13px; color: #7a9478; line-height: 1.65;
+  margin-bottom: 1.5rem; max-width: 480px;
+}
+.b2b-benefits-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 1rem; margin-bottom: 1.75rem;
+}
+.b2b-benefit-item {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; color: #a8c4a0;
+}
+.b2b-benefit-dot {
+  width: 18px; height: 18px; flex-shrink: 0;
+  background: rgba(158,196,154,0.12);
+  border: 1px solid rgba(158,196,154,0.25);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; color: #9ec49a;
+}
+.b2b-cta-row {
+  display: flex; flex-wrap: wrap; gap: 0.65rem; margin-bottom: 1.5rem;
+}
+.b2b-cta-primary {
+  padding: 13px 22px;
+  background: linear-gradient(135deg, rgba(80,140,70,0.45), rgba(60,100,50,0.35));
+  border: 1px solid rgba(120,190,100,0.45);
+  border-radius: 26px; font-size: 13px; font-weight: 700;
+  color: #c8e4c4; letter-spacing: 0.02em;
+  cursor: pointer; font-family: inherit;
+  transition: all 0.22s;
+}
+.b2b-cta-primary:hover { background: linear-gradient(135deg, rgba(80,140,70,0.6), rgba(60,100,50,0.5)); color: #e2eedb; }
+.b2b-cta-secondary {
+  padding: 12px 20px;
+  background: transparent;
+  border: 1px solid rgba(80,120,70,0.3);
+  border-radius: 26px; font-size: 13px; font-weight: 500;
+  color: #7a9478; cursor: pointer; font-family: inherit;
+  transition: all 0.22s;
+}
+.b2b-cta-secondary:hover { border-color: rgba(80,120,70,0.55); color: #9ec49a; }
+.b2b-steps-row {
+  display: flex; gap: 0; flex-wrap: wrap;
+  border: 1px solid rgba(80,120,70,0.15);
+  border-radius: 12px; overflow: hidden;
+}
+.b2b-step-item {
+  flex: 1; min-width: 0;
+  padding: 0.75rem 0.85rem;
+  border-right: 1px solid rgba(80,120,70,0.12);
+  background: rgba(8,16,8,0.5);
+}
+.b2b-step-item:last-child { border-right: none; }
+.b2b-step-num {
+  width: 20px; height: 20px;
+  background: rgba(158,196,154,0.15); border: 1px solid rgba(158,196,154,0.3);
+  border-radius: 50%; font-size: 10px; font-weight: 700; color: #9ec49a;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 5px;
+}
+.b2b-step-txt { font-size: 10px; color: #7a9478; line-height: 1.4; }
+.b2b-step-head { font-size: 11px; color: #c0d4bc; font-weight: 600; margin-bottom: 2px; }
+@media (min-width: 640px) {
+  .b2b-hero-wrap { padding: 3rem 1.5rem; }
+  .b2b-benefits-grid { grid-template-columns: repeat(3,1fr); }
+}
+@media (min-width: 900px) {
+  .b2b-hero-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  .b2b-hero-wrap { padding: 3.5rem 2rem; }
+}
+
+/* ── B2B (old small section — keep for footer) ── */
+.b2b-section { display: none; }
 .b2b-link {
   display: inline-block; margin-top: 0.6rem;
   font-size: 12px; font-weight: 500; color: var(--accent);
@@ -970,7 +1065,8 @@ nav { }
   <a onclick="openBooking();closeMenu()">Book time</a>
   <a onclick="goTo('produkter');closeMenu()">Produkter</a>
   <a onclick="goTo('tjenester');closeMenu()">Behandlinger</a>
-  <a onclick="openB2B();closeMenu()">Bedriftsportal</a>
+  <a onclick="goTo('mhnails');closeMenu()">MH Nails – Neglepleie</a>
+  <a onclick="openB2B();closeMenu()" style="color:#9ec49a;font-weight:600;">Bedriftsportal ›</a>
   <a onclick="openCart();closeMenu()">Handlekurv</a>
   <a onclick="openContact();closeMenu()">Kontakt</a>
 </div>
@@ -982,6 +1078,58 @@ nav { }
     <h1>Profesjonell pleie.<br><em>Synlige resultater.</em></h1>
     <p class="hero-sub">Eksklusive produkter og tjenester for hår som reflekterer deg.</p>
     <a class="hero-cta" href="#" onclick="goTo('produkter');return false;">Se alle produkter</a>
+  </div>
+</section>
+
+<!-- B2B PREMIUM SECTION -->
+<section class="b2b-hero-wrap" id="bedrift">
+  <div class="b2b-hero-inner">
+    <div class="b2b-hero-left">
+      <div class="b2b-hero-tag">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+        For bedrifter og salonger
+      </div>
+      <h2 class="b2b-hero-h2">Bedriftskunde?<br><em>Eksklusive priser<br>og fordeler.</em></h2>
+      <p class="b2b-hero-sub">Registrer bedriften din og få tilgang til vår dedikerte B2B-portal — med spesialpriser, kampanjer og profesjonell oppfølging.</p>
+      <div class="b2b-benefits-grid">
+        <div class="b2b-benefit-item"><div class="b2b-benefit-dot">%</div>Eksklusive B2B-priser</div>
+        <div class="b2b-benefit-item"><div class="b2b-benefit-dot">★</div>Eksklusive produkter</div>
+        <div class="b2b-benefit-item"><div class="b2b-benefit-dot">🎁</div>Kampanjer og tilbud</div>
+        <div class="b2b-benefit-item"><div class="b2b-benefit-dot">⚡</div>Rask bestilling</div>
+        <div class="b2b-benefit-item"><div class="b2b-benefit-dot">📋</div>Oversikt over kjøp</div>
+        <div class="b2b-benefit-item"><div class="b2b-benefit-dot">✓</div>Profesjonell oppfølging</div>
+      </div>
+      <div class="b2b-cta-row">
+        <button class="b2b-cta-primary" onclick="if(window.b2bSetTab)b2bSetTab('register');openB2B();">Opprett bedriftskonto →</button>
+        <button class="b2b-cta-secondary" onclick="if(window.b2bSetTab)b2bSetTab('login');openB2B();">Logg inn som bedrift</button>
+      </div>
+    </div>
+    <div class="b2b-hero-right">
+      <div class="b2b-steps-row">
+        <div class="b2b-step-item">
+          <div class="b2b-step-num">1</div>
+          <div class="b2b-step-head">Registrer</div>
+          <div class="b2b-step-txt">Fyll inn org.nr — verifiseres automatisk mot Brønnøysund</div>
+        </div>
+        <div class="b2b-step-item">
+          <div class="b2b-step-num">2</div>
+          <div class="b2b-step-head">Godkjenning</div>
+          <div class="b2b-step-txt">Vi gjennomgår søknaden innen 1–2 virkedager</div>
+        </div>
+        <div class="b2b-step-item">
+          <div class="b2b-step-num">3</div>
+          <div class="b2b-step-head">Tilgang</div>
+          <div class="b2b-step-txt">Logg inn og se B2B-priser, kampanjer og bestill</div>
+        </div>
+      </div>
+      <div style="margin-top:1rem;padding:1.25rem;background:rgba(8,16,8,0.6);border:1px solid rgba(80,120,70,0.18);border-radius:12px;">
+        <div style="font-size:10px;color:#c97d6e;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;margin-bottom:0.6rem;">Allerede bedriftskunde?</div>
+        <p style="font-size:11px;color:#7a9478;margin-bottom:0.85rem;line-height:1.55;">Logg inn for å se dine priser, kampanjer og bestille produkter til din bedriftsrabatt.</p>
+        <button onclick="if(window.b2bSetTab)b2bSetTab('login');openB2B();" style="width:100%;padding:10px;background:rgba(30,50,28,0.7);border:1px solid rgba(80,120,70,0.3);border-radius:10px;font-size:12px;font-weight:600;color:#9ec49a;cursor:pointer;font-family:inherit;transition:all 0.2s;" onmouseenter="this.style.background='rgba(50,90,45,0.5)'" onmouseleave="this.style.background='rgba(30,50,28,0.7)'">
+          Logg inn til bedriftsportalen →
+        </button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1260,16 +1408,42 @@ nav { }
   </div>
 </div>
 
-<div class="b2b-section" id="b2b">
-  <div class="b2b-icon">B2B</div>
-  <div class="b2b-text">
-    <h3>Driver du salong eller bedrift?</h3>
-    <p>Få eksklusive B2B-priser på hele NAK Hair-sortimentet. Registrer din bedrift med org.nr, og få tilgang til din personlige bedriftsportal med spesialpriser, kampanjer og enkel bestilling.</p>
-    <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.75rem;">
-      <a class="b2b-link" onclick="openB2B()">Logg inn / Registrer →</a>
-      <a class="b2b-link" style="opacity:0.6;" onclick="b2bSetTab&&b2bSetTab('register');openB2B()">Ny bedriftskonto</a>
-    </div>
+<!-- MH NAILS SECTION -->
+<div class="section-wrap" id="mhnails" style="padding-bottom:0.5rem;">
+  <div class="section-glass">
+    <p class="section-eyebrow">MH Nails – Neglepleie</p>
+    <h2 class="section-title">Profesjonell neglepleie</h2>
+    <p class="section-sub">Gelénegler, negledesign og manikyr av høy kvalitet. Bestill time direkte.</p>
   </div>
+</div>
+<div style="margin:0 1.2rem 0.5rem;display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;" id="nailsGrid">
+  <div onclick="openBookingWithService('gelenegler')" style="background:rgba(10,18,10,0.85);border:1px solid rgba(80,120,70,0.18);border-radius:14px;padding:1.1rem;cursor:pointer;transition:border-color 0.2s;" onmouseenter="this.style.borderColor='rgba(201,125,110,0.4)'" onmouseleave="this.style.borderColor='rgba(80,120,70,0.18)'">
+    <div style="font-size:1.4rem;margin-bottom:0.4rem;">💅</div>
+    <div style="font-size:13px;font-weight:600;color:#d6e4d0;margin-bottom:2px;">Gelénegler fra</div>
+    <div style="font-size:11px;color:#7a9478;margin-bottom:6px;">Langtidsholdbart gelé-resultat</div>
+    <div style="font-size:13px;font-weight:700;color:#c97d6e;">599 kr</div>
+  </div>
+  <div onclick="openBookingWithService('negledesign')" style="background:rgba(10,18,10,0.85);border:1px solid rgba(80,120,70,0.18);border-radius:14px;padding:1.1rem;cursor:pointer;transition:border-color 0.2s;" onmouseenter="this.style.borderColor='rgba(201,125,110,0.4)'" onmouseleave="this.style.borderColor='rgba(80,120,70,0.18)'">
+    <div style="font-size:1.4rem;margin-bottom:0.4rem;">🌸</div>
+    <div style="font-size:13px;font-weight:600;color:#d6e4d0;margin-bottom:2px;">Negledesign fra</div>
+    <div style="font-size:11px;color:#7a9478;margin-bottom:6px;">Artistisk negledesign</div>
+    <div style="font-size:13px;font-weight:700;color:#c97d6e;">699 kr</div>
+  </div>
+  <div onclick="openBookingWithService('manikyr')" style="background:rgba(10,18,10,0.85);border:1px solid rgba(80,120,70,0.18);border-radius:14px;padding:1.1rem;cursor:pointer;transition:border-color 0.2s;" onmouseenter="this.style.borderColor='rgba(201,125,110,0.4)'" onmouseleave="this.style.borderColor='rgba(80,120,70,0.18)'">
+    <div style="font-size:1.4rem;margin-bottom:0.4rem;">✨</div>
+    <div style="font-size:13px;font-weight:600;color:#d6e4d0;margin-bottom:2px;">Manikyr fra</div>
+    <div style="font-size:11px;color:#7a9478;margin-bottom:6px;">Klassisk neglepleie og lakk</div>
+    <div style="font-size:13px;font-weight:700;color:#c97d6e;">449 kr</div>
+  </div>
+  <div onclick="openBookingWithService('gelefjerning')" style="background:rgba(10,18,10,0.85);border:1px solid rgba(80,120,70,0.18);border-radius:14px;padding:1.1rem;cursor:pointer;transition:border-color 0.2s;" onmouseenter="this.style.borderColor='rgba(201,125,110,0.4)'" onmouseleave="this.style.borderColor='rgba(80,120,70,0.18)'">
+    <div style="font-size:1.4rem;margin-bottom:0.4rem;">🔄</div>
+    <div style="font-size:13px;font-weight:600;color:#d6e4d0;margin-bottom:2px;">Fjerning av gelé fra</div>
+    <div style="font-size:11px;color:#7a9478;margin-bottom:6px;">Forsiktig fjerning</div>
+    <div style="font-size:13px;font-weight:700;color:#c97d6e;">249 kr</div>
+  </div>
+</div>
+<div style="margin:0.5rem 1.2rem 2rem;text-align:center;">
+  <button class="book-pill" onclick="openBooking()" style="margin-right:0.5rem;">Book neglepleie</button>
 </div>
 
 <!-- REVIEWS SECTION -->
@@ -1294,6 +1468,7 @@ nav { }
       <a onclick="openService('dameklipp')">Dameklipp</a>
       <a onclick="openService('farge')">Farge &amp; Striper</a>
       <a onclick="openService('keratin')">Keratin</a>
+      <a onclick="goTo('mhnails')">MH Nails – Neglepleie</a>
       <a onclick="openBooking()">Book time</a>
     </div>
     <div class="footer-col">
@@ -1386,6 +1561,12 @@ nav { }
             <option value="keratin_mellom">Keratine mellomlangt hår fra – 2 990 kr</option>
             <option value="keratin_langt">Keratin behandling langt hår fra – 4 990 kr</option>
             <option value="hårkur">Hårkur fra – 399 kr</option>
+          </optgroup>
+          <optgroup label="MH Nails – Neglepleie">
+            <option value="gelenegler">Gelénegler fra – 599 kr</option>
+            <option value="negledesign">Negledesign fra – 699 kr</option>
+            <option value="manikyr">Manikyr fra – 449 kr</option>
+            <option value="gelefjerning">Fjerning av gelé fra – 249 kr</option>
           </optgroup>
         </select>
       </div>
@@ -2000,6 +2181,8 @@ var INFO={
 };
 function openInfo(key){document.getElementById('infoContent').innerHTML=INFO[key]||'';openModal('infoModal');}
 function openContact(){openModal('contactModal');}
+function openBookingWithService(svc){openModal('bookingModal');var sel=document.getElementById('serviceSelect');if(sel){for(var i=0;i<sel.options.length;i++){if(sel.options[i].value===svc){sel.selectedIndex=i;break;}}}}
+
 
 // ── REVIEWS ──
 var REVIEWS=[

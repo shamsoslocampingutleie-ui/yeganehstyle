@@ -1218,7 +1218,15 @@ nav { }
   </div>
 </div>
 
-<!-- B2B -->
+<div class="b2b-section" id="b2b">
+  <div class="b2b-icon">B2B</div>
+  <div class="b2b-text">
+    <h3>Driver du salong eller bedrift?</h3>
+    <p>Få eksklusive B2B-priser på hele NAK Hair-sortimentet. Søk om bedriftskonto og få tilgang til din egen bedriftsportal med spesialpriser og kampanjer.</p>
+    <a class="b2b-link" onclick="openB2B()">Søk om bedriftskonto →</a>
+  </div>
+</div>
+
 <!-- REVIEWS SECTION -->
 <div class="section-wrap" id="anmeldelser">
   <div class="section-glass">
@@ -1229,15 +1237,6 @@ nav { }
   <div class="reviews-list" id="reviewsList"></div>
   <div style="text-align:center;margin-top:1rem;">
     <button class="book-pill" onclick="openModal('reviewModal')">Skriv en anmeldelse</button>
-  </div>
-</div>
-
-<div class="b2b-section" id="b2b">
-  <div class="b2b-icon">B2B</div>
-  <div class="b2b-text">
-    <h3>Driver du salong eller bedrift?</h3>
-    <p>Få B2B-priser på hele NAK Hair-sortimentet og send forespørsel direkte.</p>
-    <a class="b2b-link" onclick="openB2B()">Til Bedriftsportalen →</a>
   </div>
 </div>
 
@@ -2124,6 +2123,55 @@ var DATA={
 };
 var editProdId=null;
 var activeChatId=null;
+var calDate=new Date();
+var calView='uke';
+var editTreatId=null;
+var editEmpId=null;
+DATA.b2bClients=[];
+DATA.blocks=[];
+DATA.employees=[
+  {id:1,name:'Yeganeh',role:'Frisør',phone:'+47 978 55 154',color:'#9ec49a',schedule:{1:'09:00-18:00',2:'09:00-18:00',3:'09:00-18:00',4:'09:00-20:00',5:'09:00-18:00',6:'10:00-16:00',0:'Stengt'}}
+];
+DATA.treatments=[
+  {id:1,name:'Herreklipp fra',cat:'Klipp',price:499,duration:30,active:true},
+  {id:2,name:'Dameklipp fra',cat:'Klipp',price:699,duration:45,active:true},
+  {id:3,name:'Herreklipp – skin fade fra',cat:'Klipp',price:629,duration:45,active:true},
+  {id:4,name:'Herreklipp med sax fra',cat:'Klipp',price:629,duration:45,active:true},
+  {id:5,name:'Dameklipp, vask, styling, føn fra',cat:'Klipp',price:919,duration:60,active:true},
+  {id:6,name:'Barneklipp (gutt) fra 6år',cat:'Klipp',price:449,duration:30,active:true},
+  {id:7,name:'Barneklipp (jenter) fra',cat:'Klipp',price:549,duration:30,active:true},
+  {id:8,name:'Herreklipp og skjegg fra',cat:'Klipp',price:869,duration:60,active:true},
+  {id:9,name:'Skinfade og skjegg fra',cat:'Klipp',price:869,duration:60,active:true},
+  {id:10,name:'Hel Maskinklipp fra',cat:'Klipp',price:359,duration:20,active:true},
+  {id:11,name:'Vask og føhn fra',cat:'Klipp',price:399,duration:30,active:true},
+  {id:12,name:'Pannelugg fra',cat:'Klipp',price:349,duration:15,active:true},
+  {id:13,name:'Hårvask fra',cat:'Klipp',price:199,duration:15,active:true},
+  {id:14,name:'Farge ettervekst pakke fra',cat:'Farge',price:1990,duration:120,active:true},
+  {id:15,name:'Farge pakke kort fra',cat:'Farge',price:2590,duration:150,active:true},
+  {id:16,name:'Farge pakke halvlangt fra',cat:'Farge',price:2990,duration:180,active:true},
+  {id:17,name:'Farge pakke langt hår fra',cat:'Farge',price:3690,duration:210,active:true},
+  {id:18,name:'Striper fra',cat:'Farge',price:1990,duration:120,active:true},
+  {id:19,name:'Balayage fra',cat:'Farge',price:3490,duration:180,active:true},
+  {id:20,name:'Farge og forming av bryn',cat:'Vipper / Bryn',price:399,duration:30,active:true},
+  {id:21,name:'Skjeggtrim fra',cat:'Skjegg',price:449,duration:20,active:true},
+  {id:22,name:'Keratine mellomlangt hår fra',cat:'Behandling',price:2990,duration:120,active:true},
+  {id:23,name:'Keratin behandling langt hår fra',cat:'Behandling',price:4990,duration:180,active:true},
+  {id:24,name:'Hårkur fra',cat:'Behandling',price:399,duration:30,active:true}
+];
+DATA.openingHours={
+  1:{open:true,from:'09:00',to:'18:00'},
+  2:{open:true,from:'09:00',to:'18:00'},
+  3:{open:true,from:'09:00',to:'18:00'},
+  4:{open:true,from:'09:00',to:'20:00'},
+  5:{open:true,from:'09:00',to:'18:00'},
+  6:{open:true,from:'10:00',to:'16:00'},
+  0:{open:false,from:'',to:''}
+};
+function isoDate(d){var m=d.getMonth()+1;var dd=d.getDate();return d.getFullYear()+'-'+(m<10?'0':'')+m+'-'+(dd<10?'0':'')+dd;}
+function fmtDateD(d){return d.getDate()+'.'+(d.getMonth()+1)+'.'+d.getFullYear();}
+function parseBookingDate(ds){if(!ds)return '';if(ds.includes('-'))return ds;var p=ds.split('.');if(p.length===3)return p[2]+'-'+(p[1].length===1?'0':'')+p[1]+'-'+(p[0].length===1?'0':'')+p[0];return ds;}
+function getWeekNum(d){var date=new Date(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate()));var dn=date.getUTCDay()||7;date.setUTCDate(date.getUTCDate()+4-dn);var ys=new Date(Date.UTC(date.getUTCFullYear(),0,1));return Math.ceil((((date-ys)/86400000)+1)/7);}
+
 
 // Load real data from Supabase into DATA
 window.admRefreshData=function(){
@@ -2186,7 +2234,12 @@ var TABS=[
   {id:'anmeldelser',label:'Anmeldelser'},
   {id:'rabatt',label:'Rabatt'},
   {id:'retur',label:'Retur'},
-  {id:'okonomi',label:'Okonomi'}
+  {id:'okonomi',label:'Økonomi'},
+  {id:'kalender',label:'Kalender'},
+  {id:'apningstider',label:'Åpningstider'},
+  {id:'ansatte',label:'Ansatte'},
+  {id:'behandlinger',label:'Behandlinger'},
+  {id:'bedriftskunder',label:'Bedriftskunder'}
 ];
 
 function el(id){return document.getElementById(id);}
@@ -2241,11 +2294,16 @@ function go(tab){
   else if(tab==='timer') b.innerHTML=viewTimer();
   else if(tab==='produkter') b.innerHTML=viewProdukter();
   else if(tab==='chat') b.innerHTML=viewChat();
-  else if(tab==='kunder') b.innerHTML=viewKunder();
   else if(tab==='anmeldelser') b.innerHTML=viewAnmeldelser();
   else if(tab==='rabatt') b.innerHTML=viewRabatt();
   else if(tab==='retur') b.innerHTML=viewRetur();
   else if(tab==='okonomi') b.innerHTML=viewOkonomi();
+  else if(tab==='kalender') b.innerHTML=viewKalender();
+  else if(tab==='apningstider') b.innerHTML=viewApningstider();
+  else if(tab==='ansatte') b.innerHTML=viewAnsatte();
+  else if(tab==='behandlinger') b.innerHTML=viewBehandlinger();
+  else if(tab==='bedriftskunder') b.innerHTML=viewBedriftskunder();
+  else if(tab==='kunder') b.innerHTML=viewKunder();
 }
 
 function viewOversikt(){
@@ -2367,6 +2425,273 @@ function viewProdukter(){
 }
 function catLabel(c){var m={shampoo:'Shampoo',conditioner:'Conditioner',behandling:'Behandling',styling:'Styling'};return m[c]||c;}
 
+function viewKalender(){
+  var html='<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem;">'
+    +'<div style="display:flex;gap:4px;">'+btn('◀','admCalPrev()','#7a9478')+btn('I dag','admCalToday()','#7a9478')+btn('▶','admCalNext()','#7a9478')+'</div>'
+    +'<b style="font-size:13px;color:#d6e4d0;">'+fmtDateD(calDate)+'</b>'
+    +'<div style="display:flex;gap:4px;">'+(calView==='dag'?btn('Ukevisning','admCalView(\'uke\')'):btn('Dagvisning','admCalView(\'dag\')'))+btn('+ Ny time','admNewBooking()','#8ab48a')+'</div>'
+    +'</div>';
+  if(calView==='dag') html+=viewKalenderDag();
+  else html+=viewKalenderUke();
+  return html;
+}
+
+function viewKalenderDag(){
+  var d=calDate;var iso=isoDate(d);
+  var slots=[];for(var h=8;h<=20;h++){slots.push((h<10?'0':'')+h+':00');if(h<20)slots.push((h<10?'0':'')+h+':30');}
+  var dayBks=DATA.bookings.filter(function(b){return parseBookingDate(b.date)===iso;});
+  var dayNames=['Søndag','Mandag','Tirsdag','Onsdag','Torsdag','Fredag','Lørdag'];
+  var html='<div style="font-size:11px;color:#7a9478;margin-bottom:0.5rem;">'+dayNames[d.getDay()]+' '+fmtDateD(d)+' · '+dayBks.length+' timer</div>'
+    +'<div style="background:#111f14;border:1px solid #1e2e21;border-radius:12px;overflow:hidden;">';
+  for(var i=0;i<slots.length;i++){
+    var sl=slots[i];
+    var bk=null;for(var j=0;j<dayBks.length;j++) if(dayBks[j].time===sl){bk=dayBks[j];break;}
+    var bl=null;for(var k=0;k<DATA.blocks.length;k++) if(DATA.blocks[k].date===iso&&DATA.blocks[k].from===sl){bl=DATA.blocks[k];break;}
+    html+='<div style="display:flex;border-bottom:1px solid #1e2e2133;min-height:'+(sl.endsWith(':00')?'48':'32')+'px;">'
+      +'<div style="width:52px;flex-shrink:0;padding:6px 4px 6px 8px;font-size:'+(sl.endsWith(':00')?'10':'9')+'px;color:'+(sl.endsWith(':00')?'#a8c4a0':'#3a5a38')+';border-right:1px solid #1e2e21;display:flex;align-items:center;">'+sl+'</div>'
+      +'<div style="flex:1;padding:4px 8px;display:flex;align-items:center;">';
+    if(bk){
+      var bkIdx=DATA.bookings.indexOf(bk);
+      html+='<div style="width:100%;background:rgba(138,180,138,0.15);border-left:3px solid #8ab48a;border-radius:6px;padding:6px 10px;cursor:pointer;" onclick="admEditBkInline('+bkIdx+')">'
+        +'<div style="display:flex;justify-content:space-between;align-items:center;">'
+        +'<div><b style="font-size:12px;color:#d6e4d0;">'+bk.customer+'</b><span style="font-size:10px;color:#7a9478;margin-left:8px;">'+bk.phone+'</span></div>'
+        +badge(bk.status)+'</div>'
+        +'<div style="font-size:10px;color:#a8c4a0;">'+bk.service+' · '+bk.price+'</div>'
+        +'</div>';
+    } else if(bl){
+      html+='<div style="width:100%;background:rgba(192,57,43,0.1);border-left:3px solid #c0392b;border-radius:6px;padding:6px 10px;">'
+        +'<div style="font-size:11px;color:#c0392b;">Blokkert: '+(bl.note||'Pause')+'</div></div>';
+    } else {
+      html+='<div style="width:100%;cursor:pointer;border-radius:6px;min-height:28px;transition:background 0.1s;" onmouseenter="this.style.background=\'rgba(138,180,138,0.08)\'" onmouseleave="this.style.background=\'\'" onclick="admQuickBook(\''+iso+'\',\''+sl+'\')" title="Opprett booking '+sl+'"></div>';
+    }
+    html+='</div></div>';
+  }
+  html+='</div>';
+  return html;
+}
+
+function viewKalenderUke(){
+  var d=new Date(calDate);var dow=d.getDay();
+  var mon=new Date(d);mon.setDate(d.getDate()-(dow===0?6:dow-1));
+  var dayShort=['Søn','Man','Tir','Ons','Tor','Fre','Lør'];
+  var dayKeys=[1,2,3,4,5,6,0];
+  var todayIso=isoDate(new Date());
+  var weekHtml='<div style="font-size:11px;color:#7a9478;margin-bottom:0.75rem;">Uke '+getWeekNum(mon)+' · '+fmtDateD(mon)+' – '+fmtDateD(new Date(mon.getTime()+6*86400000))+'</div>';
+  var cols='';
+  for(var i=0;i<7;i++){
+    (function(dayIdx){
+      var day=new Date(mon);day.setDate(mon.getDate()+dayIdx);
+      var iso=isoDate(day);var isToday=iso===todayIso;
+      var oh=DATA.openingHours[day.getDay()];
+      var dayBks=DATA.bookings.filter(function(b){return parseBookingDate(b.date)===iso;});
+      var bkHtml='';
+      for(var j=0;j<dayBks.length;j++){
+        var b=dayBks[j];
+        var bi=DATA.bookings.indexOf(b);
+        bkHtml+='<div style="background:rgba(138,180,138,0.2);border-left:2px solid #8ab48a;border-radius:4px;padding:3px 5px;margin-bottom:3px;cursor:pointer;font-size:10px;" onclick="admEditBkInline('+bi+')">'
+          +'<b style="color:#d6e4d0;">'+b.time+'</b><br><span style="color:#a8c4a0;">'+b.customer.split(' ')[0]+'</span>'
+          +'</div>';
+      }
+      if(!oh||!oh.open) bkHtml='<div style="font-size:9px;color:#c0392b;text-align:center;padding:6px 0;">Stengt</div>';
+      else if(!bkHtml) bkHtml='<div style="font-size:9px;color:#3a5a38;text-align:center;padding:6px 0;">Ledig</div>';
+      cols+='<div style="background:'+(isToday?'rgba(138,180,138,0.07)':'#111f14')+';border:1px solid '+(isToday?'rgba(138,180,138,0.35)':'#1e2e21')+';border-radius:10px;padding:8px;cursor:pointer;" onclick="admCalDay(\''+iso+'\')">'
+        +'<div style="text-align:center;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid #1e2e2155;">'
+        +'<div style="font-size:9px;color:#7a9478;text-transform:uppercase;letter-spacing:0.08em;">'+dayShort[day.getDay()]+'</div>'
+        +'<div style="font-size:17px;font-weight:700;color:'+(isToday?'#9ec49a':'#d6e4d0')+';">'+day.getDate()+'</div>'
+        +'</div>'
+        +bkHtml+'</div>';
+    })(i);
+  }
+  return weekHtml+'<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;">'+cols+'</div>';
+}
+
+function viewApningstider(){
+  var days=[{k:1,l:'Mandag'},{k:2,l:'Tirsdag'},{k:3,l:'Onsdag'},{k:4,l:'Torsdag'},{k:5,l:'Fredag'},{k:6,l:'Lørdag'},{k:0,l:'Søndag'}];
+  var html='<div style="font-size:14px;font-weight:600;color:#d6e4d0;margin-bottom:0.75rem;">Åpningstider</div>'
+    +'<div style="background:#111f14;border:1px solid #1e2e21;border-radius:14px;overflow:hidden;margin-bottom:1rem;">';
+  for(var i=0;i<days.length;i++){
+    var d=days[i];var oh=DATA.openingHours[d.k];
+    html+='<div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;border-bottom:1px solid #1e2e2155;flex-wrap:wrap;">'
+      +'<div style="min-width:70px;font-size:13px;font-weight:600;color:#d6e4d0;">'+d.l+'</div>'
+      +'<label style="display:flex;align-items:center;gap:6px;cursor:pointer;">'
+      +'<input type="checkbox" '+(oh.open?'checked':'')+' onchange="admOhToggle('+d.k+',this.checked)" style="width:16px;height:16px;accent-color:#8ab48a;">'
+      +'<span style="font-size:12px;color:#a8c4a0;">Åpen</span>'
+      +'</label>'
+      +(oh.open
+        ?'<input type="time" value="'+(oh.from||'09:00')+'" onchange="admOhFrom('+d.k+',this.value)" style="padding:6px 8px;background:#162019;border:1px solid #1e2e21;border-radius:8px;font-size:14px;color:#d6e4d0;width:106px;">'
+        +'<span style="color:#7a9478;">–</span>'
+        +'<input type="time" value="'+(oh.to||'18:00')+'" onchange="admOhTo('+d.k+',this.value)" style="padding:6px 8px;background:#162019;border:1px solid #1e2e21;border-radius:8px;font-size:14px;color:#d6e4d0;width:106px;">'
+        :'<span style="font-size:12px;color:#c0392b;font-style:italic;">Stengt</span>')
+      +'</div>';
+  }
+  html+='</div>';
+  // Blocked days
+  html+=card('Steng enkeltdag / Ferie',
+    '<div style="padding:0.75rem;">'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-bottom:0.5rem;">'
+    +input('admBlockDate','Dato','','date')
+    +input('admBlockNote','Årsak','Ferie, Helligdag...')
+    +'</div>'
+    +btn('Steng denne dagen','admAddBlock()')
+    +(DATA.blocks.length?'<div style="margin-top:0.75rem;">'+DATA.blocks.map(function(bl,bi){
+      return '<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1e2e2133;font-size:12px;">'
+        +'<span style="color:#d6e4d0;">'+bl.date+'</span><span style="color:#7a9478;margin:0 8px;">'+bl.note+'</span>'
+        +btn('Fjern','admRemoveBlock('+bi+')','#c0392b')+'</div>';
+    }).join('')+'</div>':'')
+    +'</div>');
+  return html;
+}
+
+function viewAnsatte(){
+  var empHtml='';
+  for(var i=0;i<DATA.employees.length;i++){
+    var emp=DATA.employees[i];
+    var schKeys=[1,2,3,4,5,6,0];var schLabels=['Man','Tir','Ons','Tor','Fre','Lør','Søn'];
+    empHtml+='<div style="background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
+      +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem;">'
+      +'<div style="display:flex;align-items:center;gap:0.75rem;">'
+      +'<div style="width:40px;height:40px;border-radius:50%;background:'+(emp.color||'#8ab48a')+'22;border:2px solid '+(emp.color||'#8ab48a')+';display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:'+(emp.color||'#8ab48a')+';">'+emp.name.charAt(0)+'</div>'
+      +'<div><div style="font-size:14px;font-weight:600;color:#d6e4d0;">'+emp.name+'</div><div style="font-size:11px;color:#7a9478;">'+emp.role+(emp.phone?' · '+emp.phone:'')+'</div></div>'
+      +'</div>'
+      +'<div>'+btn('Rediger','admEditEmp('+i+')')+btn('Slett','admDelEmp('+i+')','#c0392b')+'</div>'
+      +'</div>'
+      +'<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;">'
+      +schKeys.map(function(k,ki){
+        var sch=emp.schedule[k];var open=sch&&sch!=='Stengt';
+        return '<div style="background:'+(open?'rgba(138,180,138,0.12)':'rgba(192,57,43,0.08)')+';border:1px solid '+(open?'rgba(138,180,138,0.2)':'rgba(192,57,43,0.15)')+';border-radius:6px;padding:4px 2px;text-align:center;">'
+          +'<div style="font-size:8px;color:#7a9478;text-transform:uppercase;">'+schLabels[ki]+'</div>'
+          +(open?'<div style="font-size:7.5px;color:#9ec49a;margin-top:2px;">'+sch+'</div>':'<div style="font-size:9px;color:#c0392b;margin-top:2px;">✕</div>')
+          +'</div>';
+      }).join('')
+      +'</div>'
+      +'</div>';
+  }
+  if(!empHtml) empHtml='<div style="background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:2rem;text-align:center;color:#3a5a38;">Ingen ansatte registrert.</div>';
+
+  var form='<div id="admEmpForm" style="display:none;background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:1rem;margin-bottom:1rem;">'
+    +'<div id="admEmpFormTitle" style="font-size:13px;font-weight:600;color:#d6e4d0;margin-bottom:0.75rem;">Ny ansatt</div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">'
+    +input('admEmpName','Navn','Fullt navn')
+    +input('admEmpRole','Tittel','Frisør')
+    +'</div>'
+    +input('admEmpPhone','Telefon','+47...')
+    +'<div style="font-size:10px;color:#7a9478;text-transform:uppercase;margin:0.5rem 0 0.4rem;">Arbeidstider</div>'
+    +'<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.4rem;margin-bottom:0.75rem;">'
+    +[{k:1,l:'Mandag'},{k:2,l:'Tirsdag'},{k:3,l:'Onsdag'},{k:4,l:'Torsdag'},{k:5,l:'Fredag'},{k:6,l:'Lørdag'},{k:0,l:'Søndag'}].map(function(d){
+      var oh=DATA.openingHours[d.k];
+      var df=oh&&oh.open?(oh.from||'09:00'):'09:00';var dt=oh&&oh.open?(oh.to||'18:00'):'18:00';
+      return '<div style="background:#162019;border-radius:8px;padding:7px 8px;">'
+        +'<label style="display:flex;align-items:center;gap:5px;margin-bottom:5px;cursor:pointer;">'
+        +'<input type="checkbox" id="empSch'+d.k+'" '+(d.k!==0?'checked':'')+' style="width:14px;height:14px;accent-color:#8ab48a;">'
+        +'<span style="font-size:11px;color:#a8c4a0;font-weight:600;">'+d.l+'</span></label>'
+        +'<div style="display:flex;gap:3px;">'
+        +'<input type="time" id="empFrom'+d.k+'" value="'+df+'" style="flex:1;padding:4px;background:#0d1610;border:1px solid #1e2e21;border-radius:5px;font-size:11px;color:#d6e4d0;">'
+        +'<input type="time" id="empTo'+d.k+'" value="'+dt+'" style="flex:1;padding:4px;background:#0d1610;border:1px solid #1e2e21;border-radius:5px;font-size:11px;color:#d6e4d0;">'
+        +'</div></div>';
+    }).join('')
+    +'</div>'
+    +'<div style="display:flex;gap:0.5rem;">'+btn('Lagre ansatt','admSaveEmp()')+btn('Avbryt','admCancelEmp()','#7a9478')+'</div>'
+    +'</div>';
+
+  return '<div style="margin-bottom:0.75rem;">'+btn('+ Ny ansatt','admNewEmp()','#8ab48a')+'</div>'
+    +form
+    +'<div style="font-size:14px;font-weight:600;color:#d6e4d0;margin-bottom:0.75rem;">Ansatte ('+DATA.employees.length+')</div>'
+    +empHtml;
+}
+
+function viewBehandlinger(){
+  var cats={};
+  DATA.treatments.forEach(function(t){if(!cats[t.cat])cats[t.cat]=[];cats[t.cat].push(t);});
+  var html='';
+  Object.keys(cats).forEach(function(cat){
+    var rows='';
+    cats[cat].forEach(function(t){
+      var ti=DATA.treatments.indexOf(t);
+      rows+='<div style="display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-bottom:1px solid #1e2e2133;flex-wrap:wrap;gap:4px;">'
+        +'<div style="flex:1;min-width:140px;">'
+        +'<div style="font-size:12px;color:'+(t.active?'#d6e4d0':'#3a5a38')+';font-weight:500;">'+t.name+'</div>'
+        +'<div style="font-size:10px;color:#7a9478;">'+t.duration+' min</div>'
+        +'</div>'
+        +'<div style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;">'
+        +'<b style="font-size:13px;color:#9ec49a;min-width:60px;text-align:right;">'+t.price+' kr</b>'
+        +btn('Rediger','admEditTreat('+ti+')')
+        +btn(t.active?'Pause':'Aktiver','admToggleTreat('+ti+')',t.active?'#e8c04a':'#27ae60')
+        +btn('✕','admDelTreat('+ti+')','#c0392b')
+        +'</div></div>';
+    });
+    html+=card(cat,rows);
+  });
+
+  var form='<div id="admTreatForm" style="display:none;background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:1rem;margin-bottom:1rem;">'
+    +'<div id="admTreatFormTitle" style="font-size:13px;font-weight:600;color:#d6e4d0;margin-bottom:0.75rem;">Ny behandling</div>'
+    +input('admTreatName','Navn','Behandlingsnavn')
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">'
+    +input('admTreatPrice','Pris (kr)','499','number')
+    +input('admTreatDur','Varighet (min)','30','number')
+    +'</div>'
+    +'<div style="margin-bottom:0.6rem;"><label style="display:block;font-size:10px;color:#7a9478;text-transform:uppercase;margin-bottom:3px;">Kategori</label>'
+    +'<select id="admTreatCat" style="width:100%;padding:9px 11px;background:#162019;border:1px solid #1e2e21;border-radius:8px;font-size:16px;color:#d6e4d0;box-sizing:border-box;">'
+    +'<option>Klipp</option><option>Farge</option><option>Behandling</option><option>Skjegg</option><option>Vipper / Bryn</option><option>Extension / Permanent</option>'
+    +'</select></div>'
+    +'<div style="display:flex;gap:0.5rem;">'+btn('Lagre','admSaveTreat()')+btn('Avbryt','admCancelTreat()','#7a9478')+'</div>'
+    +'</div>';
+
+  return '<div style="margin-bottom:0.75rem;">'+btn('+ Ny behandling','admNewTreat()','#8ab48a')+'</div>'
+    +form
+    +'<div style="font-size:14px;font-weight:600;color:#d6e4d0;margin-bottom:0.75rem;">Behandlinger ('+DATA.treatments.length+')</div>'
+    +html;
+}
+
+function viewBedriftskunder(){
+  var clients=DATA.b2bClients||[];
+  var reqs=window.B2B_REQUESTS||[];
+  var pending=reqs.filter(function(r){return r.status==='ny';});
+  var html='';
+  if(pending.length){
+    html+='<div style="font-size:13px;font-weight:700;color:#e8c04a;margin-bottom:0.5rem;">Venter på godkjenning ('+pending.length+')</div>';
+    reqs.forEach(function(r,i){
+      if(r.status!=='ny') return;
+      html+='<div style="background:#111f14;border:1px solid #e8c04a44;border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
+        +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">'
+        +'<b style="font-size:14px;color:#d6e4d0;">'+r.firma+'</b>'+badge('ny')+'</div>'
+        +'<div style="font-size:11px;color:#7a9478;line-height:1.8;">'
+        +(r.org?'Org.nr: '+r.org+'<br>':'')+(r.kontakt?'Kontakt: '+r.kontakt+'<br>':'')
+        +(r.tlf?'<a href="tel:'+r.tlf+'" style="color:#7a9478;text-decoration:none;">'+r.tlf+'</a><br>':'')
+        +(r.epost?'<a href="mailto:'+r.epost+'" style="color:#7a9478;text-decoration:none;">'+r.epost+'</a><br>':'')
+        +'Mottatt: '+r.dato+'</div>'
+        +'<div style="display:flex;gap:3px;margin-top:0.6rem;flex-wrap:wrap;">'
+        +btn('✓ Godkjenn','admB2bApprove('+i+')','#27ae60')
+        +btn('✕ Avvis','admB2bReject('+i+')','#c0392b')
+        +(r.epost?btn('E-post',"window.location.href='mailto:"+r.epost+"'",'#2980b9'):'')
+        +'</div></div>';
+    });
+  }
+  html+='<div style="font-size:13px;font-weight:600;color:#d6e4d0;margin:'+(pending.length?'1rem':'0')+' 0 0.5rem;">Aktive B2B-kunder ('+clients.length+')</div>';
+  if(!clients.length){
+    html+='<div style="background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:2rem;text-align:center;color:#3a5a38;">Ingen aktive bedriftskunder ennå.<br><span style="font-size:11px;">Godkjenn forespørsler ovenfor for å legge til bedriftskunder.</span></div>';
+  } else {
+    clients.forEach(function(c,j){
+      html+='<div style="background:#111f14;border:1px solid '+(c.active?'#1e2e21':'#c0392b33')+';border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
+        +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">'
+        +'<div><b style="font-size:14px;color:#d6e4d0;">'+c.firma+'</b>'+(c.org?'<span style="font-size:10px;color:#7a9478;margin-left:6px;">org.'+c.org+'</span>':'')+'</div>'
+        +badge(c.active?'aktiv':'inaktiv')+'</div>'
+        +'<div style="font-size:11px;color:#7a9478;line-height:1.8;">'
+        +(c.kontakt?'Kontakt: '+c.kontakt+'<br>':'')
+        +(c.tlf?'<a href="tel:'+c.tlf+'" style="color:#7a9478;text-decoration:none;">'+c.tlf+'</a><br>':'')
+        +(c.epost?'<a href="mailto:'+c.epost+'" style="color:#7a9478;text-decoration:none;">'+c.epost+'</a><br>':'')
+        +(c.discount?'<b style="color:#e8c04a;">Rabatt: '+c.discount+'%</b><br>':'')
+        +'Godkjent: '+(c.approvedDate||'-')+'</div>'
+        +'<div style="display:flex;gap:3px;margin-top:0.6rem;flex-wrap:wrap;">'
+        +btn('Sett rabatt','admB2bDiscount('+j+')','#e8c04a')
+        +btn(c.active?'Deaktiver':'Aktiver','admB2bToggle('+j+')',c.active?'#c0392b':'#27ae60')
+        +(c.epost?btn('E-post',"window.location.href='mailto:"+c.epost+"'",'#2980b9'):'')
+        +btn('Slett','admB2bDel('+j+')','#c0392b')
+        +'</div></div>';
+    });
+  }
+  return html;
+}
+
 function viewForesporsler(){
   var reqs=window.B2B_REQUESTS||[];
   if(!reqs.length){
@@ -2463,17 +2788,48 @@ function viewChat(){
 function viewChatReset(){activeChatId=null;return viewChat();}
 
 function viewKunder(){
-  var html='',i;
-  for(i=0;i<DATA.customers.length;i++){
-    var c=DATA.customers[i];
-    html+='<div style="background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:1rem;margin-bottom:0.75rem;display:flex;justify-content:space-between;align-items:center;">'
-      +'<div><b style="font-size:14px;color:#d6e4d0;">'+c.name+'</b><br>'
-      +'<span style="font-size:11px;color:#7a9478;">'+c.email+'<br>'+c.phone+'</span></div>'
-      +'<div style="text-align:right;"><b style="font-size:14px;color:#9ec49a;">'+c.total.toLocaleString('no-NO')+' kr</b><br>'
-      +'<span style="font-size:11px;color:#7a9478;">'+c.orders+' ordre</span></div>'
-      +'</div>';
+  var search='';
+  var si=document.getElementById('admKundeSearch');
+  if(si) search=si.value.toLowerCase();
+  var filtered=DATA.customers.filter(function(c){
+    if(!search) return true;
+    return (c.name||'').toLowerCase().indexOf(search)>=0||(c.email||'').toLowerCase().indexOf(search)>=0||(c.phone||'').indexOf(search)>=0;
+  });
+  var html='<div style="display:flex;gap:0.5rem;margin-bottom:0.75rem;">'
+    +'<input id="admKundeSearch" type="search" placeholder="Søk navn, e-post, telefon..." value="'+search+'" oninput="admKundeFilter()" style="flex:1;padding:10px 13px;background:#162019;border:1px solid #1e2e21;border-radius:10px;font-size:16px;color:#d6e4d0;box-sizing:border-box;">'
+    +btn('+ Ny kunde','admNewKunde()','#8ab48a')
+    +'</div>';
+  html+='<div style="font-size:14px;font-weight:600;color:#d6e4d0;margin-bottom:0.75rem;">Kunder ('+filtered.length+')</div>';
+  if(!filtered.length) return html+'<div style="background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:2rem;text-align:center;color:#3a5a38;">Ingen kunder funnet.</div>';
+  for(var i=0;i<filtered.length;i++){
+    var c=filtered[i];
+    var ri=DATA.customers.indexOf(c);
+    var cBks=DATA.bookings.filter(function(b){return b.customer===c.name;});
+    var upcoming=cBks.filter(function(b){return b.status!=='fullfort'&&b.status!=='avlyst';});
+    html+='<div style="background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem;">'
+      +'<div>'
+      +'<div style="font-size:14px;font-weight:600;color:#d6e4d0;">'+c.name+'</div>'
+      +'<div style="font-size:11px;color:#7a9478;line-height:1.8;">'
+      +(c.phone?'<a href="tel:'+c.phone+'" style="color:#7a9478;text-decoration:none;">'+c.phone+'</a><br>':'')
+      +(c.email?'<a href="mailto:'+c.email+'" style="color:#7a9478;text-decoration:none;">'+c.email+'</a>':'')
+      +'</div>'
+      +'</div>'
+      +'<div style="text-align:right;">'
+      +'<b style="font-size:15px;color:#9ec49a;">'+(c.total||0).toLocaleString('no-NO')+' kr</b><br>'
+      +'<span style="font-size:11px;color:#7a9478;">'+(c.orders||0)+' ordre · '+cBks.length+' timer</span><br>'
+      +(upcoming.length?'<span style="font-size:10px;color:#e8c04a;">'+upcoming.length+' kommende</span>':'')
+      +'</div>'
+      +'</div>'
+      +(c.note?'<div style="background:#162019;border-left:3px solid #8ab48a;border-radius:0 8px 8px 0;padding:7px 10px;font-size:11px;color:#a8c4a0;margin-bottom:0.5rem;"><b>Notat:</b> '+c.note+'</div>':'')
+      +(upcoming.length?'<div style="font-size:10px;color:#8ab48a;margin-bottom:0.4rem;">Neste time: '+upcoming[0].date+' '+upcoming[0].time+' – '+upcoming[0].service+'</div>':'')
+      +'<div style="display:flex;gap:3px;flex-wrap:wrap;">'
+      +btn('Notat','admKundeNote('+ri+')','#e8c04a')
+      +btn('Rediger','admEditKunde('+ri+')')
+      +btn('Slett','admDelKunde('+ri+')','#c0392b')
+      +'</div></div>';
   }
-  return '<div style="font-size:14px;font-weight:600;color:#d6e4d0;margin-bottom:0.75rem;">Kunder ('+DATA.customers.length+')</div>'+html;
+  return html;
 }
 
 function viewRabatt(){
@@ -2863,6 +3219,158 @@ window.admRevHide=function(i){
   go('anmeldelser');if(window.renderReviews)window.renderReviews();if(window.showToast)window.showToast('Anmeldelse skjult');
 };
 window.ADMIN_NEW_REVIEW=function(){};
+
+// ── CALENDAR ACTIONS ──
+window.admCalPrev=function(){if(calView==='dag')calDate.setDate(calDate.getDate()-1);else calDate.setDate(calDate.getDate()-7);go('kalender');};
+window.admCalNext=function(){if(calView==='dag')calDate.setDate(calDate.getDate()+1);else calDate.setDate(calDate.getDate()+7);go('kalender');};
+window.admCalToday=function(){calDate=new Date();go('kalender');};
+window.admCalView=function(v){calView=v;go('kalender');};
+window.admCalDay=function(iso){var p=iso.split('-');calDate=new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2]));calView='dag';go('kalender');};
+window.admEditBkInline=function(i){
+  var b=DATA.bookings[i];if(!b) return;
+  var newStat=prompt('Status for '+b.customer+':\n(ny / bekreftet / fullfort / avlyst)',b.status);
+  if(!newStat||newStat===b.status) return;
+  b.status=newStat;
+  var s=window.sb||null;
+  if(s&&b.supaId) s.from('bookings').update({status:newStat}).eq('id',b.supaId).then(function(){});
+  go('kalender');if(window.showToast)window.showToast('Status oppdatert: '+newStat);
+};
+window.admQuickBook=function(date,time){
+  var name=prompt('Kundenavn:');if(!name) return;
+  var phone=prompt('Telefon:');
+  var service=prompt('Behandling:','Klipp');
+  var price=prompt('Pris (kr):','499');
+  DATA.bookings.unshift({id:'#B'+(DATA.bookings.length+50),date:date,time:time,customer:name,phone:phone||'',service:service||'',price:(price||'0')+' kr',status:'bekreftet'});
+  if(window.showToast)window.showToast('Booking opprettet '+time);
+  go('kalender');
+};
+window.admNewBooking=function(){
+  var date=prompt('Dato (YYYY-MM-DD):',isoDate(calDate));if(!date) return;
+  var time=prompt('Tid (HH:MM):','10:00');if(!time) return;
+  var name=prompt('Kundenavn:');if(!name) return;
+  var phone=prompt('Telefon:');
+  var service=prompt('Behandling:','Klipp');
+  var price=prompt('Pris (kr):','499');
+  DATA.bookings.unshift({id:'#B'+(DATA.bookings.length+50),date:date,time:time,customer:name,phone:phone||'',service:service||'',price:(price||'0')+' kr',status:'bekreftet'});
+  if(window.showToast)window.showToast('Booking opprettet');
+  go('kalender');
+};
+
+// ── OPENING HOURS ACTIONS ──
+window.admOhToggle=function(day,open){DATA.openingHours[day].open=open;go('apningstider');};
+window.admOhFrom=function(day,val){DATA.openingHours[day].from=val;};
+window.admOhTo=function(day,val){DATA.openingHours[day].to=val;};
+window.admAddBlock=function(){
+  var date=el('admBlockDate').value;var note=el('admBlockNote').value;
+  if(!date){if(window.showToast)window.showToast('Velg en dato');return;}
+  DATA.blocks.push({date:date,note:note||'Stengt'});
+  go('apningstider');if(window.showToast)window.showToast('Dag stengt: '+date);
+};
+window.admRemoveBlock=function(i){DATA.blocks.splice(i,1);go('apningstider');};
+
+// ── EMPLOYEE ACTIONS ──
+window.admNewEmp=function(){editEmpId=null;go('ansatte');setTimeout(function(){el('admEmpForm').style.display='block';el('admEmpFormTitle').textContent='Ny ansatt';el('admEmpName').value='';el('admEmpRole').value='';el('admEmpPhone').value='';},0);};
+window.admEditEmp=function(i){
+  editEmpId=i;var emp=DATA.employees[i];
+  go('ansatte');
+  setTimeout(function(){
+    el('admEmpForm').style.display='block';
+    el('admEmpFormTitle').textContent='Rediger: '+emp.name;
+    el('admEmpName').value=emp.name;el('admEmpRole').value=emp.role;el('admEmpPhone').value=emp.phone||'';
+    [1,2,3,4,5,6,0].forEach(function(k){
+      var sch=emp.schedule[k]||'Stengt';var open=sch!=='Stengt';
+      var cb=el('empSch'+k);var fr=el('empFrom'+k);var to=el('empTo'+k);
+      if(cb)cb.checked=open;
+      if(open&&fr&&to){var pts=sch.split('-');fr.value=pts[0]||'09:00';to.value=pts[1]||'18:00';}
+    });
+  },50);
+};
+window.admSaveEmp=function(){
+  var name=el('admEmpName').value.trim();if(!name){if(window.showToast)window.showToast('Fyll inn navn');return;}
+  var sch={};
+  [1,2,3,4,5,6,0].forEach(function(k){
+    var cb=el('empSch'+k);var fr=el('empFrom'+k);var to=el('empTo'+k);
+    sch[k]=(cb&&cb.checked&&fr&&to)?fr.value+'-'+to.value:'Stengt';
+  });
+  var colors=['#9ec49a','#60a8da','#e8c04a','#c97d6e','#b48ac9'];
+  var emp={id:Date.now(),name:name,role:el('admEmpRole').value.trim()||'Frisør',phone:el('admEmpPhone').value.trim(),color:colors[DATA.employees.length%colors.length],schedule:sch};
+  if(editEmpId!==null)DATA.employees[editEmpId]=emp;else DATA.employees.push(emp);
+  editEmpId=null;go('ansatte');if(window.showToast)window.showToast('Ansatt lagret');
+};
+window.admCancelEmp=function(){el('admEmpForm').style.display='none';};
+window.admDelEmp=function(i){
+  if(!confirm('Slette ansatt '+DATA.employees[i].name+'?'))return;
+  DATA.employees.splice(i,1);go('ansatte');if(window.showToast)window.showToast('Ansatt fjernet');
+};
+
+// ── TREATMENT ACTIONS ──
+window.admNewTreat=function(){editTreatId=null;go('behandlinger');setTimeout(function(){el('admTreatForm').style.display='block';el('admTreatFormTitle').textContent='Ny behandling';el('admTreatName').value='';el('admTreatPrice').value='';el('admTreatDur').value='30';},0);};
+window.admEditTreat=function(i){
+  editTreatId=i;var t=DATA.treatments[i];
+  go('behandlinger');
+  setTimeout(function(){
+    el('admTreatForm').style.display='block';
+    el('admTreatFormTitle').textContent='Rediger: '+t.name;
+    el('admTreatName').value=t.name;el('admTreatPrice').value=t.price;el('admTreatDur').value=t.duration;
+    if(el('admTreatCat'))el('admTreatCat').value=t.cat;
+  },0);
+};
+window.admSaveTreat=function(){
+  var name=el('admTreatName').value.trim();var price=parseInt(el('admTreatPrice').value,10);var dur=parseInt(el('admTreatDur').value,10)||30;var cat=el('admTreatCat').value;
+  if(!name||!price){if(window.showToast)window.showToast('Fyll inn navn og pris');return;}
+  var treat={id:Date.now(),name:name,cat:cat,price:price,duration:dur,active:true};
+  if(editTreatId!==null)DATA.treatments[editTreatId]=treat;else DATA.treatments.push(treat);
+  editTreatId=null;el('admTreatForm').style.display='none';go('behandlinger');if(window.showToast)window.showToast('Behandling lagret');
+};
+window.admCancelTreat=function(){el('admTreatForm').style.display='none';};
+window.admToggleTreat=function(i){DATA.treatments[i].active=!DATA.treatments[i].active;go('behandlinger');if(window.showToast)window.showToast(DATA.treatments[i].active?'Aktivert':'Deaktivert');};
+window.admDelTreat=function(i){if(!confirm('Slette behandlingen?'))return;DATA.treatments.splice(i,1);go('behandlinger');if(window.showToast)window.showToast('Behandling slettet');};
+
+// ── B2B CLIENT ACTIONS ──
+window.admB2bApprove=function(i){
+  var req=window.B2B_REQUESTS&&window.B2B_REQUESTS[i];if(!req) return;
+  req.status='godkjent';
+  DATA.b2bClients.push({firma:req.firma,org:req.org||'',kontakt:req.kontakt||'',tlf:req.tlf||'',epost:req.epost||'',active:true,discount:0,approvedDate:new Date().toLocaleDateString('no-NO')});
+  var s=window.sb||null;if(s&&req.supaId) s.from('b2b_requests').update({status:'godkjent'}).eq('id',req.supaId).then(function(){});
+  go('bedriftskunder');if(window.showToast)window.showToast('Bedriftskunde godkjent: '+req.firma);
+};
+window.admB2bReject=function(i){
+  var req=window.B2B_REQUESTS&&window.B2B_REQUESTS[i];if(!req) return;
+  req.status='avvist';
+  var s=window.sb||null;if(s&&req.supaId) s.from('b2b_requests').update({status:'avvist'}).eq('id',req.supaId).then(function(){});
+  go('bedriftskunder');if(window.showToast)window.showToast('Forespørsel avvist');
+};
+window.admB2bToggle=function(i){DATA.b2bClients[i].active=!DATA.b2bClients[i].active;go('bedriftskunder');if(window.showToast)window.showToast(DATA.b2bClients[i].active?'Konto aktivert':'Konto deaktivert');};
+window.admB2bDiscount=function(i){
+  var d=prompt('Sett B2B-rabatt (%) for '+DATA.b2bClients[i].firma+':',DATA.b2bClients[i].discount||'0');
+  if(d===null) return;DATA.b2bClients[i].discount=parseInt(d,10)||0;go('bedriftskunder');if(window.showToast)window.showToast('Rabatt satt til '+d+'%');
+};
+window.admB2bDel=function(i){if(!confirm('Fjerne '+DATA.b2bClients[i].firma+'?'))return;DATA.b2bClients.splice(i,1);go('bedriftskunder');};
+
+// ── CUSTOMER ACTIONS ──
+window.admKundeFilter=function(){go('kunder');};
+window.admNewKunde=function(){
+  var name=prompt('Fullt navn:');if(!name) return;
+  var phone=prompt('Telefon:');var email=prompt('E-post:');
+  DATA.customers.push({id:Date.now(),name:name,phone:phone||'',email:email||'',orders:0,total:0,note:''});
+  go('kunder');if(window.showToast)window.showToast('Kunde opprettet: '+name);
+};
+window.admEditKunde=function(i){
+  var c=DATA.customers[i];
+  var name=prompt('Navn:',c.name);if(name===null) return;
+  var phone=prompt('Telefon:',c.phone);var email=prompt('E-post:',c.email);
+  c.name=name;c.phone=phone||'';c.email=email||'';
+  go('kunder');if(window.showToast)window.showToast('Kunde oppdatert');
+};
+window.admDelKunde=function(i){
+  if(!confirm('Slette kunde '+DATA.customers[i].name+'?'))return;
+  DATA.customers.splice(i,1);go('kunder');if(window.showToast)window.showToast('Kunde slettet');
+};
+window.admKundeNote=function(i){
+  var c=DATA.customers[i];var note=prompt('Notat for '+c.name+':',c.note||'');
+  if(note===null) return;c.note=note;go('kunder');if(window.showToast)window.showToast('Notat lagret');
+};
+
 window.admInit=function(){go('oversikt');};
 })();
 

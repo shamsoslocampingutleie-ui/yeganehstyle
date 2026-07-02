@@ -1139,7 +1139,7 @@ nav { }
       </button>
       <div class="nav-dropdown" role="menu">
         <a role="menuitem" onclick="openBooking()">Frisør</a>
-        <a role="menuitem" onclick="goTo('mhnails')">Negler</a>
+        <a role="menuitem" onclick="openTimma()">Negler</a>
       </div>
     </div>
 
@@ -1162,7 +1162,7 @@ nav { }
   <button class="mobile-menu-close" onclick="closeMenu()" aria-label="Lukk meny">✕</button>
   <div class="mm-section">Booking</div>
   <a onclick="openBooking();closeMenu()">↳ Frisør</a>
-  <a onclick="goTo('mhnails');closeMenu()">↳ Negler</a>
+  <a onclick="openTimma();closeMenu()">↳ Negler</a>
   <div class="mm-section">Produkter</div>
   <a onclick="goTo('produkter');filterTab('alle',null);closeMenu()">↳ Bestselgende</a>
   <a onclick="goTo('produkter');filterTab('shampoo',null);closeMenu()">↳ Nyheter</a>
@@ -1289,6 +1289,19 @@ nav { }
 </div>
 
 <!-- BEHANDLINGER PÅ FORSIDEN -->
+<!-- REVIEWS SECTION -->
+<div class="section-wrap" id="anmeldelser">
+  <div class="section-glass">
+    <div class="section-eyebrow">Anmeldelser</div>
+    <h2 class="section-title">Hva kundene sier</h2>
+    <p class="section-sub" id="reviewSummary">5,0 stjerner · basert på omtaler</p>
+  </div>
+  <div class="reviews-list" id="reviewsList"></div>
+  <div style="text-align:center;margin-top:1rem;">
+    <button class="book-pill" onclick="openModal('reviewModal')">Skriv en anmeldelse</button>
+  </div>
+</div>
+
 <div class="section-wrap" id="forsideTjenester" style="display:none">
   <div class="section-glass">
     <p class="section-eyebrow">Tjenester</p>
@@ -1476,31 +1489,9 @@ nav { }
   </div>
 </div>
 
-<!-- MH NAILS SECTION -->
-<div class="section-wrap" id="mhnails" style="padding-bottom:0.5rem;">
-  <div class="section-glass">
-    <p class="section-eyebrow">MH Nails – Neglepleie</p>
-    <h2 class="section-title">Profesjonell neglepleie</h2>
-    <p class="section-sub">Gelénegler, negledesign og manikyr av høy kvalitet. Bestill time direkte.</p>
-  </div>
-</div>
-<div style="margin:0 1.2rem 0.5rem;display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;" id="nailsGrid"></div>
-<div style="margin:0.5rem 1.2rem 2rem;text-align:center;">
-  <button class="book-pill" onclick="openTimma()" style="margin-right:0.5rem;">Book neglepleie</button>
-</div>
+<div id="mhnails" style="display:none;"></div>
 
-<!-- REVIEWS SECTION -->
-<div class="section-wrap" id="anmeldelser">
-  <div class="section-glass">
-    <div class="section-eyebrow">Anmeldelser</div>
-    <h2 class="section-title">Hva kundene sier</h2>
-    <p class="section-sub" id="reviewSummary">5,0 stjerner · basert på omtaler</p>
-  </div>
-  <div class="reviews-list" id="reviewsList"></div>
-  <div style="text-align:center;margin-top:1rem;">
-    <button class="book-pill" onclick="openModal('reviewModal')">Skriv en anmeldelse</button>
-  </div>
-</div>
+
 
 </main>
 <!-- FOOTER -->

@@ -1884,15 +1884,39 @@ nav { }
         <h2 style="font-size:1.5rem;font-family:'Cormorant Garamond',serif;font-weight:400;">Logg inn</h2>
         <p style="font-size:12px;color:var(--gray);margin-top:4px;">Admin og bedriftskunder bruker samme innlogging</p>
       </div>
-      <div id="adminMagicForm">
+      <!-- LOGIN STEP -->
+      <div id="adminLoginStep">
         <div class="form-group"><label>E-postadresse</label><input type="email" id="adminEmail" placeholder="din@epost.no" autocomplete="email" onkeydown="if(event.key==='Enter')doAdminLogin()"></div>
         <div class="form-group"><label>Passord</label><input type="password" id="adminPassword" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doAdminLogin()"></div>
         <div id="adminErr" style="color:#e07060;font-size:12px;margin-bottom:0.75rem;display:none;padding:8px 12px;background:rgba(224,112,96,0.08);border-radius:8px;border:1px solid rgba(224,112,96,0.2);">Noe gikk galt. Prøv igjen.</div>
         <button class="confirm-btn" onclick="doAdminLogin()" style="width:100%;">Logg inn →</button>
-        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(80,120,70,0.12);display:flex;justify-content:center;">
+        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(80,120,70,0.12);display:flex;flex-direction:column;align-items:center;gap:8px;">
+          <button onclick="showAuthForgot()" style="background:none;border:none;font-size:11px;color:#7a9478;cursor:pointer;font-family:inherit;padding:0;">Glemt passord? <span style="color:#9ec49a;font-weight:600;">Tilbakestill →</span></button>
           <button onclick="closeModal('adminModal');openB2B();" style="background:none;border:none;font-size:11px;color:#7a9478;cursor:pointer;font-family:inherit;padding:0;">Ny bedriftskunde? <span style="color:#9ec49a;font-weight:600;">Registrer her →</span></button>
         </div>
       </div>
+
+      <!-- FORGOT PASSWORD STEP -->
+      <div id="adminForgotStep" style="display:none;">
+        <p style="font-size:13px;color:var(--text-dim);margin-bottom:1.2rem;text-align:center;">Skriv inn e-postadressen din, så sender vi en lenke for å sette nytt passord.</p>
+        <div class="form-group"><label>E-postadresse</label><input type="email" id="adminForgotEmail" placeholder="din@epost.no" autocomplete="email" onkeydown="if(event.key==='Enter')doSendReset()"></div>
+        <div id="adminForgotErr" style="color:#e07060;font-size:12px;margin-bottom:0.75rem;display:none;padding:8px 12px;background:rgba(224,112,96,0.08);border-radius:8px;border:1px solid rgba(224,112,96,0.2);"></div>
+        <div id="adminForgotOk" style="color:#6dca8a;font-size:12px;margin-bottom:0.75rem;display:none;padding:8px 12px;background:rgba(109,202,138,0.08);border-radius:8px;border:1px solid rgba(109,202,138,0.2);text-align:center;">E-post sendt! Sjekk innboksen din.</div>
+        <button class="confirm-btn" onclick="doSendReset()" id="forgotSendBtn" style="width:100%;">Send tilbakestillingslenke →</button>
+        <div style="margin-top:1rem;text-align:center;">
+          <button onclick="showAuthLogin()" style="background:none;border:none;font-size:11px;color:#7a9478;cursor:pointer;font-family:inherit;">← Tilbake til innlogging</button>
+        </div>
+      </div>
+
+      <!-- SET NEW PASSWORD STEP -->
+      <div id="adminSetPwStep" style="display:none;">
+        <p style="font-size:13px;color:var(--text-dim);margin-bottom:1.2rem;text-align:center;">Velg et nytt passord for kontoen din.</p>
+        <div class="form-group"><label>Nytt passord</label><input type="password" id="adminNewPw" placeholder="Minst 8 tegn" autocomplete="new-password" onkeydown="if(event.key==='Enter')doSetNewPw()"></div>
+        <div class="form-group"><label>Bekreft passord</label><input type="password" id="adminNewPw2" placeholder="Gjenta passord" autocomplete="new-password" onkeydown="if(event.key==='Enter')doSetNewPw()"></div>
+        <div id="adminSetPwErr" style="color:#e07060;font-size:12px;margin-bottom:0.75rem;display:none;padding:8px 12px;background:rgba(224,112,96,0.08);border-radius:8px;border:1px solid rgba(224,112,96,0.2);"></div>
+        <button class="confirm-btn" onclick="doSetNewPw()" id="setPwBtn" style="width:100%;">Lagre nytt passord →</button>
+      </div>
+
     </div>
   </div>
 </div>
@@ -1913,6 +1937,7 @@ window._onSbLoad=function(){
   sb.auth.getSession().then(function(res){
     if(res.data&&res.data.session){ currentUser=res.data.session.user; }
   });
+  handleYeganehAuthRedirect();
   sb.auth.onAuthStateChange(function(event,session){
     currentUser=session?session.user:null;
     if(event==='SIGNED_IN'&&session){
@@ -2214,6 +2239,106 @@ function closeAdminPanel(){
   document.getElementById('adminPanel').style.display='none';
   document.body.style.overflow='';
 }
+function showAuthLogin(){
+  document.getElementById('adminLoginStep').style.display='';
+  document.getElementById('adminForgotStep').style.display='none';
+  document.getElementById('adminSetPwStep').style.display='none';
+  document.getElementById('adminErr').style.display='none';
+  document.getElementById('adminForgotErr').style.display='none';
+  document.getElementById('adminForgotOk').style.display='none';
+}
+function showAuthForgot(){
+  document.getElementById('adminLoginStep').style.display='none';
+  document.getElementById('adminForgotStep').style.display='';
+  document.getElementById('adminSetPwStep').style.display='none';
+  var e=document.getElementById('adminEmail');
+  var fe=document.getElementById('adminForgotEmail');
+  if(e&&fe&&e.value) fe.value=e.value;
+}
+function showAuthSetPw(){
+  document.getElementById('adminLoginStep').style.display='none';
+  document.getElementById('adminForgotStep').style.display='none';
+  document.getElementById('adminSetPwStep').style.display='';
+  openModal('adminModal');
+}
+function doSendReset(){
+  var email=(document.getElementById('adminForgotEmail').value||'').trim();
+  var errEl=document.getElementById('adminForgotErr');
+  var okEl=document.getElementById('adminForgotOk');
+  var btn=document.getElementById('forgotSendBtn');
+  errEl.style.display='none'; okEl.style.display='none';
+  if(!email){errEl.style.display='block';errEl.textContent='Fyll inn e-postadresse.';return;}
+  if(!sb){errEl.style.display='block';errEl.textContent='Tilkobling feilet.';return;}
+  btn.disabled=true; btn.textContent='Sender...';
+  sb.auth.resetPasswordForEmail(email,{redirectTo:window.location.origin+'/?reset=1'}).then(function(){
+    btn.disabled=false; btn.textContent='Send tilbakestillingslenke →';
+    okEl.style.display='block';
+  }).catch(function(){
+    btn.disabled=false; btn.textContent='Send tilbakestillingslenke →';
+    okEl.style.display='block'; // Always show OK for security
+  });
+}
+function doSetNewPw(){
+  var pw=(document.getElementById('adminNewPw').value||'');
+  var pw2=(document.getElementById('adminNewPw2').value||'');
+  var errEl=document.getElementById('adminSetPwErr');
+  var btn=document.getElementById('setPwBtn');
+  errEl.style.display='none';
+  if(pw.length<8){errEl.style.display='block';errEl.textContent='Passordet må være minst 8 tegn.';return;}
+  if(pw!==pw2){errEl.style.display='block';errEl.textContent='Passordene stemmer ikke overens.';return;}
+  if(!sb){errEl.style.display='block';errEl.textContent='Tilkobling feilet.';return;}
+  btn.disabled=true; btn.textContent='Lagrer...';
+  sb.auth.updateUser({password:pw}).then(function(res){
+    btn.disabled=false; btn.textContent='Lagre nytt passord →';
+    if(res.error){errEl.style.display='block';errEl.textContent=res.error.message;return;}
+    closeModal('adminModal');
+    showToast('Passord oppdatert! ✓');
+  });
+}
+function handleYeganehAuthRedirect(){
+  try{
+    var hash=window.location.hash;
+    var search=window.location.search;
+    // Code flow (PKCE)
+    var params=new URLSearchParams(search);
+    if(params.has('code')){
+      var code=params.get('code');
+      var type=params.get('type');
+      if(sb) sb.auth.exchangeCodeForSession(code).then(function(){
+        params.delete('code'); params.delete('type');
+        history.replaceState(null,'',window.location.pathname+(params.toString()?'?'+params.toString():''));
+        if(type==='recovery') showAuthSetPw();
+      });
+      return;
+    }
+    // Hash flow (implicit)
+    if(hash&&hash.includes('access_token')){
+      var hp=new URLSearchParams(hash.slice(1));
+      var at=hp.get('access_token');
+      var rt=hp.get('refresh_token');
+      var tp=hp.get('type');
+      if(at&&rt&&sb){
+        sb.auth.setSession({access_token:at,refresh_token:rt}).then(function(){
+          history.replaceState(null,'',window.location.pathname+window.location.search);
+          if(tp==='recovery') showAuthSetPw();
+        });
+      }
+    }
+    // token_hash flow
+    if(hash&&hash.includes('token_hash')){
+      var hp2=new URLSearchParams(hash.replace(/^#[^?]*\?/,'').replace(/^#/,''));
+      var th=hp2.get('token_hash');
+      var tp2=hp2.get('type')||'magiclink';
+      if(th&&sb){
+        sb.auth.verifyOtp({token_hash:th,type:tp2}).then(function(){
+          history.replaceState(null,'',window.location.pathname+window.location.search);
+          if(tp2==='recovery') showAuthSetPw();
+        });
+      }
+    }
+  }catch(e){ console.warn('handleYeganehAuthRedirect',e); }
+}
+
 
 function openProduct(id){
   var sid=String(id);

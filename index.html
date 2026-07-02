@@ -1075,6 +1075,101 @@ nav { }
 .timma-confirm-icon { font-size:3rem;margin-bottom:1rem; }
 .timma-confirm-h { font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:#e8f0e4;margin:0 0 0.5rem; }
 .timma-confirm-sub { font-size:13px;color:#7a9478;line-height:1.6; }
+
+/* ═══════════════════════════════════════════════
+   MOBIL — komplett responsivt design
+   ═══════════════════════════════════════════════ */
+@media (max-width: 767px) {
+
+  /* ── HERO ── */
+  .hero { padding: 1.5rem 1rem 1.25rem; }
+  .hero h1 { font-size: clamp(2.2rem, 9vw, 3.2rem); }
+  .hero-sub { font-size: 12px; margin-bottom: 1.5rem; max-width: 100%; }
+  .hero-label { font-size: 10px; padding: 6px 12px; }
+
+  /* ── B2B STRIP ── */
+  .b2b-hero-inner { flex-direction: column; align-items: flex-start; gap: 0.75rem; padding: 0.75rem 0; }
+  .b2b-strip-text strong { font-size: 13px; }
+  .b2b-strip-text span { display: none; }
+  .b2b-strip-actions { width: 100%; justify-content: flex-start; }
+
+  /* ── BOOKING STRIP ── */
+  .booking-strip { flex-wrap: wrap; gap: 0.6rem; padding: 0.85rem; margin: 0.6rem 0.75rem; }
+  .strip-icon { display: none; }
+  .strip-text { width: 100%; }
+  .strip-text h3 { font-size: 14px; white-space: normal; }
+  .strip-text p { font-size: 11px; }
+  .strip-actions { width: 100%; flex-direction: row; align-items: center; gap: 0.75rem; }
+  .book-pill { flex: 1; text-align: center; padding: 10px 14px; font-size: 12px; }
+  .see-link { font-size: 11px; flex-shrink: 0; }
+
+  /* ── TRUST BAR ── */
+  .trust-bar { margin: 0 0.75rem 0.6rem; padding: 0.6rem 0.75rem; gap: 0.4rem 1rem; }
+  .trust-item { font-size: 10px; }
+
+  /* ── CATEGORY STRIP ── */
+  .cat-strip { gap: 6px; padding: 1rem 0.75rem; }
+  .cat-item { min-width: 60px; }
+  .cat-icon { width: 46px; height: 46px; border-radius: 12px; }
+  .cat-label { font-size: 10px; }
+
+  /* ── SECTION WRAP ── */
+  .section-wrap { padding: 1.25rem 0.75rem; }
+  .section-glass { padding: 0.8rem; }
+  .section-title { font-size: 1.25rem; }
+
+  /* ── PRODUCTS ── */
+  .product-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .prod-info { padding: 0.65rem; }
+  .prod-name { font-size: 12px; margin-bottom: 6px; }
+  .prod-price { font-size: 13px; }
+  .add-btn { padding: 6px 10px; font-size: 11px; }
+
+  /* ── REVIEWS ── */
+  .reviews-list { gap: 0.5rem; }
+  .review-card { padding: 0.85rem; }
+
+  /* ── SERVICE LIST ── */
+  .service-item { padding: 0.8rem; }
+  .svc-name { font-size: 13px; }
+  .svc-price { font-size: 13px; }
+
+  /* ── CONTACT GRID ── */
+  .contact-grid { grid-template-columns: 1fr 1fr; }
+  .contact-card { padding: 0.85rem; }
+
+  /* ── FOOTER ── */
+  footer { padding: 1.75rem 1rem 2rem; padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0)); }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem 1rem; margin-bottom: 1.5rem; }
+
+  /* ── MODALS ── */
+  .modal { padding: 1.25rem 1rem 2.5rem; }
+
+  /* ── TIMMA ── */
+  .timma-body { padding: 1.25rem 1rem 5rem; }
+  .timma-step-h { font-size: 1.4rem; margin-bottom: 1rem; }
+  .timma-time-grid { grid-template-columns: repeat(3, 1fr); gap: 0.4rem; }
+  .timma-time-pill { padding: 9px 4px; font-size: 12px; }
+  .timma-cat-grid { gap: 0.6rem; }
+  .timma-cat-card { padding: 1.1rem 1rem; }
+
+  /* ── B2B PORTAL ── */
+  .b2p-auth-wrap { padding: 0.75rem 0.75rem 2rem; }
+  .b2p-h2 { font-size: 1.6rem; }
+  .b2p-welcome-card { padding: 1rem; }
+}
+
+/* Svært smale skjermer (375px og under) */
+@media (max-width: 400px) {
+  .hero h1 { font-size: 2rem; }
+  .footer-grid { grid-template-columns: 1fr; gap: 1.25rem; }
+  .product-grid { grid-template-columns: 1fr 1fr; gap: 0.4rem; }
+  .timma-time-grid { grid-template-columns: repeat(3, 1fr); }
+  .b2b-strip-actions { flex-wrap: wrap; }
+  .trust-bar { justify-content: flex-start; }
+  .section-wrap { padding: 1rem 0.65rem; }
+  .nav-logo { font-size: 15px; }
+}
 </style>
 </head>
 <body>

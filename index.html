@@ -1081,94 +1081,118 @@ nav { }
    ═══════════════════════════════════════════════ */
 @media (max-width: 767px) {
 
-  /* ── HERO ── */
-  .hero { padding: 1.5rem 1rem 1.25rem; }
-  .hero h1 { font-size: clamp(2.2rem, 9vw, 3.2rem); }
-  .hero-sub { font-size: 12px; margin-bottom: 1.5rem; max-width: 100%; }
-  .hero-label { font-size: 10px; padding: 6px 12px; }
+  /* ── HERO: kompakt på mobil ── */
+  .hero {
+    padding: 1.25rem 1rem 1rem;
+    text-align: left;
+    align-items: flex-start;
+  }
+  .hero-label { font-size: 10px; padding: 5px 11px; margin-bottom: 0.75rem; }
+  .hero h1 { font-size: 1.9rem; line-height: 1.08; margin-bottom: 0.5rem; }
+  .hero-sub { font-size: 12px; margin: 0 0 1rem; max-width: 100%; text-align: left; }
+  .hero-cta { font-size: 12px; padding: 10px 18px; }
 
-  /* ── B2B STRIP ── */
-  .b2b-hero-inner { flex-direction: column; align-items: flex-start; gap: 0.75rem; padding: 0.75rem 0; }
-  .b2b-strip-text strong { font-size: 13px; }
-  .b2b-strip-text span { display: none; }
-  .b2b-strip-actions { width: 100%; justify-content: flex-start; }
+  /* ── B2B: skjult på mobil (tilgjengelig via Bedrift i nav) ── */
+  .b2b-hero-wrap { display: none; }
 
   /* ── BOOKING STRIP ── */
-  .booking-strip { flex-wrap: wrap; gap: 0.6rem; padding: 0.85rem; margin: 0.6rem 0.75rem; }
+  .booking-strip {
+    flex-direction: column; gap: 0.75rem;
+    padding: 1rem; margin: 0 0.75rem 0.6rem;
+    border-radius: 16px;
+  }
   .strip-icon { display: none; }
   .strip-text { width: 100%; }
-  .strip-text h3 { font-size: 14px; white-space: normal; }
-  .strip-text p { font-size: 11px; }
+  .strip-text h3 { font-size: 15px; white-space: normal; }
+  .strip-text p { font-size: 12px; }
   .strip-actions { width: 100%; flex-direction: row; align-items: center; gap: 0.75rem; }
-  .book-pill { flex: 1; text-align: center; padding: 10px 14px; font-size: 12px; }
-  .see-link { font-size: 11px; flex-shrink: 0; }
+  .book-pill { flex: 1; text-align: center; padding: 12px 14px; font-size: 13px; }
+  .see-link { font-size: 12px; flex-shrink: 0; }
 
   /* ── TRUST BAR ── */
-  .trust-bar { margin: 0 0.75rem 0.6rem; padding: 0.6rem 0.75rem; gap: 0.4rem 1rem; }
+  .trust-bar {
+    margin: 0 0.75rem 0.6rem;
+    padding: 0.5rem 0.75rem;
+    gap: 0.3rem 0.75rem;
+    justify-content: flex-start;
+  }
   .trust-item { font-size: 10px; }
 
   /* ── CATEGORY STRIP ── */
-  .cat-strip { gap: 6px; padding: 1rem 0.75rem; }
-  .cat-item { min-width: 60px; }
-  .cat-icon { width: 46px; height: 46px; border-radius: 12px; }
+  .cat-strip { gap: 8px; padding: 0.85rem 0.75rem; }
+  .cat-item { min-width: 58px; gap: 5px; }
+  .cat-icon { width: 44px; height: 44px; border-radius: 12px; }
+  .cat-icon svg { width: 20px; height: 20px; }
   .cat-label { font-size: 10px; }
 
   /* ── SECTION WRAP ── */
-  .section-wrap { padding: 1.25rem 0.75rem; }
-  .section-glass { padding: 0.8rem; }
-  .section-title { font-size: 1.25rem; }
+  .section-wrap { padding: 1.1rem 0.75rem; }
+  .section-wrap + .section-wrap { border-top: 1px solid var(--border); }
+  .section-glass { padding: 0.75rem; margin-bottom: 0.6rem; }
+  .section-title { font-size: 1.2rem; }
+  .section-sub { font-size: 11px; }
 
   /* ── PRODUCTS ── */
-  .product-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
-  .prod-info { padding: 0.65rem; }
-  .prod-name { font-size: 12px; margin-bottom: 6px; }
+  .product-grid { gap: 0.5rem; margin-bottom: 0.85rem; }
+  .prod-info { padding: 0.6rem; }
+  .prod-brand { font-size: 9px; }
+  .prod-name { font-size: 12px; margin: 3px 0 8px; }
   .prod-price { font-size: 13px; }
-  .add-btn { padding: 6px 10px; font-size: 11px; }
+  .add-btn { padding: 6px 10px; font-size: 11px; border-radius: 14px; }
+  .see-all-row { padding-top: 0.75rem; }
 
   /* ── REVIEWS ── */
-  .reviews-list { gap: 0.5rem; }
-  .review-card { padding: 0.85rem; }
+  .reviews-list { gap: 0.45rem; }
+  .review-card { padding: 0.8rem; }
+  .review-name { font-size: 12px; }
+  .review-text { font-size: 12px; }
 
   /* ── SERVICE LIST ── */
-  .service-item { padding: 0.8rem; }
+  .service-item { padding: 0.75rem 0.8rem; gap: 0.5rem; }
   .svc-name { font-size: 13px; }
+  .svc-desc { font-size: 11px; }
   .svc-price { font-size: 13px; }
+  .svc-arrow { font-size: 17px; }
 
   /* ── CONTACT GRID ── */
-  .contact-grid { grid-template-columns: 1fr 1fr; }
-  .contact-card { padding: 0.85rem; }
+  .contact-grid { grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+  .contact-card { padding: 0.8rem; }
+  .contact-card-value { font-size: 13px; }
 
   /* ── FOOTER ── */
-  footer { padding: 1.75rem 1rem 2rem; padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0)); }
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem 1rem; margin-bottom: 1.5rem; }
+  footer { padding: 1.5rem 1rem; padding-bottom: calc(1.25rem + env(safe-area-inset-bottom, 0)); }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 1.25rem 1rem; margin-bottom: 1.25rem; }
+  .footer-col h4 { font-size: 9px; margin-bottom: 0.6rem; }
+  .footer-col a { font-size: 11px; margin-bottom: 0.4rem; }
 
   /* ── MODALS ── */
-  .modal { padding: 1.25rem 1rem 2.5rem; }
+  .modal { padding: 1.1rem 1rem 2rem; }
+  .modal-title { font-size: 1rem; }
 
-  /* ── TIMMA ── */
-  .timma-body { padding: 1.25rem 1rem 5rem; }
-  .timma-step-h { font-size: 1.4rem; margin-bottom: 1rem; }
+  /* ── TIMMA BOOKING ── */
+  .timma-body { padding: 1.1rem 1rem 5rem; }
+  .timma-step-h { font-size: 1.35rem; margin-bottom: 1rem; }
   .timma-time-grid { grid-template-columns: repeat(3, 1fr); gap: 0.4rem; }
-  .timma-time-pill { padding: 9px 4px; font-size: 12px; }
+  .timma-time-pill { padding: 9px 3px; font-size: 12px; }
   .timma-cat-grid { gap: 0.6rem; }
-  .timma-cat-card { padding: 1.1rem 1rem; }
+  .timma-cat-card { padding: 1rem; }
+  .timma-cat-name { font-size: 13px; }
+  .timma-svc-row { padding: 0.75rem; }
 
   /* ── B2B PORTAL ── */
   .b2p-auth-wrap { padding: 0.75rem 0.75rem 2rem; }
-  .b2p-h2 { font-size: 1.6rem; }
-  .b2p-welcome-card { padding: 1rem; }
+  .b2p-h2 { font-size: 1.5rem; }
+  .b2p-welcome-card { padding: 0.85rem; flex-direction: column; }
+  .b2p-campaign { flex-direction: column; gap: 0.75rem; }
 }
 
-/* Svært smale skjermer (375px og under) */
+/* ── Svært smale skjermer (≤400px) ── */
 @media (max-width: 400px) {
-  .hero h1 { font-size: 2rem; }
-  .footer-grid { grid-template-columns: 1fr; gap: 1.25rem; }
-  .product-grid { grid-template-columns: 1fr 1fr; gap: 0.4rem; }
-  .timma-time-grid { grid-template-columns: repeat(3, 1fr); }
-  .b2b-strip-actions { flex-wrap: wrap; }
-  .trust-bar { justify-content: flex-start; }
+  .hero h1 { font-size: 1.65rem; }
+  .footer-grid { grid-template-columns: 1fr; gap: 1rem; }
   .section-wrap { padding: 1rem 0.65rem; }
   .nav-logo { font-size: 15px; }
+  .trust-item:nth-child(3), .trust-item:nth-child(4) { display: none; }
 }
 </style>
 </head>

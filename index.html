@@ -643,40 +643,47 @@ a.contact-card:hover { border-color: var(--accent); }
 .svc-price { font-size: 15px; font-weight: 700; color: var(--accent); white-space: nowrap; }
 .svc-arrow { font-size: 20px; color: var(--accent); }
 
-/* ── B2B COMPACT STRIP ── */
+/* ── B2B STRIP ── */
 .b2b-hero-wrap {
-  margin: 0;
-  background: rgba(10,20,10,0.85);
-  border-top: 1px solid rgba(80,120,70,0.18);
-  border-bottom: 1px solid rgba(80,120,70,0.15);
-  padding: 0 1.25rem;
+  margin: 0 0.75rem 0;
+  background: linear-gradient(135deg, rgba(14,26,14,0.95) 0%, rgba(20,38,18,0.9) 100%);
+  border: 1px solid rgba(80,120,70,0.22);
+  border-radius: 18px;
+  padding: 1.1rem 1.25rem;
 }
 .b2b-hero-inner {
   max-width: 900px; margin: 0 auto;
   display: flex; align-items: center; gap: 1rem;
-  padding: 0.85rem 0; flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 .b2b-strip-badge {
   flex-shrink: 0;
-  background: rgba(201,125,110,0.12); border: 1px solid rgba(201,125,110,0.28);
-  border-radius: 8px; padding: 5px 10px;
-  font-size: 11px; font-weight: 800; letter-spacing: 0.08em; color: #c97d6e;
+  background: rgba(201,125,110,0.1); border: 1px solid rgba(201,125,110,0.25);
+  border-radius: 6px; padding: 4px 9px;
+  font-size: 10px; font-weight: 800; letter-spacing: 0.1em; color: #c97d6e;
+  text-transform: uppercase;
 }
 .b2b-strip-text { flex: 1; min-width: 0; }
-.b2b-strip-text strong { font-size: 13px; font-weight: 700; color: #d6e4d0; display: block; line-height: 1.3; }
-.b2b-strip-text span { font-size: 11px; color: #7a9478; }
+.b2b-strip-text strong {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 15px; font-weight: 600; color: #ddebd8; display: block;
+  line-height: 1.25; letter-spacing: 0.01em;
+}
+.b2b-strip-text span { font-size: 11.5px; color: #6a8a6a; line-height: 1.5; margin-top: 2px; display: block; }
 .b2b-strip-actions { display: flex; gap: 0.5rem; flex-shrink: 0; flex-wrap: wrap; align-items: center; }
 .b2b-strip-primary {
-  padding: 8px 16px;
-  background: rgba(60,100,50,0.4); border: 1px solid rgba(120,190,100,0.4);
-  border-radius: 20px; font-size: 12px; font-weight: 700; color: #c8e4c4;
+  padding: 9px 18px;
+  background: rgba(158,196,154,0.1); border: 1px solid rgba(158,196,154,0.3);
+  border-radius: 22px; font-size: 12px; font-weight: 700; color: #c8e4c4;
   cursor: pointer; font-family: inherit; white-space: nowrap;
-  transition: background 0.18s;
+  letter-spacing: 0.02em; transition: all 0.18s;
+  touch-action: manipulation;
 }
-.b2b-strip-primary:hover { background: rgba(60,100,50,0.65); }
+.b2b-strip-primary:hover { background: rgba(158,196,154,0.2); border-color: rgba(158,196,154,0.5); }
 .b2b-strip-link {
-  font-size: 11px; color: #7a9478; cursor: pointer; white-space: nowrap;
-  text-decoration: underline; text-underline-offset: 3px; background: none; border: none; font-family: inherit;
+  font-size: 11px; color: #5a7a5a; cursor: pointer; white-space: nowrap;
+  text-decoration: none; background: none; border: none; font-family: inherit;
+  letter-spacing: 0.02em; transition: color 0.15s;
 }
 .b2b-strip-link:hover { color: #9ec49a; }
 
@@ -1126,13 +1133,13 @@ nav { }
   .hero-cta { font-size: 12px; padding: 9px 16px; }
 
   /* ── B2B: mobil-layout ── */
-  .b2b-hero-wrap { padding: 0 0.75rem; }
-  .b2b-hero-inner { flex-direction: column; align-items: flex-start; gap: 0.7rem; padding: 1rem 0; }
-  .b2b-strip-text strong { font-size: 14px; }
-  .b2b-strip-text span { font-size: 12px; line-height: 1.45; display: block; margin-top: 2px; }
-  .b2b-strip-actions { width: 100%; flex-direction: row; gap: 0.6rem; }
-  .b2b-strip-primary { flex: 1; text-align: center; padding: 11px 12px; font-size: 13px; }
-  .b2b-strip-link { font-size: 12px; align-self: center; }
+  .b2b-hero-wrap { margin: 0 0.75rem; padding: 1rem 1rem; border-radius: 16px; }
+  .b2b-hero-inner { flex-direction: column; align-items: flex-start; gap: 0.65rem; }
+  .b2b-strip-text strong { font-size: 15px; }
+  .b2b-strip-text span { font-size: 12px; }
+  .b2b-strip-actions { width: 100%; gap: 0.5rem; }
+  .b2b-strip-primary { flex: 1; text-align: center; padding: 12px 10px; font-size: 13px; }
+  .b2b-strip-link { font-size: 11.5px; align-self: center; color: #7a9478; }
 
   /* ── BOOKING STRIP ── */
   .booking-strip {

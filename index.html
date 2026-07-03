@@ -2341,7 +2341,7 @@ function openAdminPanel(){
       return;
     }
   }
-  _admLoad();
+  if(window._admLoad) window._admLoad();
   document.getElementById('adminPanel').style.display='block';
   document.body.style.overflow='hidden';
   if(window.admInit) window.admInit();
@@ -4906,6 +4906,7 @@ window.admKundeNote=function(i){
 };
 
 window.admInit=function(){go('oversikt');};
+window._admLoad=_admLoad;
 window.DATA=DATA;
 })();
 // DATA is now global — renderNailsGrid can access it

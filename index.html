@@ -1101,15 +1101,14 @@ nav { }
   .hero-sub { font-size: 12px; margin: 0 0 0.75rem; max-width: 100%; text-align: center; }
   .hero-cta { font-size: 12px; padding: 9px 16px; }
 
-  /* ── B2B: mobil-layout (arver booking-strip regler) ── */
-  .b2b-hero-wrap { margin: 0 0.75rem 0.6rem; }
-
-  /* ── BOOKING STRIP ── */
-  .booking-strip {
+  /* ── BOOKING STRIP + B2B STRIP ── */
+  .booking-strip,
+  .b2b-hero-wrap {
     flex-direction: column; gap: 0.6rem;
-    padding: 0.9rem; margin: 0 0.75rem 0;
-    border-radius: 16px;
+    padding: 0.9rem; border-radius: 16px;
   }
+  .booking-strip { margin: 0 0.75rem 0; }
+  .b2b-hero-wrap { margin: 0 0.75rem 0.6rem; }
   .strip-icon { display: none; }
   .strip-text { width: 100%; }
   .strip-text h3 { font-size: 15px; white-space: normal; }

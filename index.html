@@ -3948,8 +3948,8 @@ function viewBehandlinger(){
   return '<div style="margin-bottom:1rem;">'
     // Tab switcher
     +'<div style="display:grid;grid-template-columns:1fr 1fr;border:1px solid rgba(80,120,70,0.2);border-radius:12px;overflow:hidden;margin-bottom:1rem;">'
-    +'<button onclick="admSetTreatTab(\'frisør\')" style="padding:11px;background:'+(!isNails?'rgba(80,120,70,0.25)':'transparent')+';border:0;color:'+(!isNails?'#9ec49a':'#7a9478')+';font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px;">✂ Yeganeh Style · Frisør</button>'
-    +'<button onclick="admSetTreatTab(\'nails\')" style="padding:11px;background:'+(isNails?'rgba(201,125,110,0.15)':'transparent')+';border:0;border-left:1px solid rgba(80,120,70,0.15);color:'+(isNails?'#c97d6e':'#7a9478')+';font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px;">💅 MH Nails · Neglepleie</button>'
+    +'<button data-yt-tab="frisør" style="padding:11px;background:'+(!isNails?'rgba(80,120,70,0.25)':'transparent')+';border:0;color:'+(!isNails?'#9ec49a':'#7a9478')+';font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px;">✂ Yeganeh Style · Frisør</button>'
+    +'<button data-yt-tab="nails" style="padding:11px;background:'+(isNails?'rgba(201,125,110,0.15)':'transparent')+';border:0;border-left:1px solid rgba(80,120,70,0.15);color:'+(isNails?'#c97d6e':'#7a9478')+';font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px;">💅 MH Nails · Neglepleie</button>'
     +'</div>'
     // Header row
     +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;">'
@@ -4261,6 +4261,19 @@ window.admGo=function(t){go(t);};
 window.admCurrentTab='oversikt';
 window.admGoTab=function(t){go(t);};
 window.admSetTreatTab=function(tab){admTreatTab=tab;go('behandlinger');};
+
+// Event delegation: catch data-yt-tab clicks anywhere in adminPanel
+(function(){
+  var panel=document.getElementById('adminPanel');
+  if(!panel) return;
+  panel.addEventListener('click',function(e){
+    var t=e.target.closest('[data-yt-tab]');
+    if(!t) return;
+    e.stopPropagation();
+    admTreatTab=t.getAttribute('data-yt-tab');
+    go('behandlinger');
+  });
+}());
 
 // ── PERSISTENCE (localStorage + Supabase) ──
 var LS_KEY='ys_adm_v1';

@@ -2036,6 +2036,7 @@ window._onSbLoad=function(){
       var meta=session.user.user_metadata||{};
       if(meta.role==='b2b') return;
       if(window._pendingRecovery) return;
+      if(meta.role!=='admin') return;
       closeModal('adminModal');
       openAdminPanel();
     }

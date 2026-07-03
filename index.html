@@ -1205,7 +1205,6 @@ nav { }
 /* ── Svært smale skjermer (≤400px) ── */
 @media (max-width: 400px) {
   .hero h1 { font-size: 1.65rem; }
-  .footer-grid { grid-template-columns: 1fr; gap: 1rem; }
   .section-wrap { padding: 1rem 0.65rem; }
   .nav-logo { font-size: 15px; }
   .trust-item:nth-child(3), .trust-item:nth-child(4) { display: none; }
@@ -1679,15 +1678,15 @@ nav { }
     </div>
   </div>
   <div class="footer-bottom">
-    <div class="footer-social">
-      <a href="#">Instagram</a>
-      <span style="color:var(--border)">·</span>
-      <a href="#">Facebook</a>
+    <div class="footer-bottom-top" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;">
+      <div class="footer-social" style="margin-bottom:0;">
+        <a href="#">Instagram</a>
+        <span style="color:var(--border)">·</span>
+        <a href="#">Facebook</a>
+      </div>
+      <button onclick="openModal('adminModal')" style="font-size:11px;color:#5a7a5a;background:rgba(255,255,255,0.04);border:1px solid rgba(80,120,70,0.2);border-radius:8px;padding:5px 12px;cursor:pointer;letter-spacing:0.03em;">Logg inn</button>
     </div>
     <p class="footer-copy">© 2026 Yeganeh Style AS · Org.nr 913 518 241 · Råholt</p>
-    <div style="margin-top:0.5rem">
-      <button onclick="openModal('adminModal')" style="font-size:10px;color:rgba(58,90,56,0.5);background:none;border:none;cursor:pointer;padding:2px 0;letter-spacing:0.05em;">⚙ admin</button>
-    </div>
     <div class="pay-icons">
       <span class="pay-badge">Vipps</span><span class="pay-badge">Klarna</span>
       <span class="pay-badge">Apple Pay</span><span class="pay-badge">Google Pay</span>
@@ -2323,6 +2322,7 @@ function openAdminPanel(){
       return;
     }
   }
+  _admLoad();
   document.getElementById('adminPanel').style.display='block';
   document.body.style.overflow='hidden';
   if(window.admInit) window.admInit();
@@ -4251,6 +4251,60 @@ window.admGo=function(t){go(t);};
 window.admCurrentTab='oversikt';
 window.admGoTab=function(t){go(t);};
 window.admSetTreatTab=function(tab){admTreatTab=tab;go('behandlinger');};
+
+// ── PERSISTENCE (localStorage + Supabase) ──
+var LS_KEY='ys_adm_v1';
+function _admPersist(){
+  try{
+    var store={
+      employees:DATA.employees,
+      treatments:DATA.treatments,
+      discounts:DATA.discounts,
+      blocks:DATA.blocks,
+      ohData:DATA.ohData||{}
+    };
+    localStorage.setItem(LS_KEY,JSON.stringify(store));
+  }catch(e){}
+  // Sync to Supabase (fire-and-forget)
+  var s=window.sb;
+  if(s){
+    DATA.employees.forEach(function(emp){
+      s.from('employees').upsert({id:emp.id,name:emp.name,role:emp.role,phone:emp.phone||'',color:emp.color||'#9ec49a',schedule:emp.schedule,active:emp.active!==false},{onConflict:'id'}).then(function(){},function(){});
+    });
+    DATA.treatments.forEach(function(t){
+      s.from('treatments').upsert({id:t.id,name:t.name,cat:t.cat,price:t.price,duration:t.duration,active:t.active!==false,type:t.type||'frisør',stylist:t.stylist||''},{onConflict:'id'}).then(function(){},function(){});
+    });
+  }
+}
+function _admLoad(){
+  try{
+    var raw=localStorage.getItem(LS_KEY);
+    if(!raw)return;
+    var store=JSON.parse(raw);
+    if(store.employees&&store.employees.length) DATA.employees=store.employees;
+    if(store.treatments&&store.treatments.length) DATA.treatments=store.treatments;
+    if(store.discounts&&store.discounts.length) DATA.discounts=store.discounts;
+    if(store.blocks) DATA.blocks=store.blocks;
+    if(store.ohData) DATA.ohData=store.ohData;
+  }catch(e){}
+  // Also try Supabase (async, update DATA if we get results)
+  var s=window.sb;
+  if(s){
+    s.from('employees').select('*').order('sort_order').then(function(res){
+      if(res.data&&res.data.length){
+        DATA.employees=res.data.map(function(r){return{id:r.id,name:r.name,role:r.role||'Frisør',phone:r.phone||'',color:r.color||'#9ec49a',schedule:r.schedule||{},active:r.active!==false};});
+        try{localStorage.setItem(LS_KEY,JSON.stringify({employees:DATA.employees,treatments:DATA.treatments,discounts:DATA.discounts,blocks:DATA.blocks}));}catch(e){}
+      }
+    },function(){});
+    s.from('treatments').select('*').order('sort_order').then(function(res){
+      if(res.data&&res.data.length){
+        DATA.treatments=res.data.map(function(r){return{id:r.id,name:r.name,cat:r.cat||'Klipp',price:r.price||0,duration:r.duration||30,active:r.active!==false,type:r.type||'frisør',stylist:r.stylist||''};});
+        try{localStorage.setItem(LS_KEY,JSON.stringify({employees:DATA.employees,treatments:DATA.treatments,discounts:DATA.discounts,blocks:DATA.blocks}));}catch(e){}
+      }
+    },function(){});
+  }
+}
+
 window.admOrd=function(id,status){
   var supaClient=window.sb||null;
   for(var i=0;i<DATA.orders.length;i++){
@@ -4400,7 +4454,7 @@ window.admSaveDc=function(){
   var exp=el('admDcExp').value||'2026-12-31';
   var parts=exp.split('-');
   DATA.discounts.push({code:code,value:val,type:el('admDcType').value,used:0,expires:parts[2]+'.'+parts[1]+'.'+parts[0],active:true});
-  go('rabatt');
+  _admPersist();go('rabatt');
   if(window.showToast) window.showToast('Kode opprettet: '+code);
 };
 window.admDelDc=function(i){var c=DATA.discounts[i]?DATA.discounts[i].code:'';DATA.discounts.splice(i,1);go('rabatt');if(window.showToast)window.showToast('Kode slettet'+(c?': '+c:''));};
@@ -4625,14 +4679,14 @@ window.admNewBooking=function(){
 window.admOhToggle=function(day,open){DATA.openingHours[day].open=open;go('apningstider');};
 window.admOhFrom=function(day,val){DATA.openingHours[day].from=val;};
 window.admOhTo=function(day,val){DATA.openingHours[day].to=val;};
-window.admSaveOh=function(){if(window.showToast)window.showToast('Åpningstider lagret');};
+window.admSaveOh=function(){_admPersist();if(window.showToast)window.showToast('Åpningstider lagret ✓');};
 window.admAddBlock=function(){
   var date=el('admBlockDate').value;var note=el('admBlockNote').value;
   if(!date){if(window.showToast)window.showToast('Velg en dato');return;}
   DATA.blocks.push({date:date,note:note||'Stengt'});
-  go('apningstider');if(window.showToast)window.showToast('Dag stengt: '+date);
+  _admPersist();go('apningstider');if(window.showToast)window.showToast('Dag stengt: '+date);
 };
-window.admRemoveBlock=function(i){DATA.blocks.splice(i,1);go('apningstider');};
+window.admRemoveBlock=function(i){DATA.blocks.splice(i,1);_admPersist();go('apningstider');};
 
 // ── EMPLOYEE ACTIONS ──
 window.admNewEmp=function(){editEmpId=null;go('ansatte');setTimeout(function(){el('admEmpForm').style.display='block';el('admEmpFormTitle').textContent='Ny ansatt';el('admEmpName').value='';el('admEmpRole').value='';el('admEmpPhone').value='';},0);};
@@ -4661,12 +4715,12 @@ window.admSaveEmp=function(){
   var colors=['#9ec49a','#60a8da','#e8c04a','#c97d6e','#b48ac9'];
   var emp={id:Date.now(),name:name,role:el('admEmpRole').value.trim()||'Frisør',phone:el('admEmpPhone').value.trim(),color:colors[DATA.employees.length%colors.length],schedule:sch};
   if(editEmpId!==null)DATA.employees[editEmpId]=emp;else DATA.employees.push(emp);
-  editEmpId=null;go('ansatte');if(window.showToast)window.showToast('Ansatt lagret');
+  editEmpId=null;_admPersist();go('ansatte');if(window.showToast)window.showToast('Ansatt lagret ✓');
 };
 window.admCancelEmp=function(){el('admEmpForm').style.display='none';};
 window.admDelEmp=function(i){
   if(!confirm('Slette ansatt '+DATA.employees[i].name+'?'))return;
-  DATA.employees.splice(i,1);go('ansatte');if(window.showToast)window.showToast('Ansatt fjernet');
+  DATA.employees.splice(i,1);_admPersist();go('ansatte');if(window.showToast)window.showToast('Ansatt fjernet');
 };
 
 // ── TREATMENT ACTIONS ──
@@ -4688,11 +4742,11 @@ window.admSaveTreat=function(){
   var prev=editTreatId!==null?DATA.treatments[editTreatId]:{};
   var treat={id:prev.id||Date.now(),name:name,cat:cat,price:price,duration:dur,active:true,type:type};
   if(editTreatId!==null)DATA.treatments[editTreatId]=treat;else DATA.treatments.push(treat);
-  editTreatId=null;el('admTreatForm').style.display='none';go('behandlinger');if(window.showToast)window.showToast('Lagret: '+name+' – '+price+' kr');
+  editTreatId=null;_admPersist();el('admTreatForm').style.display='none';go('behandlinger');if(window.showToast)window.showToast('Lagret: '+name+' – '+price+' kr ✓');
 };
 window.admCancelTreat=function(){el('admTreatForm').style.display='none';};
-window.admToggleTreat=function(i){DATA.treatments[i].active=!DATA.treatments[i].active;go('behandlinger');if(window.showToast)window.showToast(DATA.treatments[i].active?'Aktivert':'Deaktivert');};
-window.admDelTreat=function(i){if(!confirm('Slette behandlingen?'))return;DATA.treatments.splice(i,1);go('behandlinger');if(window.showToast)window.showToast('Behandling slettet');};
+window.admToggleTreat=function(i){DATA.treatments[i].active=!DATA.treatments[i].active;_admPersist();go('behandlinger');if(window.showToast)window.showToast(DATA.treatments[i].active?'Aktivert':'Deaktivert');};
+window.admDelTreat=function(i){if(!confirm('Slette behandlingen?'))return;DATA.treatments.splice(i,1);_admPersist();go('behandlinger');if(window.showToast)window.showToast('Behandling slettet');};
 
 // ── B2B CLIENT ACTIONS ──
 window.admB2bApprove=function(i){

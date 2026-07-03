@@ -2303,13 +2303,23 @@ function doAdminLogin(){
       errEl.textContent=m.toLowerCase().includes('invalid')||m.toLowerCase().includes('credentials')?'Feil e-post eller passord.':'Innlogging feilet. Prøv igjen.';
       return;
     }
-    var meta=(res.data&&res.data.user&&res.data.user.user_metadata)||{};
+    var user=res.data&&res.data.user;
+    var meta=(user&&user.user_metadata)||{};
     if(meta.role==='b2b'){
-      // B2B user — route to B2B portal silently
       closeModal('adminModal');
       if(window.openB2BPortalFn) window.openB2BPortalFn();
+      return;
     }
-    // Admin is handled by onAuthStateChange → openAdminPanel()
+    if(meta.role==='admin'){
+      currentUser=user;
+      closeModal('adminModal');
+      openAdminPanel();
+      return;
+    }
+    // Ukjent rolle — vis feilmelding
+    errEl.style.display='block';
+    errEl.textContent='Denne brukeren har ikke admin-tilgang.';
+    sb.auth.signOut();
   });
 }
 

@@ -860,12 +860,15 @@ input[type="date"] {
   width: 100%; margin-top: 1rem;
   background: rgba(158,196,154,0.15);
   border: 1px solid rgba(158,196,154,0.35);
-  border-radius: 26px; padding: 14px;
-  font-size: 13px; font-weight: 700;
+  border-radius: 26px; padding: 15px 14px;
+  font-size: 14px; font-weight: 700;
   color: #c8e4c4; letter-spacing: 0.03em;
   cursor: pointer; transition: all 0.2s;
+  font-family: inherit; touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 .confirm-btn:hover { background: rgba(158,196,154,0.25); }
+.confirm-btn:active { background: rgba(158,196,154,0.3); transform: scale(0.98); }
 .success-msg { text-align: center; padding: 2.5rem 0; display: none; }
 .success-msg.show { display: block; }
 .success-icon { font-size: 3.5rem; margin-bottom: 1rem; }
@@ -1197,8 +1200,10 @@ nav { }
   .footer-col a { font-size: 11px; margin-bottom: 0.4rem; }
 
   /* ── MODALS ── */
-  .modal { padding: 1.1rem 1rem 2rem; }
+  .modal { padding: 1.1rem 1rem max(2rem, calc(env(safe-area-inset-bottom) + 1.25rem)); }
   .modal-title { font-size: 1rem; }
+  .modal h2 { font-size: 1.5rem; margin-bottom: 0.9rem; }
+  .modal-close { width: 36px; height: 36px; font-size: 14px; }
 
   /* ── TIMMA BOOKING ── */
   .timma-body { padding: 1.1rem 1rem 5rem; }

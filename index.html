@@ -1125,8 +1125,14 @@ nav { }
   .hero-sub { font-size: 12px; margin: 0 0 0.75rem; max-width: 100%; text-align: center; }
   .hero-cta { font-size: 12px; padding: 9px 16px; }
 
-  /* ── B2B: skjult på mobil (tilgjengelig via Bedrift i nav) ── */
-  .b2b-hero-wrap { display: none; }
+  /* ── B2B: mobil-layout ── */
+  .b2b-hero-wrap { padding: 0 0.75rem; }
+  .b2b-hero-inner { flex-direction: column; align-items: flex-start; gap: 0.7rem; padding: 1rem 0; }
+  .b2b-strip-text strong { font-size: 14px; }
+  .b2b-strip-text span { font-size: 12px; line-height: 1.45; display: block; margin-top: 2px; }
+  .b2b-strip-actions { width: 100%; flex-direction: row; gap: 0.6rem; }
+  .b2b-strip-primary { flex: 1; text-align: center; padding: 11px 12px; font-size: 13px; }
+  .b2b-strip-link { font-size: 12px; align-self: center; }
 
   /* ── BOOKING STRIP ── */
   .booking-strip {

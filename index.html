@@ -4295,6 +4295,10 @@ function _admLoad(){
     var store=JSON.parse(raw);
     if(store.employees&&store.employees.length) DATA.employees=store.employees;
     if(store.treatments&&store.treatments.length){
+      // Fix corrupted types: trust default types for known IDs
+      var defTypeById={};
+      DATA.treatments.forEach(function(t){defTypeById[t.id]=t.type;});
+      store.treatments.forEach(function(t){if(defTypeById[t.id])t.type=defTypeById[t.id];});
       // Merge: preserve nails defaults if stored data has none
       var storedNails=store.treatments.filter(function(t){return t.type==='nails';});
       var defaultNails=DATA.treatments.filter(function(t){return t.type==='nails';});

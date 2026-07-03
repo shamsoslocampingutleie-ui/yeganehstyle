@@ -3909,7 +3909,7 @@ function _buildTreatRows(list,accentColor){
 }
 function _buildTreatForm(isNails){
   var hairCats='<option>Klipp</option><option>Farge</option><option>Behandling</option><option>Skjegg</option><option>Vipper / Bryn</option><option>Extension / Permanent</option>';
-  var nailCats='<option>Negler</option><option>Manikyr</option><option>Pedikyr</option><option>Neglefjerning</option>';
+  var nailCats='<option>Gelenegler</option><option>Akrylnegler</option><option>Neglefjerning</option><option>Manikyr</option><option>Pedikyr</option><option>Negldesign / Kunst</option><option>Franskefransk</option><option>Babybomer</option>';
   return '<div id="admTreatForm" style="display:none;background:#111f14;border:1px solid '+(isNails?'rgba(201,125,110,0.3)':'#1e2e21')+';border-radius:14px;padding:1rem;margin-bottom:1rem;">'
     +'<div id="admTreatFormTitle" style="font-size:13px;font-weight:600;color:#d6e4d0;margin-bottom:0.75rem;"></div>'
     +input('admTreatName','Navn','Behandlingsnavn')
@@ -4749,7 +4749,8 @@ window.admDelEmp=function(i){
 window.admNewTreat=function(){editTreatId=null;go(admTreatTab==='nails'?'nails':'behandlinger');setTimeout(function(){el('admTreatForm').style.display='block';el('admTreatFormTitle').textContent='Ny behandling';el('admTreatName').value='';el('admTreatPrice').value='';el('admTreatDur').value='30';},0);};
 window.admEditTreat=function(i){
   editTreatId=i;var t=DATA.treatments[i];
-  go('behandlinger');
+  admTreatTab=(t.type==='nails'?'nails':'frisør');
+  go(t.type==='nails'?'nails':'behandlinger');
   setTimeout(function(){
     el('admTreatForm').style.display='block';
     el('admTreatFormTitle').textContent='Rediger: '+t.name;

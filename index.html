@@ -2301,7 +2301,7 @@ function doAdminLogin(){
     if(res.error){
       errEl.style.display='block';
       var m=res.error.message||'';
-      errEl.textContent=m.toLowerCase().includes('invalid')||m.toLowerCase().includes('credentials')?'Feil e-post eller passord.':'Innlogging feilet. Prøv igjen.';
+      errEl.textContent=m.toLowerCase().includes('invalid')||m.toLowerCase().includes('credentials')?'Feil e-post eller passord.':'Innlogging feilet: '+m;
       return;
     }
     var user=res.data&&res.data.user;
@@ -2313,14 +2313,22 @@ function doAdminLogin(){
     }
     if(meta.role==='admin'){
       currentUser=user;
-      closeModal('adminModal');
-      openAdminPanel();
+      try{
+        closeModal('adminModal');
+        openAdminPanel();
+      }catch(e){
+        errEl.style.display='block';
+        errEl.textContent='Admin-panel feil: '+e.message;
+      }
       return;
     }
-    // Ukjent rolle — vis feilmelding
     errEl.style.display='block';
-    errEl.textContent='Denne brukeren har ikke admin-tilgang.';
+    errEl.textContent='Ingen admin-tilgang. Rolle: '+(meta.role||'ukjent');
     sb.auth.signOut();
+  }).catch(function(e){
+    if(btn){btn.textContent='Logg inn →';btn.disabled=false;}
+    errEl.style.display='block';
+    errEl.textContent='Nettverksfeil: '+e.message;
   });
 }
 

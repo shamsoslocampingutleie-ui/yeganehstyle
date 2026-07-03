@@ -1175,9 +1175,9 @@ nav { }
 
   /* ── FOOTER ── */
   footer { padding: 1.5rem 1rem; padding-bottom: calc(1.25rem + env(safe-area-inset-bottom, 0)); }
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: 1.25rem 1rem; margin-bottom: 1.25rem; }
-  .footer-col h4 { font-size: 9px; margin-bottom: 0.6rem; }
-  .footer-col a { font-size: 11px; margin-bottom: 0.4rem; }
+  .footer-grid { grid-template-columns: repeat(3, 1fr); gap: 0.75rem 0.5rem; margin-bottom: 1rem; }
+  .footer-col h4 { font-size: 8px; margin-bottom: 0.4rem; letter-spacing: 0.1em; }
+  .footer-col a { font-size: 10px; margin-bottom: 0.2rem; }
 
   /* ── MODALS ── */
   .modal { padding: 1.1rem 1rem max(2rem, calc(env(safe-area-inset-bottom) + 1.25rem)); }
@@ -1334,9 +1334,9 @@ nav { }
 <!-- HERO -->
 <section class="hero" id="hjem">
   <div class="hero-inner">
-    <div class="hero-label">NAK Hair — Eksklusivt i salongen</div>
-    <h1>Profesjonell pleie.<br><em>Synlige resultater.</em></h1>
-    <p class="hero-sub">Eksklusive produkter og tjenester for hår som reflekterer deg.</p>
+    <div class="hero-label" id="heroLabel">NAK Hair — Eksklusivt i salongen</div>
+    <h1 id="heroH1">Profesjonell pleie.<br><em>Synlige resultater.</em></h1>
+    <p class="hero-sub" id="heroSub">Eksklusive produkter og tjenester for hår som reflekterer deg.</p>
     <a class="hero-cta" href="#" onclick="goTo('produkter');return false;">Se alle produkter</a>
   </div>
 </section>
@@ -3447,7 +3447,8 @@ var TABS=[
   {id:'apningstider',label:'Åpningstider'},
   {id:'ansatte',label:'Ansatte'},
   {id:'behandlinger',label:'Behandlinger'},
-  {id:'bedriftskunder',label:'Bedriftskunder'}
+  {id:'bedriftskunder',label:'Bedriftskunder'},
+  {id:'innhold',label:'✏ Innhold'}
 ];
 
 function el(id){return document.getElementById(id);}
@@ -3512,6 +3513,7 @@ function go(tab){
   else if(tab==='behandlinger') b.innerHTML=viewBehandlinger();
   else if(tab==='bedriftskunder') b.innerHTML=viewBedriftskunder();
   else if(tab==='kunder') b.innerHTML=viewKunder();
+  else if(tab==='innhold'){renderInnhold();}
 }
 
 function viewOversikt(){
@@ -5108,7 +5110,66 @@ if(window.renderNailsGrid) window.renderNailsGrid();
     ST.step=6; renderTimma();
     if(window.showToast)window.showToast('Booking sendt!');
   };
+
+// ── INNHOLD EDITOR ──
+var INNHOLD_KEY='ys_innhold';
+function loadInnhold(){
+  try{return JSON.parse(localStorage.getItem(INNHOLD_KEY)||'{}');}catch(e){return {};}
+}
+function applyInnhold(){
+  var d=loadInnhold();
+  if(d.heroLabel){var el=document.getElementById('heroLabel');if(el)el.textContent=d.heroLabel;}
+  if(d.heroH1){var el=document.getElementById('heroH1');if(el)el.innerHTML=d.heroH1;}
+  if(d.heroSub){var el=document.getElementById('heroSub');if(el)el.textContent=d.heroSub;}
+}
+function renderInnhold(){
+  var d=loadInnhold();
+  var f=function(id,label,val,ph,tag){
+    tag=tag||'input';
+    var v=(val||'').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+    if(tag==='textarea')
+      return '<div style="margin-bottom:0.75rem;"><label style="display:block;font-size:10px;color:#7a9478;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">'+label+'</label><textarea id="ic_'+id+'" rows="2" placeholder="'+(ph||'')+'" style="width:100%;padding:9px 11px;background:#162019;border:1px solid #1e2e21;border-radius:8px;font-size:15px;color:#d6e4d0;box-sizing:border-box;resize:vertical;font-family:inherit;">'+v+'</textarea></div>';
+    return '<div style="margin-bottom:0.75rem;"><label style="display:block;font-size:10px;color:#7a9478;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">'+label+'</label><input id="ic_'+id+'" type="text" value="'+v+'" placeholder="'+(ph||'')+'" style="width:100%;padding:9px 11px;background:#162019;border:1px solid #1e2e21;border-radius:8px;font-size:15px;color:#d6e4d0;box-sizing:border-box;"></div>';
+  };
+  var hero=d.heroH1||'Profesjonell pleie.<br><em>Synlige resultater.</em>';
+  el('admBody').innerHTML=
+    card('Hero – Tittel og tekst',
+      '<div style="padding:0.75rem;">'+
+      f('heroLabel','Label over tittel',d.heroLabel||'NAK Hair — Eksklusivt i salongen','Label...')+
+      f('heroH1','Tittel (HTML tillatt)',hero,'Tittel...','textarea')+
+      f('heroSub','Undertekst',d.heroSub||'Eksklusive produkter og tjenester for hår som reflekterer deg.','Undertekst...')+
+      '</div>'
+    )+
+    card('Kontaktinformasjon',
+      '<div style="padding:0.75rem;">'+
+      f('kontaktAdresse','Adresse',d.kontaktAdresse||'Råholt','Adresse...')+
+      f('kontaktTlf','Telefon',d.kontaktTlf||'+47 978 55 154','Tlf...')+
+      f('kontaktEpost','E-post',d.kontaktEpost||'yeganeh@yeganehstyle.no','E-post...')+
+      '</div>'
+    )+
+    card('Åpningstider',
+      '<div style="padding:0.75rem;">'+
+      f('apnMan','Mandag–fredag',d.apnMan||'09:00–18:00','f.eks. 09:00–18:00')+
+      f('apnLor','Lørdag',d.apnLor||'10:00–16:00','f.eks. 10:00–16:00')+
+      f('apnSon','Søndag',d.apnSon||'Stengt','f.eks. Stengt')+
+      '</div>'
+    )+
+    '<button onclick="saveInnhold()" style="width:100%;padding:13px;background:rgba(138,180,138,0.15);border:1px solid rgba(138,180,138,0.35);border-radius:12px;color:#c8e4c4;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">Lagre endringer</button>';
+}
+function saveInnhold(){
+  var get=function(id){var e=document.getElementById('ic_'+id);return e?e.value.trim():'';};
+  var d={
+    heroLabel:get('heroLabel'),heroH1:get('heroH1'),heroSub:get('heroSub'),
+    kontaktAdresse:get('kontaktAdresse'),kontaktTlf:get('kontaktTlf'),kontaktEpost:get('kontaktEpost'),
+    apnMan:get('apnMan'),apnLor:get('apnLor'),apnSon:get('apnSon')
+  };
+  try{localStorage.setItem(INNHOLD_KEY,JSON.stringify(d));}catch(e){}
+  applyInnhold();
+  if(window.showToast)window.showToast('Innhold lagret ✓');
+}
+
 })();
 </script>
+<script>document.addEventListener('DOMContentLoaded',function(){if(typeof applyInnhold==='function')applyInnhold();});</script>
 </body>
 </html>

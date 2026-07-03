@@ -3431,6 +3431,7 @@ var TABS=[
   {id:'apningstider',label:'Åpningstider'},
   {id:'ansatte',label:'Ansatte'},
   {id:'behandlinger',label:'Behandlinger'},
+  {id:'nails',label:'💅 MH Nails'},
   {id:'bedriftskunder',label:'Bedriftskunder'},
   {id:'innhold',label:'✏ Innhold'}
 ];
@@ -3494,17 +3495,8 @@ function go(tab){
   else if(tab==='kalender') b.innerHTML=viewKalender();
   else if(tab==='apningstider') b.innerHTML=viewApningstider();
   else if(tab==='ansatte') b.innerHTML=viewAnsatte();
-  else if(tab==='behandlinger'){
-    b.innerHTML=viewBehandlinger();
-    // Wire tab buttons immediately — no onclick strings, no delegation races
-    var tBtns=b.querySelectorAll('[data-yt-tab]');
-    tBtns.forEach(function(btn){
-      btn.addEventListener('click',function(){
-        admTreatTab=btn.getAttribute('data-yt-tab');
-        go('behandlinger');
-      });
-    });
-  }
+  else if(tab==='behandlinger') b.innerHTML=viewBehandlinger();
+  else if(tab==='nails') b.innerHTML=viewNails();
   else if(tab==='bedriftskunder') b.innerHTML=viewBedriftskunder();
   else if(tab==='kunder') b.innerHTML=viewKunder();
   else if(tab==='innhold'){renderInnhold();}
@@ -3879,13 +3871,7 @@ function viewAnsatte(){
 }
 
 var admTreatTab='frisør';
-function viewBehandlinger(){
-  var hair=DATA.treatments.filter(function(t){return !t.type||t.type==='frisør';});
-  var nails=DATA.treatments.filter(function(t){return t.type==='nails';});
-  var isNails=admTreatTab==='nails';
-  var list=isNails?nails:hair;
-
-  // Build category rows for active tab
+function _buildTreatRows(list,accentColor){
   var cats={};
   list.forEach(function(t){if(!cats[t.cat])cats[t.cat]=[];cats[t.cat].push(t);});
   var rows='';
@@ -3899,20 +3885,20 @@ function viewBehandlinger(){
         +'<div style="font-size:10px;color:#7a9478;">'+t.duration+' min · '+t.cat+'</div>'
         +'</div>'
         +'<div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap;">'
-        // Inline price: click to edit
-        +'<span onclick="admInlinePrice('+ti+',this)" title="Klikk for å redigere pris" style="font-size:13px;font-weight:700;color:#9ec49a;min-width:64px;text-align:right;cursor:pointer;padding:3px 6px;border-radius:6px;transition:background 0.15s;" onmouseenter="this.style.background=\'rgba(158,196,154,0.12)\'" onmouseleave="this.style.background=\'\'">'+t.price+' kr</span>'
+        +'<span onclick="admInlinePrice('+ti+',this)" title="Klikk for å redigere pris" style="font-size:13px;font-weight:700;color:'+accentColor+';min-width:64px;text-align:right;cursor:pointer;padding:3px 6px;border-radius:6px;transition:background 0.15s;" onmouseenter=\"this.style.background=\'rgba(158,196,154,0.12)\'\" onmouseleave=\"this.style.background=\'\">'+t.price+' kr</span>'
         +btn('Rediger','admEditTreat('+ti+')')
         +btn(t.active?'Pause':'Aktiver','admToggleTreat('+ti+')',t.active?'#e8c04a':'#27ae60')
         +btn('✕','admDelTreat('+ti+')','#c0392b')
         +'</div></div>';
     });
-    rows+='<div style="margin-bottom:0.75rem;"><div style="font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:'+(isNails?'#c97d6e':'#9ec49a')+';padding:8px 10px 4px;">'+cat+'</div>'+catRows+'</div>';
+    rows+='<div style="margin-bottom:0.75rem;"><div style="font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:'+accentColor+';padding:8px 10px 4px;">'+cat+'</div>'+catRows+'</div>';
   });
-
-  // Form
+  return rows;
+}
+function _buildTreatForm(isNails){
   var hairCats='<option>Klipp</option><option>Farge</option><option>Behandling</option><option>Skjegg</option><option>Vipper / Bryn</option><option>Extension / Permanent</option>';
   var nailCats='<option>Negler</option><option>Manikyr</option><option>Pedikyr</option><option>Neglefjerning</option>';
-  var form='<div id="admTreatForm" style="display:none;background:#111f14;border:1px solid '+(isNails?'rgba(201,125,110,0.3)':'#1e2e21')+';border-radius:14px;padding:1rem;margin-bottom:1rem;">'
+  return '<div id="admTreatForm" style="display:none;background:#111f14;border:1px solid '+(isNails?'rgba(201,125,110,0.3)':'#1e2e21')+';border-radius:14px;padding:1rem;margin-bottom:1rem;">'
     +'<div id="admTreatFormTitle" style="font-size:13px;font-weight:600;color:#d6e4d0;margin-bottom:0.75rem;"></div>'
     +input('admTreatName','Navn','Behandlingsnavn')
     +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">'
@@ -3926,23 +3912,31 @@ function viewBehandlinger(){
     +'<input type="hidden" id="admTreatType" value="'+(isNails?'nails':'frisør')+'">'
     +'<div style="display:flex;gap:0.5rem;">'+btn('Lagre','admSaveTreat()')+btn('Avbryt','admCancelTreat()','#7a9478')+'</div>'
     +'</div>';
-
-  var totalTxt=list.length+' tjenester';
-  return '<div style="margin-bottom:1rem;">'
-    // Tab switcher
-    +'<div style="display:grid;grid-template-columns:1fr 1fr;border:1px solid rgba(80,120,70,0.2);border-radius:12px;overflow:hidden;margin-bottom:1rem;">'
-    +'<button data-yt-tab="frisør" style="padding:11px;background:'+(!isNails?'rgba(80,120,70,0.25)':'transparent')+';border:0;color:'+(!isNails?'#9ec49a':'#7a9478')+';font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px;">✂ Yeganeh Style · Frisør</button>'
-    +'<button data-yt-tab="nails" style="padding:11px;background:'+(isNails?'rgba(201,125,110,0.15)':'transparent')+';border:0;border-left:1px solid rgba(80,120,70,0.15);color:'+(isNails?'#c97d6e':'#7a9478')+';font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;display:flex;align-items:center;justify-content:center;gap:6px;">💅 MH Nails · Neglepleie</button>'
+}
+function viewBehandlinger(){
+  admTreatTab='frisør';
+  var list=DATA.treatments.filter(function(t){return !t.type||t.type==='frisør';});
+  var rows=_buildTreatRows(list,'#9ec49a');
+  return '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;">'
+    +'<div style="font-size:11px;color:#7a9478;">'+list.length+' tjenester – Yeganeh Style</div>'
+    +btn('+ Ny tjeneste','admNewTreat()','#8ab48a')
     +'</div>'
-    // Header row
-    +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;">'
-    +'<div style="font-size:11px;color:#7a9478;">'+totalTxt+'</div>'
-    +btn('+ Ny tjeneste','admNewTreat()',isNails?'#c97d6e':'#8ab48a')
+    +_buildTreatForm(false)
+    +'<div style="background:#0d1a0f;border:1px solid rgba(80,120,70,0.2);border-radius:14px;overflow:hidden;">'
+    +(rows||'<div style="padding:2rem;text-align:center;color:#3a5a38;">Ingen tjenester. Klikk "+ Ny tjeneste".</div>')
+    +'</div>';
+}
+function viewNails(){
+  admTreatTab='nails';
+  var list=DATA.treatments.filter(function(t){return t.type==='nails';});
+  var rows=_buildTreatRows(list,'#c97d6e');
+  return '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;">'
+    +'<div style="font-size:11px;color:#7a9478;">'+list.length+' tjenester – MH Nails</div>'
+    +btn('+ Ny tjeneste','admNewTreat()','#c97d6e')
     +'</div>'
-    +'</div>'
-    +form
-    +'<div style="background:#0d1a0f;border:1px solid '+(isNails?'rgba(201,125,110,0.2)':'rgba(80,120,70,0.2)')+';border-radius:14px;overflow:hidden;">'
-    +(rows||'<div style="padding:2rem;text-align:center;color:#3a5a38;">Ingen tjenester ennå. Klikk "+ Ny tjeneste" for å legge til.</div>')
+    +_buildTreatForm(true)
+    +'<div style="background:#0d1a0f;border:1px solid rgba(201,125,110,0.2);border-radius:14px;overflow:hidden;">'
+    +(rows||'<div style="padding:2rem;text-align:center;color:rgba(201,125,110,0.5);">Ingen neglebehandlinger. Klikk "+ Ny tjeneste".</div>')
     +'</div>';
 }
 
@@ -3959,7 +3953,7 @@ window.admInlinePrice=function(i,el){
   function save(){
     var v=parseInt(inp.value,10);
     if(v>0&&v!==cur){DATA.treatments[i].price=v;updateFrontendPrice(i,v);_admPersist();}
-    go('behandlinger');
+    go(admTreatTab==='nails'?'nails':'behandlinger');
     if(window.showToast&&v>0&&v!==cur) window.showToast('Pris oppdatert: '+v+' kr');
   }
   inp.addEventListener('blur',save);
@@ -4740,7 +4734,7 @@ window.admDelEmp=function(i){
 };
 
 // ── TREATMENT ACTIONS ──
-window.admNewTreat=function(){editTreatId=null;go('behandlinger');setTimeout(function(){el('admTreatForm').style.display='block';el('admTreatFormTitle').textContent='Ny behandling';el('admTreatName').value='';el('admTreatPrice').value='';el('admTreatDur').value='30';},0);};
+window.admNewTreat=function(){editTreatId=null;go(admTreatTab==='nails'?'nails':'behandlinger');setTimeout(function(){el('admTreatForm').style.display='block';el('admTreatFormTitle').textContent='Ny behandling';el('admTreatName').value='';el('admTreatPrice').value='';el('admTreatDur').value='30';},0);};
 window.admEditTreat=function(i){
   editTreatId=i;var t=DATA.treatments[i];
   go('behandlinger');
@@ -4758,11 +4752,11 @@ window.admSaveTreat=function(){
   var prev=editTreatId!==null?DATA.treatments[editTreatId]:{};
   var treat={id:prev.id||Date.now(),name:name,cat:cat,price:price,duration:dur,active:true,type:type};
   if(editTreatId!==null)DATA.treatments[editTreatId]=treat;else DATA.treatments.push(treat);
-  editTreatId=null;_admPersist();el('admTreatForm').style.display='none';go('behandlinger');if(window.showToast)window.showToast('Lagret: '+name+' – '+price+' kr ✓');
+  editTreatId=null;_admPersist();el('admTreatForm').style.display='none';go(admTreatTab==='nails'?'nails':'behandlinger');if(window.showToast)window.showToast('Lagret: '+name+' – '+price+' kr ✓');
 };
 window.admCancelTreat=function(){el('admTreatForm').style.display='none';};
-window.admToggleTreat=function(i){DATA.treatments[i].active=!DATA.treatments[i].active;_admPersist();go('behandlinger');if(window.showToast)window.showToast(DATA.treatments[i].active?'Aktivert':'Deaktivert');};
-window.admDelTreat=function(i){if(!confirm('Slette behandlingen?'))return;DATA.treatments.splice(i,1);_admPersist();go('behandlinger');if(window.showToast)window.showToast('Behandling slettet');};
+window.admToggleTreat=function(i){DATA.treatments[i].active=!DATA.treatments[i].active;_admPersist();go(admTreatTab==='nails'?'nails':'behandlinger');if(window.showToast)window.showToast(DATA.treatments[i].active?'Aktivert':'Deaktivert');};
+window.admDelTreat=function(i){if(!confirm('Slette behandlingen?'))return;DATA.treatments.splice(i,1);_admPersist();go(admTreatTab==='nails'?'nails':'behandlinger');if(window.showToast)window.showToast('Behandling slettet');};
 
 // ── B2B CLIENT ACTIONS ──
 window.admB2bApprove=function(i){

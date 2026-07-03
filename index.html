@@ -3266,12 +3266,12 @@ document.addEventListener('keydown',function(e){
     <button onclick="closeAdminPanel()" style="background:none;border:1px solid #1e2e21;border-radius:8px;padding:6px 12px;color:#7a9478;font-size:12px;cursor:pointer;">Lukk</button>
   </div>
 </div>
-<div id="admTabs" style="display:flex;gap:4px;overflow-x:auto;padding:0.75rem 1rem;background:rgba(8,16,8,0.8);border-bottom:1px solid #1e2e21;-webkit-overflow-scrolling:touch;"></div>
+<div id="admTabs" style="padding:0.6rem 1rem 0.75rem;background:rgba(8,16,8,0.9);border-bottom:1px solid #1e2e21;"></div>
 <div id="admBody" style="padding:1rem;"></div>
 </div>
 
 <script>
-// ADMIN MODULE - all isolated in IIFE
+// ADMIN MODULE v7 - all isolated in IIFE
 (function(){
 'use strict';
 
@@ -3417,21 +3417,14 @@ window.admRefreshData=function(){
 
 var TABS=[
   {id:'oversikt',label:'Oversikt'},
-  {id:'ordre',label:'Bestillinger'},
-  {id:'foresporsler',label:'Forespørsler'},
-  {id:'timer',label:'Timer'},
-  {id:'produkter',label:'Produkter'},
-  {id:'chat',label:'Chat'},
-  {id:'kunder',label:'Kunder'},
-  {id:'anmeldelser',label:'Anmeldelser'},
-  {id:'rabatt',label:'Rabatt'},
-  {id:'retur',label:'Retur'},
-  {id:'okonomi',label:'Økonomi'},
   {id:'kalender',label:'Kalender'},
-  {id:'apningstider',label:'Åpningstider'},
-  {id:'ansatte',label:'Ansatte'},
+  {id:'timer',label:'Timer'},
   {id:'behandlinger',label:'Behandlinger'},
   {id:'nails',label:'💅 MH Nails'},
+  {id:'ansatte',label:'Ansatte'},
+  {id:'apningstider',label:'Åpningstider'},
+  {id:'anmeldelser',label:'Anmeldelser'},
+  {id:'rabatt',label:'Rabatt'},
   {id:'bedriftskunder',label:'Bedriftskunder'},
   {id:'innhold',label:'✏ Innhold'}
 ];
@@ -3467,12 +3460,23 @@ function input(id,label,ph,type){
 }
 
 function renderTabs(){
+  var rows=[
+    ['oversikt','kalender','timer'],
+    ['behandlinger','nails','ansatte','apningstider'],
+    ['anmeldelser','rabatt','bedriftskunder','innhold']
+  ];
   var html='';
-  for(var i=0;i<TABS.length;i++){
-    var t=TABS[i];
-    var active=t.id===currentTab;
-    html+='<button onclick="admGo(\''+t.id+'\')" style="background:'+(active?'rgba(138,180,138,0.15)':'rgba(255,255,255,0.04)')+';border:1px solid '+(active?'rgba(138,180,138,0.4)':'#1e2e21')+';border-radius:16px;padding:7px 13px;font-size:12px;color:'+(active?'#9ec49a':'#7a9478')+';cursor:pointer;white-space:nowrap;flex-shrink:0;">'+t.label+'</button>';
-  }
+  rows.forEach(function(ids,ri){
+    html+='<div style="display:flex;flex-wrap:wrap;gap:5px;'+(ri>0?'margin-top:5px;':'')+'">'; 
+    ids.forEach(function(id){
+      var t=null;for(var j=0;j<TABS.length;j++){if(TABS[j].id===id){t=TABS[j];break;}}
+      if(!t) return;
+      var active=t.id===currentTab;
+      var isNails=t.id==='nails';
+      html+='<button onclick="admGo(\''+t.id+'\');" style="background:'+(active?(isNails?'rgba(201,125,110,0.2)':'rgba(138,180,138,0.18)'):'rgba(255,255,255,0.03)')+';border:1px solid '+(active?(isNails?'rgba(201,125,110,0.5)':'rgba(138,180,138,0.5)'):'rgba(80,100,70,0.2)')+';border-radius:10px;padding:6px 14px;font-size:12px;font-weight:'+(active?'600':'400')+';color:'+(active?(isNails?'#c97d6e':'#9ec49a'):'#5a7a5a')+';cursor:pointer;white-space:nowrap;transition:all 0.15s;font-family:inherit;">'+t.label+'</button>';
+    });
+    html+='</div>';
+  });
   el('admTabs').innerHTML=html;
 }
 

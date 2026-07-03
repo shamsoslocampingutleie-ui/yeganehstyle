@@ -3521,7 +3521,17 @@ function go(tab){
   else if(tab==='kalender') b.innerHTML=viewKalender();
   else if(tab==='apningstider') b.innerHTML=viewApningstider();
   else if(tab==='ansatte') b.innerHTML=viewAnsatte();
-  else if(tab==='behandlinger') b.innerHTML=viewBehandlinger();
+  else if(tab==='behandlinger'){
+    b.innerHTML=viewBehandlinger();
+    // Wire tab buttons immediately — no onclick strings, no delegation races
+    var tBtns=b.querySelectorAll('[data-yt-tab]');
+    tBtns.forEach(function(btn){
+      btn.addEventListener('click',function(){
+        admTreatTab=btn.getAttribute('data-yt-tab');
+        go('behandlinger');
+      });
+    });
+  }
   else if(tab==='bedriftskunder') b.innerHTML=viewBedriftskunder();
   else if(tab==='kunder') b.innerHTML=viewKunder();
   else if(tab==='innhold'){renderInnhold();}

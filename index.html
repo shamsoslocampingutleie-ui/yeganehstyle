@@ -726,32 +726,62 @@ footer {
 /* ── MOBILE MENU ── */
 .mobile-menu {
   position: fixed; inset: 0; z-index: 400;
-  background: rgba(4,9,4,0.99);
-  transform: translateX(100%); transition: transform 0.25s ease;
-  padding: 5rem 1.8rem 2rem;
-  display: flex; flex-direction: column; gap: 0;
+  background: #060d07;
+  transform: translateX(100%); transition: transform 0.28s cubic-bezier(.4,0,.2,1);
+  display: flex; flex-direction: column;
+  overflow-y: auto; -webkit-overflow-scrolling: touch;
 }
 .mobile-menu.open { transform: translateX(0); }
-.mobile-menu-close {
-  position: absolute; top: 1rem; right: 1rem;
-  background: rgba(255,255,255,0.06); border: 1px solid var(--border);
-  border-radius: 50%; width: 36px; height: 36px;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer; color: var(--text-dim); font-size: 14px;
+.mm-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
 }
-.mobile-menu a {
+.mm-logo {
   font-family: 'Cormorant Garamond', serif;
-  font-size: 1.9rem; font-weight: 300; color: var(--text);
-  text-decoration: none; padding: 0.5rem 0 0.5rem 0.8rem;
-  border-bottom: 1px solid rgba(80,120,70,0.1); cursor: pointer;
-  transition: color 0.2s;
+  font-weight: 300; font-size: 16px; letter-spacing: 0.06em;
+  color: var(--text); display: flex; align-items: center; gap: 8px;
 }
-.mobile-menu a:hover { color: var(--accent); }
+.mobile-menu-close {
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+  border-radius: 50%; width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--text-dim); font-size: 13px;
+  flex-shrink: 0;
+}
+.mm-body { padding: 0.5rem 1.25rem 2rem; flex: 1; }
 .mm-section {
   font-family: 'Inter', sans-serif;
-  font-size: 9px; font-weight: 600; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--gray);
-  padding: 1.2rem 0 0.3rem;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--muted);
+  padding: 1.4rem 0 0.5rem;
+}
+.mm-section:first-child { padding-top: 1rem; }
+.mobile-menu a {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.55rem; font-weight: 300; color: var(--text-dim);
+  text-decoration: none; display: block;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid rgba(80,120,70,0.08);
+  cursor: pointer; transition: color 0.18s;
+  letter-spacing: 0.01em;
+}
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:active { color: var(--accent); }
+.mm-divider {
+  margin: 1rem 0 0; padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+.mm-cta {
+  margin: 1.25rem 0 0.5rem;
+  display: block; width: 100%;
+  background: rgba(158,196,154,0.1);
+  border: 1px solid rgba(158,196,154,0.25);
+  border-radius: 14px; padding: 14px;
+  font-size: 14px; font-weight: 600; color: #c8e4c4;
+  text-align: center; cursor: pointer;
+  font-family: 'Cormorant Garamond', serif; letter-spacing: 0.04em;
 }
 
 /* ── MODALS ── */
@@ -1083,22 +1113,22 @@ nav { }
 
   /* ── HERO: kompakt på mobil ── */
   .hero {
-    padding: 1.25rem 1rem 1rem;
+    padding: 1rem 1rem 0.85rem;
     text-align: left;
     align-items: flex-start;
   }
-  .hero-label { font-size: 10px; padding: 5px 11px; margin-bottom: 0.75rem; }
-  .hero h1 { font-size: 1.9rem; line-height: 1.08; margin-bottom: 0.5rem; }
-  .hero-sub { font-size: 12px; margin: 0 0 1rem; max-width: 100%; text-align: left; }
-  .hero-cta { font-size: 12px; padding: 10px 18px; }
+  .hero-label { font-size: 10px; padding: 5px 10px; margin-bottom: 0.6rem; }
+  .hero h1 { font-size: 1.85rem; line-height: 1.1; margin-bottom: 0.4rem; }
+  .hero-sub { font-size: 12px; margin: 0 0 0.75rem; max-width: 100%; text-align: left; }
+  .hero-cta { font-size: 12px; padding: 9px 16px; }
 
   /* ── B2B: skjult på mobil (tilgjengelig via Bedrift i nav) ── */
   .b2b-hero-wrap { display: none; }
 
   /* ── BOOKING STRIP ── */
   .booking-strip {
-    flex-direction: column; gap: 0.75rem;
-    padding: 1rem; margin: 0 0.75rem 0.6rem;
+    flex-direction: column; gap: 0.6rem;
+    padding: 0.9rem; margin: 0 0.75rem 0;
     border-radius: 16px;
   }
   .strip-icon { display: none; }
@@ -1119,7 +1149,8 @@ nav { }
   .trust-item { font-size: 10px; }
 
   /* ── CATEGORY STRIP ── */
-  .cat-strip { gap: 8px; padding: 0.85rem 0.75rem; }
+  .cat-strip-wrap { margin-top: 0; }
+  .cat-strip { gap: 8px; padding: 0.75rem 0.75rem; }
   .cat-item { min-width: 58px; gap: 5px; }
   .cat-icon { width: 44px; height: 44px; border-radius: 12px; }
   .cat-icon svg { width: 20px; height: 20px; }
@@ -1278,20 +1309,40 @@ nav { }
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-menu-close" onclick="closeMenu()" aria-label="Lukk meny">✕</button>
-  <div class="mm-section">Booking</div>
-  <a onclick="openBooking();closeMenu()">↳ Frisør</a>
-  <a onclick="openTimma();closeMenu()">↳ Negler</a>
-  <div class="mm-section">Produkter</div>
-  <a onclick="goTo('produkter');filterTab('alle',null);closeMenu()">↳ Bestselgende</a>
-  <a onclick="goTo('produkter');filterTab('shampoo',null);closeMenu()">↳ Nyheter</a>
-  <a onclick="goTo('produkter');filterTab('styling',null);closeMenu()">↳ Tilbud</a>
-  <div class="mm-section">Bedrift</div>
-  <a onclick="openB2B();closeMenu()">↳ Bedriftsportal</a>
-  <a onclick="openModal('adminModal');closeMenu()">↳ Logg inn</a>
-  <div class="mm-section" style="border-top:1px solid var(--border);margin-top:8px;padding-top:16px"></div>
-  <a onclick="openCart();closeMenu()">Handlekurv</a>
-  <a onclick="openContact();closeMenu()">Kontakt</a>
+  <div class="mm-header">
+    <span class="mm-logo">
+      <svg viewBox="0 0 32 32" fill="none" width="20" height="20">
+        <path d="M8 4 Q10 8 16 16" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/>
+        <path d="M24 4 Q22 8 16 16" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/>
+        <path d="M16 16 Q12 22 10 26" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="9" cy="27" r="2.5" stroke="#c97d6e" stroke-width="1.8" fill="none"/>
+        <path d="M16 16 Q20 22 22 26" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="23" cy="27" r="2.5" stroke="#c97d6e" stroke-width="1.8" fill="none"/>
+        <circle cx="16" cy="16" r="1.5" fill="#c97d6e"/>
+      </svg>
+      Yeganeh Style
+    </span>
+    <button class="mobile-menu-close" onclick="closeMenu()" aria-label="Lukk meny">✕</button>
+  </div>
+  <div class="mm-body">
+    <div class="mm-section">Booking</div>
+    <a onclick="openBooking();closeMenu()">Frisør</a>
+    <a onclick="openTimma();closeMenu()">Negler</a>
+
+    <div class="mm-section">Produkter</div>
+    <a onclick="goTo('produkter');filterTab('alle',null);closeMenu()">Bestselgende</a>
+    <a onclick="goTo('produkter');filterTab('shampoo',null);closeMenu()">Nyheter</a>
+    <a onclick="goTo('produkter');filterTab('styling',null);closeMenu()">Tilbud</a>
+
+    <div class="mm-section">Bedrift</div>
+    <a onclick="openB2B();closeMenu()">Bedriftsportal</a>
+    <a onclick="openModal('adminModal');closeMenu()">Logg inn</a>
+
+    <div class="mm-divider"></div>
+    <a onclick="openContact();closeMenu()">Kontakt</a>
+
+    <button class="mm-cta" onclick="openBooking();closeMenu()">Book time →</button>
+  </div>
 </div>
 
 <main id="main-content">
@@ -1622,7 +1673,7 @@ nav { }
       <a onclick="openService('dameklipp')">Dameklipp</a>
       <a onclick="openService('farge')">Farge &amp; Striper</a>
       <a onclick="openService('keratin')">Keratin</a>
-      <a onclick="goTo('mhnails')">MH Nails – Neglepleie</a>
+      <a onclick="openTimma()">MH Nails – Neglepleie</a>
       <a onclick="openBooking()">Book time</a>
     </div>
     <div class="footer-col">

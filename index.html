@@ -4292,7 +4292,13 @@ function _admLoad(){
     if(!raw)return;
     var store=JSON.parse(raw);
     if(store.employees&&store.employees.length) DATA.employees=store.employees;
-    if(store.treatments&&store.treatments.length) DATA.treatments=store.treatments;
+    if(store.treatments&&store.treatments.length){
+      // Merge: preserve nails defaults if stored data has none
+      var storedNails=store.treatments.filter(function(t){return t.type==='nails';});
+      var defaultNails=DATA.treatments.filter(function(t){return t.type==='nails';});
+      var storedHair=store.treatments.filter(function(t){return !t.type||t.type==='frisør';});
+      DATA.treatments=storedHair.concat(storedNails.length?storedNails:defaultNails);
+    }
     if(store.discounts&&store.discounts.length) DATA.discounts=store.discounts;
     if(store.blocks) DATA.blocks=store.blocks;
     if(store.ohData) DATA.ohData=store.ohData;
@@ -4308,7 +4314,11 @@ function _admLoad(){
     },function(){});
     s.from('treatments').select('*').order('sort_order').then(function(res){
       if(res.data&&res.data.length){
-        DATA.treatments=res.data.map(function(r){return{id:r.id,name:r.name,cat:r.cat||'Klipp',price:r.price||0,duration:r.duration||30,active:r.active!==false,type:r.type||'frisør',stylist:r.stylist||''};});
+        var sbTreats=res.data.map(function(r){return{id:r.id,name:r.name,cat:r.cat||'Klipp',price:r.price||0,duration:r.duration||30,active:r.active!==false,type:r.type||'frisør',stylist:r.stylist||''};});
+        // Preserve nails defaults if Supabase has no nails entries yet
+        var sbNails=sbTreats.filter(function(t){return t.type==='nails';});
+        var defaultNails2=DATA.treatments.filter(function(t){return t.type==='nails';});
+        DATA.treatments=sbTreats.filter(function(t){return t.type!=='nails';}).concat(sbNails.length?sbNails:defaultNails2);
         try{localStorage.setItem(LS_KEY,JSON.stringify({employees:DATA.employees,treatments:DATA.treatments,discounts:DATA.discounts,blocks:DATA.blocks}));}catch(e){}
       }
     },function(){});

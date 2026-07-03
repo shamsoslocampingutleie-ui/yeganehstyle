@@ -2645,13 +2645,28 @@ function openModal(id){
     selectedStars=5;setupStarPicker();
   }
   el.classList.add('open');
-  try{document.body.style.overflow='hidden';}catch(e){}
+  try{
+    var sy=window.scrollY||window.pageYOffset;
+    document.body.dataset.sy=sy;
+    document.body.style.position='fixed';
+    document.body.style.top='-'+sy+'px';
+    document.body.style.width='100%';
+  }catch(e){}
 }
 function closeModal(id){
   var el=document.getElementById(id);
   if(!el) return;
   el.classList.remove('open');
-  try{document.body.style.overflow='';}catch(e){}
+  var open=document.querySelectorAll('.modal-overlay.open');
+  if(!open.length){
+    try{
+      var sy=parseInt(document.body.dataset.sy||'0',10);
+      document.body.style.position='';
+      document.body.style.top='';
+      document.body.style.width='';
+      window.scrollTo(0,sy);
+    }catch(e){}
+  }
 }
 function overlayClick(e,id){if(e.target===document.getElementById(id))closeModal(id);}
 function openMenu(){document.getElementById('mobileMenu').classList.add('open');}

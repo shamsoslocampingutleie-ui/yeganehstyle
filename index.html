@@ -26,7 +26,8 @@
 <meta name="twitter:description" content="Profesjonell frisørsalong på Råholt. Book time for klipp, farge og balayage.">
 <meta name="twitter:image" content="https://www.yeganehstyle.no/og.jpg">
 <!-- Preconnect -->
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://cauftwsojtumogyshmqq.supabase.co" crossorigin>
 <!-- Preload critical fonts -->
@@ -1141,7 +1142,7 @@ nav { }
 
   /* ── SECTION WRAP ── */
   .section-wrap { padding: 1.1rem 0.75rem; }
-  .section-wrap + .section-wrap { border-top: 1px solid var(--border); }
+  
   .section-glass { padding: 0.75rem; margin-bottom: 0.6rem; }
   .section-title { font-size: 1.2rem; }
   .section-sub { font-size: 11px; }
@@ -3275,43 +3276,15 @@ document.addEventListener('keydown',function(e){
 'use strict';
 
 var DATA={
-  orders:[
-    {id:'#1042',date:'12.06.2026',customer:'Lena Andersen',phone:'+47 912 34 567',email:'lena@gmail.com',address:'Storgata 4, 0182 Oslo',items:'Scalp Relief Shampoo x2, Hydrate Me Conditioner x1',total:847,status:'ny',payment:'Vipps'},
-    {id:'#1041',date:'11.06.2026',customer:'Petter Holm',phone:'+47 934 56 789',email:'petter@gmail.com',address:'Parkveien 12, 2072 Raaholt',items:'Bond Complex x1',total:449,status:'pakket',payment:'Kort'},
-    {id:'#1040',date:'10.06.2026',customer:'Sara Eriksen',phone:'+47 956 78 901',email:'sara@hotmail.com',address:'Granveien 7, 0182 Oslo',items:'Texture Spray x1, Styling Cream x2',total:657,status:'sendt',payment:'Klarna'},
-    {id:'#1039',date:'09.06.2026',customer:'Mia Nilsen',phone:'+47 978 90 123',email:'mia@gmail.com',address:'Bjornveien 2, 2072 Raaholt',items:'Repair Treatment x1',total:349,status:'levert',payment:'Vipps'}
-  ],
-  bookings:[
-    {id:'#B28',date:'12.06.2026',time:'17:00',customer:'Amina Youssef',phone:'+47 900 11 222',service:'Dameklipp fra',price:'699 kr',status:'bekreftet'},
-    {id:'#B27',date:'12.06.2026',time:'15:30',customer:'Lars Moen',phone:'+47 911 22 333',service:'Herreklipp fra',price:'499 kr',status:'bekreftet'},
-    {id:'#B26',date:'13.06.2026',time:'09:00',customer:'Elif Demir',phone:'+47 922 33 444',service:'Balayage fra',price:'3 490 kr',status:'ny'},
-    {id:'#B25',date:'10.06.2026',time:'14:00',customer:'Nadia Hassan',phone:'+47 944 55 666',service:'Farge pakke halvlangt',price:'2 990 kr',status:'fullfort'}
-  ],
-  customers:[
-    {id:1,name:'Lena Andersen',email:'lena@gmail.com',phone:'+47 912 34 567',orders:3,total:2141},
-    {id:2,name:'Petter Holm',email:'petter@gmail.com',phone:'+47 934 56 789',orders:5,total:3890},
-    {id:3,name:'Sara Eriksen',email:'sara@hotmail.com',phone:'+47 956 78 901',orders:2,total:1285},
-    {id:4,name:'Mia Nilsen',email:'mia@gmail.com',phone:'+47 978 90 123',orders:7,total:5620}
-  ],
+  orders:[],
+  bookings:[],
+  customers:[],
   discounts:[
     {code:'SOMMER20',value:20,type:'prosent',used:14,expires:'30.06.2026',active:true},
     {code:'VELKOMST',value:150,type:'kr',used:38,expires:'31.12.2026',active:true}
   ],
-  returns:[
-    {id:'#R08',customer:'Petter Holm',product:'Bond Complex',amount:449,reason:'Allergisk reaksjon',status:'aapen'},
-    {id:'#R07',customer:'Sara Eriksen',product:'Styling Cream',amount:229,reason:'Feil produkt',status:'godkjent'}
-  ],
-  chats:[
-    {id:1,customer:'Lena Andersen',unread:2,messages:[
-      {from:'customer',text:'Hei! Naar sendes bestillingen min?',time:'10:32'},
-      {from:'customer',text:'Ordre #1042',time:'10:33'}
-    ]},
-    {id:2,customer:'Elif Demir',unread:0,messages:[
-      {from:'customer',text:'Kan jeg flytte timen min til kl 11?',time:'09:15'},
-      {from:'admin',text:'Hei! Ja det gaar fint, jeg har flyttet den.',time:'09:20'},
-      {from:'customer',text:'Tusen takk!',time:'09:21'}
-    ]}
-  ]
+  returns:[],
+  chats:[]
 };
 var editProdId=null;
 var activeChatId=null;
@@ -3985,7 +3958,7 @@ window.admInlinePrice=function(i,el){
   inp.focus();inp.select();
   function save(){
     var v=parseInt(inp.value,10);
-    if(v>0&&v!==cur){DATA.treatments[i].price=v;updateFrontendPrice(i,v);}
+    if(v>0&&v!==cur){DATA.treatments[i].price=v;updateFrontendPrice(i,v);_admPersist();}
     go('behandlinger');
     if(window.showToast&&v>0&&v!==cur) window.showToast('Pris oppdatert: '+v+' kr');
   }
@@ -4935,7 +4908,7 @@ if(window.renderNailsGrid) window.renderNailsGrid();
 
 </script>
 <!-- Supabase loaded async — does NOT block rendering -->
-<script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" onload="if(window._onSbLoad)window._onSbLoad()"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" fetchpriority="low" onload="if(window._onSbLoad)window._onSbLoad()"></script>
 
 <!-- TIMMA BOOKING PORTAL -->
 <div id="timmaPortal">
@@ -4955,8 +4928,7 @@ if(window.renderNailsGrid) window.renderNailsGrid();
   var ST = { step:1, cat:'', svc:null, date:'', time:'', calYear:0, calMonth:0, name:'', phone:'', note:'' };
 
   function today(){ var d=new Date(); return d.toISOString().slice(0,10); }
-  function isoDate(d){ return d.toISOString().slice(0,10); }
-  function addMonths(y,m,n){ var d=new Date(y,m+n,1); return {y:d.getFullYear(),m:d.getMonth()}; }
+    function addMonths(y,m,n){ var d=new Date(y,m+n,1); return {y:d.getFullYear(),m:d.getMonth()}; }
 
   function openTimma(){
     var d=new Date(); ST.calYear=d.getFullYear(); ST.calMonth=d.getMonth();

@@ -3511,7 +3511,7 @@ function go(tab){
   else if(tab==='nails') b.innerHTML=viewNails();
   else if(tab==='bedriftskunder') b.innerHTML=viewBedriftskunder();
   else if(tab==='kunder') b.innerHTML=viewKunder();
-  else if(tab==='innhold'){renderInnhold();}
+  else if(tab==='innhold'){if(window.renderInnhold)window.renderInnhold();}
 }
 
 function viewOversikt(){
@@ -5210,7 +5210,7 @@ function renderInnhold(){
     return '<div style="margin-bottom:0.75rem;"><label style="display:block;font-size:10px;color:#7a9478;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">'+label+'</label><input id="ic_'+id+'" type="text" value="'+v+'" placeholder="'+(ph||'')+'" style="width:100%;padding:9px 11px;background:#162019;border:1px solid #1e2e21;border-radius:8px;font-size:15px;color:#d6e4d0;box-sizing:border-box;"></div>';
   };
   var hero=d.heroH1||'Profesjonell pleie.<br><em>Synlige resultater.</em>';
-  el('admBody').innerHTML=
+  document.getElementById('admBody').innerHTML=
     card('Hero – Tittel og tekst',
       '<div style="padding:0.75rem;">'+
       f('heroLabel','Label over tittel',d.heroLabel||'NAK Hair — Eksklusivt i salongen','Label...')+
@@ -5232,7 +5232,7 @@ function renderInnhold(){
       f('apnSon','Søndag',d.apnSon||'Stengt','f.eks. Stengt')+
       '</div>'
     )+
-    '<button onclick="saveInnhold()" style="width:100%;padding:13px;background:rgba(138,180,138,0.15);border:1px solid rgba(138,180,138,0.35);border-radius:12px;color:#c8e4c4;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">Lagre endringer</button>';
+    '<button onclick="window.saveInnhold()" style="width:100%;padding:13px;background:rgba(138,180,138,0.15);border:1px solid rgba(138,180,138,0.35);border-radius:12px;color:#c8e4c4;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">Lagre endringer</button>';
 }
 function saveInnhold(){
   var get=function(id){var e=document.getElementById('ic_'+id);return e?e.value.trim():'';};
@@ -5246,8 +5246,11 @@ function saveInnhold(){
   if(window.showToast)window.showToast('Innhold lagret ✓');
 }
 
+window.renderInnhold=renderInnhold;
+window.saveInnhold=saveInnhold;
+window.applyInnhold=applyInnhold;
 })();
 </script>
-<script>document.addEventListener('DOMContentLoaded',function(){if(typeof applyInnhold==='function')applyInnhold();});</script>
+<script>document.addEventListener('DOMContentLoaded',function(){if(window.applyInnhold)window.applyInnhold();});</script>
 </body>
 </html>

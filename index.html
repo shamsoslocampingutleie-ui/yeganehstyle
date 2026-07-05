@@ -3364,7 +3364,7 @@ window.admRefreshData=function(){
         var d=new Date(o.created_at);
         var fmt=d.getDate()+'.'+(d.getMonth()+1)+'.'+d.getFullYear();
         var items=Array.isArray(o.items)?o.items.map(function(i){return i.name+' x'+i.qty;}).join(', '):(o.items||'');
-        return {id:'#'+o.id.split('-')[0].toUpperCase(),date:fmt,customer:o.customer_name,phone:o.phone,email:o.email,address:o.address,items:items,total:o.total,status:o.status||'ny',payment:o.payment_method||'Kort'};
+        return {id:'#'+o.id.split('-')[0].toUpperCase(),supaId:o.id,date:fmt,customer:o.customer_name,phone:o.phone,email:o.email,address:o.address,items:items,total:o.total,status:o.status||'ny',payment:o.payment_method||'Kort'};
       });
       if(window.admCurrentTab==='ordre'||window.admCurrentTab==='oversikt') if(window.admGoTab) window.admGoTab(window.admCurrentTab);
     }
@@ -3425,6 +3425,8 @@ window.admRefreshData=function(){
 
 var TABS=[
   {id:'oversikt',label:'Oversikt'},
+  {id:'ordre',label:'Bestillinger'},
+  {id:'produkter',label:'Produkter'},
   {id:'kalender',label:'Kalender'},
   {id:'timer',label:'Timer'},
   {id:'behandlinger',label:'Behandlinger'},
@@ -3469,9 +3471,9 @@ function input(id,label,ph,type){
 
 function renderTabs(){
   var rows=[
-    ['oversikt','kalender','timer'],
-    ['behandlinger','nails','ansatte','apningstider'],
-    ['anmeldelser','rabatt','bedriftskunder','innhold']
+    ['oversikt','ordre','produkter'],
+    ['kalender','timer','behandlinger','nails'],
+    ['ansatte','apningstider','anmeldelser','rabatt','bedriftskunder','innhold']
   ];
   var html='';
   rows.forEach(function(ids,ri){
@@ -4910,9 +4912,175 @@ window.admKundeNote=function(i){
   if(note===null) return;c.note=note;go('kunder');if(window.showToast)window.showToast('Notat lagret');
 };
 
+// ── PRODUKT-CRUD ──
+function admNewP(){
+  editProdId=null;
+  var t=el('admProdFormTitle'); if(t) t.textContent='Nytt produkt';
+  ['admPName','admPPrice','admPStock','admPDesc'].forEach(function(id){var e=el(id);if(e)e.value='';});
+  var c=el('admPCat'); if(c) c.value='shampoo';
+  var prev=el('admPImgPrev'); if(prev) prev.innerHTML='';
+  var fi=el('admPImg'); if(fi) fi.value='';
+  window._admEditImgUrl=null;
+  var form=el('admProdForm'); if(form) form.style.display='';
+}
+function admEditP(id){
+  var prods=window.PRODUCTS||[], p=null;
+  for(var i=0;i<prods.length;i++) if(String(prods[i].id)===String(id)){p=prods[i];break;}
+  if(!p) return;
+  editProdId=id;
+  var t=el('admProdFormTitle'); if(t) t.textContent='Rediger produkt';
+  var ne=el('admPName'); if(ne) ne.value=p.name||'';
+  var pr=el('admPPrice'); if(pr) pr.value=p.price||'';
+  var st=el('admPStock'); if(st) st.value=p.stock!=null?p.stock:'';
+  var d=el('admPDesc'); if(d) d.value=p.desc||'';
+  var ce=el('admPCat'); if(ce) ce.value=p.cat||'shampoo';
+  var prev=el('admPImgPrev');
+  if(prev) prev.innerHTML=p.img?'<img src="'+p.img+'" style="width:56px;height:56px;border-radius:8px;object-fit:cover;border:1px solid #1e2e21;">':'';
+  window._admEditImgUrl=p.img||null;
+  var fi=el('admPImg'); if(fi) fi.value='';
+  var form=el('admProdForm'); if(form) form.style.display='';
+}
+function admPImgPreview(ev){
+  var file=ev.target.files[0]; if(!file) return;
+  var reader=new FileReader();
+  reader.onload=function(e){
+    var prev=el('admPImgPrev');
+    if(prev) prev.innerHTML='<img src="'+e.target.result+'" style="width:56px;height:56px;border-radius:8px;object-fit:cover;border:1px solid #1e2e21;">';
+  };
+  reader.readAsDataURL(file);
+}
+function admSaveP(){
+  var s=window.sb; if(!s){if(window.showToast)window.showToast('Ikke tilkoblet');return;}
+  var nameEl=el('admPName'), priceEl=el('admPPrice'), stockEl=el('admPStock'), descEl=el('admPDesc'), catEl=el('admPCat');
+  var name=(nameEl?nameEl.value:'').trim();
+  var price=parseFloat(((priceEl?priceEl.value:'')||'').replace(',','.'));
+  var stock=parseInt((stockEl?stockEl.value:'0')||'0')||0;
+  var desc=(descEl?descEl.value:'').trim();
+  var cat=(catEl?catEl.value:'')||'shampoo';
+  if(!name){alert('Fyll inn produktnavn');return;}
+  if(!price||isNaN(price)){alert('Fyll inn gyldig pris');return;}
+  var fileInput=el('admPImg');
+  var file=fileInput&&fileInput.files&&fileInput.files[0]?fileInput.files[0]:null;
+  function _reload(){
+    s.from('products').select('*').eq('visible',true).order('sort_order').then(function(res){
+      if(res.data&&res.data.length){
+        window.PRODUCTS=res.data.map(function(p){return{id:p.id,name:p.name,brand:p.brand||'NAK Hair',cat:p.category,price:p.price,oldPrice:p.old_price,emoji:p.emoji||'',desc:p.description,badge:p.badge,stock:p.stock,img:p.image_url||null};});
+        renderProducts();
+      }
+      el('admProdForm').style.display='none';
+      go('produkter');
+      if(window.showToast)window.showToast('Produkt lagret ✓');
+    });
+  }
+  function _doSave(imgUrl){
+    var data={name:name,price:price,stock:stock,description:desc,category:cat,brand:'NAK Hair',visible:true};
+    if(imgUrl) data.image_url=imgUrl;
+    if(editProdId){
+      s.from('products').update(data).eq('id',editProdId).then(function(r){
+        if(r.error){alert('Feil: '+r.error.message);return;}
+        _reload();
+      });
+    } else {
+      s.from('products').insert(data).select('*').then(function(r){
+        if(r.error){alert('Feil: '+r.error.message);return;}
+        _reload();
+      });
+    }
+  }
+  if(file){
+    var ext=file.name.split('.').pop().toLowerCase();
+    var fname='prod-'+Date.now()+'.'+ext;
+    s.storage.from('product-images').upload(fname,file,{upsert:true,contentType:file.type}).then(function(r){
+      if(r.error){_doSave(window._admEditImgUrl||null);return;}
+      var pub=s.storage.from('product-images').getPublicUrl(fname);
+      _doSave(pub.data&&pub.data.publicUrl?pub.data.publicUrl:null);
+    });
+  } else {
+    _doSave(window._admEditImgUrl||null);
+  }
+}
+function admDelP(id){
+  if(!confirm('Slette dette produktet?')) return;
+  var s=window.sb; if(!s) return;
+  s.from('products').delete().eq('id',id).then(function(r){
+    if(r.error){alert('Feil: '+r.error.message);return;}
+    window.PRODUCTS=(window.PRODUCTS||[]).filter(function(p){return String(p.id)!==String(id);});
+    renderProducts();
+    go('produkter');
+    if(window.showToast)window.showToast('Produkt slettet');
+  });
+}
+function admSaleP(id){
+  var box=el('saleBox-'+id);
+  if(box) box.style.display=box.style.display==='none'?'':'none';
+}
+function admApplySale(id){
+  var s=window.sb; if(!s) return;
+  var inp=el('saleInput-'+id);
+  var salePrice=inp?parseFloat(inp.value):0;
+  if(!salePrice||isNaN(salePrice)){alert('Fyll inn tilbudspris');return;}
+  var prods=window.PRODUCTS||[], origPrice=0;
+  for(var i=0;i<prods.length;i++) if(String(prods[i].id)===String(id)){origPrice=prods[i].price;break;}
+  s.from('products').update({old_price:origPrice,price:salePrice,badge:'sale'}).eq('id',id).then(function(r){
+    if(r.error){alert('Feil: '+r.error.message);return;}
+    for(var i=0;i<prods.length;i++){
+      if(String(prods[i].id)===String(id)){prods[i].oldPrice=origPrice;prods[i].price=salePrice;prods[i].badge='sale';break;}
+    }
+    renderProducts();
+    go('produkter');
+    if(window.showToast)window.showToast('Tilbud aktivert ✓');
+  });
+}
+// ── ORDRE-CRUD ──
+function admOrd(id,status){
+  var s=window.sb;
+  for(var i=0;i<DATA.orders.length;i++){
+    if(DATA.orders[i].id===id){
+      DATA.orders[i].status=status;
+      var supaId=DATA.orders[i].supaId;
+      if(s&&supaId) s.from('orders').update({status:status}).eq('id',supaId).then(function(){},function(){});
+      break;
+    }
+  }
+  go('ordre');
+  if(window.showToast)window.showToast('Status oppdatert: '+status);
+}
+function admLabel(id){
+  var o=null;
+  for(var i=0;i<DATA.orders.length;i++) if(DATA.orders[i].id===id){o=DATA.orders[i];break;}
+  if(!o) return;
+  var w=window.open('','_blank','width=420,height=580');
+  if(!w) return;
+  w.document.write('<html><body style="font-family:sans-serif;padding:2rem;color:#222;">'
+    +'<h2 style="margin:0 0 1rem;font-size:1.1rem;letter-spacing:0.04em;">FRAKTETIKETT — YEGANEH STYLE</h2>'
+    +'<div style="border:2px solid #333;border-radius:8px;padding:1.2rem;">'
+    +'<table style="border-collapse:collapse;width:100%;font-size:13px;">'
+    +'<tr><td style="padding:5px 0;color:#666;width:90px;">Bestilling</td><td style="padding:5px 0;font-weight:700;">'+o.id+'</td></tr>'
+    +'<tr><td style="padding:5px 0;color:#666;">Kunde</td><td style="padding:5px 0;font-weight:600;">'+o.customer+'</td></tr>'
+    +'<tr><td style="padding:5px 0;color:#666;">Adresse</td><td style="padding:5px 0;">'+o.address+'</td></tr>'
+    +'<tr><td style="padding:5px 0;color:#666;">Telefon</td><td style="padding:5px 0;">'+o.phone+'</td></tr>'
+    +'<tr><td style="padding:5px 0;color:#666;">Produkter</td><td style="padding:5px 0;">'+o.items+'</td></tr>'
+    +'<tr><td style="padding:5px 0;color:#666;">Betaling</td><td style="padding:5px 0;">'+o.payment+'</td></tr>'
+    +'<tr><td style="padding:5px 0;color:#666;font-weight:700;">Total</td><td style="padding:5px 0;font-weight:700;font-size:15px;">'+o.total+' kr</td></tr>'
+    +'</table></div>'
+    +'<div style="margin-top:1.5rem;font-size:11px;color:#888;">Dato: '+o.date+' &middot; Yeganeh Style, Flaenbakken 2, 2072 Råholt</div>'
+    +'<br><button onclick="window.print()" style="background:#1a3a1a;color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;">Skriv ut etikett</button>'
+    +'</body></html>');
+  w.document.close();
+}
+
 window.admInit=function(){go('oversikt');};
 window._admLoad=_admLoad;
 window.DATA=DATA;
+window.admNewP=admNewP;
+window.admEditP=admEditP;
+window.admSaveP=admSaveP;
+window.admDelP=admDelP;
+window.admSaleP=admSaleP;
+window.admApplySale=admApplySale;
+window.admPImgPreview=admPImgPreview;
+window.admOrd=admOrd;
+window.admLabel=admLabel;
 })();
 // DATA is now global — renderNailsGrid can access it
 if(window.renderNailsGrid) window.renderNailsGrid();

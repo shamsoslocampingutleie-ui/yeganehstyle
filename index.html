@@ -779,7 +779,7 @@ footer {
 /* ── MOBILE MENU ── */
 .mobile-menu {
   position: fixed; inset: 0; z-index: 400;
-  background: #060d07;
+  background: #0c0906;
   transform: translateX(100%); transition: transform 0.28s cubic-bezier(.4,0,.2,1);
   display: flex; flex-direction: column;
   overflow-y: auto; -webkit-overflow-scrolling: touch;
@@ -846,7 +846,7 @@ footer {
 }
 .modal-overlay.open { opacity: 1; pointer-events: all; }
 .modal {
-  background: #0c1a0d;
+  background: #0c0906;
   background-image:
     radial-gradient(ellipse 80% 40% at 90% 0%, rgba(42,30,12,0.5) 0%, transparent 55%),
     radial-gradient(ellipse 60% 30% at 0% 100%, rgba(60,40,16,0.25) 0%, transparent 50%);
@@ -886,7 +886,7 @@ footer {
 }
 .form-group input:focus,
 .form-group select:focus { outline: none; border-color: var(--accent); }
-.form-group select option { background: #0c1a0d; }
+.form-group select option { background: #0c0906; }
 .form-group input::placeholder { color: var(--muted); }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
 .form-row.date-time { grid-template-columns: 1fr 1fr; gap: 0.85rem; }
@@ -937,7 +937,7 @@ input[type="date"] {
 .cart-panel {
   position: fixed; top: 0; right: 0; bottom: 0;
   width: min(340px,100vw);
-  background: #0a1409;
+  background: #0c0906;
   background-image: radial-gradient(ellipse 80% 50% at 100% 0%, rgba(42,30,12,0.42) 0%, transparent 55%);
   z-index: 300; transform: translateX(100%);
   transition: transform 0.25s ease;
@@ -1095,7 +1095,7 @@ nav { }
 .b2p-disc-badge { font-size:9px;color:#e8c04a;font-weight:600; }
 
 /* ── TIMMA BOOKING PORTAL ── */
-#timmaPortal { display:none;position:fixed;inset:0;z-index:9500;background:#07100a;overflow-y:auto;-webkit-overflow-scrolling:touch; }
+#timmaPortal { display:none;position:fixed;inset:0;z-index:9500;background:#0c0906;overflow-y:auto;-webkit-overflow-scrolling:touch; }
 .timma-header { position:sticky;top:0;z-index:10;background:rgba(16,11,6,0.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(186,152,98,0.15);padding:0 1.25rem; }
 .timma-header-inner { max-width:600px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:52px;gap:1rem; }
 .timma-back-btn { background:none;border:none;color:#c8a870;cursor:pointer;font-size:20px;padding:4px 8px;border-radius:8px;line-height:1;font-family:inherit; }
@@ -1338,8 +1338,6 @@ nav { }
         <svg class="chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <div class="nav-dropdown" role="menu">
-        <a role="menuitem" onclick="openB2B()">Bedriftsportal</a>
-        <div class="dd-divider"></div>
         <a role="menuitem" onclick="openModal('adminModal')">Logg inn</a>
       </div>
     </div>
@@ -1395,7 +1393,6 @@ nav { }
     <a onclick="closeMenu();openProdOverlay('styling')">Styling</a>
 
     <div class="mm-section">Bedrift</div>
-    <a onclick="openB2B();closeMenu()">Bedriftsportal</a>
     <a onclick="openModal('adminModal');closeMenu()">Logg inn</a>
 
     <div class="mm-divider"></div>
@@ -1698,7 +1695,6 @@ nav { }
       <h4>Nettsted</h4>
       <a onclick="window.scrollTo({top:0,behavior:'smooth'})">Hjem</a>
       <a onclick="openProdOverlay()">Produkter</a>
-      <a onclick="openB2B()">Bedriftsportal</a>
       <a onclick="openContact()">Kontakt</a>
       <a onclick="openInfo('personvern')">Personvern</a>
       <a onclick="openInfo('retur')">Retur</a>

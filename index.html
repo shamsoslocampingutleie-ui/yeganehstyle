@@ -478,7 +478,8 @@ nav {
 
 /* ── REVIEWS ── */
 .reviews-list { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.75rem; transition: opacity 0.22s ease; }
-#reviewsAll { display: flex; flex-direction: column; gap: 0.6rem; }
+#reviewsAll { display: none; flex-direction: column; gap: 0.6rem; }
+#reviewsAll.rev-open { display: flex; }
 .review-card {
   background: rgba(20,15,9,0.7);
   border: 1px solid var(--border);
@@ -1047,7 +1048,7 @@ nav { }
 @media (min-width: 900px) {
   .hero-inner { max-width: 760px; }
   .reviews-list { display: grid; grid-template-columns: repeat(3,1fr); align-items: start; }
-  #reviewsAll { display: grid !important; grid-template-columns: repeat(3,1fr); align-items: start; gap: 0.6rem; }
+  #reviewsAll.rev-open { display: grid; grid-template-columns: repeat(3,1fr); align-items: start; gap: 0.6rem; }
 }
 
 /* ── B2B PORTAL ── */
@@ -1490,7 +1491,7 @@ nav { }
     <button class="book-pill" id="visAlleBtn" onclick="toggleAllReviews()">Vis alle anmeldelser</button>
     <button class="book-pill" onclick="openModal('reviewModal')">Skriv en anmeldelse</button>
   </div>
-  <div id="reviewsAll" style="display:none;margin-top:1.25rem;"></div>
+  <div id="reviewsAll" style="margin-top:1.25rem;"></div>
 </div>
 
 <div class="section-wrap" id="forsideTjenester" style="display:none">
@@ -2708,8 +2709,13 @@ window.toggleAllReviews=function(){
   var preview=document.getElementById('reviewsPreview');
   if(!allDiv) return;
   _revAllOpen=!_revAllOpen;
-  allDiv.style.display=_revAllOpen?'':'none';
-  preview.style.display=_revAllOpen?'none':'';
+  if(_revAllOpen){
+    allDiv.classList.add('rev-open');
+    preview.style.display='none';
+  } else {
+    allDiv.classList.remove('rev-open');
+    preview.style.display='';
+  }
   if(btn) btn.textContent=_revAllOpen?'Skjul anmeldelser':'Vis alle '+_revShuffled.length+' anmeldelser';
   if(_revAllOpen&&_revInterval){clearInterval(_revInterval);_revInterval=null;}
   else if(!_revAllOpen){

@@ -117,6 +117,7 @@
 @font-face{font-family:'Inter';font-style:normal;font-weight:700;font-display:swap;src:url(https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+input:focus,textarea:focus,select:focus,button:focus{outline:none;box-shadow:0 0 0 2px rgba(200,160,80,0.35);}
 a,button,input,select,textarea{-webkit-tap-highlight-color:transparent;outline:none;}
 button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
 
@@ -1063,16 +1064,16 @@ nav { }
 .b2p-eyebrow { font-size:10px;color:#b8915a;letter-spacing:0.15em;text-transform:uppercase;font-weight:600;margin-bottom:6px; }
 .b2p-h2 { font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:300;color:#f0e4ce;margin:0 0 8px; }
 .b2p-tabs { display:grid;grid-template-columns:1fr 1fr;border:1px solid rgba(140,108,60,0.18);border-radius:10px;overflow:hidden;margin-bottom:1.5rem; }
-.b2p-tab { padding:11px;background:transparent;border:0;color:#9a7a5a;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.2s; }
+.b2p-tab { padding:11px;background:transparent;border:0;color:#c8a870;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.2s; }
 .b2p-tab-a { background:rgba(140,108,60,0.18);color:#b8915a; }
 .b2p-fi { margin-bottom:0.8rem; }
-.b2p-label { display:block;font-size:10px;color:#9a7a5a;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;font-weight:500; }
-.b2p-input { width:100%;padding:11px 13px;background:rgba(15,28,15,0.9);border:1px solid rgba(140,108,60,0.26);border-radius:10px;font-size:15px;color:#f0e4ce;font-family:inherit;box-sizing:border-box;outline:none;transition:border-color 0.2s; }
-.b2p-input:focus { border-color:rgba(184,148,96,0.45); }
-.b2p-input::placeholder { color:#3a2c1a; }
+.b2p-label { display:block;font-size:10px;color:#c8a870;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;font-weight:500; }
+.b2p-input { width:100%;padding:11px 13px;background:rgba(30,22,12,0.9);border:1px solid rgba(140,108,60,0.26);border-radius:10px;font-size:15px;color:#f0e4ce;font-family:inherit;box-sizing:border-box;outline:none;transition:border-color 0.2s; }
+.b2p-input:focus { border-color:rgba(200,160,80,0.65); box-shadow: 0 0 0 3px rgba(200,160,80,0.1); }
+.b2p-input::placeholder { color:#7a6040; }
 .b2p-btn-main { display:block;width:100%;padding:13px;background:rgba(140,108,60,0.26);border:1px solid rgba(184,148,96,0.35);border-radius:12px;color:#b8915a;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:background 0.2s;text-align:center; }
 .b2p-btn-main:hover { background:rgba(140,108,60,0.38); }
-.b2p-btn-sec { padding:9px 20px;background:transparent;border:1px solid rgba(186,152,98,0.2);border-radius:8px;color:#9a7a5a;font-size:12px;cursor:pointer;font-family:inherit;transition:all 0.2s; }
+.b2p-btn-sec { padding:9px 20px;background:transparent;border:1px solid rgba(186,152,98,0.2);border-radius:8px;color:#ddc898;font-size:13px;cursor:pointer;font-family:inherit;transition:all 0.2s; }
 .b2p-btn-sec:hover { border-color:rgba(186,152,98,0.45);color:#b8915a; }
 .b2p-btn-sm { padding:9px 13px;background:rgba(186,152,98,0.12);border:1px solid rgba(140,108,60,0.26);border-radius:8px;color:#b8915a;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap; }
 .b2p-err { font-size:12px;color:#e07060;padding:9px 12px;background:rgba(220,80,60,0.08);border:1px solid rgba(220,80,60,0.2);border-radius:8px;margin-bottom:0.85rem; }
@@ -1082,12 +1083,12 @@ nav { }
 .b2p-welcome-card { background:linear-gradient(135deg,rgba(52,38,20,0.9),rgba(28,18,8,0.9));border:1px solid rgba(186,152,98,0.2);border-radius:16px;padding:1.5rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem; }
 .b2p-campaign { background:linear-gradient(135deg,rgba(201,125,110,0.12),rgba(201,125,110,0.04));border:1px solid rgba(201,125,110,0.2);border-radius:14px;padding:1.25rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap; }
 .b2p-card { background:rgba(34,24,12,0.78);border:1px solid rgba(186,152,98,0.15);border-radius:14px;padding:1.25rem; }
-.b2p-card-title { font-size:12px;font-weight:700;color:#ddc8a0;margin-bottom:0.75rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(186,152,98,0.1);letter-spacing:0.04em; }
+.b2p-card-title { font-size:13px;font-weight:700;color:#f0dca8;margin-bottom:0.75rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(186,152,98,0.1);letter-spacing:0.04em; }
 .b2p-cat-head { font-size:9px;color:#b8915a;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;margin-bottom:0.4rem; }
 .b2p-price-row { display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(186,152,98,0.09);gap:0.75rem; }
 .b2p-price-row:last-child { border-bottom:none; }
-.b2p-price-name { font-size:12px;color:#c0d4bc;flex:1; }
-.b2p-retail { font-size:10px;color:#3a2c1a;text-decoration:line-through; }
+.b2p-price-name { font-size:12px;color:#e0d4b8;flex:1; }
+.b2p-retail { font-size:10px;color:#8a6a40;text-decoration:line-through; }
 .b2p-b2bprice { font-size:14px;font-weight:700;color:#b8915a; }
 .b2p-disc-badge { font-size:9px;color:#e8c04a;font-weight:600; }
 
@@ -1095,16 +1096,16 @@ nav { }
 #timmaPortal { display:none;position:fixed;inset:0;z-index:9500;background:#07100a;overflow-y:auto;-webkit-overflow-scrolling:touch; }
 .timma-header { position:sticky;top:0;z-index:10;background:rgba(16,11,6,0.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(186,152,98,0.15);padding:0 1.25rem; }
 .timma-header-inner { max-width:600px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:52px;gap:1rem; }
-.timma-back-btn { background:none;border:none;color:#9a7a5a;cursor:pointer;font-size:20px;padding:4px 8px;border-radius:8px;line-height:1;font-family:inherit; }
+.timma-back-btn { background:none;border:none;color:#c8a870;cursor:pointer;font-size:20px;padding:4px 8px;border-radius:8px;line-height:1;font-family:inherit; }
 .timma-back-btn:hover { color:#b8915a;background:rgba(186,152,98,0.09); }
 .timma-steps { display:flex;align-items:center;gap:4px;flex:1;justify-content:center; }
 .timma-step-dot { width:7px;height:7px;border-radius:50%;background:rgba(186,152,98,0.2);transition:all 0.2s; }
 .timma-step-dot.active { background:#b8915a;width:22px;border-radius:4px; }
 .timma-step-dot.done { background:rgba(184,148,96,0.38); }
-.timma-close-btn { background:none;border:none;color:#9a7a5a;cursor:pointer;font-size:22px;padding:4px 8px;border-radius:8px;line-height:1;font-family:inherit; }
+.timma-close-btn { background:none;border:none;color:#c8a870;cursor:pointer;font-size:22px;padding:4px 8px;border-radius:8px;line-height:1;font-family:inherit; }
 .timma-close-btn:hover { color:#e4cda8; }
 .timma-body { max-width:600px;margin:0 auto;padding:2rem 1.25rem 5rem; }
-.timma-step-label { font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#9a7a5a;margin-bottom:0.5rem; }
+.timma-step-label { font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#c8a870;margin-bottom:0.5rem; }
 .timma-step-h { font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:300;color:#e8f0e4;margin:0 0 1.5rem;line-height:1.2; }
 /* Category cards */
 .timma-cat-grid { display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;margin-bottom:1rem; }
@@ -1112,42 +1113,42 @@ nav { }
 .timma-cat-card:hover,.timma-cat-card.sel { border-color:rgba(184,148,96,0.45);background:rgba(46,34,16,0.85); }
 .timma-cat-icon { font-size:1.8rem;margin-bottom:0.6rem; }
 .timma-cat-name { font-size:14px;font-weight:700;color:#e4cda8; }
-.timma-cat-sub { font-size:11px;color:#9a7a5a;margin-top:3px; }
+.timma-cat-sub { font-size:11px;color:#c8a870;margin-top:3px; }
 /* Service list */
 .timma-svc-list { display:flex;flex-direction:column;gap:0.5rem; }
 .timma-svc-row { display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1rem;background:rgba(10,20,10,0.7);border:1px solid rgba(186,152,98,0.15);border-radius:12px;cursor:pointer;transition:all 0.2s;gap:0.75rem; }
 .timma-svc-row:hover,.timma-svc-row.sel { border-color:rgba(184,148,96,0.42);background:rgba(46,34,16,0.85); }
 .timma-svc-name { font-size:13px;font-weight:600;color:#e4cda8; }
-.timma-svc-dur { font-size:11px;color:#9a7a5a;margin-top:2px; }
+.timma-svc-dur { font-size:11px;color:#c8a870;margin-top:2px; }
 .timma-svc-price { font-size:14px;font-weight:700;color:#b8915a;flex-shrink:0; }
 /* Calendar */
 .timma-cal { background:rgba(30,22,10,0.55);border:1px solid rgba(186,152,98,0.15);border-radius:16px;overflow:hidden; }
 .timma-cal-header { display:flex;align-items:center;justify-content:space-between;padding:0.85rem 1rem;border-bottom:1px solid rgba(186,152,98,0.1); }
-.timma-cal-nav { background:none;border:none;color:#9a7a5a;cursor:pointer;font-size:18px;padding:4px 10px;border-radius:8px;font-family:inherit; }
+.timma-cal-nav { background:none;border:none;color:#c8a870;cursor:pointer;font-size:18px;padding:4px 10px;border-radius:8px;font-family:inherit; }
 .timma-cal-nav:hover { color:#b8915a;background:rgba(186,152,98,0.09); }
 .timma-cal-month { font-size:13px;font-weight:700;color:#e4cda8;text-transform:capitalize; }
 .timma-cal-grid { display:grid;grid-template-columns:repeat(7,1fr);padding:0.5rem; }
-.timma-cal-day-name { font-size:10px;font-weight:600;color:#3a2c1a;text-align:center;padding:4px 0;text-transform:uppercase; }
-.timma-cal-day { text-align:center;padding:6px 2px;font-size:13px;border-radius:8px;cursor:pointer;color:#9a7a5a;transition:all 0.15s; }
-.timma-cal-day.avail { color:#c0d4bc;cursor:pointer; }
+.timma-cal-day-name { font-size:10px;font-weight:600;color:#b09070;text-align:center;padding:4px 0;text-transform:uppercase; }
+.timma-cal-day { text-align:center;padding:6px 2px;font-size:13px;border-radius:8px;cursor:pointer;color:#c8a870;transition:all 0.15s; }
+.timma-cal-day.avail { color:#e0d4b8;cursor:pointer; }
 .timma-cal-day.avail:hover { background:rgba(184,148,96,0.1);color:#e4cda8; }
 .timma-cal-day.sel { background:#2d5a2a;color:#e8f0e4;font-weight:700; }
 .timma-cal-day.today { outline:1px solid rgba(184,148,96,0.32);outline-offset:-1px; }
 .timma-cal-day.disabled,.timma-cal-day.empty { color:#2a1e12;cursor:default;pointer-events:none; }
 /* Time slots */
 .timma-time-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem; }
-.timma-time-pill { padding:10px 4px;text-align:center;background:rgba(10,20,10,0.7);border:1px solid rgba(140,108,60,0.18);border-radius:10px;font-size:13px;font-weight:600;color:#c0d4bc;cursor:pointer;transition:all 0.18s;font-family:inherit; }
+.timma-time-pill { padding:10px 4px;text-align:center;background:rgba(10,20,10,0.7);border:1px solid rgba(140,108,60,0.18);border-radius:10px;font-size:13px;font-weight:600;color:#e0d4b8;cursor:pointer;transition:all 0.18s;font-family:inherit; }
 .timma-time-pill:hover { border-color:rgba(184,148,96,0.38);color:#e4cda8; }
 .timma-time-pill.sel { background:#2d5a2a;border-color:#4a8a45;color:#e8f0e4; }
 /* Contact form */
 .timma-field { margin-bottom:0.85rem; }
-.timma-label { display:block;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#9a7a5a;margin-bottom:5px; }
+.timma-label { display:block;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#c8a870;margin-bottom:5px; }
 .timma-input { width:100%;padding:12px 14px;background:rgba(10,20,10,0.8);border:1px solid rgba(140,108,60,0.26);border-radius:12px;font-size:15px;color:#e4cda8;box-sizing:border-box;font-family:inherit;outline:none;transition:border 0.2s; }
-.timma-input:focus { border-color:rgba(184,148,96,0.45); }
+.timma-input:focus { border-color:rgba(200,160,80,0.65); box-shadow: 0 0 0 3px rgba(200,160,80,0.12); }
 /* Summary card */
 .timma-summary { background:rgba(10,20,10,0.7);border:1px solid rgba(140,108,60,0.18);border-radius:14px;padding:1.1rem;margin-bottom:1.25rem; }
 .timma-sum-row { display:flex;justify-content:space-between;align-items:baseline;padding:4px 0;font-size:13px; }
-.timma-sum-label { color:#9a7a5a; }
+.timma-sum-label { color:#c8a870; }
 .timma-sum-val { color:#e4cda8;font-weight:600; }
 /* Bottom CTA */
 .timma-cta-bar { position:sticky;bottom:0;background:rgba(16,11,6,0.95);backdrop-filter:blur(10px);border-top:1px solid rgba(186,152,98,0.12);padding:1rem 1.25rem;margin:0 -1.25rem -5rem; }
@@ -1158,7 +1159,7 @@ nav { }
 .timma-confirm-wrap { text-align:center;padding:2rem 0; }
 .timma-confirm-icon { font-size:3rem;margin-bottom:1rem; }
 .timma-confirm-h { font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:#e8f0e4;margin:0 0 0.5rem; }
-.timma-confirm-sub { font-size:13px;color:#9a7a5a;line-height:1.6; }
+.timma-confirm-sub { font-size:13px;color:#c8a870;line-height:1.6; }
 
 /* ═══════════════════════════════════════════════
    MOBIL — komplett responsivt design
@@ -1827,9 +1828,9 @@ nav { }
     <div style="display:flex;align-items:center;gap:8px;">
       <svg viewBox="0 0 32 32" fill="none" style="width:20px;height:20px"><path d="M8 4 Q10 8 16 16" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/><path d="M24 4 Q22 8 16 16" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/><path d="M16 16 Q12 22 10 26" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="27" r="2.5" stroke="#c97d6e" stroke-width="1.8" fill="none"/><path d="M16 16 Q20 22 22 26" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/><circle cx="23" cy="27" r="2.5" stroke="#c97d6e" stroke-width="1.8" fill="none"/><circle cx="16" cy="16" r="1.5" fill="#c97d6e"/></svg>
       <span style="font-size:13px;font-weight:600;color:#e4cda8;">Yeganeh Style</span>
-      <span style="font-size:10px;color:#3a2c1a;padding:2px 7px;border:1px solid rgba(140,108,60,0.18);border-radius:4px;letter-spacing:0.08em;">B2B</span>
+      <span style="font-size:10px;color:#8a6a40;padding:2px 7px;border:1px solid rgba(140,108,60,0.18);border-radius:4px;letter-spacing:0.08em;">B2B</span>
     </div>
-    <button onclick="closeB2BPortal()" style="background:none;border:1px solid rgba(186,152,98,0.2);border-radius:8px;padding:6px 14px;color:#9a7a5a;font-size:12px;cursor:pointer;font-family:inherit;">Lukk ✕</button>
+    <button onclick="closeB2BPortal()" style="background:none;border:1px solid rgba(186,152,98,0.2);border-radius:8px;padding:6px 14px;color:#ddc898;font-size:13px;cursor:pointer;font-family:inherit;">Lukk ✕</button>
   </div>
   <div id="b2pBody" style="min-height:calc(100vh - 54px);padding:1.5rem 1rem 1rem;"></div>
 </div>
@@ -2008,8 +2009,8 @@ nav { }
         <div id="adminErr" style="color:#e07060;font-size:12px;margin-bottom:0.75rem;display:none;padding:8px 12px;background:rgba(224,112,96,0.08);border-radius:8px;border:1px solid rgba(224,112,96,0.2);">Noe gikk galt. Prøv igjen.</div>
         <button class="confirm-btn" onclick="doAdminLogin()" style="width:100%;">Logg inn →</button>
         <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(186,152,98,0.1);display:flex;flex-direction:column;align-items:center;gap:8px;">
-          <button onclick="showAuthForgot()" style="background:none;border:none;font-size:11px;color:#9a7a5a;cursor:pointer;font-family:inherit;padding:0;">Glemt passord? <span style="color:#b8915a;font-weight:600;">Tilbakestill →</span></button>
-          <button onclick="closeModal('adminModal');openB2B();" style="background:none;border:none;font-size:11px;color:#9a7a5a;cursor:pointer;font-family:inherit;padding:0;">Ny bedriftskunde? <span style="color:#b8915a;font-weight:600;">Registrer her →</span></button>
+          <button onclick="showAuthForgot()" style="background:none;border:none;font-size:11px;color:#c8a870;cursor:pointer;font-family:inherit;padding:0;">Glemt passord? <span style="color:#b8915a;font-weight:600;">Tilbakestill →</span></button>
+          <button onclick="closeModal('adminModal');openB2B();" style="background:none;border:none;font-size:11px;color:#c8a870;cursor:pointer;font-family:inherit;padding:0;">Ny bedriftskunde? <span style="color:#b8915a;font-weight:600;">Registrer her →</span></button>
         </div>
       </div>
 
@@ -2018,10 +2019,10 @@ nav { }
         <p style="font-size:13px;color:var(--text-dim);margin-bottom:1.2rem;text-align:center;">Skriv inn e-postadressen din, så sender vi en lenke for å sette nytt passord.</p>
         <div class="form-group"><label>E-postadresse</label><input type="email" id="adminForgotEmail" placeholder="din@epost.no" autocomplete="email" onkeydown="if(event.key==='Enter')doSendReset()"></div>
         <div id="adminForgotErr" style="color:#e07060;font-size:12px;margin-bottom:0.75rem;display:none;padding:8px 12px;background:rgba(224,112,96,0.08);border-radius:8px;border:1px solid rgba(224,112,96,0.2);"></div>
-        <div id="adminForgotOk" style="color:#c8a870;font-size:12px;margin-bottom:0.75rem;display:none;padding:8px 12px;background:rgba(109,202,138,0.08);border-radius:8px;border:1px solid rgba(109,202,138,0.2);text-align:center;">E-post sendt! Sjekk innboksen din.</div>
+        <div id="adminForgotOk" style="color:#ddc898;font-size:13px;margin-bottom:0.75rem;display:none;padding:8px 12px;background:rgba(109,202,138,0.08);border-radius:8px;border:1px solid rgba(109,202,138,0.2);text-align:center;">E-post sendt! Sjekk innboksen din.</div>
         <button class="confirm-btn" onclick="doSendReset()" id="forgotSendBtn" style="width:100%;">Send tilbakestillingslenke →</button>
         <div style="margin-top:1rem;text-align:center;">
-          <button onclick="showAuthLogin()" style="background:none;border:none;font-size:11px;color:#9a7a5a;cursor:pointer;font-family:inherit;">← Tilbake til innlogging</button>
+          <button onclick="showAuthLogin()" style="background:none;border:none;font-size:11px;color:#c8a870;cursor:pointer;font-family:inherit;">← Tilbake til innlogging</button>
         </div>
       </div>
 
@@ -2522,7 +2523,7 @@ function renderNailsGrid(){
     return '<div onclick="openTimma()" style="background:rgba(10,18,10,0.85);border:1px solid rgba(186,152,98,0.15);border-radius:14px;padding:1.1rem;cursor:pointer;transition:border-color 0.2s;" onmouseenter="this.style.borderColor=\'rgba(201,125,110,0.4)\'" onmouseleave="this.style.borderColor=\'rgba(186,152,98,0.15)\'">'
       +'<div style="font-size:1.4rem;margin-bottom:0.4rem;">'+icon+'</div>'
       +'<div style="font-size:13px;font-weight:600;color:#e4cda8;margin-bottom:2px;">'+t.name+'</div>'
-      +'<div style="font-size:11px;color:#9a7a5a;margin-bottom:6px;">'+t.duration+' min</div>'
+      +'<div style="font-size:11px;color:#c8a870;margin-bottom:6px;">'+t.duration+' min</div>'
       +'<div style="font-size:13px;font-weight:700;color:#c97d6e;">'+t.price+' kr</div>'
       +'</div>';
   }).join('');
@@ -2801,7 +2802,7 @@ window.closeB2BPortal=function(){
 };
 
 function render(html){var c=document.getElementById('b2pBody');if(c) c.innerHTML=html;}
-function showSpin(msg){render('<div class="b2p-center"><div class="b2p-spin"></div>'+(msg?'<div style="color:#9a7a5a;font-size:12px;margin-top:12px;">'+msg+'</div>':'')+'</div>');}
+function showSpin(msg){render('<div class="b2p-center"><div class="b2p-spin"></div>'+(msg?'<div style="color:#ddc898;font-size:13px;margin-top:12px;">'+msg+'</div>':'')+'</div>');}
 function showE(id,msg){var e=document.getElementById(id);if(e){e.textContent=msg;e.style.display='block';}}
 function hideE(id){var e=document.getElementById(id);if(e) e.style.display='none';}
 function val(id){var e=document.getElementById(id);return e?e.value:'';}
@@ -2851,7 +2852,7 @@ function renderAuth(){
     +'<div style="text-align:center;margin-bottom:1.75rem;">'
     +'<div class="b2p-eyebrow">Eksklusiv tilgang</div>'
     +'<h2 class="b2p-h2">Bedriftsportal</h2>'
-    +'<p style="color:#9a7a5a;font-size:12px;line-height:1.6;margin-top:4px;">Logg inn eller registrer din bedrift for å få tilgang til eksklusive B2B-priser og avtaler.</p>'
+    +'<p style="color:#ddc898;font-size:13px;line-height:1.6;margin-top:4px;">Logg inn eller registrer din bedrift for å få tilgang til eksklusive B2B-priser og avtaler.</p>'
     +'</div>'
     +'<div class="b2p-tabs">'
     +'<button class="b2p-tab'+(isL?' b2p-tab-a':'')+'" onclick="b2bSetTab(\'login\')">Logg inn</button>'
@@ -2866,7 +2867,7 @@ function loginForm(){
     +fi('b2lPass','Passord','password','••••••••••','current-password')
     +'<div id="b2lErr" class="b2p-err" style="display:none;"></div>'
     +'<button class="b2p-btn-main" onclick="b2bDoLogin()">Logg inn som bedrift →</button>'
-    +'<p style="text-align:center;font-size:11px;color:#3a2c1a;margin-top:0.75rem;">Ikke registrert? <span class="b2p-link" onclick="b2bSetTab(\'register\')">Registrer bedrift</span></p>';
+    +'<p style="text-align:center;font-size:11px;color:#8a6a40;margin-top:0.75rem;">Ikke registrert? <span class="b2p-link" onclick="b2bSetTab(\'register\')">Registrer bedrift</span></p>';
 }
 
 function regForm(){
@@ -2886,7 +2887,7 @@ function regForm(){
     +'<div id="b2rAutoCheck" style="display:none;font-size:11px;padding:9px 12px;background:rgba(232,192,74,0.08);border:1px solid rgba(232,192,74,0.22);border-radius:8px;color:#b8944a;margin-bottom:0.85rem;line-height:1.6;"></div>'
     +'<div id="b2rErr" class="b2p-err" style="display:none;"></div>'
     +'<button class="b2p-btn-main" onclick="b2bDoRegister()">Registrer bedriftskonto →</button>'
-    +'<p style="text-align:center;font-size:10px;color:#3a2c1a;margin-top:0.75rem;line-height:1.55;">Org.nr verifiseres mot Brønnøysundregistrene.<br>Konto gjennomgås og aktiveres innen 1–2 virkedager.</p>';
+    +'<p style="text-align:center;font-size:10px;color:#8a6a40;margin-top:0.75rem;line-height:1.55;">Org.nr verifiseres mot Brønnøysundregistrene.<br>Konto gjennomgås og aktiveres innen 1–2 virkedager.</p>';
 }
 
 // ── STATES ──
@@ -2894,7 +2895,7 @@ function renderPending(){
   render('<div class="b2p-center">'
     +'<div class="b2p-status-icon" style="border-color:rgba(232,192,74,0.5);">⏳</div>'
     +'<h2 class="b2p-h2">Søknad til behandling</h2>'
-    +'<p style="color:#9a7a5a;font-size:12px;line-height:1.7;margin-bottom:1.5rem;max-width:380px;">Din søknad er mottatt og gjennomgås av oss. Du vil motta bekreftelse på <b style="color:#b09070;">'+((BST.account||{}).email||'')+'</b> innen 1–2 virkedager.</p>'
+    +'<p style="color:#ddc898;font-size:13px;line-height:1.7;margin-bottom:1.5rem;max-width:380px;">Din søknad er mottatt og gjennomgås av oss. Du vil motta bekreftelse på <b style="color:#b09070;">'+((BST.account||{}).email||'')+'</b> innen 1–2 virkedager.</p>'
     +'<button class="b2p-btn-sec" onclick="b2bDoLogout()">Logg ut</button>'
     +'</div>');
 }
@@ -2902,7 +2903,7 @@ function renderRejected(){
   render('<div class="b2p-center">'
     +'<div class="b2p-status-icon" style="border-color:rgba(220,80,60,0.4);">✕</div>'
     +'<h2 class="b2p-h2">Søknad ikke godkjent</h2>'
-    +'<p style="color:#9a7a5a;font-size:12px;line-height:1.7;margin-bottom:1.5rem;max-width:380px;">Dessverre ble søknaden avslått. Ta kontakt på <a href="mailto:post@yeganehstyle.no" style="color:#b8915a;">post@yeganehstyle.no</a> for spørsmål.</p>'
+    +'<p style="color:#ddc898;font-size:13px;line-height:1.7;margin-bottom:1.5rem;max-width:380px;">Dessverre ble søknaden avslått. Ta kontakt på <a href="mailto:post@yeganehstyle.no" style="color:#b8915a;">post@yeganehstyle.no</a> for spørsmål.</p>'
     +'<button class="b2p-btn-sec" onclick="b2bDoLogout()">Logg ut</button>'
     +'</div>');
 }
@@ -2910,15 +2911,15 @@ function renderSuspended(){
   render('<div class="b2p-center">'
     +'<div class="b2p-status-icon" style="border-color:rgba(180,80,60,0.4);">🔒</div>'
     +'<h2 class="b2p-h2">Konto sperret</h2>'
-    +'<p style="color:#9a7a5a;font-size:12px;line-height:1.7;margin-bottom:1.5rem;max-width:380px;">Kontoen er midlertidig sperret. Kontakt oss på <a href="mailto:post@yeganehstyle.no" style="color:#b8915a;">post@yeganehstyle.no</a>.</p>'
+    +'<p style="color:#ddc898;font-size:13px;line-height:1.7;margin-bottom:1.5rem;max-width:380px;">Kontoen er midlertidig sperret. Kontakt oss på <a href="mailto:post@yeganehstyle.no" style="color:#b8915a;">post@yeganehstyle.no</a>.</p>'
     +'<button class="b2p-btn-sec" onclick="b2bDoLogout()">Logg ut</button>'
     +'</div>');
 }
 
 // ── PORTAL ──
-var B2B_TAB='priser';
+var B2B_TAB='bestilling';
 var B2B_TIERS=[
-  {pct:0,  spend:0,      lbl:'Standard', col:'#3a2c1a', icon:'○',  next:5,  nextSpend:10000, nextLbl:'Bronze'},
+  {pct:0,  spend:0,      lbl:'Standard', col:'#8a6a40', icon:'○',  next:5,  nextSpend:10000, nextLbl:'Bronze'},
   {pct:5,  spend:10000,  lbl:'Bronze',   col:'#cd7f32', icon:'🥉', next:10, nextSpend:25000, nextLbl:'Silver'},
   {pct:10, spend:25000,  lbl:'Silver',   col:'#a8b8b8', icon:'🥈', next:15, nextSpend:50000, nextLbl:'Gold'},
   {pct:15, spend:50000,  lbl:'Gold',     col:'#e8c04a', icon:'🥇', next:20, nextSpend:100000,nextLbl:'Platinum'},
@@ -2950,10 +2951,10 @@ function renderPortal(){
       +'<div>'
       +'<div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:'+tier.col+';margin-bottom:3px;">Ditt nivå nå</div>'
       +'<div style="font-size:20px;font-weight:800;color:#e4cda8;">'+tier.icon+' '+tier.lbl+'</div>'
-      +(disc?'<div style="font-size:13px;color:'+tier.col+';font-weight:700;">'+disc+'% rabatt</div>':'<div style="font-size:11px;color:#3a2c1a;">Ingen rabatt ennå</div>')
+      +(disc?'<div style="font-size:13px;color:'+tier.col+';font-weight:700;">'+disc+'% rabatt</div>':'<div style="font-size:11px;color:#8a6a40;">Ingen rabatt ennå</div>')
       +'</div>'
       +'<div style="text-align:right;">'
-      +'<div style="font-size:10px;color:#9a7a5a;margin-bottom:2px;">Neste nivå</div>'
+      +'<div style="font-size:10px;color:#c8a870;margin-bottom:2px;">Neste nivå</div>'
       +'<div style="font-size:18px;font-weight:800;color:'+nextTierObj.col+';">'+nextTierObj.icon+' '+nextTierObj.lbl+'</div>'
       +'<div style="font-size:13px;color:'+nextTierObj.col+';font-weight:700;">'+nextTierObj.pct+'% rabatt</div>'
       +'</div>'
@@ -2961,7 +2962,7 @@ function renderPortal(){
       +'<div style="background:rgba(0,0,0,0.4);border-radius:999px;height:10px;margin-bottom:8px;overflow:hidden;">'
       +'<div style="background:linear-gradient(90deg,'+tier.col+','+nextTierObj.col+');height:100%;width:'+prog+'%;border-radius:999px;transition:width 1s ease;min-width:'+(prog>0?'10px':'0')+'"></div>'
       +'</div>'
-      +'<div style="display:flex;justify-content:space-between;font-size:10px;color:#9a7a5a;margin-bottom:0.75rem;">'
+      +'<div style="display:flex;justify-content:space-between;font-size:10px;color:#c8a870;margin-bottom:0.75rem;">'
       +'<span>'+(totalSpend?fmtKr(totalSpend)+' kjøpt':'Ingen kjøp registrert')+'</span>'
       +'<span style="color:'+nextTierObj.col+';font-weight:700;">Mål: '+fmtKr(tier.nextSpend||0)+'</span>'
       +'</div>'
@@ -2973,7 +2974,7 @@ function renderPortal(){
     tierCard='<div style="background:linear-gradient(135deg,rgba(201,125,110,0.12),rgba(10,22,12,0.95));border:1px solid #c97d6e44;border-radius:18px;padding:1.25rem;margin-bottom:1rem;text-align:center;">'
       +'<div style="font-size:2.5rem;margin-bottom:4px;">👑</div>'
       +'<div style="font-size:15px;font-weight:800;color:#c97d6e;">Elite-bedriftskunde</div>'
-      +'<div style="font-size:11px;color:#9a7a5a;margin-top:6px;line-height:1.6;">Du nyter vår høyeste rabatt på <b style="color:#c97d6e;">'+disc+'%</b> på alt.<br>Takk for lojaliteten til Yeganeh Style! 🙏</div>'
+      +'<div style="font-size:11px;color:#c8a870;margin-top:6px;line-height:1.6;">Du nyter vår høyeste rabatt på <b style="color:#c97d6e;">'+disc+'%</b> på alt.<br>Takk for lojaliteten til Yeganeh Style! 🙏</div>'
       +'</div>';
   }
 
@@ -2983,7 +2984,7 @@ function renderPortal(){
     offerCard='<div style="background:linear-gradient(135deg,rgba(232,192,74,0.08),rgba(10,22,12,0.95));border:2px solid rgba(232,192,74,0.4);border-radius:18px;padding:1.25rem;margin-bottom:1rem;animation:pulse 2s infinite;">'
       +'<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#e8c04a;margin-bottom:6px;">📬 Nytt pristilbud fra Yeganeh Style</div>'
       +'<div style="font-size:20px;font-weight:900;color:#e8c04a;margin-bottom:4px;">'+acc.offer_discount+'% rabatt</div>'
-      +(acc.offer_message?'<div style="font-size:12px;color:#c0d4bc;margin-bottom:1rem;font-style:italic;">"'+acc.offer_message+'"</div>':'')
+      +(acc.offer_message?'<div style="font-size:12px;color:#e0d4b8;margin-bottom:1rem;font-style:italic;">"'+acc.offer_message+'"</div>':'')
       +'<div style="display:flex;gap:0.5rem;">'
       +'<button onclick="b2bAcceptOffer()" style="flex:1;padding:10px;background:rgba(60,100,50,0.4);border:1px solid rgba(120,190,100,0.4);border-radius:12px;font-size:12px;font-weight:700;color:#e0caa8;cursor:pointer;font-family:inherit;">✓ Aksepter tilbud</button>'
       +'<button onclick="b2bDeclineOffer()" style="padding:10px 14px;background:transparent;border:1px solid rgba(192,57,43,0.3);border-radius:12px;font-size:12px;color:#c0392b;cursor:pointer;font-family:inherit;">Avslå</button>'
@@ -2997,7 +2998,7 @@ function renderPortal(){
     +'<h2 class="b2p-h2" style="margin-bottom:6px;">'+(acc.firma||'Din bedrift')+'</h2>'
     +'<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">'
     +tierBadge
-    +'<span style="font-size:11px;color:#9a7a5a;">Org.nr: '+fmtOrg(acc.org_nr||'')+'</span>'
+    +'<span style="font-size:11px;color:#c8a870;">Org.nr: '+fmtOrg(acc.org_nr||'')+'</span>'
     +'</div>'
     +'</div>'
     +'<button class="b2p-btn-sec" onclick="b2bDoLogout()">Logg ut</button>'
@@ -3006,11 +3007,11 @@ function renderPortal(){
     +offerCard;
 
   // Tab nav
-  var tabs=[['priser','💰 Prisliste'],['tjenester','✂ Tjenester'],['bestilling','📦 Bestill'],['konto','👤 Min konto']];
-  var tabNav='<div style="display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(186,152,98,0.15);border-radius:12px;overflow:hidden;margin-bottom:1.25rem;">';
+  var tabs=[['bestilling','📦 Bestill produkter'],['konto','👤 Min konto']];
+  var tabNav='<div style="display:grid;grid-template-columns:repeat(2,1fr);border:1px solid rgba(186,152,98,0.15);border-radius:12px;overflow:hidden;margin-bottom:1.25rem;">';
   tabs.forEach(function(t){
     var active=B2B_TAB===t[0];
-    tabNav+='<button onclick="b2bTab(\''+t[0]+'\')" style="padding:10px 4px;background:'+(active?'rgba(60,100,50,0.35)':'transparent')+';border:0;border-right:1px solid rgba(186,152,98,0.1);color:'+(active?'#e0caa8':'#9a7a5a')+';font-size:11px;font-weight:'+(active?'700':'500')+';cursor:pointer;font-family:inherit;">'+t[1]+'</button>';
+    tabNav+='<button onclick="b2bTab(\''+t[0]+'\')" style="padding:10px 4px;background:'+(active?'rgba(60,100,50,0.35)':'transparent')+';border:0;border-right:1px solid rgba(186,152,98,0.1);color:'+(active?'#e0caa8':'#c8a870')+';font-size:11px;font-weight:'+(active?'700':'500')+';cursor:pointer;font-family:inherit;">'+t[1]+'</button>';
   });
   tabNav+='</div>';
 
@@ -3021,9 +3022,9 @@ function renderPortal(){
     B2B_PRICES.forEach(function(p){if(!cats[p.cat])cats[p.cat]=[];cats[p.cat].push(p);});
     content='<div class="b2p-campaign"><div><div class="b2p-eyebrow" style="color:#c97d6e;">Aktiv kampanje</div>'
       +'<div style="font-size:14px;color:#f0e4ce;font-weight:600;margin-top:3px;">Kjøp for 5 000 kr+ og få gratis frakt</div>'
-      +'<div style="font-size:11px;color:#9a7a5a;margin-top:3px;">Gjelder alle B2B-ordrer.</div></div><div style="font-size:2rem;">📦</div></div>'
+      +'<div style="font-size:11px;color:#c8a870;margin-top:3px;">Gjelder alle B2B-ordrer.</div></div><div style="font-size:2rem;">📦</div></div>'
       +'<div class="b2p-card"><div class="b2p-card-title">NAK Hair – Produkter med B2B-pris</div>'
-      +'<div style="font-size:10px;color:#9a7a5a;margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid rgba(186,152,98,0.09);">Alle priser eks. mva · Din rabatt: <b style="color:#e8c04a;">'+(disc?disc+'%':'standard B2B')+'</b></div>';
+      +'<div style="font-size:10px;color:#c8a870;margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid rgba(186,152,98,0.09);">Alle priser eks. mva · Din rabatt: <b style="color:#e8c04a;">'+(disc?disc+'%':'standard B2B')+'</b></div>';
     Object.keys(cats).forEach(function(cat){
       content+='<div style="margin-bottom:1.25rem;"><div class="b2p-cat-head">'+cat+'</div>';
       cats[cat].forEach(function(p){
@@ -3050,14 +3051,14 @@ function renderPortal(){
       treatCats[k].push(t);
     });
     content='<div class="b2p-card"><div class="b2p-card-title">Frisørtjenester og neglepleie – B2B-priser</div>'
-      +'<div style="font-size:10px;color:#9a7a5a;margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid rgba(186,152,98,0.09);">'
+      +'<div style="font-size:10px;color:#c8a870;margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid rgba(186,152,98,0.09);">'
       +(disc?'Din bedriftsrabatt: <b style="color:#e8c04a;">'+disc+'%</b> på alle tjenester.':'Kontakt oss for bedriftspriser på tjenester.')+'</div>';
     Object.keys(treatCats).forEach(function(cat){
       content+='<div style="margin-bottom:1.25rem;"><div class="b2p-cat-head">'+cat+'</div>';
       treatCats[cat].forEach(function(t){
         var fp=disc?Math.round(t.price*(1-disc/100)):t.price;
         content+='<div class="b2p-price-row">'
-          +'<div><div class="b2p-price-name">'+t.name+'</div><div style="font-size:10px;color:#9a7a5a;">'+t.duration+' min</div></div>'
+          +'<div><div class="b2p-price-name">'+t.name+'</div><div style="font-size:10px;color:#c8a870;">'+t.duration+' min</div></div>'
           +'<div style="text-align:right;flex-shrink:0;">'
           +(disc?'<div class="b2p-retail">'+t.price+' kr</div><div class="b2p-b2bprice">'+fp+' kr</div><div class="b2p-disc-badge">−'+disc+'%</div>':'<div class="b2p-b2bprice">'+t.price+' kr</div>')
           +'</div></div>';
@@ -3069,23 +3070,23 @@ function renderPortal(){
   } else if(B2B_TAB==='bestilling'){
     content='<div class="b2p-card">'
       +'<div class="b2p-card-title">Bestill som bedriftskunde</div>'
-      +'<p style="font-size:12px;color:#9a7a5a;line-height:1.7;margin-bottom:1.25rem;">Send e-post med produktnavn og antall. Oppgi bedriftsnavn og org.nr i emnefeltet. Vi fakturerer med din avtalte rabatt.</p>'
+      +'<p style="font-size:12px;color:#c8a870;line-height:1.7;margin-bottom:1.25rem;">Send e-post med produktnavn og antall. Oppgi bedriftsnavn og org.nr i emnefeltet. Vi fakturerer med din avtalte rabatt.</p>'
       +'<div style="display:flex;flex-direction:column;gap:0.75rem;">'
       +'<a href="mailto:post@yeganehstyle.no?subject=B2B+Bestilling+%E2%80%93+'+encodeURIComponent(acc.firma||'Bedrift')+'&body=Firma%3A+'+encodeURIComponent(acc.firma||'')+'+%0AOrg.nr%3A+'+encodeURIComponent(acc.org_nr||'')+'%0A%0AProdukt%2FTjeneste%3A+%0AAntall%3A+%0AKommentar%3A" class="b2p-btn-main" style="display:flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;">✉ Send bestilling på e-post</a>'
       +'<a href="tel:+4797855154" class="b2p-btn-sec" style="display:flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;">📞 Ring +47 978 55 154</a>'
       +'</div>'
       +'<div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(186,152,98,0.1);">'
-      +'<div style="font-size:11px;font-weight:700;color:#9a7a5a;margin-bottom:0.6rem;text-transform:uppercase;letter-spacing:0.08em;">Ordrehistorikk</div>';
+      +'<div style="font-size:11px;font-weight:700;color:#c8a870;margin-bottom:0.6rem;text-transform:uppercase;letter-spacing:0.08em;">Ordrehistorikk</div>';
     var myOrders=(DATA.bookings||[]).filter(function(b){return b.phone&&acc.kontakt;}).slice(0,5);
     if(myOrders.length){
       myOrders.forEach(function(b){
-        content+='<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(140,108,60,0.08);font-size:11px;color:#9a7a5a;">'
+        content+='<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(140,108,60,0.08);font-size:11px;color:#c8a870;">'
           +'<span>'+b.date+' '+b.time+' · '+b.service+'</span>'
           +'<span style="color:#b8915a;font-weight:600;">'+b.price+'</span>'
           +'</div>';
       });
     } else {
-      content+='<div style="font-size:11px;color:#3a2c1a;padding:0.75rem 0;">Ingen ordrer ennå.</div>';
+      content+='<div style="font-size:11px;color:#8a6a40;padding:0.75rem 0;">Ingen ordrer ennå.</div>';
     }
     content+='</div></div>';
 
@@ -3099,8 +3100,8 @@ function renderPortal(){
         +'<div style="display:flex;align-items:center;gap:10px;">'
         +'<div style="font-size:18px;opacity:'+(isUnlocked?'1':'0.3')+'">' +t.icon+'</div>'
         +'<div>'
-        +'<div style="font-size:12px;font-weight:700;color:'+(isCurrentTier?t.col:isUnlocked?'#9a7a5a':'#2a2010')+';">'+t.lbl+(isCurrentTier?' ← ditt nivå':'')+'</div>'
-        +'<div style="font-size:10px;color:#3a2c1a;">Fra '+t.spend.toLocaleString('no-NO')+' kr kjøpt</div>'
+        +'<div style="font-size:12px;font-weight:700;color:'+(isCurrentTier?t.col:isUnlocked?'#c8a870':'#2a2010')+';">'+t.lbl+(isCurrentTier?' ← ditt nivå':'')+'</div>'
+        +'<div style="font-size:10px;color:#b09070;">Fra '+t.spend.toLocaleString('no-NO')+' kr kjøpt</div>'
         +'</div>'
         +'</div>'
         +'<div style="font-size:16px;font-weight:900;color:'+(isCurrentTier?t.col:isUnlocked?'#7a5a3a':'#1e3a1c')+';opacity:'+(isUnlocked?'1':'0.4')+'">' +t.pct+'%</div>'
@@ -3122,9 +3123,9 @@ function renderPortal(){
       +'</div>'
       +'<div class="b2p-card" style="background:linear-gradient(135deg,rgba(232,192,74,0.05),rgba(10,18,10,0.9));border-color:rgba(232,192,74,0.2);">'
       +'<div class="b2p-card-title" style="color:#e8c04a;">🏆 Lojalitetsprogram — Jo mer du kjøper, jo mer sparer du</div>'
-      +'<div style="font-size:11px;color:#9a7a5a;margin-bottom:0.5rem;line-height:1.6;">Rabatten gjelder alle frisørtjenester, neglepleie og NAK Hair-produkter. Nivå beregnes basert på totalt kjøp.</div>'
+      +'<div style="font-size:13px;color:#e0d0a8;margin-bottom:0.75rem;line-height:1.7;">Rabatten gjelder alle frisørtjenester, neglepleie og NAK Hair-produkter. Nivå beregnes basert på totalt kjøp.</div>'
       +allTiers
-      +'<p style="font-size:11px;color:#9a7a5a;line-height:1.6;margin:0.5rem 0 1rem;">Be om oppgradering av din avtale. Vi sender tilbake et skreddersydd pristilbud basert på din kjøpshistorikk.</p>'
+      +'<p style="font-size:13px;color:#e0d0a8;line-height:1.7;margin:0.5rem 0 1rem;">Be om oppgradering av din avtale. Vi sender tilbake et skreddersydd pristilbud basert på din kjøpshistorikk.</p>'
       +(reqSent
         ?'<div style="padding:10px;background:rgba(60,100,50,0.2);border-radius:10px;font-size:11px;color:#b8915a;text-align:center;">✓ Forespørsel sendt — vi svarer innen 1 virkedag</div>'
         :(acc.offer_status==='offer_sent'
@@ -3141,8 +3142,8 @@ function renderPortal(){
 
 function b2pInfoRow(label,val){
   return '<div style="display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px solid rgba(186,152,98,0.09);gap:1rem;">'
-    +'<span style="font-size:11px;color:#9a7a5a;flex-shrink:0;">'+label+'</span>'
-    +'<span style="font-size:12px;font-weight:600;color:#c0d4bc;text-align:right;">'+val+'</span>'
+    +'<span style="font-size:11px;color:#c8a870;flex-shrink:0;">'+label+'</span>'
+    +'<span style="font-size:12px;font-weight:600;color:#e0d4b8;text-align:right;">'+val+'</span>'
     +'</div>';
 }
 
@@ -3198,7 +3199,7 @@ window.b2bCheckOrg=async function(){
   if(!nr){res.innerHTML='<span style="color:#e07060;">Skriv inn org.nr</span>';return;}
   if(!validOrgNr(nr)){res.innerHTML='<span style="color:#e07060;">❌ Ugyldig organisasjonsnummer (kontrollsiffer stemmer ikke)</span>';return;}
   if(btn){btn.textContent='...';btn.disabled=true;}
-  res.innerHTML='<span style="color:#9a7a5a;">Sjekker mot Brønnøysundregistrene...</span>';
+  res.innerHTML='<span style="color:#c8a870;">Sjekker mot Brønnøysundregistrene...</span>';
   var data=await brregLookup(nr);
   if(btn){btn.textContent='Sjekk →';btn.disabled=false;}
   if(!data){res.innerHTML='<span style="color:#e07060;">❌ Organisasjonsnummeret ble ikke funnet i registeret</span>';BST.brreg=null;return;}
@@ -3206,7 +3207,7 @@ window.b2bCheckOrg=async function(){
   var dot=data.konkurs||data.underAvvikling?'🔴':'🟢';
   var stxt=data.konkurs?'Under konkurs':data.underAvvikling?'Under avvikling':'Aktivt selskap';
   res.innerHTML='<div class="b2p-brreg-ok"><div style="color:#b8915a;font-weight:600;">'+dot+' '+data.navn+'</div>'
-    +'<div style="color:#9a7a5a;margin-top:3px;">'+stxt+(data.naeringskode1?' · '+data.naeringskode1.beskrivelse:'')+(data.forretningsadresse?' · '+data.forretningsadresse.poststed:'')+'</div></div>';
+    +'<div style="color:#c8a870;margin-top:3px;">'+stxt+(data.naeringskode1?' · '+data.naeringskode1.beskrivelse:'')+(data.forretningsadresse?' · '+data.forretningsadresse.poststed:'')+'</div></div>';
   var fEl=document.getElementById('b2rFirma');
   if(fEl&&!fEl.value.trim()) fEl.value=data.navn;
 };
@@ -3299,8 +3300,8 @@ document.addEventListener('keydown',function(e){
 <div style="position:sticky;top:0;background:rgba(20,14,8,0.98);border-bottom:1px solid #2a1e12;display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1rem;z-index:10;">
   <span style="font-size:14px;font-weight:600;color:#e4cda8;">Yeganeh Admin</span>
   <div style="display:flex;gap:6px;">
-    <button onclick="if(window.sb){window.sb.auth.signOut().then(function(){closeAdminPanel();if(window.showToast)window.showToast('Logget ut');});}" style="background:none;border:1px solid #2a1e12;border-radius:8px;padding:6px 12px;color:#9a7a5a;font-size:12px;cursor:pointer;">Logg ut</button>
-    <button onclick="closeAdminPanel()" style="background:none;border:1px solid #2a1e12;border-radius:8px;padding:6px 12px;color:#9a7a5a;font-size:12px;cursor:pointer;">Lukk</button>
+    <button onclick="if(window.sb){window.sb.auth.signOut().then(function(){closeAdminPanel();if(window.showToast)window.showToast('Logget ut');});}" style="background:none;border:1px solid #2a1e12;border-radius:8px;padding:6px 12px;color:#ddc898;font-size:13px;cursor:pointer;">Logg ut</button>
+    <button onclick="closeAdminPanel()" style="background:none;border:1px solid #2a1e12;border-radius:8px;padding:6px 12px;color:#ddc898;font-size:13px;cursor:pointer;">Lukk</button>
   </div>
 </div>
 <div id="admTabs" style="padding:0.6rem 1rem 0.75rem;background:rgba(20,14,6,0.9);border-bottom:1px solid #2a1e12;"></div>
@@ -3472,7 +3473,7 @@ function el(id){return document.getElementById(id);}
 
 function badge(s){
   var map={ny:'#c0392b',pakket:'#d4a017',sendt:'#2980b9',levert:'#c0925a',refundert:'#c0925a',bekreftet:'#2980b9',fullfort:'#c0925a',aapen:'#c0392b',godkjent:'#d4a017'};
-  var c=map[s]||'#9a7a5a';
+  var c=map[s]||'#c8a870';
   return '<span style="display:inline-block;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:600;background:'+c+'22;color:'+c+';border:1px solid '+c+'44">'+s+'</span>';
 }
 function btn(label,action,color){
@@ -3487,15 +3488,15 @@ function card(title,inner){
 }
 function tbl(headers,rows){
   var h='<tr>';
-  for(var i=0;i<headers.length;i++) h+='<th style="padding:8px 10px;text-align:left;font-size:10px;color:#9a7a5a;text-transform:uppercase;border-bottom:1px solid #2a1e12;white-space:nowrap;">'+headers[i]+'</th>';
+  for(var i=0;i<headers.length;i++) h+='<th style="padding:8px 10px;text-align:left;font-size:10px;color:#c8a870;text-transform:uppercase;border-bottom:1px solid #2a1e12;white-space:nowrap;">'+headers[i]+'</th>';
   h+='</tr>';
   return '<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table style="width:100%;border-collapse:collapse;font-size:12px;color:#e4cda8;"><thead>'+h+'</thead><tbody>'+rows+'</tbody></table></div>';
 }
 function stat(label,val,color){
-  return '<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:12px;padding:0.85rem;"><div style="font-size:10px;color:#9a7a5a;text-transform:uppercase;margin-bottom:4px;">'+label+'</div><div style="font-size:1.3rem;font-weight:700;color:'+(color||'#e4cda8')+';">'+val+'</div></div>';
+  return '<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:12px;padding:0.85rem;"><div style="font-size:10px;color:#c8a870;text-transform:uppercase;margin-bottom:4px;">'+label+'</div><div style="font-size:1.3rem;font-weight:700;color:'+(color||'#e4cda8')+';">'+val+'</div></div>';
 }
 function input(id,label,ph,type){
-  return '<div style="margin-bottom:0.6rem;"><label style="display:block;font-size:10px;color:#9a7a5a;text-transform:uppercase;margin-bottom:3px;">'+label+'</label><input id="'+id+'" type="'+(type||'text')+'" placeholder="'+(ph||'')+'" style="width:100%;padding:9px 11px;background:#181208;border:1px solid #2a1e12;border-radius:8px;font-size:16px;color:#e4cda8;box-sizing:border-box;"></div>';
+  return '<div style="margin-bottom:0.6rem;"><label style="display:block;font-size:10px;color:#c8a870;text-transform:uppercase;margin-bottom:3px;">'+label+'</label><input id="'+id+'" type="'+(type||'text')+'" placeholder="'+(ph||'')+'" style="width:100%;padding:9px 11px;background:#181208;border:1px solid #2a1e12;border-radius:8px;font-size:16px;color:#e4cda8;box-sizing:border-box;"></div>';
 }
 
 function renderTabs(){
@@ -3585,13 +3586,13 @@ function viewOrdre(){
     actions+=btn('Etikett',"admLabel('"+o.id+"')",'#9b8ab4');
     html+='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem;">'
-      +'<div><b style="font-size:14px;color:#e4cda8;">'+o.id+'</b> <span style="font-size:11px;color:#9a7a5a;">'+o.date+'</span></div>'
+      +'<div><b style="font-size:14px;color:#e4cda8;">'+o.id+'</b> <span style="font-size:11px;color:#c8a870;">'+o.date+'</span></div>'
       +badge(o.status)+'</div>'
       +'<div style="font-size:13px;color:#e4cda8;margin-bottom:2px;"><b>'+o.customer+'</b></div>'
-      +'<div style="font-size:11px;color:#9a7a5a;margin-bottom:0.5rem;">'+o.phone+' &middot; '+o.email+'<br>'+o.address+'</div>'
+      +'<div style="font-size:11px;color:#c8a870;margin-bottom:0.5rem;">'+o.phone+' &middot; '+o.email+'<br>'+o.address+'</div>'
       +'<div style="font-size:12px;color:#b09070;background:#181208;border-radius:8px;padding:0.5rem 0.7rem;margin-bottom:0.6rem;">'+o.items+'</div>'
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem;">'
-      +'<span style="font-size:11px;color:#9a7a5a;">'+o.payment+'</span>'
+      +'<span style="font-size:11px;color:#c8a870;">'+o.payment+'</span>'
       +'<b style="font-size:15px;color:#e4cda8;">'+o.total+' kr</b></div>'
       +'<div style="display:flex;flex-wrap:wrap;gap:2px;">'+actions+'</div>'
       +'</div>';
@@ -3609,9 +3610,9 @@ function viewTimer(){
     actions+=btn('Avlys','admBkDel('+i+')','#c0392b');
     html+='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">'
-      +'<div><b style="font-size:15px;color:#e4cda8;">'+b.time+'</b> <span style="font-size:11px;color:#9a7a5a;">'+b.date+'</span></div>'
+      +'<div><b style="font-size:15px;color:#e4cda8;">'+b.time+'</b> <span style="font-size:11px;color:#c8a870;">'+b.date+'</span></div>'
       +badge(b.status)+'</div>'
-      +'<div style="font-size:13px;color:#e4cda8;"><b>'+b.customer+'</b> <span style="font-size:11px;color:#9a7a5a;">'+b.phone+'</span></div>'
+      +'<div style="font-size:13px;color:#e4cda8;"><b>'+b.customer+'</b> <span style="font-size:11px;color:#c8a870;">'+b.phone+'</span></div>'
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin:0.4rem 0 0.6rem;">'
       +'<span style="font-size:12px;color:#b09070;">'+b.service+'</span>'
       +'<b style="font-size:13px;color:#b8915a;">'+b.price+'</b></div>'
@@ -3625,7 +3626,7 @@ function viewProdukter(){
   var cards='',i;
   var prods=window.PRODUCTS||[];
   var selCss='width:100%;padding:9px 11px;background:#181208;border:1px solid #2a1e12;border-radius:8px;font-size:15px;color:#e4cda8;box-sizing:border-box;';
-  var chkCss='width:18px;height:18px;accent-color:#b8915a;cursor:pointer;';
+  var chkCss='width:18px;height:18px;accent-color:#c8a060;cursor:pointer;';
 
   // ── Product list ──
   for(i=0;i<prods.length;i++){
@@ -3638,7 +3639,7 @@ function viewProdukter(){
       ?'<img src="'+p.img+'" alt="'+p.name+'" loading="lazy" style="width:60px;height:60px;border-radius:12px;object-fit:cover;flex-shrink:0;">'
       :'<div style="width:60px;height:60px;border-radius:12px;background:#241c10;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">'+(p.emoji||'🧴')+'</div>';
     var priceHtml=p.oldPrice
-      ?'<b style="color:#e07060;">'+p.price+' kr</b> <s style="color:#9a7a5a;font-size:11px;">'+p.oldPrice+' kr</s>'
+      ?'<b style="color:#e07060;">'+p.price+' kr</b> <s style="color:#c8a870;font-size:11px;">'+p.oldPrice+' kr</s>'
       :'<b style="color:#b8915a;">'+p.price+' kr</b>';
     cards+='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:0.9rem;margin-bottom:0.6rem;display:flex;gap:0.85rem;align-items:flex-start;">'
       +img
@@ -3648,15 +3649,15 @@ function viewProdukter(){
       +(badgeTxt?'<span style="font-size:9px;background:#b8915a22;border:1px solid #b8915a44;color:#b8915a;padding:2px 7px;border-radius:20px;font-weight:700;">'+badgeTxt+'</span>':'')
       +(vis?'':'<span style="font-size:9px;background:#c0392b22;border:1px solid #c0392b44;color:#c0392b;padding:2px 7px;border-radius:20px;font-weight:700;">Skjult</span>')
       +'</div>'
-      +'<div style="font-size:11px;color:#9a7a5a;margin-bottom:4px;">'+(p.brand||'NAK Hair')+' · '+catLabel(p.cat)+'</div>'
-      +'<div style="font-size:12px;color:#b09070;margin-bottom:6px;">'+priceHtml+' <span style="color:#9a7a5a;margin-left:6px;">·</span> <span style="color:'+sc+';margin-left:6px;">'+stock+' stk</span></div>'
+      +'<div style="font-size:11px;color:#c8a870;margin-bottom:4px;">'+(p.brand||'NAK Hair')+' · '+catLabel(p.cat)+'</div>'
+      +'<div style="font-size:12px;color:#b09070;margin-bottom:6px;">'+priceHtml+' <span style="color:#c8a870;margin-left:6px;">·</span> <span style="color:'+sc+';margin-left:6px;">'+stock+' stk</span></div>'
       +'<div style="display:flex;gap:4px;flex-wrap:wrap;">'
       +btn('✏ Rediger',"admEditP('"+p.id+"')",'#b8915a')
       +btn(p.oldPrice?'✕ Avslutt tilbud':'% Tilbud',"admSaleP('"+p.id+"')","#e8c04a")
       +btn('🗑 Slett',"admDelP('"+p.id+"')","#c0392b")
       +'</div>'
       +'<div id="saleBox-'+p.id+'" style="display:none;margin-top:0.6rem;background:#100c08;border:1px solid #2a1e12;border-radius:10px;padding:0.75rem;">'
-      +'<div style="font-size:10px;color:#9a7a5a;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Tilbudspris (nåværende: '+p.price+' kr)</div>'
+      +'<div style="font-size:10px;color:#c8a870;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Tilbudspris (nåværende: '+p.price+' kr)</div>'
       +'<div style="display:flex;gap:0.5rem;align-items:center;">'
       +'<input id="saleInput-'+p.id+'" type="number" placeholder="'+Math.round(p.price*0.8)+'" style="flex:1;padding:9px 11px;background:#181208;border:1px solid #2a1e12;border-radius:8px;font-size:16px;color:#e4cda8;box-sizing:border-box;">'
       +btn('✓ Aktiver',"admApplySale('"+p.id+"')","#76c87a")
@@ -3674,9 +3675,9 @@ function viewProdukter(){
     +'</div>'
     // Row 2: Category + Badge
     +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:0.6rem;">'
-    +'<div><label style="display:block;font-size:10px;color:#9a7a5a;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px;">Kategori</label>'
+    +'<div><label style="display:block;font-size:10px;color:#c8a870;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px;">Kategori</label>'
     +'<select id="admPCat" style="'+selCss+'"><option value="shampoo">Shampoo</option><option value="conditioner">Conditioner</option><option value="behandling">Behandling</option><option value="styling">Styling</option></select></div>'
-    +'<div><label style="display:block;font-size:10px;color:#9a7a5a;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px;">Badge</label>'
+    +'<div><label style="display:block;font-size:10px;color:#c8a870;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px;">Badge</label>'
     +'<select id="admPBadge" style="'+selCss+'"><option value="">Ingen</option><option value="best">⭐ Bestselger</option><option value="ny">🆕 Ny</option><option value="sale">🏷 Tilbud</option></select></div>'
     +'</div>'
     // Row 3: Price + Old price + Stock + Sort
@@ -3687,7 +3688,7 @@ function viewProdukter(){
     +input('admPSort','Sortering','0','number')
     +'</div>'
     // Description
-    +'<div style="margin-bottom:0.6rem;"><label style="display:block;font-size:10px;color:#9a7a5a;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px;">Beskrivelse</label>'
+    +'<div style="margin-bottom:0.6rem;"><label style="display:block;font-size:10px;color:#c8a870;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px;">Beskrivelse</label>'
     +'<textarea id="admPDesc" rows="2" placeholder="Kort produktbeskrivelse..." style="width:100%;padding:9px 11px;background:#181208;border:1px solid #2a1e12;border-radius:8px;font-size:15px;color:#e4cda8;box-sizing:border-box;resize:vertical;font-family:inherit;"></textarea></div>'
     // Row: Emoji + Visible
     +'<div style="display:grid;grid-template-columns:1fr auto;gap:0.6rem;align-items:end;margin-bottom:0.75rem;">'
@@ -3698,15 +3699,15 @@ function viewProdukter(){
     +'</div></div>'
     // Image upload
     +'<div style="margin-bottom:0.9rem;">'
-    +'<label style="display:block;font-size:10px;color:#9a7a5a;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Produktbilde</label>'
+    +'<label style="display:block;font-size:10px;color:#c8a870;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Produktbilde</label>'
     +'<div style="display:flex;align-items:center;gap:0.75rem;">'
     +'<div id="admPImgPrev" style="width:64px;height:64px;border-radius:12px;background:#241c10;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:24px;">🖼</div>'
-    +'<div style="flex:1;"><input type="file" id="admPImg" accept="image/*" onchange="admPImgPreview(event)" style="width:100%;font-size:13px;color:#9a7a5a;"></div>'
+    +'<div style="flex:1;"><input type="file" id="admPImg" accept="image/*" onchange="admPImgPreview(event)" style="width:100%;font-size:13px;color:#c8a870;"></div>'
     +'</div></div>'
     // Buttons
     +'<div style="display:flex;gap:0.6rem;border-top:1px solid #2a1e12;padding-top:0.9rem;">'
     +'<button onclick="admSaveP()" style="flex:1;padding:12px;background:#b8915a22;border:1px solid #b8915a66;border-radius:10px;color:#f0e4ce;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:0.03em;">💾 Lagre produkt</button>'
-    +'<button onclick="document.getElementById(\'admProdForm\').style.display=\'none\'" style="padding:12px 18px;background:#2a1e12;border:1px solid #3a2a1a;border-radius:10px;color:#9a7a5a;font-size:13px;cursor:pointer;font-family:inherit;">Avbryt</button>'
+    +'<button onclick="document.getElementById(\'admProdForm\').style.display=\'none\'" style="padding:12px 18px;background:#2a1e12;border:1px solid #3a2a1a;border-radius:10px;color:#c8a870;font-size:13px;cursor:pointer;font-family:inherit;">Avbryt</button>'
     +'</div>'
     +'</div>';
 
@@ -3714,12 +3715,12 @@ function viewProdukter(){
     ?'<div style="text-align:center;padding:3rem 1rem;background:#1a1410;border:1px dashed #2a1e12;border-radius:14px;">'
       +'<div style="font-size:3rem;margin-bottom:1rem;">📦</div>'
       +'<div style="font-size:15px;font-weight:600;color:#e4cda8;margin-bottom:6px;">Ingen produkter ennå</div>'
-      +'<div style="font-size:13px;color:#9a7a5a;">Klikk «+ Nytt produkt» for å legge til ditt første produkt</div>'
+      +'<div style="font-size:13px;color:#c8a870;">Klikk «+ Nytt produkt» for å legge til ditt første produkt</div>'
       +'</div>'
     :'';
 
   return '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">'
-    +'<div style="font-size:15px;font-weight:700;color:#f0e4ce;">Produkter <span style="font-size:12px;font-weight:400;color:#9a7a5a;">('+prods.length+')</span></div>'
+    +'<div style="font-size:15px;font-weight:700;color:#f0e4ce;">Produkter <span style="font-size:12px;font-weight:400;color:#c8a870;">('+prods.length+')</span></div>'
     +'<button onclick="admNewP()" style="padding:9px 18px;background:#b8915a22;border:1px solid #b8915a66;border-radius:10px;color:#b8915a;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:0.04em;">+ Nytt produkt</button>'
     +'</div>'
     +form
@@ -3738,7 +3739,7 @@ function viewKalender(){
     +['måned','uke','dag'].map(function(v){
       var active=calView===v;
       var lbl=v==='måned'?'Mnd':v==='uke'?'Uke':'Dag';
-      return '<button onclick="admCalView(\''+v+'\')" style="padding:6px 10px;background:'+(active?'rgba(60,100,50,0.35)':'transparent')+';border:0;border-right:1px solid rgba(186,152,98,0.12);color:'+(active?'#e0caa8':'#9a7a5a')+';font-size:11px;font-weight:'+(active?'700':'500')+';cursor:pointer;font-family:inherit;">'+lbl+'</button>';
+      return '<button onclick="admCalView(\''+v+'\')" style="padding:6px 10px;background:'+(active?'rgba(60,100,50,0.35)':'transparent')+';border:0;border-right:1px solid rgba(186,152,98,0.12);color:'+(active?'#e0caa8':'#c8a870')+';font-size:11px;font-weight:'+(active?'700':'500')+';cursor:pointer;font-family:inherit;">'+lbl+'</button>';
     }).join('')
     +'</div>';
   var html='<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem;">'
@@ -3766,7 +3767,7 @@ function viewKalenderMnd(){
   var html='<div style="background:#0d1a0f;border:1px solid #2a1e12;border-radius:14px;overflow:hidden;">'
     +'<div style="display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid #2a1e12;">';
   dayNames.forEach(function(n){
-    html+='<div style="padding:8px 4px;text-align:center;font-size:10px;font-weight:700;color:#3a2c1a;text-transform:uppercase;letter-spacing:0.06em;">'+n+'</div>';
+    html+='<div style="padding:8px 4px;text-align:center;font-size:10px;font-weight:700;color:#8a6a40;text-transform:uppercase;letter-spacing:0.06em;">'+n+'</div>';
   });
   html+='</div><div style="display:grid;grid-template-columns:repeat(7,1fr);">';
   for(var i=0;i<firstDayMon;i++){
@@ -3784,14 +3785,14 @@ function viewKalenderMnd(){
     var dayBks=DATA.bookings.filter(function(b){return parseBookingDate(b.date)===dateStr;});
     var closed=!isOpen||isBlocked;
     html+='<div onclick="admCalDay(\''+dateStr+'\')" style="min-height:80px;padding:6px;border-right:'+(isLastCol?'0':'1px solid #2a1e1233')+';border-bottom:1px solid #2a1e1233;background:'+(isToday?'rgba(80,140,60,0.1)':closed?'rgba(0,0,0,0.15)':'transparent')+';cursor:pointer;transition:background 0.15s;position:relative;" onmouseenter="this.style.background=\''+(closed?'rgba(0,0,0,0.15)':'rgba(30,50,28,0.5)')+'\'" onmouseleave="this.style.background=\''+(isToday?'rgba(80,140,60,0.1)':closed?'rgba(0,0,0,0.15)':'transparent')+'\'">'
-      +'<div style="font-size:13px;font-weight:'+(isToday?'800':'600')+';color:'+(isToday?'#b8915a':closed?'#2a3a2a':'#c0d4bc')+';margin-bottom:4px;'+(isToday?'background:rgba(80,140,60,0.2);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;':'')+'">'+d+'</div>';
+      +'<div style="font-size:13px;font-weight:'+(isToday?'800':'600')+';color:'+(isToday?'#b8915a':closed?'#2a3a2a':'#e0d4b8')+';margin-bottom:4px;'+(isToday?'background:rgba(80,140,60,0.2);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;':'')+'">'+d+'</div>';
     if(closed){
       html+='<div style="font-size:9px;color:#c0392b;font-weight:600;">'+(isBlocked?'Stengt':'Fri')+'</div>';
     } else {
       dayBks.slice(0,3).forEach(function(b){
         html+='<div style="background:rgba(138,180,138,0.18);border-left:2px solid #b09070;border-radius:3px;padding:2px 4px;margin-bottom:2px;font-size:9px;color:#b09070;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+b.time+' '+b.customer.split(' ')[0]+'</div>';
       });
-      if(dayBks.length>3) html+='<div style="font-size:9px;color:#9a7a5a;">+'+( dayBks.length-3)+' til</div>';
+      if(dayBks.length>3) html+='<div style="font-size:9px;color:#c8a870;">+'+( dayBks.length-3)+' til</div>';
       if(!dayBks.length) html+='<div style="font-size:9px;color:#2a2010;">Ledig</div>';
     }
     html+='</div>';
@@ -3805,20 +3806,20 @@ function viewKalenderDag(){
   var slots=[];for(var h=8;h<=20;h++){slots.push((h<10?'0':'')+h+':00');if(h<20)slots.push((h<10?'0':'')+h+':30');}
   var dayBks=DATA.bookings.filter(function(b){return parseBookingDate(b.date)===iso;});
   var dayNames=['Søndag','Mandag','Tirsdag','Onsdag','Torsdag','Fredag','Lørdag'];
-  var html='<div style="font-size:11px;color:#9a7a5a;margin-bottom:0.5rem;">'+dayNames[d.getDay()]+' '+fmtDateD(d)+' · '+dayBks.length+' timer</div>'
+  var html='<div style="font-size:11px;color:#c8a870;margin-bottom:0.5rem;">'+dayNames[d.getDay()]+' '+fmtDateD(d)+' · '+dayBks.length+' timer</div>'
     +'<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:12px;overflow:hidden;">';
   for(var i=0;i<slots.length;i++){
     var sl=slots[i];
     var bk=null;for(var j=0;j<dayBks.length;j++) if(dayBks[j].time===sl){bk=dayBks[j];break;}
     var bl=null;for(var k=0;k<DATA.blocks.length;k++) if(DATA.blocks[k].date===iso&&DATA.blocks[k].from===sl){bl=DATA.blocks[k];break;}
     html+='<div style="display:flex;border-bottom:1px solid #2a1e1233;min-height:'+(sl.endsWith(':00')?'48':'32')+'px;">'
-      +'<div style="width:52px;flex-shrink:0;padding:6px 4px 6px 8px;font-size:'+(sl.endsWith(':00')?'10':'9')+'px;color:'+(sl.endsWith(':00')?'#c4a87a':'#3a2c1a')+';border-right:1px solid #2a1e12;display:flex;align-items:center;">'+sl+'</div>'
+      +'<div style="width:52px;flex-shrink:0;padding:6px 4px 6px 8px;font-size:'+(sl.endsWith(':00')?'10':'9')+'px;color:'+(sl.endsWith(':00')?'#c4a87a':'#8a6a40')+';border-right:1px solid #2a1e12;display:flex;align-items:center;">'+sl+'</div>'
       +'<div style="flex:1;padding:4px 8px;display:flex;align-items:center;">';
     if(bk){
       var bkIdx=DATA.bookings.indexOf(bk);
       html+='<div style="width:100%;background:rgba(138,180,138,0.15);border-left:3px solid #b09070;border-radius:6px;padding:6px 10px;cursor:pointer;" onclick="admEditBkInline('+bkIdx+')">'
         +'<div style="display:flex;justify-content:space-between;align-items:center;">'
-        +'<div><b style="font-size:12px;color:#e4cda8;">'+bk.customer+'</b><span style="font-size:10px;color:#9a7a5a;margin-left:8px;">'+bk.phone+'</span></div>'
+        +'<div><b style="font-size:12px;color:#e4cda8;">'+bk.customer+'</b><span style="font-size:10px;color:#c8a870;margin-left:8px;">'+bk.phone+'</span></div>'
         +badge(bk.status)+'</div>'
         +'<div style="font-size:10px;color:#b09070;">'+bk.service+' · '+bk.price+'</div>'
         +'</div>';
@@ -3840,7 +3841,7 @@ function viewKalenderUke(){
   var dayShort=['Søn','Man','Tir','Ons','Tor','Fre','Lør'];
   var dayKeys=[1,2,3,4,5,6,0];
   var todayIso=isoDate(new Date());
-  var weekHtml='<div style="font-size:11px;color:#9a7a5a;margin-bottom:0.75rem;">Uke '+getWeekNum(mon)+' · '+fmtDateD(mon)+' – '+fmtDateD(new Date(mon.getTime()+6*86400000))+'</div>';
+  var weekHtml='<div style="font-size:11px;color:#c8a870;margin-bottom:0.75rem;">Uke '+getWeekNum(mon)+' · '+fmtDateD(mon)+' – '+fmtDateD(new Date(mon.getTime()+6*86400000))+'</div>';
   var cols='';
   for(var i=0;i<7;i++){
     (function(dayIdx){
@@ -3857,10 +3858,10 @@ function viewKalenderUke(){
           +'</div>';
       }
       if(!oh||!oh.open) bkHtml='<div style="font-size:9px;color:#c0392b;text-align:center;padding:6px 0;">Stengt</div>';
-      else if(!bkHtml) bkHtml='<div style="font-size:9px;color:#3a2c1a;text-align:center;padding:6px 0;">Ledig</div>';
+      else if(!bkHtml) bkHtml='<div style="font-size:9px;color:#8a6a40;text-align:center;padding:6px 0;">Ledig</div>';
       cols+='<div style="background:'+(isToday?'rgba(138,180,138,0.07)':'#1a1410')+';border:1px solid '+(isToday?'rgba(138,180,138,0.35)':'#2a1e12')+';border-radius:10px;padding:8px;cursor:pointer;" onclick="admCalDay(\''+iso+'\')">'
         +'<div style="text-align:center;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid #2a1e1255;">'
-        +'<div style="font-size:9px;color:#9a7a5a;text-transform:uppercase;letter-spacing:0.08em;">'+dayShort[day.getDay()]+'</div>'
+        +'<div style="font-size:9px;color:#c8a870;text-transform:uppercase;letter-spacing:0.08em;">'+dayShort[day.getDay()]+'</div>'
         +'<div style="font-size:17px;font-weight:700;color:'+(isToday?'#b8915a':'#e4cda8')+';">'+day.getDate()+'</div>'
         +'</div>'
         +bkHtml+'</div>';
@@ -3890,12 +3891,12 @@ function viewApningstider(){
     html+='<div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;'+(isLast?'':'border-bottom:1px solid #2a1e1255;')+'flex-wrap:wrap;">'
       +'<div style="min-width:70px;font-size:13px;font-weight:600;color:#e4cda8;">'+d.l+'</div>'
       +'<label style="display:flex;align-items:center;gap:6px;cursor:pointer;">'
-      +'<input type="checkbox" '+(oh.open?'checked':'')+' onchange="admOhToggle('+d.k+',this.checked)" style="width:16px;height:16px;accent-color:#b09070;">'
+      +'<input type="checkbox" '+(oh.open?'checked':'')+' onchange="admOhToggle('+d.k+',this.checked)" style="width:16px;height:16px;accent-color:#c8a060;">'
       +'<span style="font-size:12px;color:#b09070;">Åpen</span>'
       +'</label>'
       +(oh.open
         ? ohTimeSel('ohFrom'+d.k, oh.from||'09:00', 'admOhFrom('+d.k+',this.value)')
-          +'<span style="color:#9a7a5a;font-size:12px;">–</span>'
+          +'<span style="color:#ddc898;font-size:13px;">–</span>'
           +ohTimeSel('ohTo'+d.k, oh.to||'18:00', 'admOhTo('+d.k+',this.value)')
         : '<span style="font-size:12px;color:#c0392b;font-style:italic;">Stengt</span>')
       +'</div>';
@@ -3912,7 +3913,7 @@ function viewApningstider(){
     +btn('Steng denne dagen','admAddBlock()')
     +(DATA.blocks.length?'<div style="margin-top:0.75rem;">'+DATA.blocks.map(function(bl,bi){
       return '<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid #2a1e1233;font-size:12px;">'
-        +'<span style="color:#e4cda8;">'+bl.date+'</span><span style="color:#9a7a5a;margin:0 8px;">'+bl.note+'</span>'
+        +'<span style="color:#e4cda8;">'+bl.date+'</span><span style="color:#c8a870;margin:0 8px;">'+bl.note+'</span>'
         +btn('Fjern','admRemoveBlock('+bi+')','#c0392b')+'</div>';
     }).join('')+'</div>':'')
     +'</div>');
@@ -3928,7 +3929,7 @@ function viewAnsatte(){
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem;">'
       +'<div style="display:flex;align-items:center;gap:0.75rem;">'
       +'<div style="width:40px;height:40px;border-radius:50%;background:'+(emp.color||'#b09070')+'22;border:2px solid '+(emp.color||'#b09070')+';display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:'+(emp.color||'#b09070')+';">'+emp.name.charAt(0)+'</div>'
-      +'<div><div style="font-size:14px;font-weight:600;color:#e4cda8;">'+emp.name+'</div><div style="font-size:11px;color:#9a7a5a;">'+emp.role+(emp.phone?' · '+emp.phone:'')+'</div></div>'
+      +'<div><div style="font-size:14px;font-weight:600;color:#e4cda8;">'+emp.name+'</div><div style="font-size:11px;color:#c8a870;">'+emp.role+(emp.phone?' · '+emp.phone:'')+'</div></div>'
       +'</div>'
       +'<div>'+btn('Rediger','admEditEmp('+i+')')+btn('Slett','admDelEmp('+i+')','#c0392b')+'</div>'
       +'</div>'
@@ -3936,14 +3937,14 @@ function viewAnsatte(){
       +schKeys.map(function(k,ki){
         var sch=emp.schedule[k];var open=sch&&sch!=='Stengt';
         return '<div style="background:'+(open?'rgba(138,180,138,0.12)':'rgba(192,57,43,0.08)')+';border:1px solid '+(open?'rgba(138,180,138,0.2)':'rgba(192,57,43,0.15)')+';border-radius:6px;padding:4px 2px;text-align:center;">'
-          +'<div style="font-size:8px;color:#9a7a5a;text-transform:uppercase;">'+schLabels[ki]+'</div>'
+          +'<div style="font-size:8px;color:#c8a870;text-transform:uppercase;">'+schLabels[ki]+'</div>'
           +(open?'<div style="font-size:7.5px;color:#b8915a;margin-top:2px;">'+sch+'</div>':'<div style="font-size:9px;color:#c0392b;margin-top:2px;">✕</div>')
           +'</div>';
       }).join('')
       +'</div>'
       +'</div>';
   }
-  if(!empHtml) empHtml='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:2rem;text-align:center;color:#3a2c1a;">Ingen ansatte registrert.</div>';
+  if(!empHtml) empHtml='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:2rem;text-align:center;color:#8a6a40;">Ingen ansatte registrert.</div>';
 
   var form='<div id="admEmpForm" style="display:none;background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:1rem;margin-bottom:1rem;">'
     +'<div id="admEmpFormTitle" style="font-size:13px;font-weight:600;color:#e4cda8;margin-bottom:0.75rem;">Ny ansatt</div>'
@@ -3952,14 +3953,14 @@ function viewAnsatte(){
     +input('admEmpRole','Tittel','Frisør')
     +'</div>'
     +input('admEmpPhone','Telefon','+47...')
-    +'<div style="font-size:10px;color:#9a7a5a;text-transform:uppercase;margin:0.5rem 0 0.4rem;">Arbeidstider</div>'
+    +'<div style="font-size:10px;color:#c8a870;text-transform:uppercase;margin:0.5rem 0 0.4rem;">Arbeidstider</div>'
     +'<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.4rem;margin-bottom:0.75rem;">'
     +[{k:1,l:'Mandag'},{k:2,l:'Tirsdag'},{k:3,l:'Onsdag'},{k:4,l:'Torsdag'},{k:5,l:'Fredag'},{k:6,l:'Lørdag'},{k:0,l:'Søndag'}].map(function(d){
       var oh=DATA.openingHours[d.k];
       var df=oh&&oh.open?(oh.from||'09:00'):'09:00';var dt=oh&&oh.open?(oh.to||'18:00'):'18:00';
       return '<div style="background:#181208;border-radius:8px;padding:7px 8px;">'
         +'<label style="display:flex;align-items:center;gap:5px;margin-bottom:5px;cursor:pointer;">'
-        +'<input type="checkbox" id="empSch'+d.k+'" '+(d.k!==0?'checked':'')+' style="width:14px;height:14px;accent-color:#b09070;">'
+        +'<input type="checkbox" id="empSch'+d.k+'" '+(d.k!==0?'checked':'')+' style="width:14px;height:14px;accent-color:#c8a060;">'
         +'<span style="font-size:11px;color:#b09070;font-weight:600;">'+d.l+'</span></label>'
         +'<div style="display:flex;gap:3px;">'
         +'<input type="time" id="empFrom'+d.k+'" value="'+df+'" style="flex:1;padding:4px;background:#100c08;border:1px solid #2a1e12;border-radius:5px;font-size:11px;color:#e4cda8;">'
@@ -3967,7 +3968,7 @@ function viewAnsatte(){
         +'</div></div>';
     }).join('')
     +'</div>'
-    +'<div style="display:flex;gap:0.5rem;">'+btn('Lagre ansatt','admSaveEmp()')+btn('Avbryt','admCancelEmp()','#9a7a5a')+'</div>'
+    +'<div style="display:flex;gap:0.5rem;">'+btn('Lagre ansatt','admSaveEmp()')+btn('Avbryt','admCancelEmp()','#c8a870')+'</div>'
     +'</div>';
 
   return '<div style="margin-bottom:0.75rem;">'+btn('+ Ny ansatt','admNewEmp()','#b09070')+'</div>'
@@ -3987,8 +3988,8 @@ function _buildTreatRows(list,accentColor){
       var ti=DATA.treatments.indexOf(t);
       catRows+='<div style="display:flex;align-items:center;justify-content:space-between;padding:9px 10px;border-bottom:1px solid rgba(30,46,33,0.5);flex-wrap:wrap;gap:6px;">'
         +'<div style="flex:1;min-width:120px;">'
-        +'<div style="font-size:12px;font-weight:500;color:'+(t.active?'#e4cda8':'#3a2c1a')+';">'+t.name+'</div>'
-        +'<div style="font-size:10px;color:#9a7a5a;">'+t.duration+' min · '+t.cat+'</div>'
+        +'<div style="font-size:12px;font-weight:500;color:'+(t.active?'#e4cda8':'#8a6a40')+';">'+t.name+'</div>'
+        +'<div style="font-size:10px;color:#c8a870;">'+t.duration+' min · '+t.cat+'</div>'
         +'</div>'
         +'<div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap;">'
         +'<span onclick="admInlinePrice('+ti+',this)" title="Klikk for å redigere pris" style="font-size:13px;font-weight:700;color:'+accentColor+';min-width:64px;text-align:right;cursor:pointer;padding:3px 6px;border-radius:6px;transition:background 0.15s;" onmouseenter=\"this.style.background=\'rgba(184,148,96,0.1)\'\" onmouseleave=\"this.style.background=\'\">'+t.price+' kr</span>'
@@ -4011,12 +4012,12 @@ function _buildTreatForm(isNails){
     +input('admTreatPrice','Pris (kr)','499','number')
     +input('admTreatDur','Varighet (min)','30','number')
     +'</div>'
-    +'<div style="margin-bottom:0.6rem;"><label style="display:block;font-size:10px;color:#9a7a5a;text-transform:uppercase;margin-bottom:3px;">Kategori</label>'
+    +'<div style="margin-bottom:0.6rem;"><label style="display:block;font-size:10px;color:#c8a870;text-transform:uppercase;margin-bottom:3px;">Kategori</label>'
     +'<select id="admTreatCat" style="width:100%;padding:9px 11px;background:#181208;border:1px solid #2a1e12;border-radius:8px;font-size:16px;color:#e4cda8;box-sizing:border-box;">'
     +(isNails?nailCats:hairCats)
     +'</select></div>'
     +'<input type="hidden" id="admTreatType" value="'+(isNails?'nails':'frisør')+'">'
-    +'<div style="display:flex;gap:0.5rem;">'+btn('Lagre','admSaveTreat()')+btn('Avbryt','admCancelTreat()','#9a7a5a')+'</div>'
+    +'<div style="display:flex;gap:0.5rem;">'+btn('Lagre','admSaveTreat()')+btn('Avbryt','admCancelTreat()','#c8a870')+'</div>'
     +'</div>';
 }
 function viewBehandlinger(){
@@ -4024,12 +4025,12 @@ function viewBehandlinger(){
   var list=DATA.treatments.filter(function(t){return !t.type||t.type==='frisør';});
   var rows=_buildTreatRows(list,'#b8915a');
   return '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;">'
-    +'<div style="font-size:11px;color:#9a7a5a;">'+list.length+' tjenester – Yeganeh Style</div>'
+    +'<div style="font-size:11px;color:#c8a870;">'+list.length+' tjenester – Yeganeh Style</div>'
     +btn('+ Ny tjeneste','admNewTreat()','#b09070')
     +'</div>'
     +_buildTreatForm(false)
     +'<div style="background:#0d1a0f;border:1px solid rgba(140,108,60,0.18);border-radius:14px;overflow:hidden;">'
-    +(rows||'<div style="padding:2rem;text-align:center;color:#3a2c1a;">Ingen tjenester. Klikk "+ Ny tjeneste".</div>')
+    +(rows||'<div style="padding:2rem;text-align:center;color:#8a6a40;">Ingen tjenester. Klikk "+ Ny tjeneste".</div>')
     +'</div>';
 }
 function viewNails(){
@@ -4037,7 +4038,7 @@ function viewNails(){
   var list=DATA.treatments.filter(function(t){return t.type==='nails';});
   var rows=_buildTreatRows(list,'#c97d6e');
   return '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;">'
-    +'<div style="font-size:11px;color:#9a7a5a;">'+list.length+' tjenester – MH Nails</div>'
+    +'<div style="font-size:11px;color:#c8a870;">'+list.length+' tjenester – MH Nails</div>'
     +btn('+ Ny tjeneste','admNewTreat()','#c97d6e')
     +'</div>'
     +_buildTreatForm(true)
@@ -4081,7 +4082,7 @@ function viewBedriftskunder(){
   var pending=reqs.filter(function(r){return r.status==='ny'||r.status==='pending';});
   var html='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem;">'
     +'<div><div style="font-size:16px;font-weight:700;color:#e4cda8;">Bedriftskunder</div>'
-    +'<div style="font-size:11px;color:#9a7a5a;margin-top:2px;">'+pending.length+' venter godkjenning · '+clients.length+' aktive</div></div>'
+    +'<div style="font-size:11px;color:#c8a870;margin-top:2px;">'+pending.length+' venter godkjenning · '+clients.length+' aktive</div></div>'
     +'<button onclick="if(window.admRefreshData)window.admRefreshData();" style="'+btnCss('#4a3020')+'">↺ Oppdater</button>'
     +'</div>';
   if(pending.length){
@@ -4091,14 +4092,14 @@ function viewBedriftskunder(){
       var isFlag=r.flagged;
       html+='<div style="background:#1a1410;border:1px solid '+(isFlag?'#e8c04a55':'#e8c04a33')+';border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
         +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.5rem;">'
-        +'<div><b style="font-size:14px;color:#e4cda8;">'+r.firma+'</b>'+(r.org?'<span style="font-size:10px;color:#9a7a5a;margin-left:8px;">org.'+r.org+'</span>':'')+'</div>'
+        +'<div><b style="font-size:14px;color:#e4cda8;">'+r.firma+'</b>'+(r.org?'<span style="font-size:10px;color:#c8a870;margin-left:8px;">org.'+r.org+'</span>':'')+'</div>'
         +'<div style="display:flex;gap:4px;align-items:center;">'+(isFlag?'<span style="font-size:9px;background:#e8c04a22;border:1px solid #e8c04a55;border-radius:6px;padding:2px 7px;color:#e8c04a;">⚠ Flagget</span>':'')+badge('ny')+'</div>'
         +'</div>'
         +(isFlag?'<div style="font-size:11px;background:rgba(232,192,74,0.07);border:1px solid rgba(232,192,74,0.2);border-radius:8px;padding:7px 10px;margin-bottom:0.6rem;color:#b8944a;">'+r.flag_reason+'</div>':'')
-        +'<div style="font-size:11px;color:#9a7a5a;line-height:1.8;">'
+        +'<div style="font-size:11px;color:#c8a870;line-height:1.8;">'
         +(r.brreg_navn&&r.brreg_navn!==r.firma?'Registrert navn: <b style="color:#b09070;">'+r.brreg_navn+'</b><br>':'')
         +(r.kontakt?'Kontaktperson: '+r.kontakt+'<br>':'')
-        +(r.tlf?'Tlf: <a href="tel:'+r.tlf+'" style="color:#9a7a5a;">'+r.tlf+'</a><br>':'')
+        +(r.tlf?'Tlf: <a href="tel:'+r.tlf+'" style="color:#c8a870;">'+r.tlf+'</a><br>':'')
         +(r.epost?'E-post: <a href="mailto:'+r.epost+'" style="color:#b8915a;">'+r.epost+'</a><br>':'')
         +'Mottatt: '+r.dato+'</div>'
         +'<div style="display:flex;gap:4px;margin-top:0.6rem;flex-wrap:wrap;">'
@@ -4108,18 +4109,18 @@ function viewBedriftskunder(){
         +'</div></div>';
     });
   }
-  html+='<div style="font-size:11px;font-weight:700;color:#9a7a5a;letter-spacing:0.08em;text-transform:uppercase;margin:'+(pending.length?'1.25rem':'0')+' 0 0.6rem;">Godkjente bedriftskunder ('+clients.length+')</div>';
+  html+='<div style="font-size:11px;font-weight:700;color:#c8a870;letter-spacing:0.08em;text-transform:uppercase;margin:'+(pending.length?'1.25rem':'0')+' 0 0.6rem;">Godkjente bedriftskunder ('+clients.length+')</div>';
   if(!clients.length){
-    html+='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:2rem;text-align:center;color:#3a2c1a;">Ingen godkjente bedriftskunder ennå.<br><span style="font-size:11px;">Godkjenn søknader ovenfor.</span></div>';
+    html+='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:2rem;text-align:center;color:#8a6a40;">Ingen godkjente bedriftskunder ennå.<br><span style="font-size:11px;">Godkjenn søknader ovenfor.</span></div>';
   } else {
     clients.forEach(function(c,j){
       html+='<div style="background:#1a1410;border:1px solid '+(c.active?'#2a1e12':'#c0392b33')+';border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
         +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.5rem;">'
-        +'<div><b style="font-size:14px;color:#e4cda8;">'+c.firma+'</b>'+(c.org?'<span style="font-size:10px;color:#9a7a5a;margin-left:8px;">org.'+c.org+'</span>':'')+'</div>'
+        +'<div><b style="font-size:14px;color:#e4cda8;">'+c.firma+'</b>'+(c.org?'<span style="font-size:10px;color:#c8a870;margin-left:8px;">org.'+c.org+'</span>':'')+'</div>'
         +badge(c.active?'godkjent':'sperret')+'</div>'
-        +'<div style="font-size:11px;color:#9a7a5a;line-height:1.8;">'
+        +'<div style="font-size:11px;color:#c8a870;line-height:1.8;">'
         +(c.kontakt?'Kontaktperson: '+c.kontakt+'<br>':'')
-        +(c.tlf?'Tlf: <a href="tel:'+c.tlf+'" style="color:#9a7a5a;">'+c.tlf+'</a><br>':'')
+        +(c.tlf?'Tlf: <a href="tel:'+c.tlf+'" style="color:#c8a870;">'+c.tlf+'</a><br>':'')
         +(c.epost?'E-post: <a href="mailto:'+c.epost+'" style="color:#b8915a;">'+c.epost+'</a><br>':'')
         +(c.discount?(function(){var trs=[{p:25,l:'👑 Elite'},{p:20,l:'💎 Platinum'},{p:15,l:'🥇 Gold'},{p:10,l:'🥈 Silver'},{p:5,l:'🥉 Bronze'}];var tl='';for(var x=0;x<trs.length;x++){if(c.discount>=trs[x].p){tl=trs[x].l;break;}}return '<b style="color:#e8c04a;">'+tl+' · '+c.discount+'% rabatt</b><br>';})():'Ingen rabatt satt<br>')
         +(c.offer_status==='pending_offer'?'<b style="color:#c97d6e;">📩 Ønsker pristilbud!</b><br>':'')
@@ -4143,7 +4144,7 @@ function viewForesporsler(){
   var reqs=window.B2B_REQUESTS||[];
   if(!reqs.length){
     return '<div style="font-size:14px;font-weight:600;color:#e4cda8;margin-bottom:0.75rem;">Bedriftsforespørsler</div>'
-      +'<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:2rem;text-align:center;color:#3a2c1a;">Ingen forespørsler ennå.<br><span style="font-size:11px;">Når bedrifter sender forespørsel via Bedriftsportalen, dukker de opp her.</span></div>';
+      +'<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:2rem;text-align:center;color:#8a6a40;">Ingen forespørsler ennå.<br><span style="font-size:11px;">Når bedrifter sender forespørsel via Bedriftsportalen, dukker de opp her.</span></div>';
   }
   var html='',i;
   for(i=0;i<reqs.length;i++){
@@ -4151,7 +4152,7 @@ function viewForesporsler(){
     html+='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">'
       +'<b style="font-size:14px;color:#e4cda8;">'+r.firma+'</b>'+badge(r.status)+'</div>'
-      +'<div style="font-size:11px;color:#9a7a5a;line-height:1.6;">'
+      +'<div style="font-size:11px;color:#c8a870;line-height:1.6;">'
       +(r.org?'Org.nr: '+r.org+'<br>':'')
       +(r.kontakt?'Kontakt: '+r.kontakt+'<br>':'')
       +(r.tlf?'Tlf: '+r.tlf+'<br>':'')
@@ -4204,11 +4205,11 @@ function viewChat(){
       var c=DATA.chats[i];
       var last=c.messages[c.messages.length-1];
       list+='<div onclick="admOpenChat('+c.id+')" style="padding:0.85rem 1rem;border-bottom:1px solid #2a1e1255;cursor:pointer;display:flex;justify-content:space-between;align-items:center;">'
-        +'<div><b style="color:#e4cda8;font-size:13px;">'+c.customer+'</b><br><span style="font-size:11px;color:#9a7a5a;">'+last.text.substring(0,40)+'...</span></div>'
+        +'<div><b style="color:#e4cda8;font-size:13px;">'+c.customer+'</b><br><span style="font-size:11px;color:#c8a870;">'+last.text.substring(0,40)+'...</span></div>'
         +(c.unread>0?'<span style="background:#c97d6e;color:#fff;font-size:10px;font-weight:700;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 5px;">'+c.unread+'</span>':'')
         +'</div>';
     }
-    html=card('Kundechat',list||'<div style="padding:2rem;text-align:center;color:#3a2c1a;">Ingen meldinger</div>');
+    html=card('Kundechat',list||'<div style="padding:2rem;text-align:center;color:#8a6a40;">Ingen meldinger</div>');
   } else {
     var chat=null;
     for(var j=0;j<DATA.chats.length;j++) if(DATA.chats[j].id===activeChatId) chat=DATA.chats[j];
@@ -4220,9 +4221,9 @@ function viewChat(){
       msgs+='<div style="display:flex;justify-content:'+(mine?'flex-end':'flex-start')+';margin-bottom:8px;">'
         +'<div style="max-width:75%;padding:8px 12px;border-radius:14px;font-size:13px;line-height:1.4;'
         +(mine?'background:rgba(138,180,138,0.2);color:#e0caa8;border:1px solid rgba(138,180,138,0.3);':'background:#181208;color:#e4cda8;border:1px solid #2a1e12;')
-        +'">'+m.text+'<div style="font-size:9px;color:#9a7a5a;margin-top:3px;text-align:right;">'+m.time+'</div></div></div>';
+        +'">'+m.text+'<div style="font-size:9px;color:#c8a870;margin-top:3px;text-align:right;">'+m.time+'</div></div></div>';
     }
-    html='<div style="margin-bottom:0.5rem;">'+btn('< Tilbake','admBackChat()','#9a7a5a')+'</div>'
+    html='<div style="margin-bottom:0.5rem;">'+btn('< Tilbake','admBackChat()','#c8a870')+'</div>'
       +card(chat.customer,
         '<div style="padding:1rem;max-height:50vh;overflow-y:auto;" id="admChatMsgs">'+msgs+'</div>'
         +'<div style="padding:0.75rem;border-top:1px solid #2a1e12;display:flex;gap:0.5rem;">'
@@ -4247,7 +4248,7 @@ function viewKunder(){
     +btn('+ Ny kunde','admNewKunde()','#b09070')
     +'</div>';
   html+='<div style="font-size:14px;font-weight:600;color:#e4cda8;margin-bottom:0.75rem;">Kunder ('+filtered.length+')</div>';
-  if(!filtered.length) return html+'<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:2rem;text-align:center;color:#3a2c1a;">Ingen kunder funnet.</div>';
+  if(!filtered.length) return html+'<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:2rem;text-align:center;color:#8a6a40;">Ingen kunder funnet.</div>';
   for(var i=0;i<filtered.length;i++){
     var c=filtered[i];
     var ri=DATA.customers.indexOf(c);
@@ -4257,14 +4258,14 @@ function viewKunder(){
       +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem;">'
       +'<div>'
       +'<div style="font-size:14px;font-weight:600;color:#e4cda8;">'+c.name+'</div>'
-      +'<div style="font-size:11px;color:#9a7a5a;line-height:1.8;">'
-      +(c.phone?'<a href="tel:'+c.phone+'" style="color:#9a7a5a;text-decoration:none;">'+c.phone+'</a><br>':'')
-      +(c.email?'<a href="mailto:'+c.email+'" style="color:#9a7a5a;text-decoration:none;">'+c.email+'</a>':'')
+      +'<div style="font-size:11px;color:#c8a870;line-height:1.8;">'
+      +(c.phone?'<a href="tel:'+c.phone+'" style="color:#c8a870;text-decoration:none;">'+c.phone+'</a><br>':'')
+      +(c.email?'<a href="mailto:'+c.email+'" style="color:#c8a870;text-decoration:none;">'+c.email+'</a>':'')
       +'</div>'
       +'</div>'
       +'<div style="text-align:right;">'
       +'<b style="font-size:15px;color:#b8915a;">'+(c.total||0).toLocaleString('no-NO')+' kr</b><br>'
-      +'<span style="font-size:11px;color:#9a7a5a;">'+(c.orders||0)+' ordre · '+cBks.length+' timer</span><br>'
+      +'<span style="font-size:11px;color:#c8a870;">'+(c.orders||0)+' ordre · '+cBks.length+' timer</span><br>'
       +(upcoming.length?'<span style="font-size:10px;color:#e8c04a;">'+upcoming.length+' kommende</span>':'')
       +'</div>'
       +'</div>'
@@ -4285,7 +4286,7 @@ function viewRabatt(){
     var d=DATA.discounts[i];
     rows+='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:0.85rem 1rem;margin-bottom:0.6rem;display:flex;justify-content:space-between;align-items:center;">'
       +'<div><b style="font-family:monospace;font-size:14px;color:#b8915a;letter-spacing:0.05em;">'+d.code+'</b><br>'
-      +'<span style="font-size:11px;color:#9a7a5a;">'+d.value+(d.type==='prosent'?'%':' kr')+' rabatt &middot; brukt '+d.used+' ganger &middot; utloper '+d.expires+'</span></div>'
+      +'<span style="font-size:11px;color:#c8a870;">'+d.value+(d.type==='prosent'?'%':' kr')+' rabatt &middot; brukt '+d.used+' ganger &middot; utloper '+d.expires+'</span></div>'
       +btn('Slett','admDelDc('+i+')','#c0392b')
       +'</div>';
   }
@@ -4295,7 +4296,7 @@ function viewRabatt(){
     +input('admDcVal','Rabatt','20','number')
     +'</div>'
     +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;">'
-    +'<div style="margin-bottom:0.6rem;"><label style="display:block;font-size:10px;color:#9a7a5a;text-transform:uppercase;margin-bottom:3px;">Type</label><select id="admDcType" style="width:100%;padding:9px 11px;background:#181208;border:1px solid #2a1e12;border-radius:8px;font-size:16px;color:#e4cda8;box-sizing:border-box;"><option value="prosent">Prosent</option><option value="kr">Kroner</option></select></div>'
+    +'<div style="margin-bottom:0.6rem;"><label style="display:block;font-size:10px;color:#c8a870;text-transform:uppercase;margin-bottom:3px;">Type</label><select id="admDcType" style="width:100%;padding:9px 11px;background:#181208;border:1px solid #2a1e12;border-radius:8px;font-size:16px;color:#e4cda8;box-sizing:border-box;"><option value="prosent">Prosent</option><option value="kr">Kroner</option></select></div>'
     +input('admDcExp','Utloper','','date')
     +'</div>'
     +btn('Opprett kode','admSaveDc()')
@@ -4317,7 +4318,7 @@ function viewRetur(){
       +'<b style="font-size:14px;color:#e4cda8;">'+r.id+'</b>'+badge(r.status)+'</div>'
       +'<div style="font-size:13px;color:#e4cda8;margin-bottom:2px;"><b>'+r.customer+'</b></div>'
       +'<div style="font-size:12px;color:#b09070;margin-bottom:0.3rem;">'+r.product+' &middot; <b>'+r.amount+' kr</b></div>'
-      +'<div style="font-size:11px;color:#9a7a5a;margin-bottom:0.6rem;">Aarsak: '+r.reason+'</div>'
+      +'<div style="font-size:11px;color:#c8a870;margin-bottom:0.6rem;">Aarsak: '+r.reason+'</div>'
       +'<div>'+act+'</div>'
       +'</div>';
   }
@@ -4619,17 +4620,17 @@ window.admLabel=function(id,carrier){
   if(!o) return;
   // Step 1: choose carrier if not chosen
   if(!carrier){
-    el('admBody').innerHTML='<div style="margin-bottom:0.75rem;">'+btn('Tilbake',"admGo('ordre')",'#9a7a5a')+'</div>'
+    el('admBody').innerHTML='<div style="margin-bottom:0.75rem;">'+btn('Tilbake',"admGo('ordre')",'#c8a870')+'</div>'
       +'<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:1.25rem;max-width:420px;margin:0 auto;">'
       +'<div style="font-size:14px;font-weight:600;color:#e4cda8;margin-bottom:0.3rem;">Velg fraktselskap</div>'
-      +'<div style="font-size:11px;color:#9a7a5a;margin-bottom:1rem;">Ordre '+o.id+' til '+o.customer+'</div>'
+      +'<div style="font-size:11px;color:#c8a870;margin-bottom:1rem;">Ordre '+o.id+' til '+o.customer+'</div>'
       +'<div onclick="admLabel(\''+id+'\',\'posten\')" style="display:flex;align-items:center;gap:0.75rem;background:#181208;border:1px solid #2a1e12;border-radius:12px;padding:0.9rem 1rem;cursor:pointer;margin-bottom:0.6rem;">'
       +'<div style="width:40px;height:40px;background:#e32d22;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:16px;">P</div>'
-      +'<div><b style="font-size:13px;color:#e4cda8;">Posten / Bring</b><br><span style="font-size:11px;color:#9a7a5a;">Pakke i postkassen &middot; 2-4 dager &middot; 75 kr</span></div>'
+      +'<div><b style="font-size:13px;color:#e4cda8;">Posten / Bring</b><br><span style="font-size:11px;color:#c8a870;">Pakke i postkassen &middot; 2-4 dager &middot; 75 kr</span></div>'
       +'</div>'
       +'<div onclick="admLabel(\''+id+'\',\'postnord\')" style="display:flex;align-items:center;gap:0.75rem;background:#181208;border:1px solid #2a1e12;border-radius:12px;padding:0.9rem 1rem;cursor:pointer;">'
       +'<div style="width:40px;height:40px;background:#00a0d6;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:14px;">PN</div>'
-      +'<div><b style="font-size:13px;color:#e4cda8;">PostNord</b><br><span style="font-size:11px;color:#9a7a5a;">MyPack Collect &middot; 1-3 dager &middot; 69 kr</span></div>'
+      +'<div><b style="font-size:13px;color:#e4cda8;">PostNord</b><br><span style="font-size:11px;color:#c8a870;">MyPack Collect &middot; 1-3 dager &middot; 69 kr</span></div>'
       +'</div>'
       +'</div>';
     return;
@@ -4670,7 +4671,7 @@ window.admLabel=function(id,carrier){
     +'<div style="display:flex;gap:2px;height:46px;align-items:flex-end;justify-content:center;">'+bars+'</div>'
     +'<div style="font-family:monospace;font-size:10px;text-align:center;letter-spacing:0.25em;margin-top:3px;">'+trackNum+'</div>'
     +'</div>';
-  el('admBody').innerHTML='<div style="margin-bottom:0.75rem;">'+btn('Tilbake',"admGo('ordre')",'#9a7a5a')+btn('Bytt fraktselskap',"admLabel('"+id+"')",'#9a7a5a')+'</div>'
+  el('admBody').innerHTML='<div style="margin-bottom:0.75rem;">'+btn('Tilbake',"admGo('ordre')",'#c8a870')+btn('Bytt fraktselskap',"admLabel('"+id+"')",'#c8a870')+'</div>'
     +labelHtml
     +'<div style="max-width:420px;margin:0.75rem auto 0;display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;">'
     +btn('Skriv ut etikett','admPrintLabel()')
@@ -4909,23 +4910,23 @@ window.admB2bDiscount=function(i){
   var tiers=[{pct:5,lbl:'Bronze',col:'#cd7f32'},{pct:10,lbl:'Silver',col:'#c0c0c0'},{pct:15,lbl:'Gold',col:'#e8c04a'},{pct:20,lbl:'Platinum',col:'#b8915a'},{pct:25,lbl:'Elite',col:'#c97d6e'}];
   var tierBtns=tiers.map(function(t){
     var active=cur===t.pct;
-    return '<button onclick="document.getElementById(\'discInp\').value='+t.pct+';document.querySelectorAll(\'.tier-btn\').forEach(function(b){b.style.background=\'transparent\';b.style.borderColor=\'rgba(140,108,60,0.26)\';b.style.color=\'#9a7a5a\'});this.style.background=\''+t.col+'22\';this.style.borderColor=\''+t.col+'99\';this.style.color=\''+t.col+'\'" class="tier-btn" style="flex:1;padding:10px 6px;background:'+(active?t.col+'22':'transparent')+';border:1px solid '+(active?t.col+'99':'rgba(140,108,60,0.26)')+';border-radius:10px;cursor:pointer;font-family:inherit;color:'+(active?t.col:'#9a7a5a')+';transition:all 0.15s;">'
+    return '<button onclick="document.getElementById(\'discInp\').value='+t.pct+';document.querySelectorAll(\'.tier-btn\').forEach(function(b){b.style.background=\'transparent\';b.style.borderColor=\'rgba(140,108,60,0.26)\';b.style.color=\'#c8a870\'});this.style.background=\''+t.col+'22\';this.style.borderColor=\''+t.col+'99\';this.style.color=\''+t.col+'\'" class="tier-btn" style="flex:1;padding:10px 6px;background:'+(active?t.col+'22':'transparent')+';border:1px solid '+(active?t.col+'99':'rgba(140,108,60,0.26)')+';border-radius:10px;cursor:pointer;font-family:inherit;color:'+(active?t.col:'#c8a870')+';transition:all 0.15s;">'
       +'<div style="font-size:16px;font-weight:800;color:inherit;">'+t.pct+'%</div>'
       +'<div style="font-size:9px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:inherit;margin-top:2px;">'+t.lbl+'</div>'
       +'</button>';
   }).join('');
   overlay.innerHTML='<div style="background:#0d1a0f;border:1px solid rgba(140,108,60,0.26);border-radius:20px;padding:1.5rem;width:100%;max-width:420px;">'
     +'<div style="font-size:14px;font-weight:700;color:#e4cda8;margin-bottom:4px;">B2B-rabatt</div>'
-    +'<div style="font-size:11px;color:#9a7a5a;margin-bottom:1.25rem;">'+c.firma+'</div>'
+    +'<div style="font-size:11px;color:#c8a870;margin-bottom:1.25rem;">'+c.firma+'</div>'
     +'<div style="display:flex;gap:6px;margin-bottom:1.25rem;">'+tierBtns+'</div>'
     +'<div style="margin-bottom:1rem;">'
-    +'<label style="font-size:10px;color:#9a7a5a;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:6px;">Egendefinert (0–30%)</label>'
-    +'<input id="discInp" type="range" min="0" max="30" value="'+cur+'" oninput="document.getElementById(\'discVal\').textContent=this.value+\'%\'" style="width:100%;accent-color:#b8915a;">'
+    +'<label style="font-size:10px;color:#c8a870;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:6px;">Egendefinert (0–30%)</label>'
+    +'<input id="discInp" type="range" min="0" max="30" value="'+cur+'" oninput="document.getElementById(\'discVal\').textContent=this.value+\'%\'" style="width:100%;accent-color:#c8a060;">'
     +'<div style="text-align:center;font-size:22px;font-weight:800;color:#e8c04a;margin-top:4px;" id="discVal">'+cur+'%</div>'
     +'</div>'
     +'<div style="display:flex;gap:0.5rem;">'
     +'<button onclick="(function(){var v=parseInt(document.getElementById(\'discInp\').value,10);DATA.b2bClients['+i+'].discount=v;if(window.sb&&DATA.b2bClients['+i+'].epost){window.sb.from(\'b2b_applications\').update({discount:v}).eq(\'email\',DATA.b2bClients['+i+'].epost).then(function(){});}document.getElementById(\'discOverlay\').remove();go(\'bedriftskunder\');if(window.showToast)window.showToast(DATA.b2bClients['+i+'].firma+\': \'+v+\'% rabatt satt\');})()" style="flex:1;padding:12px;background:rgba(60,100,50,0.4);border:1px solid rgba(120,190,100,0.4);border-radius:12px;font-size:13px;font-weight:700;color:#e0caa8;cursor:pointer;font-family:inherit;">Lagre rabatt</button>'
-    +'<button onclick="document.getElementById(\'discOverlay\').remove()" style="padding:12px 16px;background:transparent;border:1px solid rgba(186,152,98,0.2);border-radius:12px;font-size:13px;color:#9a7a5a;cursor:pointer;font-family:inherit;">Avbryt</button>'
+    +'<button onclick="document.getElementById(\'discOverlay\').remove()" style="padding:12px 16px;background:transparent;border:1px solid rgba(186,152,98,0.2);border-radius:12px;font-size:13px;color:#c8a870;cursor:pointer;font-family:inherit;">Avbryt</button>'
     +'</div>'
     +'</div>';
   document.body.appendChild(overlay);
@@ -4952,13 +4953,13 @@ window.admB2bSendOffer=function(i){
     +'<div style="font-size:11px;color:#c97d6e;font-weight:600;margin-bottom:1.25rem;">'+c.firma+' ønsker en bedre avtale</div>'
     +'<div style="display:flex;gap:5px;margin-bottom:1rem;">'+tierBtns+'</div>'
     +'<div style="margin-bottom:1rem;">'
-    +'<label style="font-size:10px;color:#9a7a5a;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:5px;">Tilbudt rabatt</label>'
+    +'<label style="font-size:10px;color:#c8a870;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:5px;">Tilbudt rabatt</label>'
     +'<input id="offerInp" type="range" min="1" max="30" value="'+defaultDisc+'" oninput="document.getElementById(\'offerVal\').textContent=this.value+\'%\'" style="width:100%;accent-color:#c97d6e;">'
     +'<div style="text-align:center;font-size:28px;font-weight:900;color:#c97d6e;margin-top:2px;" id="offerVal">'+defaultDisc+'%</div>'
     +'</div>'
     +'<div style="margin-bottom:1.25rem;">'
-    +'<label style="font-size:10px;color:#9a7a5a;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:5px;">Melding til bedriften (valgfritt)</label>'
-    +'<textarea id="offerMsg" placeholder="f.eks. Gjelder fra neste måned. Minimum 10 besøk per år." style="width:100%;box-sizing:border-box;background:#081209;border:1px solid rgba(186,152,98,0.2);border-radius:10px;padding:8px;color:#c0d4bc;font-size:12px;font-family:inherit;resize:none;height:64px;"></textarea>'
+    +'<label style="font-size:10px;color:#c8a870;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:5px;">Melding til bedriften (valgfritt)</label>'
+    +'<textarea id="offerMsg" placeholder="f.eks. Gjelder fra neste måned. Minimum 10 besøk per år." style="width:100%;box-sizing:border-box;background:#081209;border:1px solid rgba(186,152,98,0.2);border-radius:10px;padding:8px;color:#e0d4b8;font-size:12px;font-family:inherit;resize:none;height:64px;"></textarea>'
     +'</div>'
     +'<div style="display:flex;gap:0.5rem;">'
     +'<button onclick="(function(){'
@@ -4974,7 +4975,7 @@ window.admB2bSendOffer=function(i){
       +'go(\'bedriftskunder\');'
       +'if(window.showToast)window.showToast(\'Tilbud sendt til \'+DATA.b2bClients['+i+'].firma+\': \'+v+\'%\');'
     +'})()" style="flex:1;padding:12px;background:rgba(201,125,110,0.25);border:1px solid rgba(201,125,110,0.4);border-radius:12px;font-size:13px;font-weight:700;color:#e8c4b8;cursor:pointer;font-family:inherit;">📩 Send tilbud til bedriften</button>'
-    +'<button onclick="document.getElementById(\'offerOverlay\').remove()" style="padding:12px 16px;background:transparent;border:1px solid rgba(140,108,60,0.18);border-radius:12px;font-size:13px;color:#9a7a5a;cursor:pointer;font-family:inherit;">Avbryt</button>'
+    +'<button onclick="document.getElementById(\'offerOverlay\').remove()" style="padding:12px 16px;background:transparent;border:1px solid rgba(140,108,60,0.18);border-radius:12px;font-size:13px;color:#c8a870;cursor:pointer;font-family:inherit;">Avbryt</button>'
     +'</div></div>';
   document.body.appendChild(overlay);
   overlay.addEventListener('click',function(e){if(e.target===overlay)overlay.remove();});
@@ -5186,7 +5187,7 @@ function viewInnhold(){
   var d=loadIC();
   var inpStyle='width:100%;padding:9px 11px;background:#100c08;border:1px solid #2a1e12;border-radius:8px;font-size:15px;color:#e4cda8;box-sizing:border-box;font-family:inherit;';
   var taStyle=inpStyle+'resize:vertical;';
-  var lbl=function(t){return '<label style="display:block;font-size:10px;color:#9a7a5a;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;">'+t+'</label>';};
+  var lbl=function(t){return '<label style="display:block;font-size:10px;color:#c8a870;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;">'+t+'</label>';};
   var row=function(id,label,val,ph,tag,rows){
     val=(val||'').replace(/"/g,'&quot;').replace(/</g,'&lt;');
     if(tag==='textarea') return '<div style="margin-bottom:0.75rem;">'+lbl(label)+'<textarea id="ic_'+id+'" rows="'+(rows||2)+'" placeholder="'+(ph||'')+'" style="'+taStyle+'">'+val+'</textarea></div>';
@@ -5198,7 +5199,7 @@ function viewInnhold(){
 
   return card('✏ Tekst og innhold på nettsiden',
     '<div style="padding:0.9rem;">'
-    +'<div style="font-size:11px;color:#9a7a5a;margin-bottom:1rem;padding:8px 12px;background:#100c08;border-radius:8px;border-left:3px solid #b8915a;">ℹ Endringer lagres lokalt (nettleser). Oppdater siden for å se dem på forsiden.</div>'
+    +'<div style="font-size:11px;color:#c8a870;margin-bottom:1rem;padding:8px 12px;background:#100c08;border-radius:8px;border-left:3px solid #b8915a;">ℹ Endringer lagres lokalt (nettleser). Oppdater siden for å se dem på forsiden.</div>'
     +row('tagline','Tagline / slagord',gv('tagline'),'f.eks. Profesjonell pleie. Synlige resultater.')
     +row('omOss','Om oss (footer/about)',gv('omOss'),'Kort tekst om salongen...','textarea',3)
     +'</div>'
@@ -5231,7 +5232,7 @@ function viewInnhold(){
   +card('📢 Kampanjebanner (vises øverst på siden)',
     '<div style="padding:0.9rem;">'
     +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:0.75rem;">'
-    +'<input type="checkbox" id="ic_bannerAktiv" '+(gv('bannerAktiv')==='1'?'checked':'')+' style="width:18px;height:18px;accent-color:#b8915a;cursor:pointer;">'
+    +'<input type="checkbox" id="ic_bannerAktiv" '+(gv('bannerAktiv')==='1'?'checked':'')+' style="width:18px;height:18px;accent-color:#c8a060;cursor:pointer;">'
     +'<label for="ic_bannerAktiv" style="font-size:13px;color:#b09070;cursor:pointer;">Aktiver kampanjebanner</label>'
     +'</div>'
     +row('bannerTekst','Bannertekst',gv('bannerTekst'),'f.eks. 🎉 Sommer-tilbud! 20% på alle NAK Hair-produkter i juli')
@@ -5491,7 +5492,7 @@ if(window.renderNailsGrid) window.renderNailsGrid();
     });
     var stylistCard='<div style="display:flex;align-items:center;gap:12px;padding:12px 0 16px;border-bottom:1px solid rgba(186,152,98,0.12);margin-bottom:6px;">'
       +'<div style="width:44px;height:44px;border-radius:50%;background:'+stylistCol+'22;border:2px solid '+stylistCol+'66;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:'+stylistCol+';flex-shrink:0;">'+stylistInitial+'</div>'
-      +'<div><div style="font-size:14px;font-weight:700;color:#e4cda8;">'+stylistName+'</div><div style="font-size:11px;color:#9a7a5a;">'+stylistRole+' · Yeganeh Style</div></div>'
+      +'<div><div style="font-size:14px;font-weight:700;color:#e4cda8;">'+stylistName+'</div><div style="font-size:11px;color:#c8a870;">'+stylistRole+' · Yeganeh Style</div></div>'
       +'</div>';
     return '<div class="timma-step-label">Steg 2 av 5</div>'
       +'<div class="timma-step-h">Velg behandling</div>'
@@ -5585,11 +5586,11 @@ if(window.renderNailsGrid) window.renderNailsGrid();
     var slots=ST.svc?getSlots(ST.date,ST.svc.duration):[];
     var pills=slots.length
       ? slots.map(function(s){ return '<button class="timma-time-pill'+(ST.time===s?' sel':'')+'" onclick="timmaSelTime(\''+s+'\')">'+s+'</button>'; }).join('')
-      : '<div style="color:#3a2c1a;font-size:13px;padding:1rem 0;">Ingen ledige tider denne dagen.</div>';
+      : '<div style="color:#8a6a40;font-size:13px;padding:1rem 0;">Ingen ledige tider denne dagen.</div>';
     var dateLabel=ST.date?new Date(ST.date).toLocaleDateString('nb-NO',{weekday:'long',day:'numeric',month:'long'}):'';
     return '<div class="timma-step-label">Steg 4 av 5</div>'
       +'<div class="timma-step-h">Velg tid</div>'
-      +'<div style="font-size:12px;color:#9a7a5a;margin-bottom:1rem;text-transform:capitalize;">'+dateLabel+'</div>'
+      +'<div style="font-size:12px;color:#c8a870;margin-bottom:1rem;text-transform:capitalize;">'+dateLabel+'</div>'
       +'<div class="timma-time-grid">'+pills+'</div>'
       +cta('Fyll inn kontaktinfo →','timmaNext()',!ST.time);
   }

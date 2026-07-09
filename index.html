@@ -494,7 +494,8 @@ nav {
 .cat-label { font-size: 13px; color: var(--text); white-space: nowrap; letter-spacing: 0.01em; font-weight: 500; }
 
 /* ── REVIEWS ── */
-.reviews-list { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.75rem; }
+.reviews-list { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.75rem; transition: opacity 0.22s ease; }
+#reviewsAll { display: flex; flex-direction: column; gap: 0.6rem; }
 .review-card {
   background: rgba(20,15,9,0.7);
   border: 1px solid var(--border);
@@ -1063,6 +1064,7 @@ nav { }
 @media (min-width: 900px) {
   .hero-inner { max-width: 760px; }
   .reviews-list { display: grid; grid-template-columns: repeat(3,1fr); align-items: start; }
+  #reviewsAll { display: grid !important; grid-template-columns: repeat(3,1fr); align-items: start; gap: 0.6rem; }
 }
 
 /* ── B2B PORTAL ── */
@@ -1537,10 +1539,12 @@ nav { }
     <h2 class="section-title">Hva kundene sier</h2>
     <p class="section-sub" id="reviewSummary">4,5 stjerner · 66 Google-anmeldelser</p>
   </div>
-  <div class="reviews-list" id="reviewsList"></div>
-  <div style="text-align:center;margin-top:1rem;">
+  <div class="reviews-list" id="reviewsPreview"></div>
+  <div style="text-align:center;margin-top:1rem;display:flex;flex-wrap:wrap;justify-content:center;gap:0.6rem;">
+    <button class="book-pill" id="visAlleBtn" onclick="toggleAllReviews()">Vis alle anmeldelser</button>
     <button class="book-pill" onclick="openModal('reviewModal')">Skriv en anmeldelse</button>
   </div>
+  <div id="reviewsAll" style="display:none;margin-top:1.25rem;"></div>
 </div>
 
 <div class="section-wrap" id="forsideTjenester" style="display:none">
@@ -2696,30 +2700,76 @@ var REVIEWS=[
 window.REVIEWS=REVIEWS;
 var selectedStars=5;
 
-function renderReviews(){
-  var list=document.getElementById('reviewsList');
-  if(!list) return;
-  var approved=REVIEWS.filter(function(r){return r.approved;});
-  var html='';
-  for(var i=0;i<approved.length;i++){
-    var r=approved[i];
-    var stars='';
-    for(var s=0;s<5;s++) stars+=s<r.rating?'★':'☆';
-    html+='<div class="review-card">'
-      +'<div class="review-head"><span class="review-name">'+r.name+'</span><span class="review-stars">'+stars+'</span></div>'
-      +'<div class="review-text">'+r.text+'</div>'
-      +'<div class="review-date">'+r.date+'</div>'
-      +'</div>';
-  }
-  list.innerHTML=html;
-  // summary
-  if(approved.length){
-    var sum=0;for(var j=0;j<approved.length;j++) sum+=approved[j].rating;
-    var avg=(sum/approved.length).toFixed(1).replace('.',',');
-    var sumEl=document.getElementById('reviewSummary');
-    if(sumEl) sumEl.textContent=avg+' stjerner · '+approved.length+' anmeldelser';
-  }
+var _revOffset=0;
+var _revShuffled=[];
+var _revInterval=null;
+var _revAllOpen=false;
+
+function _shuffleReviews(arr){
+  var a=arr.slice();
+  for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}
+  return a;
 }
+
+function _buildRevCard(r){
+  var stars='';
+  for(var s=0;s<5;s++) stars+=s<r.rating?'★':'☆';
+  return '<div class="review-card">'
+    +'<div class="review-head"><span class="review-name">'+r.name+'</span><span class="review-stars">'+stars+'</span></div>'
+    +'<div class="review-text">'+r.text+'</div>'
+    +'<div class="review-date">'+r.date+'</div>'
+    +'</div>';
+}
+
+function _renderPreview(){
+  var preview=document.getElementById('reviewsPreview');
+  if(!preview||!_revShuffled.length) return;
+  var group=[];
+  for(var i=0;i<3;i++) group.push(_revShuffled[(_revOffset+i)%_revShuffled.length]);
+  preview.style.opacity='0';
+  setTimeout(function(){
+    preview.innerHTML=group.map(_buildRevCard).join('');
+    preview.style.opacity='1';
+  },220);
+}
+
+function renderReviews(){
+  var approved=REVIEWS.filter(function(r){return r.approved;});
+  if(!approved.length) return;
+  _revShuffled=_shuffleReviews(approved);
+  _revOffset=0;
+  _renderPreview();
+  if(_revInterval) clearInterval(_revInterval);
+  _revInterval=setInterval(function(){
+    _revOffset=(_revOffset+3)%_revShuffled.length;
+    _renderPreview();
+  },6000);
+  // all reviews grid
+  var allDiv=document.getElementById('reviewsAll');
+  if(allDiv) allDiv.innerHTML=approved.map(_buildRevCard).join('');
+  // summary
+  var sum=0;for(var j=0;j<approved.length;j++) sum+=approved[j].rating;
+  var avg=(sum/approved.length).toFixed(1).replace('.',',');
+  var sumEl=document.getElementById('reviewSummary');
+  if(sumEl) sumEl.textContent=avg+' stjerner · '+approved.length+' Google-anmeldelser';
+  var btn=document.getElementById('visAlleBtn');
+  if(btn) btn.textContent='Vis alle '+approved.length+' anmeldelser';
+}
+
+window.toggleAllReviews=function(){
+  var allDiv=document.getElementById('reviewsAll');
+  var btn=document.getElementById('visAlleBtn');
+  var preview=document.getElementById('reviewsPreview');
+  if(!allDiv) return;
+  _revAllOpen=!_revAllOpen;
+  allDiv.style.display=_revAllOpen?'':'none';
+  preview.style.display=_revAllOpen?'none':'';
+  if(btn) btn.textContent=_revAllOpen?'Skjul anmeldelser':'Vis alle '+_revShuffled.length+' anmeldelser';
+  if(_revAllOpen&&_revInterval){clearInterval(_revInterval);_revInterval=null;}
+  else if(!_revAllOpen){
+    _revInterval=setInterval(function(){_revOffset=(_revOffset+3)%_revShuffled.length;_renderPreview();},6000);
+  }
+};
 
 function setupStarPicker(){
   var picker=document.getElementById('starPicker');

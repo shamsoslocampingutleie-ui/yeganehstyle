@@ -122,21 +122,21 @@ a,button,input,select,textarea{-webkit-tap-highlight-color:transparent;outline:n
 button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
 
 :root {
-  --bg: #1c1510;
-  --surface: rgba(46,34,20,0.92);
-  --surface-solid: #221a10;
-  --surface2: rgba(54,40,24,0.95);
-  --border: rgba(200,164,108,0.28);
-  --border-bright: rgba(220,180,120,0.5);
+  --bg: #1a130d;
+  --surface: rgba(50,36,20,0.95);
+  --surface-solid: #261c0e;
+  --surface2: rgba(60,44,26,0.97);
+  --border: rgba(200,164,108,0.38);
+  --border-bright: rgba(220,180,120,0.65);
   --text: #fff8ef;
-  --text-dim: #d4b080;
-  --gray: #b09070;
-  --accent: #c8a060;
-  --accent2: #d4887a;
-  --muted: #4a3824;
-  --leaf1: #2a2018;
-  --leaf2: #1c1510;
-  --leaf3: #342818;
+  --text-dim: #ecc888;
+  --gray: #c8aa80;
+  --accent: #d4a840;
+  --accent2: #e09080;
+  --muted: #5a4430;
+  --leaf1: #2e2418;
+  --leaf2: #1a130d;
+  --leaf3: #382e1c;
 }
 
 html { scroll-behavior: smooth; }
@@ -221,8 +221,8 @@ nav {
 }
 .nav-item > button, .nav-item > a {
   background: none; border: none;
-  color: var(--text-dim); font-family: 'Inter', sans-serif;
-  font-size: 13px; font-weight: 500; letter-spacing: 0.04em;
+  color: #f0e0c0; font-family: 'Inter', sans-serif;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.05em;
   text-transform: uppercase;
   padding: 0 14px; height: 72px;
   display: flex; align-items: center; gap: 5px;
@@ -231,7 +231,7 @@ nav {
   white-space: nowrap;
 }
 .nav-item > button:hover, .nav-item > a:hover,
-.nav-item:hover > button, .nav-item:hover > a { color: var(--text); }
+.nav-item:hover > button, .nav-item:hover > a { color: #fff8ef; }
 .nav-item > button .chevron {
   width: 10px; height: 10px; flex-shrink: 0;
   transition: transform 0.25s;
@@ -348,14 +348,14 @@ nav {
 }
 .hero-btn {
   display: flex; align-items: center; justify-content: center; gap: 8px;
-  background: rgba(255,255,255,0.05);
-  border: 1.5px solid rgba(200,160,100,0.4);
+  background: rgba(255,255,255,0.07);
+  border: 1.5px solid rgba(200,160,100,0.6);
   border-radius: 6px;
   padding: 18px 40px;
   font-family: 'Inter', sans-serif;
-  font-size: 14px; font-weight: 600;
+  font-size: 15px; font-weight: 700;
   letter-spacing: 0.1em; text-transform: uppercase;
-  color: rgba(255,240,210,0.9);
+  color: #fff8ef;
   cursor: pointer;
   transition: border-color 0.22s, color 0.22s, background 0.22s, transform 0.15s;
   white-space: nowrap;
@@ -363,21 +363,21 @@ nav {
   min-width: 140px;
 }
 .hero-btn:hover {
-  border-color: rgba(200,160,100,0.8);
+  border-color: rgba(212,168,80,0.95);
   color: #fff8ef;
-  background: rgba(200,160,100,0.12);
+  background: rgba(212,168,80,0.18);
   transform: translateY(-1px);
 }
 .hero-btn:active { transform: scale(0.97); }
 .hero-btn-primary {
-  background: rgba(212,136,122,0.14);
-  border-color: rgba(212,136,122,0.55);
-  color: rgba(255,210,200,0.95);
+  background: rgba(212,136,122,0.2);
+  border-color: rgba(220,144,128,0.7);
+  color: #ffe8e0;
 }
 .hero-btn-primary:hover {
-  border-color: rgba(212,136,122,0.9);
-  color: #ffe8e0;
-  background: rgba(212,136,122,0.22);
+  border-color: rgba(220,144,128,1);
+  color: #fff0ea;
+  background: rgba(212,136,122,0.3);
 }
 
 /* ── PRODUCTS OVERLAY ── */
@@ -517,7 +517,7 @@ a.contact-card:hover { border-color: var(--accent); }
   font-size: 16px; color: var(--text); font-weight: 600;
   line-height: 1.3; margin-bottom: 4px;
 }
-.contact-card-sub { font-size: 11px; color: var(--gray); }
+.contact-card-sub { font-size: 13px; color: var(--text-dim); }
 .contact-cta { text-align: center; margin-top: 1rem; }
 @media (min-width: 600px) {
   .contact-grid { grid-template-columns: repeat(4, 1fr); }
@@ -601,7 +601,7 @@ a.contact-card:hover { border-color: var(--accent); }
   font-size: 1.4rem; font-weight: 300; color: var(--text);
   margin-bottom: 0.2rem; line-height: 1.15;
 }
-.section-sub { font-size: 11px; color: var(--text-dim); line-height: 1.5; }
+.section-sub { font-size: 13px; color: var(--text-dim); line-height: 1.55; }
 
 /* ── PRODUCT TABS ── */
 .prod-tabs {
@@ -609,17 +609,17 @@ a.contact-card:hover { border-color: var(--accent); }
   margin: 1.1rem 0;
 }
 .prod-tab {
-  background: rgba(255,255,255,0.04);
+  background: rgba(255,255,255,0.06);
   border: 1px solid var(--border);
-  border-radius: 18px; padding: 7px 14px;
-  font-size: 12px; color: var(--gray);
+  border-radius: 18px; padding: 8px 16px;
+  font-size: 13px; color: var(--text-dim);
   cursor: pointer; transition: all 0.2s; white-space: nowrap;
 }
 .prod-tab:hover { color: var(--text); border-color: var(--border-bright); }
 .prod-tab.active {
-  background: rgba(184,148,96,0.1);
-  border-color: rgba(184,148,96,0.28);
-  color: var(--accent); font-weight: 500;
+  background: rgba(200,160,60,0.18);
+  border-color: rgba(212,168,80,0.55);
+  color: #f0d060; font-weight: 600;
 }
 
 /* ── PRODUCT GRID ── */
@@ -758,21 +758,21 @@ footer {
   letter-spacing: 0.14em; color: var(--accent); margin-bottom: 0.8rem;
 }
 .footer-col a, .footer-col span {
-  display: block; font-size: 13px; color: var(--gray);
+  display: block; font-size: 14px; color: #c8aa80;
   text-decoration: none; margin-bottom: 0.4rem; cursor: pointer;
-  transition: color 0.2s; line-height: 1.4;
+  transition: color 0.2s; line-height: 1.5;
 }
 .footer-col a:hover { color: var(--text); }
 .footer-bottom { border-top: 1px solid var(--border); padding-top: 1.25rem; margin-top: 0.5rem; }
 .footer-social { display: flex; gap: 0.75rem; margin-bottom: 0.5rem; }
-.footer-social a { font-size: 12px; color: var(--gray); text-decoration: none; cursor: pointer; transition: color 0.2s; }
+.footer-social a { font-size: 13px; color: #c8aa80; text-decoration: none; cursor: pointer; transition: color 0.2s; }
 .footer-social a:hover { color: var(--accent); }
-.footer-copy { font-size: 11px; color: var(--muted); margin-bottom: 1rem; line-height: 1.6; }
+.footer-copy { font-size: 12px; color: #7a6040; margin-bottom: 1rem; line-height: 1.6; }
 .pay-icons { display: flex; gap: 0.4rem; flex-wrap: wrap; }
 .pay-badge {
-  background: rgba(255,255,255,0.04); border: 1px solid var(--border);
-  border-radius: 5px; padding: 3px 7px;
-  font-size: 9px; font-weight: 600; color: var(--muted);
+  background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+  border-radius: 5px; padding: 3px 8px;
+  font-size: 10px; font-weight: 600; color: #a08860;
 }
 
 /* ── MOBILE MENU ── */
@@ -1061,8 +1061,8 @@ nav { }
 }
 .b2p-center { display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50vh;text-align:center;padding:2rem 1rem; }
 .b2p-auth-wrap { max-width:460px;margin:0 auto;padding:1rem 1rem 3rem; }
-.b2p-eyebrow { font-size:10px;color:#b8915a;letter-spacing:0.15em;text-transform:uppercase;font-weight:600;margin-bottom:6px; }
-.b2p-h2 { font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:300;color:#f0e4ce;margin:0 0 8px; }
+.b2p-eyebrow { font-size:11px;color:#d4a840;letter-spacing:0.15em;text-transform:uppercase;font-weight:700;margin-bottom:6px; }
+.b2p-h2 { font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:300;color:#fff8ef;margin:0 0 8px; }
 .b2p-tabs { display:grid;grid-template-columns:1fr 1fr;border:1px solid rgba(140,108,60,0.18);border-radius:10px;overflow:hidden;margin-bottom:1.5rem; }
 .b2p-tab { padding:11px;background:transparent;border:0;color:#c8a870;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.2s; }
 .b2p-tab-a { background:rgba(140,108,60,0.18);color:#b8915a; }
@@ -1071,11 +1071,11 @@ nav { }
 .b2p-input { width:100%;padding:11px 13px;background:rgba(30,22,12,0.9);border:1px solid rgba(140,108,60,0.26);border-radius:10px;font-size:15px;color:#f0e4ce;font-family:inherit;box-sizing:border-box;outline:none;transition:border-color 0.2s; }
 .b2p-input:focus { border-color:rgba(200,160,80,0.65); box-shadow: 0 0 0 3px rgba(200,160,80,0.1); }
 .b2p-input::placeholder { color:#7a6040; }
-.b2p-btn-main { display:block;width:100%;padding:13px;background:rgba(140,108,60,0.26);border:1px solid rgba(184,148,96,0.35);border-radius:12px;color:#b8915a;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:background 0.2s;text-align:center; }
-.b2p-btn-main:hover { background:rgba(140,108,60,0.38); }
-.b2p-btn-sec { padding:9px 20px;background:transparent;border:1px solid rgba(186,152,98,0.2);border-radius:8px;color:#ddc898;font-size:13px;cursor:pointer;font-family:inherit;transition:all 0.2s; }
-.b2p-btn-sec:hover { border-color:rgba(186,152,98,0.45);color:#b8915a; }
-.b2p-btn-sm { padding:9px 13px;background:rgba(186,152,98,0.12);border:1px solid rgba(140,108,60,0.26);border-radius:8px;color:#b8915a;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap; }
+.b2p-btn-main { display:block;width:100%;padding:14px;background:rgba(200,160,60,0.22);border:1px solid rgba(212,168,80,0.55);border-radius:12px;color:#f0d070;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;transition:background 0.2s,border-color 0.2s;text-align:center; }
+.b2p-btn-main:hover { background:rgba(200,160,60,0.36);border-color:rgba(212,168,80,0.8); }
+.b2p-btn-sec { padding:10px 22px;background:rgba(255,255,255,0.05);border:1px solid rgba(200,160,80,0.35);border-radius:8px;color:#f0d8a8;font-size:14px;cursor:pointer;font-family:inherit;transition:all 0.2s; }
+.b2p-btn-sec:hover { border-color:rgba(200,160,80,0.65);color:#f8e8c0;background:rgba(200,160,80,0.1); }
+.b2p-btn-sm { padding:9px 14px;background:rgba(200,160,80,0.18);border:1px solid rgba(200,160,80,0.4);border-radius:8px;color:#f0d070;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap; }
 .b2p-err { font-size:12px;color:#e07060;padding:9px 12px;background:rgba(220,80,60,0.08);border:1px solid rgba(220,80,60,0.2);border-radius:8px;margin-bottom:0.85rem; }
 .b2p-link { color:#b8915a;cursor:pointer;text-decoration:underline; }
 .b2p-brreg-ok { background:rgba(186,152,98,0.09);border-radius:8px;padding:8px 10px;border:1px solid rgba(140,108,60,0.18); }
@@ -1083,12 +1083,12 @@ nav { }
 .b2p-welcome-card { background:linear-gradient(135deg,rgba(52,38,20,0.9),rgba(28,18,8,0.9));border:1px solid rgba(186,152,98,0.2);border-radius:16px;padding:1.5rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem; }
 .b2p-campaign { background:linear-gradient(135deg,rgba(201,125,110,0.12),rgba(201,125,110,0.04));border:1px solid rgba(201,125,110,0.2);border-radius:14px;padding:1.25rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap; }
 .b2p-card { background:rgba(34,24,12,0.78);border:1px solid rgba(186,152,98,0.15);border-radius:14px;padding:1.25rem; }
-.b2p-card-title { font-size:13px;font-weight:700;color:#f0dca8;margin-bottom:0.75rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(186,152,98,0.1);letter-spacing:0.04em; }
+.b2p-card-title { font-size:14px;font-weight:700;color:#f0e0b0;margin-bottom:0.75rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(200,164,80,0.2);letter-spacing:0.04em; }
 .b2p-cat-head { font-size:9px;color:#b8915a;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;margin-bottom:0.4rem; }
 .b2p-price-row { display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(186,152,98,0.09);gap:0.75rem; }
 .b2p-price-row:last-child { border-bottom:none; }
 .b2p-price-name { font-size:12px;color:#e0d4b8;flex:1; }
-.b2p-retail { font-size:10px;color:#8a6a40;text-decoration:line-through; }
+.b2p-retail { font-size:10px;color:#b09060;text-decoration:line-through; }
 .b2p-b2bprice { font-size:14px;font-weight:700;color:#b8915a; }
 .b2p-disc-badge { font-size:9px;color:#e8c04a;font-weight:600; }
 
@@ -1828,7 +1828,7 @@ nav { }
     <div style="display:flex;align-items:center;gap:8px;">
       <svg viewBox="0 0 32 32" fill="none" style="width:20px;height:20px"><path d="M8 4 Q10 8 16 16" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/><path d="M24 4 Q22 8 16 16" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/><path d="M16 16 Q12 22 10 26" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="27" r="2.5" stroke="#c97d6e" stroke-width="1.8" fill="none"/><path d="M16 16 Q20 22 22 26" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/><circle cx="23" cy="27" r="2.5" stroke="#c97d6e" stroke-width="1.8" fill="none"/><circle cx="16" cy="16" r="1.5" fill="#c97d6e"/></svg>
       <span style="font-size:13px;font-weight:600;color:#e4cda8;">Yeganeh Style</span>
-      <span style="font-size:10px;color:#8a6a40;padding:2px 7px;border:1px solid rgba(140,108,60,0.18);border-radius:4px;letter-spacing:0.08em;">B2B</span>
+      <span style="font-size:10px;color:#b09060;padding:2px 7px;border:1px solid rgba(140,108,60,0.18);border-radius:4px;letter-spacing:0.08em;">B2B</span>
     </div>
     <button onclick="closeB2BPortal()" style="background:none;border:1px solid rgba(186,152,98,0.2);border-radius:8px;padding:6px 14px;color:#ddc898;font-size:13px;cursor:pointer;font-family:inherit;">Lukk ✕</button>
   </div>
@@ -2867,7 +2867,7 @@ function loginForm(){
     +fi('b2lPass','Passord','password','••••••••••','current-password')
     +'<div id="b2lErr" class="b2p-err" style="display:none;"></div>'
     +'<button class="b2p-btn-main" onclick="b2bDoLogin()">Logg inn som bedrift →</button>'
-    +'<p style="text-align:center;font-size:11px;color:#8a6a40;margin-top:0.75rem;">Ikke registrert? <span class="b2p-link" onclick="b2bSetTab(\'register\')">Registrer bedrift</span></p>';
+    +'<p style="text-align:center;font-size:11px;color:#b09060;margin-top:0.75rem;">Ikke registrert? <span class="b2p-link" onclick="b2bSetTab(\'register\')">Registrer bedrift</span></p>';
 }
 
 function regForm(){
@@ -2887,7 +2887,7 @@ function regForm(){
     +'<div id="b2rAutoCheck" style="display:none;font-size:11px;padding:9px 12px;background:rgba(232,192,74,0.08);border:1px solid rgba(232,192,74,0.22);border-radius:8px;color:#b8944a;margin-bottom:0.85rem;line-height:1.6;"></div>'
     +'<div id="b2rErr" class="b2p-err" style="display:none;"></div>'
     +'<button class="b2p-btn-main" onclick="b2bDoRegister()">Registrer bedriftskonto →</button>'
-    +'<p style="text-align:center;font-size:10px;color:#8a6a40;margin-top:0.75rem;line-height:1.55;">Org.nr verifiseres mot Brønnøysundregistrene.<br>Konto gjennomgås og aktiveres innen 1–2 virkedager.</p>';
+    +'<p style="text-align:center;font-size:10px;color:#b09060;margin-top:0.75rem;line-height:1.55;">Org.nr verifiseres mot Brønnøysundregistrene.<br>Konto gjennomgås og aktiveres innen 1–2 virkedager.</p>';
 }
 
 // ── STATES ──
@@ -2951,7 +2951,7 @@ function renderPortal(){
       +'<div>'
       +'<div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:'+tier.col+';margin-bottom:3px;">Ditt nivå nå</div>'
       +'<div style="font-size:20px;font-weight:800;color:#e4cda8;">'+tier.icon+' '+tier.lbl+'</div>'
-      +(disc?'<div style="font-size:13px;color:'+tier.col+';font-weight:700;">'+disc+'% rabatt</div>':'<div style="font-size:11px;color:#8a6a40;">Ingen rabatt ennå</div>')
+      +(disc?'<div style="font-size:13px;color:'+tier.col+';font-weight:700;">'+disc+'% rabatt</div>':'<div style="font-size:11px;color:#b09060;">Ingen rabatt ennå</div>')
       +'</div>'
       +'<div style="text-align:right;">'
       +'<div style="font-size:10px;color:#c8a870;margin-bottom:2px;">Neste nivå</div>'
@@ -2992,6 +2992,35 @@ function renderPortal(){
       +'</div>';
   }
 
+  // ── ALL TIERS ROADMAP ──
+  var allTiersHtml='<div style="background:rgba(20,14,8,0.9);border:1px solid rgba(200,164,108,0.18);border-radius:18px;padding:1.25rem;margin-bottom:1rem;">'
+    +'<div style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#c8a060;margin-bottom:1rem;">🏆 Lojalitetsprogram — Alle nivåer</div>';
+
+  B2B_TIERS.forEach(function(t,idx){
+    if(t.pct===0) return; // skip Standard
+    var isCurrent=disc>=t.pct&&(t.next===null||disc<t.next);
+    var isUnlocked=disc>=t.pct;
+    var bg=isCurrent?'linear-gradient(135deg,'+t.col+'22,'+t.col+'0a)':'transparent';
+    var borderCol=isCurrent?t.col+'99':isUnlocked?t.col+'55':'rgba(200,164,108,0.22)';
+    var nameCol=isUnlocked?t.col:'#a08060';
+    var subCol=isUnlocked?'#e0c090':'#907050';
+    var pctCol=isUnlocked?t.col:'#8a6840';
+    allTiersHtml+='<div style="display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;background:'+bg+';border:1px solid '+borderCol+';margin-bottom:8px;'+(isCurrent?'box-shadow:0 2px 16px '+t.col+'22;':'')+'position:relative;">'
+      +(isCurrent?'<div style="position:absolute;top:-7px;left:12px;background:'+t.col+';border-radius:4px;padding:2px 7px;font-size:9px;font-weight:800;color:#0c0906;letter-spacing:0.06em;">DITT NIVÅ</div>':'')
+      +'<div style="font-size:1.6rem;line-height:1;width:36px;text-align:center;'+(isUnlocked?'':'filter:grayscale(0.6) opacity(0.55);')+'">'+(t.icon||'○')+'</div>'
+      +'<div style="flex:1;min-width:0;">'
+      +'<div style="font-size:14px;font-weight:700;color:'+nameCol+';">'+t.lbl+(isUnlocked&&!isCurrent?' ✓':'')+'</div>'
+      +'<div style="font-size:12px;color:'+subCol+';margin-top:1px;">Fra '+t.spend.toLocaleString('no-NO')+' kr kjøpt</div>'
+      +'</div>'
+      +'<div style="text-align:right;flex-shrink:0;">'
+      +'<div style="font-size:20px;font-weight:800;color:'+pctCol+';">'+t.pct+'%</div>'
+      +'<div style="font-size:11px;color:'+subCol+';">rabatt</div>'
+      +'</div>'
+      +'</div>';
+  });
+  allTiersHtml+='<div style="font-size:12px;color:#c8a870;margin-top:10px;text-align:center;line-height:1.6;">Kun NAK Hair-produkter kvalifiserer. Nivå beregnes automatisk basert på totalt produktkjøp.</div>'
+    +'</div>';
+
   var header='<div class="b2p-welcome-card">'
     +'<div>'
     +'<div class="b2p-eyebrow">Bedriftsportal · Eksklusiv tilgang</div>'
@@ -3004,7 +3033,8 @@ function renderPortal(){
     +'<button class="b2p-btn-sec" onclick="b2bDoLogout()">Logg ut</button>'
     +'</div>'
     +tierCard
-    +offerCard;
+    +offerCard
+    +allTiersHtml;
 
   // Tab nav
   var tabs=[['bestilling','📦 Bestill produkter'],['konto','👤 Min konto']];
@@ -3086,7 +3116,7 @@ function renderPortal(){
           +'</div>';
       });
     } else {
-      content+='<div style="font-size:11px;color:#8a6a40;padding:0.75rem 0;">Ingen ordrer ennå.</div>';
+      content+='<div style="font-size:11px;color:#b09060;padding:0.75rem 0;">Ingen ordrer ennå.</div>';
     }
     content+='</div></div>';
 
@@ -3096,15 +3126,15 @@ function renderPortal(){
     B2B_TIERS.filter(function(t){return t.pct>0;}).forEach(function(t){
       var isCurrentTier=disc>=t.pct&&(t.next===null||disc<t.next);
       var isUnlocked=disc>=t.pct;
-      allTiers+='<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:'+(isCurrentTier?t.col+'18':isUnlocked?'rgba(10,18,10,0.5)':'rgba(6,12,6,0.4)')+';border:1px solid '+(isCurrentTier?t.col+'55':isUnlocked?'rgba(140,108,60,0.18)':'rgba(40,60,40,0.15)')+';border-radius:12px;">'
+      allTiers+='<div style="display:flex;align-items:center;justify-content:space-between;padding:11px 14px;background:'+(isCurrentTier?t.col+'1a':isUnlocked?'rgba(30,22,10,0.6)':'rgba(20,15,8,0.5)')+';border:1px solid '+(isCurrentTier?t.col+'66':isUnlocked?'rgba(200,160,80,0.3)':'rgba(180,140,80,0.18)')+';border-radius:12px;">'
         +'<div style="display:flex;align-items:center;gap:10px;">'
-        +'<div style="font-size:18px;opacity:'+(isUnlocked?'1':'0.3')+'">' +t.icon+'</div>'
+        +'<div style="font-size:20px;opacity:'+(isUnlocked?'1':'0.55')+'">' +t.icon+'</div>'
         +'<div>'
-        +'<div style="font-size:12px;font-weight:700;color:'+(isCurrentTier?t.col:isUnlocked?'#c8a870':'#2a2010')+';">'+t.lbl+(isCurrentTier?' ← ditt nivå':'')+'</div>'
-        +'<div style="font-size:10px;color:#b09070;">Fra '+t.spend.toLocaleString('no-NO')+' kr kjøpt</div>'
+        +'<div style="font-size:13px;font-weight:700;color:'+(isCurrentTier?t.col:isUnlocked?'#e0c080':'#b09060')+';">'+t.lbl+(isCurrentTier?' ← ditt nivå':'')+'</div>'
+        +'<div style="font-size:11px;color:'+(isUnlocked?'#c8a870':'#907050')+';">Fra '+t.spend.toLocaleString('no-NO')+' kr kjøpt</div>'
         +'</div>'
         +'</div>'
-        +'<div style="font-size:16px;font-weight:900;color:'+(isCurrentTier?t.col:isUnlocked?'#7a5a3a':'#1e3a1c')+';opacity:'+(isUnlocked?'1':'0.4')+'">' +t.pct+'%</div>'
+        +'<div style="font-size:18px;font-weight:900;color:'+(isCurrentTier?t.col:isUnlocked?'#c8a040':'#9a7840')+';opacity:'+(isUnlocked?'1':'0.7')+'">' +t.pct+'%</div>'
         +'</div>';
     });
     allTiers+='</div>';
@@ -3123,11 +3153,11 @@ function renderPortal(){
       +'</div>'
       +'<div class="b2p-card" style="background:linear-gradient(135deg,rgba(232,192,74,0.05),rgba(10,18,10,0.9));border-color:rgba(232,192,74,0.2);">'
       +'<div class="b2p-card-title" style="color:#e8c04a;">🏆 Lojalitetsprogram — Jo mer du kjøper, jo mer sparer du</div>'
-      +'<div style="font-size:13px;color:#e0d0a8;margin-bottom:0.75rem;line-height:1.7;">Rabatten gjelder alle frisørtjenester, neglepleie og NAK Hair-produkter. Nivå beregnes basert på totalt kjøp.</div>'
+      +'<div style="font-size:13px;color:#f0d8a8;margin-bottom:0.75rem;line-height:1.7;">Rabatten gjelder kun NAK Hair-produkter. Frisør- og negletjenester inngår ikke i lojalitetsprogrammet. Nivå beregnes basert på totalt produktkjøp.</div>'
       +allTiers
       +'<p style="font-size:13px;color:#e0d0a8;line-height:1.7;margin:0.5rem 0 1rem;">Be om oppgradering av din avtale. Vi sender tilbake et skreddersydd pristilbud basert på din kjøpshistorikk.</p>'
       +(reqSent
-        ?'<div style="padding:10px;background:rgba(60,100,50,0.2);border-radius:10px;font-size:11px;color:#b8915a;text-align:center;">✓ Forespørsel sendt — vi svarer innen 1 virkedag</div>'
+        ?'<div style="padding:10px;background:rgba(200,160,60,0.15);border-radius:10px;font-size:12px;color:#e8c060;text-align:center;border:1px solid rgba(200,160,60,0.3);">✓ Forespørsel sendt — vi svarer innen 1 virkedag</div>'
         :(acc.offer_status==='offer_sent'
           ?'<div style="padding:10px;background:rgba(232,192,74,0.1);border-radius:10px;font-size:11px;color:#e8c04a;text-align:center;">📬 Du har et åpent tilbud — se toppen av siden</div>'
           :'<button onclick="b2bRequestOffer()" class="b2p-btn-main" style="width:100%;">📩 Be om bedre avtalepris</button>'))
@@ -3328,6 +3358,9 @@ var editProdId=null;
 var activeChatId=null;
 var calDate=new Date();
 var calView='måned';
+var nailCalDate=new Date();
+var nailCalView='måned';
+var nailsTab='kalender';
 var editTreatId=null;
 var editEmpId=null;
 DATA.b2bClients=[];
@@ -3457,7 +3490,7 @@ var TABS=[
   {id:'oversikt',label:'Oversikt'},
   {id:'ordre',label:'Bestillinger'},
   {id:'produkter',label:'Produkter'},
-  {id:'kalender',label:'Kalender'},
+  {id:'kalender',label:'💇 Frisør'},
   {id:'timer',label:'Timer'},
   {id:'behandlinger',label:'Behandlinger'},
   {id:'nails',label:'💅 MH Nails'},
@@ -3739,7 +3772,7 @@ function viewKalender(){
     +['måned','uke','dag'].map(function(v){
       var active=calView===v;
       var lbl=v==='måned'?'Mnd':v==='uke'?'Uke':'Dag';
-      return '<button onclick="admCalView(\''+v+'\')" style="padding:6px 10px;background:'+(active?'rgba(60,100,50,0.35)':'transparent')+';border:0;border-right:1px solid rgba(186,152,98,0.12);color:'+(active?'#e0caa8':'#c8a870')+';font-size:11px;font-weight:'+(active?'700':'500')+';cursor:pointer;font-family:inherit;">'+lbl+'</button>';
+      return '<button onclick="admCalView(\''+v+'\')" style="padding:6px 10px;background:'+(active?'rgba(200,160,60,0.25)':'transparent')+';border:0;border-right:1px solid rgba(186,152,98,0.12);color:'+(active?'#f0d060':'#c8a870')+';font-size:11px;font-weight:'+(active?'700':'500')+';cursor:pointer;font-family:inherit;">'+lbl+'</button>';
     }).join('')
     +'</div>';
   var html='<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem;">'
@@ -3767,7 +3800,7 @@ function viewKalenderMnd(){
   var html='<div style="background:#0d1a0f;border:1px solid #2a1e12;border-radius:14px;overflow:hidden;">'
     +'<div style="display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid #2a1e12;">';
   dayNames.forEach(function(n){
-    html+='<div style="padding:8px 4px;text-align:center;font-size:10px;font-weight:700;color:#8a6a40;text-transform:uppercase;letter-spacing:0.06em;">'+n+'</div>';
+    html+='<div style="padding:8px 4px;text-align:center;font-size:10px;font-weight:700;color:#b09060;text-transform:uppercase;letter-spacing:0.06em;">'+n+'</div>';
   });
   html+='</div><div style="display:grid;grid-template-columns:repeat(7,1fr);">';
   for(var i=0;i<firstDayMon;i++){
@@ -3782,18 +3815,18 @@ function viewKalenderMnd(){
     var isToday=dateStr===todayIso;
     var col=(firstDayMon+d-1)%7;
     var isLastCol=col===6;
-    var dayBks=DATA.bookings.filter(function(b){return parseBookingDate(b.date)===dateStr;});
+    var dayBks=DATA.bookings.filter(function(b){return parseBookingDate(b.date)===dateStr&&_isFrisorBooking(b);});
     var closed=!isOpen||isBlocked;
-    html+='<div onclick="admCalDay(\''+dateStr+'\')" style="min-height:80px;padding:6px;border-right:'+(isLastCol?'0':'1px solid #2a1e1233')+';border-bottom:1px solid #2a1e1233;background:'+(isToday?'rgba(80,140,60,0.1)':closed?'rgba(0,0,0,0.15)':'transparent')+';cursor:pointer;transition:background 0.15s;position:relative;" onmouseenter="this.style.background=\''+(closed?'rgba(0,0,0,0.15)':'rgba(30,50,28,0.5)')+'\'" onmouseleave="this.style.background=\''+(isToday?'rgba(80,140,60,0.1)':closed?'rgba(0,0,0,0.15)':'transparent')+'\'">'
-      +'<div style="font-size:13px;font-weight:'+(isToday?'800':'600')+';color:'+(isToday?'#b8915a':closed?'#2a3a2a':'#e0d4b8')+';margin-bottom:4px;'+(isToday?'background:rgba(80,140,60,0.2);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;':'')+'">'+d+'</div>';
+    html+='<div onclick="admCalDay(\''+dateStr+'\')" style="min-height:80px;padding:6px;border-right:'+(isLastCol?'0':'1px solid #2a1e1233')+';border-bottom:1px solid #2a1e1233;background:'+(isToday?'rgba(180,140,60,0.1)':closed?'rgba(0,0,0,0.15)':'transparent')+';cursor:pointer;transition:background 0.15s;position:relative;" onmouseenter="this.style.background=\''+(closed?'rgba(0,0,0,0.15)':'rgba(50,38,18,0.5)')+'\'" onmouseleave="this.style.background=\''+(isToday?'rgba(180,140,60,0.1)':closed?'rgba(0,0,0,0.15)':'transparent')+'\'">'
+      +'<div style="font-size:13px;font-weight:'+(isToday?'800':'600')+';color:'+(isToday?'#f0d060':closed?'#3a2a1a':'#e0d4b8')+';margin-bottom:4px;'+(isToday?'background:rgba(180,140,60,0.25);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;':'')+'">'+d+'</div>';
     if(closed){
       html+='<div style="font-size:9px;color:#c0392b;font-weight:600;">'+(isBlocked?'Stengt':'Fri')+'</div>';
     } else {
       dayBks.slice(0,3).forEach(function(b){
-        html+='<div style="background:rgba(138,180,138,0.18);border-left:2px solid #b09070;border-radius:3px;padding:2px 4px;margin-bottom:2px;font-size:9px;color:#b09070;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+b.time+' '+b.customer.split(' ')[0]+'</div>';
+        html+='<div style="background:rgba(200,160,60,0.15);border-left:2px solid #c8a060;border-radius:3px;padding:2px 4px;margin-bottom:2px;font-size:9px;color:#e4c870;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+b.time+' '+b.customer.split(' ')[0]+'</div>';
       });
       if(dayBks.length>3) html+='<div style="font-size:9px;color:#c8a870;">+'+( dayBks.length-3)+' til</div>';
-      if(!dayBks.length) html+='<div style="font-size:9px;color:#2a2010;">Ledig</div>';
+      if(!dayBks.length) html+='<div style="font-size:9px;color:#3a2a10;">Ledig</div>';
     }
     html+='</div>';
   }
@@ -3858,7 +3891,7 @@ function viewKalenderUke(){
           +'</div>';
       }
       if(!oh||!oh.open) bkHtml='<div style="font-size:9px;color:#c0392b;text-align:center;padding:6px 0;">Stengt</div>';
-      else if(!bkHtml) bkHtml='<div style="font-size:9px;color:#8a6a40;text-align:center;padding:6px 0;">Ledig</div>';
+      else if(!bkHtml) bkHtml='<div style="font-size:9px;color:#b09060;text-align:center;padding:6px 0;">Ledig</div>';
       cols+='<div style="background:'+(isToday?'rgba(138,180,138,0.07)':'#1a1410')+';border:1px solid '+(isToday?'rgba(138,180,138,0.35)':'#2a1e12')+';border-radius:10px;padding:8px;cursor:pointer;" onclick="admCalDay(\''+iso+'\')">'
         +'<div style="text-align:center;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid #2a1e1255;">'
         +'<div style="font-size:9px;color:#c8a870;text-transform:uppercase;letter-spacing:0.08em;">'+dayShort[day.getDay()]+'</div>'
@@ -3944,7 +3977,7 @@ function viewAnsatte(){
       +'</div>'
       +'</div>';
   }
-  if(!empHtml) empHtml='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:2rem;text-align:center;color:#8a6a40;">Ingen ansatte registrert.</div>';
+  if(!empHtml) empHtml='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:2rem;text-align:center;color:#b09060;">Ingen ansatte registrert.</div>';
 
   var form='<div id="admEmpForm" style="display:none;background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:1rem;margin-bottom:1rem;">'
     +'<div id="admEmpFormTitle" style="font-size:13px;font-weight:600;color:#e4cda8;margin-bottom:0.75rem;">Ny ansatt</div>'
@@ -4030,19 +4063,91 @@ function viewBehandlinger(){
     +'</div>'
     +_buildTreatForm(false)
     +'<div style="background:#0d1a0f;border:1px solid rgba(140,108,60,0.18);border-radius:14px;overflow:hidden;">'
-    +(rows||'<div style="padding:2rem;text-align:center;color:#8a6a40;">Ingen tjenester. Klikk "+ Ny tjeneste".</div>')
+    +(rows||'<div style="padding:2rem;text-align:center;color:#b09060;">Ingen tjenester. Klikk "+ Ny tjeneste".</div>')
     +'</div>';
 }
+function _isNailsBooking(b){
+  var nailNames=DATA.treatments.filter(function(t){return t.type==='nails';}).map(function(t){return t.name.replace(/ fra$/,'').toLowerCase();});
+  var svc=(b.service||'').toLowerCase();
+  return nailNames.some(function(n){return svc.indexOf(n)>=0;});
+}
+function _isFrisorBooking(b){return !_isNailsBooking(b);}
+
+function viewNailsKalender(){
+  var months=['Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember'];
+  var label=nailCalView==='måned'
+    ? months[nailCalDate.getMonth()]+' '+nailCalDate.getFullYear()
+    : nailCalView==='uke'
+      ? (function(){var d=new Date(nailCalDate);var dow=d.getDay();var mon=new Date(d);mon.setDate(d.getDate()-(dow===0?6:dow-1));return 'Uke '+getWeekNum(mon)+' · '+fmtDateD(mon)+' – '+fmtDateD(new Date(mon.getTime()+6*86400000));})()
+      : fmtDateD(nailCalDate);
+  var viewBtns='<div style="display:flex;border:1px solid rgba(201,125,110,0.25);border-radius:8px;overflow:hidden;">'
+    +['måned','uke','dag'].map(function(v){
+      var active=nailCalView===v;
+      var lbl=v==='måned'?'Mnd':v==='uke'?'Uke':'Dag';
+      return '<button onclick="admNailCalView(\''+v+'\')" style="padding:6px 10px;background:'+(active?'rgba(201,125,110,0.25)':'transparent')+';border:0;border-right:1px solid rgba(201,125,110,0.15);color:'+(active?'#f0b0a0':'#c97d6e')+';font-size:11px;font-weight:'+(active?'700':'500')+';cursor:pointer;font-family:inherit;">'+lbl+'</button>';
+    }).join('')+'</div>';
+  var html='<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem;">'
+    +'<div style="display:flex;align-items:center;gap:4px;">'
+    +'<button onclick="admNailCalPrev()" style="'+btnCss('#1a0d0d')+'padding:6px 10px;font-size:16px;">◀</button>'
+    +'<button onclick="admNailCalToday()" style="'+btnCss('#1a0d0d')+'font-size:11px;">I dag</button>'
+    +'<button onclick="admNailCalNext()" style="'+btnCss('#1a0d0d')+'padding:6px 10px;font-size:16px;">▶</button>'
+    +'</div>'
+    +'<b style="font-size:13px;color:#f0b0a0;">'+label+'</b>'
+    +'<div style="display:flex;gap:6px;align-items:center;">'+viewBtns+'</div>'
+    +'</div>';
+  // Month view
+  var y=nailCalDate.getFullYear(),m=nailCalDate.getMonth();
+  var firstDay=new Date(y,m,1).getDay();
+  var firstDayMon=(firstDay+6)%7;
+  var daysInMonth=new Date(y,m+1,0).getDate();
+  var todayIso=isoDate(new Date());
+  var dayNames=['Man','Tir','Ons','Tor','Fre','Lør','Søn'];
+  html+='<div style="background:#160c0c;border:1px solid rgba(201,125,110,0.25);border-radius:14px;overflow:hidden;">'
+    +'<div style="display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid rgba(201,125,110,0.15);">';
+  dayNames.forEach(function(n){html+='<div style="padding:8px 4px;text-align:center;font-size:10px;font-weight:700;color:#c97d6e;text-transform:uppercase;letter-spacing:0.06em;">'+n+'</div>';});
+  html+='</div><div style="display:grid;grid-template-columns:repeat(7,1fr);">';
+  for(var i=0;i<firstDayMon;i++) html+='<div style="min-height:80px;border-right:1px solid rgba(201,125,110,0.1);border-bottom:1px solid rgba(201,125,110,0.1);background:rgba(0,0,0,0.2);"></div>';
+  for(var d=1;d<=daysInMonth;d++){
+    var dateStr=y+'-'+(m+1<10?'0':'')+(m+1)+'-'+(d<10?'0':'')+d;
+    var col=(firstDayMon+d-1)%7;
+    var isLastCol=col===6;
+    var isToday=dateStr===todayIso;
+    var dayBks=DATA.bookings.filter(function(b){return parseBookingDate(b.date)===dateStr&&_isNailsBooking(b);});
+    html+='<div onclick="admNailCalDay(\''+dateStr+'\')" style="min-height:80px;padding:6px;border-right:'+(isLastCol?'0':'1px solid rgba(201,125,110,0.1)')+';border-bottom:1px solid rgba(201,125,110,0.1);background:'+(isToday?'rgba(201,125,110,0.1)':'transparent')+';cursor:pointer;transition:background 0.15s;" onmouseenter="this.style.background=\''+(isToday?'rgba(201,125,110,0.15)':'rgba(201,125,110,0.06)')+'\'" onmouseleave="this.style.background=\''+(isToday?'rgba(201,125,110,0.1)':'transparent')+'\'">'
+      +'<div style="font-size:13px;font-weight:'+(isToday?'800':'600')+';color:'+(isToday?'#f0b0a0':'#e0d4b8')+';margin-bottom:4px;'+(isToday?'background:rgba(201,125,110,0.25);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;':'')+'">'+d+'</div>';
+    dayBks.slice(0,3).forEach(function(b){
+      html+='<div style="background:rgba(201,125,110,0.15);border-left:2px solid #c97d6e;border-radius:3px;padding:2px 4px;margin-bottom:2px;font-size:9px;color:#f0b0a0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+b.time+' '+b.customer.split(' ')[0]+'</div>';
+    });
+    if(dayBks.length>3) html+='<div style="font-size:9px;color:#c97d6e;">+'+(dayBks.length-3)+' til</div>';
+    if(!dayBks.length) html+='<div style="font-size:9px;color:#3a1a1a;">Ledig</div>';
+    html+='</div>';
+  }
+  html+='</div></div>';
+  return html;
+}
+
 function viewNails(){
   admTreatTab='nails';
+  var subTabStyle=function(id){
+    var active=nailsTab===id;
+    return 'background:'+(active?'rgba(201,125,110,0.2)':'rgba(255,255,255,0.03)')+';border:1px solid '+(active?'rgba(201,125,110,0.5)':'rgba(201,125,110,0.15)')+';border-radius:10px;padding:7px 16px;font-size:12px;font-weight:'+(active?'700':'400')+';color:'+(active?'#f0b0a0':'#a06858')+';cursor:pointer;font-family:inherit;';
+  };
+  var subTabs='<div style="display:flex;gap:6px;margin-bottom:1rem;">'
+    +'<button onclick="admSetNailsTab(\'kalender\')" style="'+subTabStyle('kalender')+'">📅 Kalender</button>'
+    +'<button onclick="admSetNailsTab(\'tjenester\')" style="'+subTabStyle('tjenester')+'">💅 Tjenester</button>'
+    +'</div>';
+  if(nailsTab==='kalender'){
+    return subTabs+viewNailsKalender();
+  }
   var list=DATA.treatments.filter(function(t){return t.type==='nails';});
   var rows=_buildTreatRows(list,'#c97d6e');
-  return '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;">'
+  return subTabs
+    +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;">'
     +'<div style="font-size:11px;color:#c8a870;">'+list.length+' tjenester – MH Nails</div>'
     +btn('+ Ny tjeneste','admNewTreat()','#c97d6e')
     +'</div>'
     +_buildTreatForm(true)
-    +'<div style="background:#0d1a0f;border:1px solid rgba(201,125,110,0.2);border-radius:14px;overflow:hidden;">'
+    +'<div style="background:#160c0c;border:1px solid rgba(201,125,110,0.2);border-radius:14px;overflow:hidden;">'
     +(rows||'<div style="padding:2rem;text-align:center;color:rgba(201,125,110,0.5);">Ingen neglebehandlinger. Klikk "+ Ny tjeneste".</div>')
     +'</div>';
 }
@@ -4111,7 +4216,7 @@ function viewBedriftskunder(){
   }
   html+='<div style="font-size:11px;font-weight:700;color:#c8a870;letter-spacing:0.08em;text-transform:uppercase;margin:'+(pending.length?'1.25rem':'0')+' 0 0.6rem;">Godkjente bedriftskunder ('+clients.length+')</div>';
   if(!clients.length){
-    html+='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:2rem;text-align:center;color:#8a6a40;">Ingen godkjente bedriftskunder ennå.<br><span style="font-size:11px;">Godkjenn søknader ovenfor.</span></div>';
+    html+='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:2rem;text-align:center;color:#b09060;">Ingen godkjente bedriftskunder ennå.<br><span style="font-size:11px;">Godkjenn søknader ovenfor.</span></div>';
   } else {
     clients.forEach(function(c,j){
       html+='<div style="background:#1a1410;border:1px solid '+(c.active?'#2a1e12':'#c0392b33')+';border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
@@ -4144,7 +4249,7 @@ function viewForesporsler(){
   var reqs=window.B2B_REQUESTS||[];
   if(!reqs.length){
     return '<div style="font-size:14px;font-weight:600;color:#e4cda8;margin-bottom:0.75rem;">Bedriftsforespørsler</div>'
-      +'<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:2rem;text-align:center;color:#8a6a40;">Ingen forespørsler ennå.<br><span style="font-size:11px;">Når bedrifter sender forespørsel via Bedriftsportalen, dukker de opp her.</span></div>';
+      +'<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:2rem;text-align:center;color:#b09060;">Ingen forespørsler ennå.<br><span style="font-size:11px;">Når bedrifter sender forespørsel via Bedriftsportalen, dukker de opp her.</span></div>';
   }
   var html='',i;
   for(i=0;i<reqs.length;i++){
@@ -4209,7 +4314,7 @@ function viewChat(){
         +(c.unread>0?'<span style="background:#c97d6e;color:#fff;font-size:10px;font-weight:700;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 5px;">'+c.unread+'</span>':'')
         +'</div>';
     }
-    html=card('Kundechat',list||'<div style="padding:2rem;text-align:center;color:#8a6a40;">Ingen meldinger</div>');
+    html=card('Kundechat',list||'<div style="padding:2rem;text-align:center;color:#b09060;">Ingen meldinger</div>');
   } else {
     var chat=null;
     for(var j=0;j<DATA.chats.length;j++) if(DATA.chats[j].id===activeChatId) chat=DATA.chats[j];
@@ -4248,7 +4353,7 @@ function viewKunder(){
     +btn('+ Ny kunde','admNewKunde()','#b09070')
     +'</div>';
   html+='<div style="font-size:14px;font-weight:600;color:#e4cda8;margin-bottom:0.75rem;">Kunder ('+filtered.length+')</div>';
-  if(!filtered.length) return html+'<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:2rem;text-align:center;color:#8a6a40;">Ingen kunder funnet.</div>';
+  if(!filtered.length) return html+'<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:2rem;text-align:center;color:#b09060;">Ingen kunder funnet.</div>';
   for(var i=0;i<filtered.length;i++){
     var c=filtered[i];
     var ri=DATA.customers.indexOf(c);
@@ -4766,6 +4871,22 @@ window.admCalNext=function(){
 window.admCalToday=function(){calDate=new Date();go('kalender');};
 window.admCalView=function(v){calView=v;go('kalender');};
 window.admCalDay=function(iso){var p=iso.split('-');calDate=new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2]));calView='dag';go('kalender');};
+window.admNailCalPrev=function(){
+  if(nailCalView==='dag') nailCalDate.setDate(nailCalDate.getDate()-1);
+  else if(nailCalView==='uke') nailCalDate.setDate(nailCalDate.getDate()-7);
+  else { var m=nailCalDate.getMonth()-1; nailCalDate=new Date(nailCalDate.getFullYear()+(m<0?-1:0),(m+12)%12,1); }
+  go('nails');
+};
+window.admNailCalNext=function(){
+  if(nailCalView==='dag') nailCalDate.setDate(nailCalDate.getDate()+1);
+  else if(nailCalView==='uke') nailCalDate.setDate(nailCalDate.getDate()+7);
+  else { var m=nailCalDate.getMonth()+1; nailCalDate=new Date(nailCalDate.getFullYear()+(m>11?1:0),m%12,1); }
+  go('nails');
+};
+window.admNailCalToday=function(){nailCalDate=new Date();go('nails');};
+window.admNailCalView=function(v){nailCalView=v;go('nails');};
+window.admNailCalDay=function(iso){var p=iso.split('-');nailCalDate=new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2]));nailCalView='dag';go('nails');};
+window.admSetNailsTab=function(t){nailsTab=t;go('nails');};
 window.admEditBkInline=function(i){
   var b=DATA.bookings[i];if(!b) return;
   var newStat=prompt('Status for '+b.customer+':\n(ny / bekreftet / fullfort / avlyst)',b.status);
@@ -5586,7 +5707,7 @@ if(window.renderNailsGrid) window.renderNailsGrid();
     var slots=ST.svc?getSlots(ST.date,ST.svc.duration):[];
     var pills=slots.length
       ? slots.map(function(s){ return '<button class="timma-time-pill'+(ST.time===s?' sel':'')+'" onclick="timmaSelTime(\''+s+'\')">'+s+'</button>'; }).join('')
-      : '<div style="color:#8a6a40;font-size:13px;padding:1rem 0;">Ingen ledige tider denne dagen.</div>';
+      : '<div style="color:#b09060;font-size:13px;padding:1rem 0;">Ingen ledige tider denne dagen.</div>';
     var dateLabel=ST.date?new Date(ST.date).toLocaleDateString('nb-NO',{weekday:'long',day:'numeric',month:'long'}):'';
     return '<div class="timma-step-label">Steg 4 av 5</div>'
       +'<div class="timma-step-h">Velg tid</div>'

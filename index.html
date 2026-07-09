@@ -200,7 +200,7 @@ nav {
   flex-shrink: 0;
   -webkit-tap-highlight-color: transparent;
 }
-.nav-logo-img { height: 42px; width: auto; opacity: 0.95; display: block; }
+.nav-logo-img { height: 44px; width: auto; display: block; filter: sepia(0.45) brightness(1.05); }
 
 /* Center links */
 .nav-links {
@@ -322,14 +322,14 @@ nav {
   gap: 0;
 }
 
-/* Logo: transparent PNG (white logo, no background) */
+/* Logo: transparent PNG — champagne gold tint, fills the hero */
 .hero-logo {
-  width: auto; height: auto;
-  max-width: 640px; max-height: 300px;
+  width: 82vw; height: auto;
+  max-width: 860px; max-height: 42vh;
   object-fit: contain;
   margin-bottom: 3rem;
-  opacity: 1;
-  filter: drop-shadow(0 4px 32px rgba(200,160,80,0.12));
+  /* sepia(0.55) turns white → warm champagne/gold matching --accent */
+  filter: sepia(0.55) brightness(1.06) drop-shadow(0 6px 40px rgba(180,140,60,0.18));
 }
 
 /* Divider line above buttons */
@@ -1169,7 +1169,7 @@ nav { }
 
   /* ── HERO: logo + 3 knapper på mobil ── */
   .hero { padding: 3rem 1.5rem 3rem; min-height: 85svh; min-height: 85vh; }
-  .hero-logo { max-width: 300px; max-height: 150px; margin-bottom: 2.5rem; }
+  .hero-logo { width: 90vw; max-width: 420px; max-height: 55vw; margin-bottom: 2.5rem; }
   .hero-divider { margin-bottom: 1.8rem; }
   .hero-btns { flex-direction: column; width: 100%; gap: 0.75rem; }
   .hero-btn { width: 100%; padding: 20px 20px; font-size: 16px; justify-content: center; border-radius: 6px; min-width: unset; letter-spacing: 0.08em; }

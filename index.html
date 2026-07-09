@@ -310,37 +310,68 @@ nav {
 
 /* ── HERO ── */
 .hero {
-  padding: 3rem 1.4rem 2.5rem;
-  min-height: 70vh;
+  padding: 5rem 2rem 4rem;
+  min-height: 88vh;
   display: flex; flex-direction: column; justify-content: center; align-items: center;
-  text-align: center;
-  position: relative;
+  text-align: center; position: relative;
 }
-.hero-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+.hero-inner {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center;
+  gap: 0;
+}
+
+/* Logo: invert so black logo becomes white, then screen-blend to knock out background */
 .hero-logo {
   width: auto; height: auto;
-  max-width: 340px; max-height: 170px;
-  object-fit: contain; margin-bottom: 2.5rem;
-  filter: brightness(0) invert(1); opacity: 0.9;
+  max-width: 480px; max-height: 220px;
+  object-fit: contain;
+  margin-bottom: 3.5rem;
+  filter: invert(1);
+  mix-blend-mode: screen;
 }
+
+/* Divider line above buttons */
+.hero-divider {
+  width: 40px; height: 1px;
+  background: rgba(158,196,154,0.35);
+  margin-bottom: 2.2rem;
+}
+
+/* Button row */
 .hero-btns {
-  display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center;
+  display: flex; gap: 1rem; flex-wrap: nowrap; justify-content: center;
 }
 .hero-btn {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(158,196,154,0.28);
-  border-radius: 28px; padding: 13px 26px;
-  font-size: 14px; font-weight: 500; color: #c8e4c4;
-  cursor: pointer; font-family: inherit; letter-spacing: 0.03em;
-  transition: all 0.2s; white-space: nowrap;
+  display: flex; align-items: center; gap: 8px;
+  background: transparent;
+  border: 1px solid rgba(158,196,154,0.22);
+  border-radius: 3px;
+  padding: 14px 32px;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(200,228,196,0.75);
+  cursor: pointer;
+  transition: border-color 0.25s, color 0.25s, background 0.25s;
+  white-space: nowrap;
   -webkit-tap-highlight-color: transparent;
 }
-.hero-btn:hover { background: rgba(158,196,154,0.12); border-color: rgba(158,196,154,0.5); }
-.hero-btn:active { transform: scale(0.97); }
-.hero-btn-primary {
-  background: rgba(158,196,154,0.14); border-color: rgba(158,196,154,0.45); font-weight: 600;
+.hero-btn:hover {
+  border-color: rgba(158,196,154,0.6);
+  color: #e2eedb;
+  background: rgba(158,196,154,0.06);
 }
-.hero-btn-primary:hover { background: rgba(158,196,154,0.24); }
+.hero-btn:active { transform: scale(0.98); }
+.hero-btn-primary {
+  border-color: rgba(201,125,110,0.45);
+  color: rgba(220,180,170,0.85);
+}
+.hero-btn-primary:hover {
+  border-color: rgba(201,125,110,0.75);
+  color: #e8c4b8;
+  background: rgba(201,125,110,0.07);
+}
 
 /* ── PRODUCTS OVERLAY ── */
 .prod-overlay {
@@ -1128,10 +1159,11 @@ nav { }
 @media (max-width: 767px) {
 
   /* ── HERO: logo + 3 knapper på mobil ── */
-  .hero { padding: 2.5rem 1.2rem 2.5rem; min-height: 70vh; }
-  .hero-logo { max-width: 240px; max-height: 120px; margin-bottom: 2rem; }
-  .hero-btns { flex-direction: column; width: 100%; gap: 0.6rem; }
-  .hero-btn { width: 100%; padding: 15px 20px; font-size: 15px; justify-content: center; }
+  .hero { padding: 3rem 1.5rem 3rem; min-height: 82svh; min-height: 82vh; }
+  .hero-logo { max-width: 260px; max-height: 130px; margin-bottom: 2.5rem; }
+  .hero-divider { margin-bottom: 1.8rem; }
+  .hero-btns { flex-direction: column; width: 100%; gap: 0.55rem; }
+  .hero-btn { width: 100%; padding: 16px 20px; font-size: 11px; justify-content: center; border-radius: 3px; }
 
   /* ── BOOKING STRIP + B2B STRIP ── */
   .booking-strip,
@@ -1365,7 +1397,8 @@ nav { }
 <!-- HERO -->
 <section class="hero" id="hjem">
   <div class="hero-inner">
-    <img class="hero-logo" src="https://cauftwsojtumogyshmqq.supabase.co/storage/v1/object/public/product-images/logo.jpeg" alt="Yeganeh Style AS">
+    <img class="hero-logo" src="https://cauftwsojtumogyshmqq.supabase.co/storage/v1/object/public/product-images/logo.jpeg" alt="Yeganeh Style AS" draggable="false">
+    <div class="hero-divider"></div>
     <div class="hero-btns">
       <button class="hero-btn" onclick="openProdOverlay()">Produkter</button>
       <button class="hero-btn" onclick="openB2B()">Bedrift</button>

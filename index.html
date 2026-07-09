@@ -310,61 +310,97 @@ nav {
 
 /* ── HERO ── */
 .hero {
-  padding: 2rem 1.4rem 1.5rem;
-  min-height: auto;
+  padding: 3rem 1.4rem 2.5rem;
+  min-height: 70vh;
   display: flex; flex-direction: column; justify-content: center; align-items: center;
   text-align: center;
   position: relative;
 }
-
-
-.hero-inner { position: relative; z-index: 1; }
-
-.hero-label {
-  display: inline-flex; align-items: center; gap: 7px;
-  background: rgba(158,196,154,0.1);
-  border: 1px solid rgba(158,196,154,0.25);
-  border-radius: 20px; padding: 7px 14px;
-  font-size: 11px; font-weight: 500; color: var(--accent);
-  letter-spacing: 0.05em; margin-bottom: 1.4rem;
+.hero-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; }
+.hero-logo {
+  width: auto; height: auto;
+  max-width: 340px; max-height: 170px;
+  object-fit: contain; margin-bottom: 2.5rem;
+  filter: brightness(0) invert(1); opacity: 0.9;
 }
-.hero-label::before {
-  content: '';
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--accent); opacity: 0.8;
+.hero-btns {
+  display: flex; gap: 0.75rem; flex-wrap: wrap; justify-content: center;
 }
+.hero-btn {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(158,196,154,0.28);
+  border-radius: 28px; padding: 13px 26px;
+  font-size: 14px; font-weight: 500; color: #c8e4c4;
+  cursor: pointer; font-family: inherit; letter-spacing: 0.03em;
+  transition: all 0.2s; white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+}
+.hero-btn:hover { background: rgba(158,196,154,0.12); border-color: rgba(158,196,154,0.5); }
+.hero-btn:active { transform: scale(0.97); }
+.hero-btn-primary {
+  background: rgba(158,196,154,0.14); border-color: rgba(158,196,154,0.45); font-weight: 600;
+}
+.hero-btn-primary:hover { background: rgba(158,196,154,0.24); }
 
-.hero h1 {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(2.8rem, 11vw, 5.5rem);
-  font-weight: 400; line-height: 1.04;
-  color: #ecf5e8;
-  margin-bottom: 0.6rem;
-  text-shadow: 0 4px 40px rgba(0,0,0,0.6);
+/* ── PRODUCTS OVERLAY ── */
+.prod-overlay {
+  position: fixed; inset: 0; z-index: 500;
+  background: #080e09; display: flex; flex-direction: column;
+  transform: translateY(100%); transition: transform 0.32s cubic-bezier(.4,0,.2,1);
+  will-change: transform;
 }
-.hero h1 em {
-  font-style: italic; font-weight: 300;
-  color: var(--accent);
-  display: block;
+.prod-overlay.open { transform: translateY(0); }
+.prod-ov-header {
+  position: sticky; top: 0; background: rgba(6,12,6,0.97);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: calc(0.85rem + env(safe-area-inset-top,0)) 1.1rem 0.85rem;
+  z-index: 10; flex-shrink: 0;
 }
-
-.hero-sub {
-  font-size: 13px; color: var(--text-dim);
-  margin: 1rem auto 2rem; line-height: 1.65;
-  max-width: 260px;
+.prod-ov-back {
+  background: none; border: 1px solid var(--border); border-radius: 20px;
+  padding: 6px 14px; color: var(--text-dim); font-size: 13px;
+  cursor: pointer; font-family: inherit; transition: color 0.2s;
 }
-
-.hero-cta {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(158,196,154,0.12);
-  border: 1px solid rgba(158,196,154,0.3);
-  border-radius: 24px; padding: 12px 22px;
-  font-size: 13px; font-weight: 500; color: #c8e4c4;
-  cursor: pointer; transition: all 0.2s;
-  text-decoration: none;
+.prod-ov-back:hover { color: var(--text); }
+.prod-ov-title {
+  font-family: 'Cormorant Garamond', serif; font-size: 17px;
+  font-weight: 300; letter-spacing: 0.05em; color: var(--text);
 }
-.hero-cta:hover { background: rgba(158,196,154,0.22); border-color: rgba(158,196,154,0.5); }
-.hero-cta::after { content: '→'; font-size: 14px; }
+.prod-ov-close {
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+  border-radius: 50%; width: 34px; height: 34px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; color: var(--text-dim); font-size: 13px;
+}
+.prod-ov-body { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 1.2rem; }
+.prod-cat-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.75rem; }
+@media(min-width:500px){.prod-cat-grid{grid-template-columns:repeat(3,1fr);}}
+@media(min-width:900px){.prod-cat-grid{grid-template-columns:repeat(4,1fr);}}
+.prod-cat-card {
+  background: rgba(12,22,13,0.85); border: 1px solid var(--border);
+  border-radius: 16px; padding: 1.5rem 1rem; text-align: center;
+  cursor: pointer; transition: border-color 0.2s, background 0.2s;
+  display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+  -webkit-tap-highlight-color: transparent;
+}
+.prod-cat-card:hover { border-color: var(--accent); background: rgba(158,196,154,0.07); }
+.prod-cat-card:active { transform: scale(0.97); }
+.prod-cat-icon { font-size: 2.2rem; line-height: 1; }
+.prod-cat-name { font-size: 13px; font-weight: 500; color: var(--text); letter-spacing: 0.02em; }
+.prod-cat-count { font-size: 11px; color: var(--gray); }
+.prod-ov-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.75rem; }
+@media(min-width:600px){.prod-ov-grid{grid-template-columns:repeat(3,1fr);}}
+@media(min-width:900px){.prod-ov-grid{grid-template-columns:repeat(4,1fr);}}
+/* Popular row header */
+.popular-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; }
+.popular-title { font-family:'Cormorant Garamond',serif; font-size:1.4rem; font-weight:300; color:var(--text); }
+.popular-see-all {
+  background: none; border: 1px solid var(--border); border-radius: 20px;
+  padding: 7px 16px; font-size: 12px; color: var(--accent);
+  cursor: pointer; font-family: inherit; white-space: nowrap; transition: border-color 0.2s;
+}
+.popular-see-all:hover { border-color: var(--accent); }
 
 /* ── CAT STRIP ── */
 .cat-strip-wrap {
@@ -1091,16 +1127,11 @@ nav { }
    ═══════════════════════════════════════════════ */
 @media (max-width: 767px) {
 
-  /* ── HERO: kompakt på mobil ── */
-  .hero {
-    padding: 1rem 1rem 0.85rem;
-    text-align: center;
-    align-items: center;
-  }
-  .hero-label { font-size: 10px; padding: 5px 10px; margin-bottom: 0.6rem; }
-  .hero h1 { font-size: 1.85rem; line-height: 1.1; margin-bottom: 0.4rem; }
-  .hero-sub { font-size: 12px; margin: 0 0 0.75rem; max-width: 100%; text-align: center; }
-  .hero-cta { font-size: 12px; padding: 9px 16px; }
+  /* ── HERO: logo + 3 knapper på mobil ── */
+  .hero { padding: 2.5rem 1.2rem 2.5rem; min-height: 70vh; }
+  .hero-logo { max-width: 240px; max-height: 120px; margin-bottom: 2rem; }
+  .hero-btns { flex-direction: column; width: 100%; gap: 0.6rem; }
+  .hero-btn { width: 100%; padding: 15px 20px; font-size: 15px; justify-content: center; }
 
   /* ── BOOKING STRIP + B2B STRIP ── */
   .booking-strip,
@@ -1334,44 +1365,14 @@ nav { }
 <!-- HERO -->
 <section class="hero" id="hjem">
   <div class="hero-inner">
-    <div class="hero-label" id="heroLabel">NAK Hair — Eksklusivt i salongen</div>
-    <h1 id="heroH1">Profesjonell pleie.<br><em>Synlige resultater.</em></h1>
-    <p class="hero-sub" id="heroSub">Eksklusive produkter og tjenester for hår som reflekterer deg.</p>
-    <a class="hero-cta" href="#" onclick="goTo('produkter');return false;">Se alle produkter</a>
-  </div>
-</section>
-
-<!-- B2B PREMIUM SECTION -->
-<section class="b2b-hero-wrap" id="bedrift">
-  <div class="b2b-hero-inner">
-    <div class="strip-icon">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M8 7V5a4 4 0 0 1 8 0v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
-    </div>
-    <div class="strip-text">
-      <h3>Driver du salong eller bedrift?</h3>
-      <p>Registrer deg med org.nr og få eksklusive B2B-priser, kampanjer og profesjonell oppfølging.</p>
-    </div>
-    <div class="strip-actions">
-      <button class="book-pill" onclick="if(window.b2bSetTab)b2bSetTab('register');openB2B();">Ny bedriftskonto →</button>
-      <span class="see-link" onclick="if(window.b2bSetTab)b2bSetTab('login');openB2B();">Logg inn / Registrer →</span>
+    <img class="hero-logo" src="https://cauftwsojtumogyshmqq.supabase.co/storage/v1/object/public/product-images/logo.jpeg" alt="Yeganeh Style AS">
+    <div class="hero-btns">
+      <button class="hero-btn" onclick="openProdOverlay()">Produkter</button>
+      <button class="hero-btn" onclick="openB2B()">Bedrift</button>
+      <button class="hero-btn hero-btn-primary" onclick="openBooking()">Behandling</button>
     </div>
   </div>
 </section>
-
-<!-- BOOKING STRIP -->
-<div class="booking-strip">
-  <div class="strip-icon">
-    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-  </div>
-  <div class="strip-text">
-    <h3>Klar for ny glød?</h3>
-    <p>Book time enkelt og raskt.</p>
-  </div>
-  <div class="strip-actions">
-    <button class="book-pill" onclick="openBooking()">Book time</button>
-    <span class="see-link" onclick="goTo('tjenester')">Se behandlinger</span>
-  </div>
-</div>
 
 <!-- TRUST BAR -->
 <div class="trust-bar">
@@ -1424,25 +1425,11 @@ nav { }
 
 
 <div class="section-wrap" id="produkter">
-  <div class="section-glass">
-    <p class="section-eyebrow">Utvalgte produkter</p>
-    <h2 class="section-title">NAK Hair</h2>
-    <p class="section-sub">De samme produktene vi bruker i salongen — nå tilgjengelig for deg hjemme.</p>
+  <div class="popular-hdr">
+    <span class="popular-title">Populære produkter</span>
+    <button class="popular-see-all" onclick="openProdOverlay()">Se alle →</button>
   </div>
-
-  <div class="prod-tabs">
-    <button class="prod-tab active" onclick="filterTab('alle',this)">Bestselgende</button>
-    <button class="prod-tab" onclick="filterTab('shampoo',this)">Nyheter</button>
-    <button class="prod-tab" onclick="filterTab('behandling',this)">Etter behandling</button>
-    <button class="prod-tab" onclick="filterTab('styling',this)">Tilbud</button>
-  </div>
-
   <div class="product-grid" id="productGrid"></div>
-
-  <div class="see-all-row">
-    <button class="see-all-btn" id="seeAllBtn" onclick="toggleAll()">Se hele sortimentet</button>
-    <span class="delivery-note">Rask levering · 2–4 virkedager</span>
-  </div>
 </div>
 
 <!-- BEHANDLINGER PÅ FORSIDEN -->
@@ -1778,6 +1765,7 @@ nav { }
         <div class="form-group"><label>Etternavn</label><input type="text" id="bookEtternavn" placeholder="Nordmann"></div>
       </div>
       <div class="form-group"><label>Telefon</label><input type="tel" id="bookTlf" placeholder="+47 000 00 000"></div>
+      <div class="form-group"><label>E-post</label><input type="email" id="bookEmail" placeholder="din@epost.no"></div>
       <button class="confirm-btn" onclick="confirmBooking()">Bekreft bestilling</button>
     </div>
     <div class="success-msg" id="bookingSuccess">
@@ -2101,26 +2089,30 @@ function getVisible(){
   var items=activeFilter==='alle'?PRODUCTS:PRODUCTS.filter(function(p){return p.cat===activeFilter;});
   return showAll?items:items.slice(0,8);
 }
+function _prodCardHtml(p){
+  var bHtml='';
+  if(p.badge==='best') bHtml='<span class="prod-badge badge-best">Bestselger</span>';
+  else if(p.badge==='new') bHtml='<span class="prod-badge badge-new">Ny</span>';
+  else if(p.badge==='sale') bHtml='<span class="prod-badge badge-sale">Tilbud</span>';
+  var oldHtml=p.oldPrice?'<span class="old">'+p.oldPrice+' kr</span>':'';
+  var imgInner=p.img?'<img src="'+p.img+'" alt="'+p.name+'" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">':(p.emoji?'<span class="prod-emoji">'+p.emoji+'</span>':'<span style="font-family:Cormorant Garamond,serif;font-size:2rem;color:var(--accent);">'+p.name.charAt(0)+'</span>');
+  return '<div class="product-card" onclick="openProduct(\''+p.id+'\')">'
+    +'<div class="prod-img">'+bHtml+imgInner+'</div>'
+    +'<div class="prod-info">'
+    +'<div class="prod-brand">'+p.brand+'</div>'
+    +'<div class="prod-name">'+p.name+'</div>'
+    +'<div class="prod-foot">'
+    +'<div class="prod-price">'+oldHtml+p.price+' kr</div>'
+    +'<button class="add-btn" onclick="addToCart(\''+p.id+'\',event)">+ Legg til</button>'
+    +'</div></div></div>';
+}
 function renderProducts(){
-  var grid=document.getElementById('productGrid'),items=getVisible(),html='';
-  for(var i=0;i<items.length;i++){
-    var p=items[i];
-    var bHtml='';
-    if(p.badge==='best') bHtml='<span class="prod-badge badge-best">Bestselger</span>';
-    else if(p.badge==='new') bHtml='<span class="prod-badge badge-new">Ny</span>';
-    else if(p.badge==='sale') bHtml='<span class="prod-badge badge-sale">Tilbud</span>';
-    var oldHtml=p.oldPrice?'<span class="old">'+p.oldPrice+' kr</span>':'';
-    var imgInner=p.img?'<img src="'+p.img+'" alt="'+p.name+'" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">':(p.emoji?'<span class="prod-emoji">'+p.emoji+'</span>':'<span style="font-family:Cormorant Garamond,serif;font-size:2rem;color:var(--accent);">'+p.name.charAt(0)+'</span>');
-    html+='<div class="product-card" onclick="openProduct(\''+p.id+'\')">'
-      +'<div class="prod-img">'+bHtml+imgInner+'</div>'
-      +'<div class="prod-info">'
-      +'<div class="prod-brand">'+p.brand+'</div>'
-      +'<div class="prod-name">'+p.name+'</div>'
-      +'<div class="prod-foot">'
-      +'<div class="prod-price">'+oldHtml+p.price+' kr</div>'
-      +'<button class="add-btn" onclick="addToCart(\''+p.id+'\',event)">+ Legg til</button>'
-      +'</div></div></div>';
-  }
+  // Homepage: show only popular (badge=best) products, max 4
+  var grid=document.getElementById('productGrid'); if(!grid) return;
+  var all=window.PRODUCTS||[];
+  var popular=all.filter(function(p){return p.badge==='best';}).slice(0,4);
+  if(!popular.length) popular=all.slice(0,4); // fallback: first 4
+  var html=''; for(var i=0;i<popular.length;i++) html+=_prodCardHtml(popular[i]);
   grid.innerHTML=html;
 }
 function filterCat(cat){activeFilter=cat;showAll=false;goTo('produkter');renderProducts();}
@@ -2508,9 +2500,9 @@ function confirmBooking(){
   var fornavn=(document.getElementById('bookFornavn').value||'').trim();
   var etternavn=(document.getElementById('bookEtternavn').value||'').trim();
   var tlf=(document.getElementById('bookTlf').value||'').trim();
+  var epost=(document.getElementById('bookEmail').value||'').trim();
   if(!fornavn){showToast('Fyll inn fornavn');return;}
   if(!tlf){showToast('Fyll inn telefon');return;}
-  // Push to admin bookings
   var svcText=sel.options[sel.selectedIndex].text;
   var svcName=svcText.split(' – ')[0];
   var svcPrice=svcText.indexOf(' – ')>-1?svcText.split(' – ')[1]:'';
@@ -2518,7 +2510,7 @@ function confirmBooking(){
   var datoFmt=dato?dato.split('-').reverse().join('.'):'';
   var bookingData={
     customer_name:(fornavn+' '+etternavn).trim(),
-    phone:tlf,service:svcName,service_price:svcPrice,
+    phone:tlf,email:epost||null,service:svcName,service_price:svcPrice,
     booking_date:dato,
     booking_time:document.getElementById('bookTime').value,
     status:'ny'
@@ -2526,7 +2518,7 @@ function confirmBooking(){
   if(sb) sb.from('bookings').insert(bookingData).then(function(){});
   if(window.ADMIN_ADD_BOOKING){
     window.ADMIN_ADD_BOOKING({
-      customer:bookingData.customer_name,phone:tlf,
+      customer:bookingData.customer_name,phone:tlf,email:epost,
       service:svcName,price:svcPrice,date:datoFmt,
       time:document.getElementById('bookTime').value
     });
@@ -5087,6 +5079,101 @@ if(window.renderNailsGrid) window.renderNailsGrid();
 
 
 </script>
+<!-- PRODUCTS OVERLAY -->
+<div class="prod-overlay" id="prodOverlay" aria-modal="true" role="dialog">
+  <div class="prod-ov-header">
+    <button class="prod-ov-back" id="prodOvBack" onclick="prodOvBack()" style="visibility:hidden">← Tilbake</button>
+    <span class="prod-ov-title" id="prodOvTitle">Produkter</span>
+    <button class="prod-ov-close" onclick="closeProdOverlay()" aria-label="Lukk">✕</button>
+  </div>
+  <div class="prod-ov-body" id="prodOvBody"></div>
+</div>
+
+<script>
+(function(){
+  var CAT_INFO={
+    alle:   {icon:'✨',name:'Alle produkter'},
+    shampoo:{icon:'🧴',name:'Shampoo'},
+    conditioner:{icon:'💧',name:'Conditioner'},
+    behandling:{icon:'✂️',name:'Behandling'},
+    styling:{icon:'💨',name:'Styling'}
+  };
+
+  window.openProdOverlay=function(startCat){
+    var ov=document.getElementById('prodOverlay');
+    if(!ov) return;
+    document.body.style.overflow='hidden';
+    ov.classList.add('open');
+    if(startCat) _showCat(startCat);
+    else _showCats();
+  };
+
+  window.closeProdOverlay=function(){
+    var ov=document.getElementById('prodOverlay');
+    if(!ov) return;
+    ov.classList.remove('open');
+    document.body.style.overflow='';
+  };
+
+  window.prodOvBack=function(){
+    _showCats();
+  };
+
+  function _setBack(visible){
+    var b=document.getElementById('prodOvBack');
+    if(b) b.style.visibility=visible?'visible':'hidden';
+  }
+  function _setTitle(t){
+    var el=document.getElementById('prodOvTitle');
+    if(el) el.textContent=t;
+  }
+
+  function _showCats(){
+    _setTitle('Produkter');
+    _setBack(false);
+    var prods=window.PRODUCTS||[];
+    var cats=['alle','shampoo','conditioner','behandling','styling'];
+    var html='<div class="prod-cat-grid">';
+    cats.forEach(function(cat){
+      var info=CAT_INFO[cat]||{icon:'•',name:cat};
+      var count=cat==='alle'?prods.length:prods.filter(function(p){return p.cat===cat;}).length;
+      html+='<div class="prod-cat-card" onclick="window._prodOvShowCat(\''+cat+'\')">'
+        +'<div class="prod-cat-icon">'+info.icon+'</div>'
+        +'<div class="prod-cat-name">'+info.name+'</div>'
+        +'<div class="prod-cat-count">'+count+' produkter</div>'
+        +'</div>';
+    });
+    html+='</div>';
+    var body=document.getElementById('prodOvBody');
+    if(body){body.innerHTML=html;body.scrollTop=0;}
+  }
+
+  function _showCat(cat){
+    var info=CAT_INFO[cat]||{icon:'',name:cat};
+    _setTitle(info.name);
+    _setBack(true);
+    var prods=window.PRODUCTS||[];
+    var items=cat==='alle'?prods:prods.filter(function(p){return p.cat===cat;});
+    var html='<div class="prod-ov-grid">';
+    for(var i=0;i<items.length;i++) html+=_prodCardHtml(items[i]);
+    html+='</div>';
+    if(!items.length) html='<p style="color:var(--gray);text-align:center;padding:2rem;">Ingen produkter her ennå.</p>';
+    var body=document.getElementById('prodOvBody');
+    if(body){body.innerHTML=html;body.scrollTop=0;}
+  }
+
+  window._prodOvShowCat=_showCat;
+
+  // Close on back gesture / escape
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){var ov=document.getElementById('prodOverlay');if(ov&&ov.classList.contains('open'))window.closeProdOverlay();}
+  });
+
+  // Make filterCat open the overlay for that category
+  window.filterCat=function(cat){window.openProdOverlay(cat);};
+})();
+</script>
+
 <!-- Supabase loaded async — does NOT block rendering -->
 <script async src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js" onload="if(window._onSbLoad)window._onSbLoad()"></script>
 

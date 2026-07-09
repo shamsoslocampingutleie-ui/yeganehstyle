@@ -342,6 +342,22 @@ nav {
   margin-bottom: 2.4rem;
 }
 
+/* ── HERO SLIDER ── */
+.hslide {
+  position:absolute;inset:0;
+  display:flex;align-items:center;gap:1.5rem;padding:1.5rem 2rem;
+  opacity:0;transition:opacity 0.7s ease;pointer-events:none;
+}
+.hslide-active { opacity:1;pointer-events:auto; }
+.hslide-glow { position:absolute;inset:0;pointer-events:none; }
+.hslide-icon { font-size:3.5rem;line-height:1;flex-shrink:0;filter:drop-shadow(0 0 20px rgba(255,255,255,0.2)); }
+.hslide-text { flex:1;text-align:left; }
+.hslide-title { font-family:'Cormorant Garamond',serif;font-size:clamp(1.3rem,4vw,1.9rem);font-weight:300;color:#fff8ef;line-height:1.2;margin-bottom:0.4rem; }
+.hslide-sub { font-size:clamp(11px,2.5vw,13px);color:rgba(255,240,210,0.65);letter-spacing:0.04em; }
+.hslide-deco { position:absolute;pointer-events:none;line-height:1; }
+.hdot { width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.25);cursor:pointer;transition:all 0.3s;display:block; }
+.hdot-active { background:rgba(255,240,210,0.85);width:22px;border-radius:4px; }
+
 /* Button row */
 .hero-btns {
   display: flex; gap: 1.2rem; flex-wrap: nowrap; justify-content: center;
@@ -1407,7 +1423,45 @@ nav { }
 <!-- HERO -->
 <section class="hero" id="hjem">
   <div class="hero-inner">
-    <img class="hero-logo" src="https://cauftwsojtumogyshmqq.supabase.co/storage/v1/object/public/product-images/logo-white.png" alt="Yeganeh Style AS" draggable="false" fetchpriority="high">
+    <!-- Auto-cycling hero slider -->
+    <div id="heroSlider" style="width:min(90vw,520px);margin-bottom:2.5rem;position:relative;border-radius:24px;overflow:hidden;aspect-ratio:16/9;">
+      <!-- Slide 1: Neglepleie -->
+      <div class="hslide hslide-active" style="background:linear-gradient(135deg,#1a0a10 0%,#2e0f1e 40%,#1a0614 100%);">
+        <div class="hslide-glow" style="background:radial-gradient(ellipse 60% 50% at 70% 40%,rgba(220,100,140,0.35),transparent);"></div>
+        <div class="hslide-icon">💅</div>
+        <div class="hslide-text">
+          <div class="hslide-title">Negledesign & Pleie</div>
+          <div class="hslide-sub">MH Nails · Gelé · Design · Manikyr</div>
+        </div>
+        <div class="hslide-deco" style="color:rgba(220,100,140,0.12);font-size:8rem;right:-1rem;bottom:-1rem;">💅</div>
+      </div>
+      <!-- Slide 2: Hårklipper -->
+      <div class="hslide" style="background:linear-gradient(135deg,#120c00 0%,#2a1800 40%,#1a1000 100%);">
+        <div class="hslide-glow" style="background:radial-gradient(ellipse 60% 50% at 30% 50%,rgba(212,168,60,0.35),transparent);"></div>
+        <div class="hslide-icon">✂️</div>
+        <div class="hslide-text">
+          <div class="hslide-title">Ekspert Frisørtjenester</div>
+          <div class="hslide-sub">Hadi · Klipp · Farge · Balayage · Keratin</div>
+        </div>
+        <div class="hslide-deco" style="color:rgba(212,168,60,0.1);font-size:8rem;right:-1rem;bottom:-1rem;">✂️</div>
+      </div>
+      <!-- Slide 3: Nettbutikk -->
+      <div class="hslide" style="background:linear-gradient(135deg,#0a0e16 0%,#101828 40%,#080c12 100%);">
+        <div class="hslide-glow" style="background:radial-gradient(ellipse 60% 50% at 50% 40%,rgba(100,160,230,0.25),transparent);"></div>
+        <div class="hslide-icon">🛒</div>
+        <div class="hslide-text">
+          <div class="hslide-title">NAK Hair Nettbutikk</div>
+          <div class="hslide-sub">Eksklusiv forhandler · Rask levering · Gratis frakt 499+</div>
+        </div>
+        <div class="hslide-deco" style="color:rgba(100,160,230,0.1);font-size:8rem;right:-1rem;bottom:-1rem;">🛒</div>
+      </div>
+      <!-- Dots -->
+      <div id="heroDots" style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:5;">
+        <span class="hdot hdot-active" onclick="heroGoTo(0)"></span>
+        <span class="hdot" onclick="heroGoTo(1)"></span>
+        <span class="hdot" onclick="heroGoTo(2)"></span>
+      </div>
+    </div>
     <div class="hero-divider"></div>
     <div class="hero-btns">
       <button class="hero-btn" onclick="openProdOverlay()">Produkter</button>
@@ -1686,12 +1740,8 @@ nav { }
   <div class="footer-grid" style="grid-template-columns:repeat(2,1fr);">
     <div class="footer-col">
       <h4>Tjenester</h4>
-      <a onclick="openService('herreklipp')">Herreklipp</a>
-      <a onclick="openService('dameklipp')">Dameklipp</a>
-      <a onclick="openService('farge')">Farge &amp; Striper</a>
-      <a onclick="openService('keratin')">Keratin</a>
-      <a onclick="openTimma()">MH Nails – Neglepleie</a>
-      <a onclick="openBooking()">Book time</a>
+      <a onclick="openBooking()">✂ Frisør – Hadi</a>
+      <a onclick="openTimma()">💅 MH Nails – Neglepleie</a>
     </div>
     <div class="footer-col">
       <h4>Nettsted</h4>
@@ -3521,7 +3571,6 @@ var TABS=[
   {id:'ordre',label:'Bestillinger'},
   {id:'produkter',label:'Produkter'},
   {id:'kalender',label:'✂ Hadi'},
-  {id:'timer',label:'Timer'},
   {id:'nails',label:'💅 MH Nails'},
   {id:'ansatte',label:'Ansatte'},
   {id:'apningstider',label:'Åpningstider'},
@@ -3561,21 +3610,32 @@ function input(id,label,ph,type){
   return '<div style="margin-bottom:0.6rem;"><label style="display:block;font-size:10px;color:#c8a870;text-transform:uppercase;margin-bottom:3px;">'+label+'</label><input id="'+id+'" type="'+(type||'text')+'" placeholder="'+(ph||'')+'" style="width:100%;padding:9px 11px;background:#181208;border:1px solid #2a1e12;border-radius:8px;font-size:16px;color:#e4cda8;box-sizing:border-box;"></div>';
 }
 
+function _newBkCount(filterFn){
+  var today=isoDate(new Date());
+  return DATA.bookings.filter(function(b){
+    return filterFn(b)&&(b.status==='ny'||b.status==='bekreftet')&&parseBookingDate(b.date)>=today;
+  }).length;
+}
+
 function renderTabs(){
   var rows=[
     ['oversikt','ordre','produkter'],
-    ['kalender','timer','nails'],
+    ['kalender','nails'],
     ['ansatte','apningstider','anmeldelser','rabatt','bedriftskunder','innhold']
   ];
+  var hadiNew=_newBkCount(_isFrisorBooking);
+  var nailsNew=_newBkCount(_isNailsBooking);
   var html='';
   rows.forEach(function(ids,ri){
-    html+='<div style="display:flex;flex-wrap:wrap;gap:5px;'+(ri>0?'margin-top:5px;':'')+'">'; 
+    html+='<div style="display:flex;flex-wrap:wrap;gap:5px;'+(ri>0?'margin-top:5px;':'')+'">';
     ids.forEach(function(id){
       var t=null;for(var j=0;j<TABS.length;j++){if(TABS[j].id===id){t=TABS[j];break;}}
       if(!t) return;
       var active=t.id===currentTab;
       var isNails=t.id==='nails';
-      html+='<button onclick="admGo(\''+t.id+'\');" style="background:'+(active?(isNails?'rgba(201,125,110,0.2)':'rgba(200,160,60,0.18)'):'rgba(255,255,255,0.03)')+';border:1px solid '+(active?(isNails?'rgba(201,125,110,0.55)':'rgba(200,160,60,0.5)'):'rgba(180,140,60,0.15)')+';border-radius:10px;padding:6px 14px;font-size:12px;font-weight:'+(active?'600':'400')+';color:'+(active?(isNails?'#f0b0a0':'#f0d060'):'#a08850')+';cursor:pointer;white-space:nowrap;transition:all 0.15s;font-family:inherit;">'+t.label+'</button>';
+      var newCount=isNails?nailsNew:(t.id==='kalender'?hadiNew:0);
+      var badge=newCount>0?'<span style="display:inline-flex;align-items:center;justify-content:center;min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:#c0392b;color:#fff;font-size:9px;font-weight:800;margin-left:5px;vertical-align:middle;">'+newCount+'</span>':'';
+      html+='<button onclick="admGo(\''+t.id+'\');" style="background:'+(active?(isNails?'rgba(201,125,110,0.2)':'rgba(200,160,60,0.18)'):'rgba(255,255,255,0.03)')+';border:1px solid '+(active?(isNails?'rgba(201,125,110,0.55)':'rgba(200,160,60,0.5)'):'rgba(180,140,60,0.15)')+';border-radius:10px;padding:6px 14px;font-size:12px;font-weight:'+(active?'600':'400')+';color:'+(active?(isNails?'#f0b0a0':'#f0d060'):'#a08850')+';cursor:pointer;white-space:nowrap;transition:all 0.15s;font-family:inherit;">'+t.label+badge+'</button>';
     });
     html+='</div>';
   });
@@ -3790,6 +3850,36 @@ function viewProdukter(){
 }
 function catLabel(c){var m={shampoo:'Shampoo',conditioner:'Conditioner',behandling:'Behandling',styling:'Styling'};return m[c]||c;}
 
+function _buildVarselBanner(filterFn,accentCol,name){
+  var today=isoDate(new Date());
+  var upcoming=DATA.bookings.filter(function(b){return filterFn(b)&&parseBookingDate(b.date)>=today;})
+    .sort(function(a,b){return (parseBookingDate(a.date)+a.time).localeCompare(parseBookingDate(b.date)+b.time)})
+    .slice(0,5);
+  var nyCount=upcoming.filter(function(b){return b.status==='ny';}).length;
+  if(!upcoming.length) return '';
+  var rows=upcoming.map(function(b){
+    var isNy=b.status==='ny';
+    return '<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid rgba(200,160,80,0.1);">'
+      +(isNy?'<span style="width:6px;height:6px;border-radius:50%;background:#c0392b;flex-shrink:0;"></span>':'<span style="width:6px;height:6px;border-radius:50%;background:'+accentCol+';opacity:0.4;flex-shrink:0;"></span>')
+      +'<div style="flex:1;min-width:0;">'
+      +'<span style="font-size:13px;font-weight:600;color:#f0e0c0;">'+b.customer+'</span>'
+      +'<span style="font-size:11px;color:#c8a870;margin-left:8px;">'+b.service+'</span>'
+      +'</div>'
+      +'<div style="text-align:right;flex-shrink:0;">'
+      +'<div style="font-size:12px;color:'+accentCol+';font-weight:600;">'+b.date.replace(/\d{4}-/,'').replace('-','.')+' · '+b.time+'</div>'
+      +(isNy?'<div style="font-size:9px;color:#c0392b;font-weight:700;">NY</div>':'')
+      +'</div>'
+      +'</div>';
+  }).join('');
+  return '<div style="background:rgba(20,14,8,0.9);border:1px solid '+accentCol+'33;border-radius:14px;margin-bottom:1rem;overflow:hidden;">'
+    +'<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border-bottom:1px solid '+accentCol+'22;">'
+    +'<div style="font-size:12px;font-weight:700;color:'+accentCol+';">📋 Kommende timer — '+name+'</div>'
+    +(nyCount>0?'<div style="font-size:10px;font-weight:800;color:#c0392b;background:rgba(192,57,43,0.15);border:1px solid rgba(192,57,43,0.3);border-radius:6px;padding:2px 8px;">'+nyCount+' NY'+(nyCount>1?'E':'')+'</div>':'')
+    +'</div>'
+    +rows
+    +'</div>';
+}
+
 function viewKalender(){
   var subTabStyle=function(id){
     var active=hadiTab===id;
@@ -3828,7 +3918,8 @@ function viewKalender(){
       return '<button onclick="admCalView(\''+v+'\')" style="padding:6px 10px;background:'+(active?'rgba(200,160,60,0.25)':'transparent')+';border:0;border-right:1px solid rgba(186,152,98,0.12);color:'+(active?'#f0d060':'#c8a870')+';font-size:11px;font-weight:'+(active?'700':'500')+';cursor:pointer;font-family:inherit;">'+lbl+'</button>';
     }).join('')
     +'</div>';
-  var html=subTabs+'<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem;">'
+  var varsel=_buildVarselBanner(_isFrisorBooking,'#d4a840','Hadi');
+  var html=subTabs+varsel+'<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem;">'
     +'<div style="display:flex;align-items:center;gap:4px;">'
     +'<button onclick="admCalPrev()" style="'+btnCss('#181208')+'padding:6px 10px;font-size:16px;">◀</button>'
     +'<button onclick="admCalToday()" style="'+btnCss('#181208')+'font-size:11px;">I dag</button>'
@@ -4139,7 +4230,8 @@ function viewNailsKalender(){
       var lbl=v==='måned'?'Mnd':v==='uke'?'Uke':'Dag';
       return '<button onclick="admNailCalView(\''+v+'\')" style="padding:6px 10px;background:'+(active?'rgba(201,125,110,0.25)':'transparent')+';border:0;border-right:1px solid rgba(201,125,110,0.15);color:'+(active?'#f0b0a0':'#c97d6e')+';font-size:11px;font-weight:'+(active?'700':'500')+';cursor:pointer;font-family:inherit;">'+lbl+'</button>';
     }).join('')+'</div>';
-  var html='<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem;">'
+  var varsel=_buildVarselBanner(_isNailsBooking,'#c97d6e','MH Nails');
+  var html=varsel+'<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem;">'
     +'<div style="display:flex;align-items:center;gap:4px;">'
     +'<button onclick="admNailCalPrev()" style="'+btnCss('#1a0d0d')+'padding:6px 10px;font-size:16px;">◀</button>'
     +'<button onclick="admNailCalToday()" style="'+btnCss('#1a0d0d')+'font-size:11px;">I dag</button>'
@@ -5837,6 +5929,21 @@ if(window.renderNailsGrid) window.renderNailsGrid();
     }
   }catch(e){}
 })();
+})();
+</script>
+<script>
+(function(){
+  var slides=document.querySelectorAll('.hslide');
+  var dots=document.querySelectorAll('.hdot');
+  var cur=0;
+  window.heroGoTo=function(n){
+    slides[cur].classList.remove('hslide-active');
+    dots[cur].classList.remove('hdot-active');
+    cur=n;
+    slides[cur].classList.add('hslide-active');
+    dots[cur].classList.add('hdot-active');
+  };
+  setInterval(function(){heroGoTo((cur+1)%slides.length);},4000);
 })();
 </script>
 </body>

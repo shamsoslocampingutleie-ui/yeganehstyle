@@ -1425,9 +1425,10 @@ nav { }
 <!-- HERO -->
 <section class="hero" id="hjem">
   <div class="hero-inner">
-    <!-- Auto-cycling hero slider -->
-    <div id="heroSlider" style="width:min(90vw,520px);margin-bottom:2.5rem;position:relative;border-radius:24px;overflow:hidden;aspect-ratio:16/9;">
-      <!-- Slide 1: Neglepleie -->
+    <img class="hero-logo" src="https://cauftwsojtumogyshmqq.supabase.co/storage/v1/object/public/product-images/logo-white.png" alt="Yeganeh Style AS" draggable="false" fetchpriority="high">
+
+    <!-- Service slider — auto-cycling under logo -->
+    <div id="heroSlider" style="width:min(92vw,600px);position:relative;border-radius:18px;overflow:hidden;aspect-ratio:16/6;margin-bottom:2rem;">
       <div class="hslide hslide-active" style="background:linear-gradient(135deg,#1a0a10 0%,#2e0f1e 40%,#1a0614 100%);">
         <div class="hslide-glow" style="background:radial-gradient(ellipse 60% 50% at 70% 40%,rgba(220,100,140,0.35),transparent);"></div>
         <div class="hslide-icon">💅</div>
@@ -1437,7 +1438,6 @@ nav { }
         </div>
         <div class="hslide-deco" style="color:rgba(220,100,140,0.12);font-size:8rem;right:-1rem;bottom:-1rem;">💅</div>
       </div>
-      <!-- Slide 2: Hårklipper -->
       <div class="hslide" style="background:linear-gradient(135deg,#120c00 0%,#2a1800 40%,#1a1000 100%);">
         <div class="hslide-glow" style="background:radial-gradient(ellipse 60% 50% at 30% 50%,rgba(212,168,60,0.35),transparent);"></div>
         <div class="hslide-icon">✂️</div>
@@ -1447,7 +1447,6 @@ nav { }
         </div>
         <div class="hslide-deco" style="color:rgba(212,168,60,0.1);font-size:8rem;right:-1rem;bottom:-1rem;">✂️</div>
       </div>
-      <!-- Slide 3: Nettbutikk -->
       <div class="hslide" style="background:linear-gradient(135deg,#0a0e16 0%,#101828 40%,#080c12 100%);">
         <div class="hslide-glow" style="background:radial-gradient(ellipse 60% 50% at 50% 40%,rgba(100,160,230,0.25),transparent);"></div>
         <div class="hslide-icon">🛒</div>
@@ -1457,13 +1456,13 @@ nav { }
         </div>
         <div class="hslide-deco" style="color:rgba(100,160,230,0.1);font-size:8rem;right:-1rem;bottom:-1rem;">🛒</div>
       </div>
-      <!-- Dots -->
-      <div id="heroDots" style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:5;">
+      <div id="heroDots" style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:5;">
         <span class="hdot hdot-active" onclick="heroGoTo(0)"></span>
         <span class="hdot" onclick="heroGoTo(1)"></span>
         <span class="hdot" onclick="heroGoTo(2)"></span>
       </div>
     </div>
+
     <div class="hero-divider"></div>
     <div class="hero-btns">
       <button class="hero-btn" onclick="openProdOverlay()">Produkter</button>

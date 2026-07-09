@@ -314,24 +314,24 @@ nav {
 
 /* ── HERO ── */
 .hero {
-  padding: 5rem 2rem 4rem;
-  min-height: 88vh;
-  display: flex; flex-direction: column; justify-content: center; align-items: center;
-  text-align: center; position: relative;
+  padding: 3.5rem 2rem 3.5rem;
+  min-height: 70vh;
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+  position: relative;
 }
 .hero-inner {
   position: relative; z-index: 1;
-  display: flex; flex-direction: column; align-items: center;
+  display: flex; flex-direction: column; align-items: flex-start;
   gap: 0;
+  padding-left: clamp(0rem, 4vw, 3rem);
 }
 
-/* Logo: transparent PNG — champagne gold tint, fills the hero */
+/* Logo: transparent PNG — champagne gold tint, left-aligned */
 .hero-logo {
-  width: 82vw; height: auto;
-  max-width: 860px; max-height: 42vh;
+  width: auto; height: auto;
+  max-width: min(72vw, 480px); max-height: 38vh;
   object-fit: contain;
-  margin-bottom: 3rem;
-  /* sepia(0.55) turns white → warm champagne/gold matching --accent */
+  margin-bottom: 2.5rem;
   filter: sepia(0.55) brightness(1.06) drop-shadow(0 6px 40px rgba(180,140,60,0.18));
 }
 
@@ -342,25 +342,9 @@ nav {
   margin-bottom: 2.4rem;
 }
 
-/* ── HERO SLIDER ── */
-.hslide {
-  position:absolute;inset:0;
-  display:flex;align-items:center;gap:1.5rem;padding:1.5rem 2rem;
-  opacity:0;transition:opacity 0.7s ease;pointer-events:none;
-}
-.hslide-active { opacity:1;pointer-events:auto; }
-.hslide-glow { position:absolute;inset:0;pointer-events:none; }
-.hslide-icon { font-size:3.5rem;line-height:1;flex-shrink:0;filter:drop-shadow(0 0 20px rgba(255,255,255,0.2)); }
-.hslide-text { flex:1;text-align:left; }
-.hslide-title { font-family:'Cormorant Garamond',serif;font-size:clamp(1.3rem,4vw,1.9rem);font-weight:300;color:#fff8ef;line-height:1.2;margin-bottom:0.4rem; }
-.hslide-sub { font-size:clamp(11px,2.5vw,13px);color:rgba(255,240,210,0.65);letter-spacing:0.04em; }
-.hslide-deco { position:absolute;pointer-events:none;line-height:1; }
-.hdot { width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,0.25);cursor:pointer;transition:all 0.3s;display:block; }
-.hdot-active { background:rgba(255,240,210,0.85);width:22px;border-radius:4px; }
-
 /* Button row */
 .hero-btns {
-  display: flex; gap: 1.2rem; flex-wrap: nowrap; justify-content: center;
+  display: flex; gap: 1.2rem; flex-wrap: nowrap; justify-content: flex-start;
 }
 .hero-btn {
   display: flex; align-items: center; justify-content: center; gap: 8px;
@@ -1189,8 +1173,8 @@ nav { }
   .nav-logo-img { height: 50px; }
 
   /* ── HERO: logo + 3 knapper på mobil ── */
-  .hero { padding: 3rem 1.5rem 3rem; min-height: 85svh; min-height: 85vh; }
-  .hero-logo { width: 90vw; max-width: 420px; max-height: 55vw; margin-bottom: 2.5rem; }
+  .hero { padding: 2.5rem 1.5rem 2.5rem; min-height: 70svh; min-height: 70vh; }
+  .hero-logo { max-width: 78vw; max-height: 40vw; margin-bottom: 2rem; }
   .hero-divider { margin-bottom: 1.8rem; }
   .hero-btns { flex-direction: column; width: 100%; gap: 0.75rem; }
   .hero-btn { width: 100%; padding: 20px 20px; font-size: 16px; justify-content: center; border-radius: 6px; min-width: unset; letter-spacing: 0.08em; }
@@ -1426,42 +1410,6 @@ nav { }
 <section class="hero" id="hjem">
   <div class="hero-inner">
     <img class="hero-logo" src="https://cauftwsojtumogyshmqq.supabase.co/storage/v1/object/public/product-images/logo-white.png" alt="Yeganeh Style AS" draggable="false" fetchpriority="high">
-
-    <!-- Service slider — auto-cycling under logo -->
-    <div id="heroSlider" style="width:min(92vw,600px);position:relative;border-radius:18px;overflow:hidden;aspect-ratio:16/6;margin-bottom:2rem;">
-      <div class="hslide hslide-active" style="background:linear-gradient(135deg,#1a0a10 0%,#2e0f1e 40%,#1a0614 100%);">
-        <div class="hslide-glow" style="background:radial-gradient(ellipse 60% 50% at 70% 40%,rgba(220,100,140,0.35),transparent);"></div>
-        <div class="hslide-icon">💅</div>
-        <div class="hslide-text">
-          <div class="hslide-title">Negledesign & Pleie</div>
-          <div class="hslide-sub">MH Nails · Gelé · Design · Manikyr</div>
-        </div>
-        <div class="hslide-deco" style="color:rgba(220,100,140,0.12);font-size:8rem;right:-1rem;bottom:-1rem;">💅</div>
-      </div>
-      <div class="hslide" style="background:linear-gradient(135deg,#120c00 0%,#2a1800 40%,#1a1000 100%);">
-        <div class="hslide-glow" style="background:radial-gradient(ellipse 60% 50% at 30% 50%,rgba(212,168,60,0.35),transparent);"></div>
-        <div class="hslide-icon">✂️</div>
-        <div class="hslide-text">
-          <div class="hslide-title">Ekspert Frisørtjenester</div>
-          <div class="hslide-sub">Hadi · Klipp · Farge · Balayage · Keratin</div>
-        </div>
-        <div class="hslide-deco" style="color:rgba(212,168,60,0.1);font-size:8rem;right:-1rem;bottom:-1rem;">✂️</div>
-      </div>
-      <div class="hslide" style="background:linear-gradient(135deg,#0a0e16 0%,#101828 40%,#080c12 100%);">
-        <div class="hslide-glow" style="background:radial-gradient(ellipse 60% 50% at 50% 40%,rgba(100,160,230,0.25),transparent);"></div>
-        <div class="hslide-icon">🛒</div>
-        <div class="hslide-text">
-          <div class="hslide-title">NAK Hair Nettbutikk</div>
-          <div class="hslide-sub">Eksklusiv forhandler · Rask levering · Gratis frakt 499+</div>
-        </div>
-        <div class="hslide-deco" style="color:rgba(100,160,230,0.1);font-size:8rem;right:-1rem;bottom:-1rem;">🛒</div>
-      </div>
-      <div id="heroDots" style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:5;">
-        <span class="hdot hdot-active" onclick="heroGoTo(0)"></span>
-        <span class="hdot" onclick="heroGoTo(1)"></span>
-        <span class="hdot" onclick="heroGoTo(2)"></span>
-      </div>
-    </div>
 
     <div class="hero-divider"></div>
     <div class="hero-btns">
@@ -5978,21 +5926,6 @@ if(window.renderNailsGrid) window.renderNailsGrid();
     }
   }catch(e){}
 })();
-})();
-</script>
-<script>
-(function(){
-  var slides=document.querySelectorAll('.hslide');
-  var dots=document.querySelectorAll('.hdot');
-  var cur=0;
-  window.heroGoTo=function(n){
-    slides[cur].classList.remove('hslide-active');
-    dots[cur].classList.remove('hdot-active');
-    cur=n;
-    slides[cur].classList.add('hslide-active');
-    dots[cur].classList.add('hdot-active');
-  };
-  setInterval(function(){heroGoTo((cur+1)%slides.length);},4000);
 })();
 </script>
 </body>

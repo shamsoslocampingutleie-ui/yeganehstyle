@@ -178,7 +178,7 @@ nav, section, .hero, .cat-strip, .booking-strip,
 /* ── NAVIGATION ── */
 nav {
   position: sticky; top: 0; z-index: 200;
-  background: rgba(10,7,4,0.94);
+  background: rgba(18,13,7,0.96);
   will-change: transform;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -200,7 +200,7 @@ nav {
   flex-shrink: 0;
   -webkit-tap-highlight-color: transparent;
 }
-.nav-logo-img { height: 30px; width: auto; opacity: 0.9; display: block; }
+.nav-logo-img { height: 42px; width: auto; opacity: 0.95; display: block; }
 
 /* Center links */
 .nav-links {
@@ -240,7 +240,7 @@ nav {
   position: absolute; top: 100%; left: 50%;
   transform: translateX(-50%);
   min-width: 160px;
-  background: rgba(12,9,5,0.97);
+  background: rgba(22,16,8,0.98);
   border: 1px solid var(--border);
   border-top: none;
   border-radius: 0 0 12px 12px;
@@ -386,7 +386,7 @@ nav {
 }
 .prod-overlay.open { transform: translateY(0); }
 .prod-ov-header {
-  position: sticky; top: 0; background: rgba(10,7,4,0.97);
+  position: sticky; top: 0; background: rgba(20,14,8,0.98);
   border-bottom: 1px solid var(--border);
   display: flex; align-items: center; justify-content: space-between;
   padding: calc(0.85rem + env(safe-area-inset-top,0)) 1.1rem 0.85rem;
@@ -440,7 +440,7 @@ nav {
 /* ── CAT STRIP ── */
 .cat-strip-wrap {
   position: relative; z-index: 1;
-  background: rgba(10,7,4,0.85);
+  background: rgba(28,20,10,0.88);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
@@ -576,7 +576,7 @@ a.contact-card:hover { border-color: var(--accent); }
 }
 
 .section-glass {
-  background: rgba(8,16,8,0.7);
+  background: rgba(20,14,6,0.7);
   backdrop-filter: blur(4px);
   border-radius: 14px;
   border: 1px solid var(--border);
@@ -627,55 +627,56 @@ a.contact-card:hover { border-color: var(--accent); }
   margin-bottom: 1.2rem;
 }
 .product-card {
-  background: rgba(20,15,9,0.75);
+  background: rgba(38,28,16,0.88);
   border: 1px solid var(--border);
   border-radius: 16px; overflow: hidden;
-  cursor: pointer; transition: transform 0.2s, border-color 0.2s;
+  cursor: pointer; transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
 }
-.product-card:hover { transform: translateY(-3px); border-color: var(--border-bright); }
+.product-card:hover { transform: translateY(-3px); border-color: var(--border-bright); box-shadow: 0 8px 32px rgba(0,0,0,0.4); }
 .product-card:active { transform: scale(0.98); }
 
 .prod-img {
   width: 100%; aspect-ratio: 1;
-  background: rgba(18,34,16,0.9);
+  background: linear-gradient(145deg, rgba(48,36,18,0.95) 0%, rgba(32,22,10,0.98) 100%);
   display: flex; align-items: center; justify-content: center;
   font-size: 3.2rem; position: relative;
 }
-/* subtle bokeh inside product card */
+/* subtle warm bokeh inside product card */
 .prod-img::before {
   content: '';
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse 60% 60% at 80% 20%, rgba(50,34,14,0.3) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 40% at 10% 80%, rgba(20,48,16,0.2) 0%, transparent 55%);
+    radial-gradient(ellipse 60% 60% at 80% 20%, rgba(180,140,70,0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 10% 80%, rgba(140,100,50,0.08) 0%, transparent 55%);
   pointer-events: none;
 }
 .prod-emoji { position: relative; z-index: 1; }
 
 .prod-badge {
-  position: absolute; top: 8px; left: 8px; z-index: 2;
-  font-size: 9px; font-weight: 700;
-  padding: 3px 8px; border-radius: 8px;
-  text-transform: uppercase; letter-spacing: 0.05em;
+  position: absolute; top: 10px; left: 10px; z-index: 2;
+  font-size: 10px; font-weight: 700;
+  padding: 4px 10px; border-radius: 8px;
+  text-transform: uppercase; letter-spacing: 0.06em;
 }
-.badge-best { background: rgba(184,148,96,0.2); border: 1px solid rgba(184,148,96,0.32); color: var(--accent); }
+.badge-best { background: rgba(200,160,80,0.25); border: 1px solid rgba(200,160,80,0.5); color: #e8c070; }
 .badge-new  { background: rgba(91,143,212,0.25); border: 1px solid rgba(91,143,212,0.4); color: #8ab8e8; }
-.badge-sale { background: rgba(201,125,110,0.25); border: 1px solid rgba(201,125,110,0.4); color: #e8a898; }
+.badge-sale { background: rgba(212,120,105,0.28); border: 1px solid rgba(212,120,105,0.5); color: #f0a898; }
 
-.prod-info { padding: 0.8rem; }
-.prod-brand { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; }
-.prod-name  { font-size: 14px; font-weight: 600; margin: 4px 0 10px; line-height: 1.35; color: var(--text); }
+.prod-info { padding: 1rem; }
+.prod-brand { font-size: 11px; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; margin-bottom: 4px; }
+.prod-name  { font-size: 16px; font-weight: 600; margin: 4px 0 12px; line-height: 1.35; color: var(--text); }
 .prod-foot  { display: flex; align-items: center; justify-content: space-between; }
-.prod-price { font-size: 15px; font-weight: 700; color: var(--text); }
-.prod-price .old { font-size: 11px; color: var(--muted); text-decoration: line-through; font-weight: 400; margin-right: 3px; }
+.prod-price { font-size: 18px; font-weight: 700; color: var(--text); }
+.prod-price .old { font-size: 12px; color: var(--gray); text-decoration: line-through; font-weight: 400; margin-right: 4px; }
 .add-btn {
-  background: rgba(184,148,96,0.12);
-  border: 1px solid rgba(184,148,96,0.28);
-  border-radius: 18px; padding: 8px 14px;
-  font-size: 12px; font-weight: 700; color: var(--accent);
+  background: rgba(200,160,80,0.16);
+  border: 1.5px solid rgba(200,160,80,0.42);
+  border-radius: 20px; padding: 10px 18px;
+  font-size: 13px; font-weight: 700; color: #e8c070;
   cursor: pointer; transition: all 0.2s; white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
 }
-.add-btn:hover { background: rgba(184,148,96,0.18); border-color: rgba(184,148,96,0.42); }
+.add-btn:hover { background: rgba(200,160,80,0.28); border-color: rgba(200,160,80,0.65); }
 
 .see-all-row {
   display: flex; align-items: center; justify-content: space-between;
@@ -707,7 +708,7 @@ a.contact-card:hover { border-color: var(--accent); }
   display: flex; align-items: center; justify-content: space-between; gap: 0.75rem;
   cursor: pointer; transition: border-color 0.2s, background 0.2s;
 }
-.service-item:hover { border-color: var(--border-bright); background: rgba(20,38,18,0.75); }
+.service-item:hover { border-color: var(--border-bright); background: rgba(46,34,18,0.82); }
 .svc-left { display: flex; flex-direction: column; gap: 3px; flex: 1; min-width: 0; }
 .svc-name { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.35; }
 .svc-desc { font-size: 12px; color: var(--gray); }
@@ -844,7 +845,7 @@ footer {
   background: #0c1a0d;
   background-image:
     radial-gradient(ellipse 80% 40% at 90% 0%, rgba(42,30,12,0.5) 0%, transparent 55%),
-    radial-gradient(ellipse 60% 30% at 0% 100%, rgba(20,48,16,0.4) 0%, transparent 50%);
+    radial-gradient(ellipse 60% 30% at 0% 100%, rgba(60,40,16,0.25) 0%, transparent 50%);
   border-radius: 22px 22px 0 0;
   width: 100%; max-width: 540px;
   padding: 1.5rem 1.25rem 3rem;
@@ -875,7 +876,7 @@ footer {
 .form-group input,
 .form-group select {
   width: 100%; min-width: 0; padding: 10px 10px;
-  background: rgba(18,34,16,0.9); border: 1px solid var(--border);
+  background: rgba(34,26,14,0.9); border: 1px solid var(--border);
   border-radius: 10px; font-size: 16px; color: var(--text);
   font-family: inherit; transition: border-color 0.2s;
 }
@@ -961,7 +962,7 @@ input[type="date"] {
 }
 .cart-item-img {
   width: 50px; height: 50px; border-radius: 10px;
-  background: rgba(18,34,16,0.9); display: flex;
+  background: rgba(34,26,14,0.9); display: flex;
   align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;
 }
 .cart-item-info { flex: 1; min-width: 0; }
@@ -1000,7 +1001,7 @@ input[type="date"] {
 .pay-methods { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1rem; }
 .pay-method {
   display: flex; align-items: center; gap: 0.75rem;
-  background: rgba(18,34,16,0.8); border: 1px solid var(--border);
+  background: rgba(34,26,14,0.8); border: 1px solid var(--border);
   border-radius: 12px; padding: 0.9rem 1rem;
   cursor: pointer; transition: border-color 0.2s;
 }
@@ -1011,7 +1012,7 @@ input[type="date"] {
 .pay-radio { margin-left: auto; width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; }
 .pay-method.selected .pay-radio { border-color: var(--accent); background: var(--accent); }
 .pay-method.selected .pay-radio::after { content: ''; width: 8px; height: 8px; background: #100c08; border-radius: 50%; }
-.order-summary { background: rgba(18,34,16,0.6); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; margin-bottom: 1rem; }
+.order-summary { background: rgba(34,26,14,0.6); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; margin-bottom: 1rem; }
 .order-row { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px; color: var(--text-dim); }
 .order-row.total { font-size: 14px; font-weight: 700; color: var(--text); border-top: 1px solid var(--border); padding-top: 8px; margin-top: 8px; margin-bottom: 0; }
 
@@ -1069,19 +1070,19 @@ nav { }
 .b2p-input::placeholder { color:#3a2c1a; }
 .b2p-btn-main { display:block;width:100%;padding:13px;background:rgba(140,108,60,0.26);border:1px solid rgba(184,148,96,0.35);border-radius:12px;color:#b8915a;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:background 0.2s;text-align:center; }
 .b2p-btn-main:hover { background:rgba(140,108,60,0.38); }
-.b2p-btn-sec { padding:9px 20px;background:transparent;border:1px solid rgba(80,120,70,0.25);border-radius:8px;color:#9a7a5a;font-size:12px;cursor:pointer;font-family:inherit;transition:all 0.2s; }
-.b2p-btn-sec:hover { border-color:rgba(80,120,70,0.5);color:#b8915a; }
-.b2p-btn-sm { padding:9px 13px;background:rgba(80,120,70,0.15);border:1px solid rgba(140,108,60,0.26);border-radius:8px;color:#b8915a;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap; }
+.b2p-btn-sec { padding:9px 20px;background:transparent;border:1px solid rgba(186,152,98,0.2);border-radius:8px;color:#9a7a5a;font-size:12px;cursor:pointer;font-family:inherit;transition:all 0.2s; }
+.b2p-btn-sec:hover { border-color:rgba(186,152,98,0.45);color:#b8915a; }
+.b2p-btn-sm { padding:9px 13px;background:rgba(186,152,98,0.12);border:1px solid rgba(140,108,60,0.26);border-radius:8px;color:#b8915a;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap; }
 .b2p-err { font-size:12px;color:#e07060;padding:9px 12px;background:rgba(220,80,60,0.08);border:1px solid rgba(220,80,60,0.2);border-radius:8px;margin-bottom:0.85rem; }
 .b2p-link { color:#b8915a;cursor:pointer;text-decoration:underline; }
-.b2p-brreg-ok { background:rgba(80,120,70,0.1);border-radius:8px;padding:8px 10px;border:1px solid rgba(140,108,60,0.18); }
+.b2p-brreg-ok { background:rgba(186,152,98,0.09);border-radius:8px;padding:8px 10px;border:1px solid rgba(140,108,60,0.18); }
 .b2p-status-icon { width:64px;height:64px;border-radius:50%;border:2px solid rgba(184,148,96,0.32);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 1.25rem; }
-.b2p-welcome-card { background:linear-gradient(135deg,rgba(25,50,20,0.85),rgba(12,24,12,0.85));border:1px solid rgba(80,120,70,0.25);border-radius:16px;padding:1.5rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem; }
+.b2p-welcome-card { background:linear-gradient(135deg,rgba(52,38,20,0.9),rgba(28,18,8,0.9));border:1px solid rgba(186,152,98,0.2);border-radius:16px;padding:1.5rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem; }
 .b2p-campaign { background:linear-gradient(135deg,rgba(201,125,110,0.12),rgba(201,125,110,0.04));border:1px solid rgba(201,125,110,0.2);border-radius:14px;padding:1.25rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap; }
-.b2p-card { background:rgba(10,18,10,0.7);border:1px solid rgba(80,120,70,0.18);border-radius:14px;padding:1.25rem; }
-.b2p-card-title { font-size:12px;font-weight:700;color:#c8dfc4;margin-bottom:0.75rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(80,120,70,0.12);letter-spacing:0.04em; }
+.b2p-card { background:rgba(34,24,12,0.78);border:1px solid rgba(186,152,98,0.15);border-radius:14px;padding:1.25rem; }
+.b2p-card-title { font-size:12px;font-weight:700;color:#ddc8a0;margin-bottom:0.75rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(186,152,98,0.1);letter-spacing:0.04em; }
 .b2p-cat-head { font-size:9px;color:#b8915a;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;margin-bottom:0.4rem; }
-.b2p-price-row { display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(80,120,70,0.1);gap:0.75rem; }
+.b2p-price-row { display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(186,152,98,0.09);gap:0.75rem; }
 .b2p-price-row:last-child { border-bottom:none; }
 .b2p-price-name { font-size:12px;color:#c0d4bc;flex:1; }
 .b2p-retail { font-size:10px;color:#3a2c1a;text-decoration:line-through; }
@@ -1090,12 +1091,12 @@ nav { }
 
 /* ── TIMMA BOOKING PORTAL ── */
 #timmaPortal { display:none;position:fixed;inset:0;z-index:9500;background:#07100a;overflow-y:auto;-webkit-overflow-scrolling:touch; }
-.timma-header { position:sticky;top:0;z-index:10;background:rgba(7,16,10,0.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(80,120,70,0.18);padding:0 1.25rem; }
+.timma-header { position:sticky;top:0;z-index:10;background:rgba(16,11,6,0.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(186,152,98,0.15);padding:0 1.25rem; }
 .timma-header-inner { max-width:600px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:52px;gap:1rem; }
 .timma-back-btn { background:none;border:none;color:#9a7a5a;cursor:pointer;font-size:20px;padding:4px 8px;border-radius:8px;line-height:1;font-family:inherit; }
-.timma-back-btn:hover { color:#b8915a;background:rgba(80,120,70,0.1); }
+.timma-back-btn:hover { color:#b8915a;background:rgba(186,152,98,0.09); }
 .timma-steps { display:flex;align-items:center;gap:4px;flex:1;justify-content:center; }
-.timma-step-dot { width:7px;height:7px;border-radius:50%;background:rgba(80,120,70,0.25);transition:all 0.2s; }
+.timma-step-dot { width:7px;height:7px;border-radius:50%;background:rgba(186,152,98,0.2);transition:all 0.2s; }
 .timma-step-dot.active { background:#b8915a;width:22px;border-radius:4px; }
 .timma-step-dot.done { background:rgba(184,148,96,0.38); }
 .timma-close-btn { background:none;border:none;color:#9a7a5a;cursor:pointer;font-size:22px;padding:4px 8px;border-radius:8px;line-height:1;font-family:inherit; }
@@ -1106,22 +1107,22 @@ nav { }
 /* Category cards */
 .timma-cat-grid { display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;margin-bottom:1rem; }
 .timma-cat-card { background:rgba(10,20,10,0.7);border:1px solid rgba(140,108,60,0.18);border-radius:16px;padding:1.5rem 1.25rem;cursor:pointer;transition:all 0.2s;text-align:left; }
-.timma-cat-card:hover,.timma-cat-card.sel { border-color:rgba(184,148,96,0.45);background:rgba(20,40,18,0.8); }
+.timma-cat-card:hover,.timma-cat-card.sel { border-color:rgba(184,148,96,0.45);background:rgba(46,34,16,0.85); }
 .timma-cat-icon { font-size:1.8rem;margin-bottom:0.6rem; }
 .timma-cat-name { font-size:14px;font-weight:700;color:#e4cda8; }
 .timma-cat-sub { font-size:11px;color:#9a7a5a;margin-top:3px; }
 /* Service list */
 .timma-svc-list { display:flex;flex-direction:column;gap:0.5rem; }
-.timma-svc-row { display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1rem;background:rgba(10,20,10,0.7);border:1px solid rgba(80,120,70,0.18);border-radius:12px;cursor:pointer;transition:all 0.2s;gap:0.75rem; }
-.timma-svc-row:hover,.timma-svc-row.sel { border-color:rgba(184,148,96,0.42);background:rgba(20,40,18,0.8); }
+.timma-svc-row { display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1rem;background:rgba(10,20,10,0.7);border:1px solid rgba(186,152,98,0.15);border-radius:12px;cursor:pointer;transition:all 0.2s;gap:0.75rem; }
+.timma-svc-row:hover,.timma-svc-row.sel { border-color:rgba(184,148,96,0.42);background:rgba(46,34,16,0.85); }
 .timma-svc-name { font-size:13px;font-weight:600;color:#e4cda8; }
 .timma-svc-dur { font-size:11px;color:#9a7a5a;margin-top:2px; }
 .timma-svc-price { font-size:14px;font-weight:700;color:#b8915a;flex-shrink:0; }
 /* Calendar */
-.timma-cal { background:rgba(10,20,10,0.5);border:1px solid rgba(80,120,70,0.18);border-radius:16px;overflow:hidden; }
-.timma-cal-header { display:flex;align-items:center;justify-content:space-between;padding:0.85rem 1rem;border-bottom:1px solid rgba(80,120,70,0.12); }
+.timma-cal { background:rgba(30,22,10,0.55);border:1px solid rgba(186,152,98,0.15);border-radius:16px;overflow:hidden; }
+.timma-cal-header { display:flex;align-items:center;justify-content:space-between;padding:0.85rem 1rem;border-bottom:1px solid rgba(186,152,98,0.1); }
 .timma-cal-nav { background:none;border:none;color:#9a7a5a;cursor:pointer;font-size:18px;padding:4px 10px;border-radius:8px;font-family:inherit; }
-.timma-cal-nav:hover { color:#b8915a;background:rgba(80,120,70,0.1); }
+.timma-cal-nav:hover { color:#b8915a;background:rgba(186,152,98,0.09); }
 .timma-cal-month { font-size:13px;font-weight:700;color:#e4cda8;text-transform:capitalize; }
 .timma-cal-grid { display:grid;grid-template-columns:repeat(7,1fr);padding:0.5rem; }
 .timma-cal-day-name { font-size:10px;font-weight:600;color:#3a2c1a;text-align:center;padding:4px 0;text-transform:uppercase; }
@@ -1147,9 +1148,9 @@ nav { }
 .timma-sum-label { color:#9a7a5a; }
 .timma-sum-val { color:#e4cda8;font-weight:600; }
 /* Bottom CTA */
-.timma-cta-bar { position:sticky;bottom:0;background:rgba(7,16,10,0.95);backdrop-filter:blur(10px);border-top:1px solid rgba(80,120,70,0.15);padding:1rem 1.25rem;margin:0 -1.25rem -5rem; }
-.timma-cta-btn { width:100%;padding:15px;background:linear-gradient(135deg,rgba(60,110,50,0.7),rgba(40,80,35,0.6));border:1px solid rgba(120,190,100,0.45);border-radius:14px;font-size:15px;font-weight:700;color:#e0caa8;cursor:pointer;font-family:inherit;transition:all 0.2s;letter-spacing:0.01em; }
-.timma-cta-btn:hover { background:linear-gradient(135deg,rgba(60,110,50,0.9),rgba(40,80,35,0.8));color:#f0e4ce; }
+.timma-cta-bar { position:sticky;bottom:0;background:rgba(16,11,6,0.95);backdrop-filter:blur(10px);border-top:1px solid rgba(186,152,98,0.12);padding:1rem 1.25rem;margin:0 -1.25rem -5rem; }
+.timma-cta-btn { width:100%;padding:15px;background:linear-gradient(135deg,rgba(180,140,60,0.7),rgba(140,100,40,0.7));border:1px solid rgba(200,160,70,0.4);border-radius:14px;font-size:15px;font-weight:700;color:#e0caa8;cursor:pointer;font-family:inherit;transition:all 0.2s;letter-spacing:0.01em; }
+.timma-cta-btn:hover { background:linear-gradient(135deg,rgba(180,140,60,0.9),rgba(140,100,40,0.85));color:#f0e4ce; }
 .timma-cta-btn:disabled { opacity:0.35;cursor:default; }
 /* Confirm screen */
 .timma-confirm-wrap { text-align:center;padding:2rem 0; }
@@ -1164,7 +1165,7 @@ nav { }
 
   /* ── NAV ── */
   nav { height: 56px; }
-  .nav-logo-img { height: 28px; }
+  .nav-logo-img { height: 38px; }
 
   /* ── HERO: logo + 3 knapper på mobil ── */
   .hero { padding: 3rem 1.5rem 3rem; min-height: 85svh; min-height: 85vh; }
@@ -1280,7 +1281,7 @@ nav { }
 /* ── Svært smale skjermer (≤400px) ── */
 @media (max-width: 400px) {
   .section-wrap { padding: 1rem 0.65rem; }
-  .nav-logo-img { height: 24px; }
+  .nav-logo-img { height: 36px; }
   .trust-item:nth-child(3), .trust-item:nth-child(4) { display: none; }
 }
 </style>
@@ -1831,7 +1832,7 @@ nav { }
       <span style="font-size:13px;font-weight:600;color:#e4cda8;">Yeganeh Style</span>
       <span style="font-size:10px;color:#3a2c1a;padding:2px 7px;border:1px solid rgba(140,108,60,0.18);border-radius:4px;letter-spacing:0.08em;">B2B</span>
     </div>
-    <button onclick="closeB2BPortal()" style="background:none;border:1px solid rgba(80,120,70,0.25);border-radius:8px;padding:6px 14px;color:#9a7a5a;font-size:12px;cursor:pointer;font-family:inherit;">Lukk ✕</button>
+    <button onclick="closeB2BPortal()" style="background:none;border:1px solid rgba(186,152,98,0.2);border-radius:8px;padding:6px 14px;color:#9a7a5a;font-size:12px;cursor:pointer;font-family:inherit;">Lukk ✕</button>
   </div>
   <div id="b2pBody" style="min-height:calc(100vh - 54px);padding:1.5rem 1rem 1rem;"></div>
 </div>
@@ -1853,25 +1854,25 @@ nav { }
     <h2 style="margin-bottom:0.25rem">Ta kontakt med oss</h2>
     <p style="font-size:12px;color:var(--gray);margin-bottom:1.25rem">Vi er her for å hjelpe deg.</p>
 
-    <a href="https://maps.google.com/?q=Flaenbakken+2+Råholt" target="_blank" style="display:block;text-decoration:none;background:rgba(18,34,16,0.7);border:1px solid var(--border);border-radius:12px;padding:0.9rem 1rem;margin-bottom:0.6rem">
+    <a href="https://maps.google.com/?q=Flaenbakken+2+Råholt" target="_blank" style="display:block;text-decoration:none;background:rgba(34,26,14,0.7);border:1px solid var(--border);border-radius:12px;padding:0.9rem 1rem;margin-bottom:0.6rem">
       <div style="font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:4px">Besøk oss</div>
       <div style="font-size:14px;color:var(--text);font-weight:500">Flaenbakken 2, 2072 Råholt</div>
       <div style="font-size:11px;color:var(--gray);margin-top:2px">Åpne i kart →</div>
     </a>
 
-    <a href="tel:+4797855154" style="display:block;text-decoration:none;background:rgba(18,34,16,0.7);border:1px solid var(--border);border-radius:12px;padding:0.9rem 1rem;margin-bottom:0.6rem">
+    <a href="tel:+4797855154" style="display:block;text-decoration:none;background:rgba(34,26,14,0.7);border:1px solid var(--border);border-radius:12px;padding:0.9rem 1rem;margin-bottom:0.6rem">
       <div style="font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:4px">Ring oss</div>
       <div style="font-size:14px;color:var(--text);font-weight:500">+47 978 55 154</div>
       <div style="font-size:11px;color:var(--gray);margin-top:2px">Man–Fre 09–18 · Lør 10–16</div>
     </a>
 
-    <a href="mailto:post@yeganehstyle.no" style="display:block;text-decoration:none;background:rgba(18,34,16,0.7);border:1px solid var(--border);border-radius:12px;padding:0.9rem 1rem;margin-bottom:0.6rem">
+    <a href="mailto:post@yeganehstyle.no" style="display:block;text-decoration:none;background:rgba(34,26,14,0.7);border:1px solid var(--border);border-radius:12px;padding:0.9rem 1rem;margin-bottom:0.6rem">
       <div style="font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:4px">Send e-post</div>
       <div style="font-size:14px;color:var(--text);font-weight:500">post@yeganehstyle.no</div>
       <div style="font-size:11px;color:var(--gray);margin-top:2px">Vi svarer innen 24 timer →</div>
     </a>
 
-    <div style="background:rgba(18,34,16,0.7);border:1px solid var(--border);border-radius:12px;padding:0.9rem 1rem;margin-bottom:1.25rem">
+    <div style="background:rgba(34,26,14,0.7);border:1px solid var(--border);border-radius:12px;padding:0.9rem 1rem;margin-bottom:1.25rem">
       <div style="font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:4px">Vurdering</div>
       <div style="font-size:14px;color:var(--text);font-weight:500">5,0 stjerner · 214 omtaler</div>
     </div>
@@ -1895,7 +1896,7 @@ nav { }
           <span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span>
         </div>
       </div>
-      <div class="form-group"><label>Din anmeldelse</label><textarea id="revText" rows="4" placeholder="Fortell om besøket ditt..." style="width:100%;padding:10px;background:rgba(18,34,16,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;resize:vertical;"></textarea></div>
+      <div class="form-group"><label>Din anmeldelse</label><textarea id="revText" rows="4" placeholder="Fortell om besøket ditt..." style="width:100%;padding:10px;background:rgba(34,26,14,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;resize:vertical;"></textarea></div>
       <button class="confirm-btn" onclick="submitReview()">Send anmeldelse</button>
     </div>
     <div class="success-msg" id="reviewSuccess">
@@ -1933,15 +1934,15 @@ nav { }
       <!-- Kundeinfo -->
       <p style="font-size:11px;color:var(--gray);margin-bottom:0.6rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase">Leveringsinformasjon</p>
       <div class="form-row date-time">
-        <div class="form-group"><label>Fornavn</label><input type="text" id="ckFornavn" placeholder="Ola" autocomplete="given-name" class="form-group input" style="width:100%;padding:10px;background:rgba(18,34,16,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;min-width:0"></div>
-        <div class="form-group"><label>Etternavn</label><input type="text" id="ckEtternavn" placeholder="Nordmann" autocomplete="family-name" style="width:100%;padding:10px;background:rgba(18,34,16,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;min-width:0"></div>
+        <div class="form-group"><label>Fornavn</label><input type="text" id="ckFornavn" placeholder="Ola" autocomplete="given-name" class="form-group input" style="width:100%;padding:10px;background:rgba(34,26,14,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;min-width:0"></div>
+        <div class="form-group"><label>Etternavn</label><input type="text" id="ckEtternavn" placeholder="Nordmann" autocomplete="family-name" style="width:100%;padding:10px;background:rgba(34,26,14,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;min-width:0"></div>
       </div>
       <div class="form-group"><label>E-post</label><input type="email" id="ckEpost" placeholder="din@epost.no" autocomplete="email" inputmode="email"></div>
       <div class="form-group"><label>Telefon</label><input type="tel" id="ckTelefon" placeholder="+47 000 00 000" autocomplete="tel" inputmode="tel"></div>
       <div class="form-group"><label>Gateadresse</label><input type="text" id="ckAdresse" placeholder="Storgata 1" autocomplete="street-address"></div>
       <div class="form-row date-time">
-        <div class="form-group"><label>Postnummer</label><input type="text" id="ckPostnr" placeholder="0000" maxlength="4" autocomplete="postal-code" inputmode="numeric" style="width:100%;padding:10px;background:rgba(18,34,16,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;min-width:0"></div>
-        <div class="form-group"><label>Sted</label><input type="text" id="ckSted" placeholder="Oslo" autocomplete="address-level2" style="width:100%;padding:10px;background:rgba(18,34,16,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;min-width:0"></div>
+        <div class="form-group"><label>Postnummer</label><input type="text" id="ckPostnr" placeholder="0000" maxlength="4" autocomplete="postal-code" inputmode="numeric" style="width:100%;padding:10px;background:rgba(34,26,14,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;min-width:0"></div>
+        <div class="form-group"><label>Sted</label><input type="text" id="ckSted" placeholder="Oslo" autocomplete="address-level2" style="width:100%;padding:10px;background:rgba(34,26,14,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;min-width:0"></div>
       </div>
 
       <!-- Ordresammendrag -->
@@ -1974,8 +1975,8 @@ nav { }
       <div id="cardFields" style="display:none">
         <div class="form-group"><label>Kortnummer</label><input type="text" placeholder="0000 0000 0000 0000" maxlength="19" oninput="fmtCard(this)"></div>
         <div class="form-row date-time">
-          <div class="form-group"><label>Utløper</label><input type="text" placeholder="MM/ÅÅ" maxlength="5" style="width:100%;padding:10px;background:rgba(18,34,16,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;min-width:0"></div>
-          <div class="form-group"><label>CVC</label><input type="text" placeholder="•••" maxlength="3" style="width:100%;padding:10px;background:rgba(18,34,16,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;min-width:0"></div>
+          <div class="form-group"><label>Utløper</label><input type="text" placeholder="MM/ÅÅ" maxlength="5" style="width:100%;padding:10px;background:rgba(34,26,14,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;min-width:0"></div>
+          <div class="form-group"><label>CVC</label><input type="text" placeholder="•••" maxlength="3" style="width:100%;padding:10px;background:rgba(34,26,14,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;min-width:0"></div>
         </div>
         <div class="form-group"><label>Navn på kort</label><input type="text" placeholder="Fullt navn"></div>
       </div>
@@ -1996,7 +1997,7 @@ nav { }
     <button aria-label="Lukk" class="modal-close" onclick="closeModal('adminModal')">✕</button>
     <div id="adminLoginForm">
       <div style="text-align:center;margin-bottom:1.5rem;">
-        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(80,120,70,0.1);border:1px solid rgba(140,108,60,0.18);border-radius:10px;padding:6px 14px;margin-bottom:1rem;">
+        <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(186,152,98,0.09);border:1px solid rgba(140,108,60,0.18);border-radius:10px;padding:6px 14px;margin-bottom:1rem;">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#b8915a" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           <span style="font-size:11px;font-weight:600;color:#b8915a;letter-spacing:0.06em;">YEGANEH STYLE</span>
         </div>
@@ -2009,7 +2010,7 @@ nav { }
         <div class="form-group"><label>Passord</label><input type="password" id="adminPassword" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doAdminLogin()"></div>
         <div id="adminErr" style="color:#e07060;font-size:12px;margin-bottom:0.75rem;display:none;padding:8px 12px;background:rgba(224,112,96,0.08);border-radius:8px;border:1px solid rgba(224,112,96,0.2);">Noe gikk galt. Prøv igjen.</div>
         <button class="confirm-btn" onclick="doAdminLogin()" style="width:100%;">Logg inn →</button>
-        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(80,120,70,0.12);display:flex;flex-direction:column;align-items:center;gap:8px;">
+        <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(186,152,98,0.1);display:flex;flex-direction:column;align-items:center;gap:8px;">
           <button onclick="showAuthForgot()" style="background:none;border:none;font-size:11px;color:#9a7a5a;cursor:pointer;font-family:inherit;padding:0;">Glemt passord? <span style="color:#b8915a;font-weight:600;">Tilbakestill →</span></button>
           <button onclick="closeModal('adminModal');openB2B();" style="background:none;border:none;font-size:11px;color:#9a7a5a;cursor:pointer;font-family:inherit;padding:0;">Ny bedriftskunde? <span style="color:#b8915a;font-weight:600;">Registrer her →</span></button>
         </div>
@@ -2495,8 +2496,8 @@ function openProduct(id){
   var stock=p.stock!=null?p.stock:20;
   var stockHtml=stock>0?'<span style="color:#c8a870">● På lager</span>':'<span style="color:#e07060">● Utsolgt</span>';
   var visual=p.img
-    ? '<div style="text-align:center;background:rgba(18,34,16,0.9);border-radius:14px;padding:0;margin-bottom:1.25rem;overflow:hidden"><img src="'+p.img+'" alt="'+p.name+'" style="width:100%;max-height:240px;object-fit:cover"></div>'
-    : '<div style="text-align:center;font-size:5rem;background:rgba(18,34,16,0.9);border-radius:14px;padding:2rem;margin-bottom:1.25rem">'+(p.emoji||'<span style="font-family:Cormorant Garamond,serif;color:var(--accent)">'+p.name.charAt(0)+'</span>')+'</div>';
+    ? '<div style="text-align:center;background:rgba(34,26,14,0.9);border-radius:14px;padding:0;margin-bottom:1.25rem;overflow:hidden"><img src="'+p.img+'" alt="'+p.name+'" style="width:100%;max-height:240px;object-fit:cover"></div>'
+    : '<div style="text-align:center;font-size:5rem;background:rgba(34,26,14,0.9);border-radius:14px;padding:2rem;margin-bottom:1.25rem">'+(p.emoji||'<span style="font-family:Cormorant Garamond,serif;color:var(--accent)">'+p.name.charAt(0)+'</span>')+'</div>';
   document.getElementById('productModalContent').innerHTML=
     visual
     +'<p style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;font-weight:700">'+p.brand+'</p>'
@@ -2521,7 +2522,7 @@ function renderNailsGrid(){
   var svcs=_DATA.treatments.filter(function(t){return t.type==='nails'&&t.active;});
   g.innerHTML=svcs.map(function(t){
     var icon=icons[t.cat.toLowerCase()]||'💅';
-    return '<div onclick="openTimma()" style="background:rgba(10,18,10,0.85);border:1px solid rgba(80,120,70,0.18);border-radius:14px;padding:1.1rem;cursor:pointer;transition:border-color 0.2s;" onmouseenter="this.style.borderColor=\'rgba(201,125,110,0.4)\'" onmouseleave="this.style.borderColor=\'rgba(80,120,70,0.18)\'">'
+    return '<div onclick="openTimma()" style="background:rgba(10,18,10,0.85);border:1px solid rgba(186,152,98,0.15);border-radius:14px;padding:1.1rem;cursor:pointer;transition:border-color 0.2s;" onmouseenter="this.style.borderColor=\'rgba(201,125,110,0.4)\'" onmouseleave="this.style.borderColor=\'rgba(186,152,98,0.15)\'">'
       +'<div style="font-size:1.4rem;margin-bottom:0.4rem;">'+icon+'</div>'
       +'<div style="font-size:13px;font-weight:600;color:#e4cda8;margin-bottom:2px;">'+t.name+'</div>'
       +'<div style="font-size:11px;color:#9a7a5a;margin-bottom:6px;">'+t.duration+' min</div>'
@@ -3009,10 +3010,10 @@ function renderPortal(){
 
   // Tab nav
   var tabs=[['priser','💰 Prisliste'],['tjenester','✂ Tjenester'],['bestilling','📦 Bestill'],['konto','👤 Min konto']];
-  var tabNav='<div style="display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(80,120,70,0.18);border-radius:12px;overflow:hidden;margin-bottom:1.25rem;">';
+  var tabNav='<div style="display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(186,152,98,0.15);border-radius:12px;overflow:hidden;margin-bottom:1.25rem;">';
   tabs.forEach(function(t){
     var active=B2B_TAB===t[0];
-    tabNav+='<button onclick="b2bTab(\''+t[0]+'\')" style="padding:10px 4px;background:'+(active?'rgba(60,100,50,0.35)':'transparent')+';border:0;border-right:1px solid rgba(80,120,70,0.12);color:'+(active?'#e0caa8':'#9a7a5a')+';font-size:11px;font-weight:'+(active?'700':'500')+';cursor:pointer;font-family:inherit;">'+t[1]+'</button>';
+    tabNav+='<button onclick="b2bTab(\''+t[0]+'\')" style="padding:10px 4px;background:'+(active?'rgba(60,100,50,0.35)':'transparent')+';border:0;border-right:1px solid rgba(186,152,98,0.1);color:'+(active?'#e0caa8':'#9a7a5a')+';font-size:11px;font-weight:'+(active?'700':'500')+';cursor:pointer;font-family:inherit;">'+t[1]+'</button>';
   });
   tabNav+='</div>';
 
@@ -3025,7 +3026,7 @@ function renderPortal(){
       +'<div style="font-size:14px;color:#f0e4ce;font-weight:600;margin-top:3px;">Kjøp for 5 000 kr+ og få gratis frakt</div>'
       +'<div style="font-size:11px;color:#9a7a5a;margin-top:3px;">Gjelder alle B2B-ordrer.</div></div><div style="font-size:2rem;">📦</div></div>'
       +'<div class="b2p-card"><div class="b2p-card-title">NAK Hair – Produkter med B2B-pris</div>'
-      +'<div style="font-size:10px;color:#9a7a5a;margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid rgba(80,120,70,0.1);">Alle priser eks. mva · Din rabatt: <b style="color:#e8c04a;">'+(disc?disc+'%':'standard B2B')+'</b></div>';
+      +'<div style="font-size:10px;color:#9a7a5a;margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid rgba(186,152,98,0.09);">Alle priser eks. mva · Din rabatt: <b style="color:#e8c04a;">'+(disc?disc+'%':'standard B2B')+'</b></div>';
     Object.keys(cats).forEach(function(cat){
       content+='<div style="margin-bottom:1.25rem;"><div class="b2p-cat-head">'+cat+'</div>';
       cats[cat].forEach(function(p){
@@ -3052,7 +3053,7 @@ function renderPortal(){
       treatCats[k].push(t);
     });
     content='<div class="b2p-card"><div class="b2p-card-title">Frisørtjenester og neglepleie – B2B-priser</div>'
-      +'<div style="font-size:10px;color:#9a7a5a;margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid rgba(80,120,70,0.1);">'
+      +'<div style="font-size:10px;color:#9a7a5a;margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid rgba(186,152,98,0.09);">'
       +(disc?'Din bedriftsrabatt: <b style="color:#e8c04a;">'+disc+'%</b> på alle tjenester.':'Kontakt oss for bedriftspriser på tjenester.')+'</div>';
     Object.keys(treatCats).forEach(function(cat){
       content+='<div style="margin-bottom:1.25rem;"><div class="b2p-cat-head">'+cat+'</div>';
@@ -3076,7 +3077,7 @@ function renderPortal(){
       +'<a href="mailto:post@yeganehstyle.no?subject=B2B+Bestilling+%E2%80%93+'+encodeURIComponent(acc.firma||'Bedrift')+'&body=Firma%3A+'+encodeURIComponent(acc.firma||'')+'+%0AOrg.nr%3A+'+encodeURIComponent(acc.org_nr||'')+'%0A%0AProdukt%2FTjeneste%3A+%0AAntall%3A+%0AKommentar%3A" class="b2p-btn-main" style="display:flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;">✉ Send bestilling på e-post</a>'
       +'<a href="tel:+4797855154" class="b2p-btn-sec" style="display:flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;">📞 Ring +47 978 55 154</a>'
       +'</div>'
-      +'<div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(80,120,70,0.12);">'
+      +'<div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(186,152,98,0.1);">'
       +'<div style="font-size:11px;font-weight:700;color:#9a7a5a;margin-bottom:0.6rem;text-transform:uppercase;letter-spacing:0.08em;">Ordrehistorikk</div>';
     var myOrders=(DATA.bookings||[]).filter(function(b){return b.phone&&acc.kontakt;}).slice(0,5);
     if(myOrders.length){
@@ -3142,7 +3143,7 @@ function renderPortal(){
 }
 
 function b2pInfoRow(label,val){
-  return '<div style="display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px solid rgba(80,120,70,0.1);gap:1rem;">'
+  return '<div style="display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px solid rgba(186,152,98,0.09);gap:1rem;">'
     +'<span style="font-size:11px;color:#9a7a5a;flex-shrink:0;">'+label+'</span>'
     +'<span style="font-size:12px;font-weight:600;color:#c0d4bc;text-align:right;">'+val+'</span>'
     +'</div>';
@@ -3298,14 +3299,14 @@ document.addEventListener('keydown',function(e){
 
 <!-- ═══════ ADMIN PANEL ═══════ -->
 <div id="adminPanel" style="display:none;position:fixed;inset:0;z-index:1000;background:#0a1209;overflow-y:auto;-webkit-overflow-scrolling:touch;-webkit-text-size-adjust:100%;font-size:14px;box-sizing:border-box;">
-<div style="position:sticky;top:0;background:rgba(10,7,4,0.97);border-bottom:1px solid #2a1e12;display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1rem;z-index:10;">
+<div style="position:sticky;top:0;background:rgba(20,14,8,0.98);border-bottom:1px solid #2a1e12;display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1rem;z-index:10;">
   <span style="font-size:14px;font-weight:600;color:#e4cda8;">Yeganeh Admin</span>
   <div style="display:flex;gap:6px;">
     <button onclick="if(window.sb){window.sb.auth.signOut().then(function(){closeAdminPanel();if(window.showToast)window.showToast('Logget ut');});}" style="background:none;border:1px solid #2a1e12;border-radius:8px;padding:6px 12px;color:#9a7a5a;font-size:12px;cursor:pointer;">Logg ut</button>
     <button onclick="closeAdminPanel()" style="background:none;border:1px solid #2a1e12;border-radius:8px;padding:6px 12px;color:#9a7a5a;font-size:12px;cursor:pointer;">Lukk</button>
   </div>
 </div>
-<div id="admTabs" style="padding:0.6rem 1rem 0.75rem;background:rgba(8,16,8,0.9);border-bottom:1px solid #2a1e12;"></div>
+<div id="admTabs" style="padding:0.6rem 1rem 0.75rem;background:rgba(20,14,6,0.9);border-bottom:1px solid #2a1e12;"></div>
 <div id="admBody" style="padding:1rem;"></div>
 </div>
 
@@ -3740,7 +3741,7 @@ function viewKalender(){
     +['måned','uke','dag'].map(function(v){
       var active=calView===v;
       var lbl=v==='måned'?'Mnd':v==='uke'?'Uke':'Dag';
-      return '<button onclick="admCalView(\''+v+'\')" style="padding:6px 10px;background:'+(active?'rgba(60,100,50,0.35)':'transparent')+';border:0;border-right:1px solid rgba(80,120,70,0.15);color:'+(active?'#e0caa8':'#9a7a5a')+';font-size:11px;font-weight:'+(active?'700':'500')+';cursor:pointer;font-family:inherit;">'+lbl+'</button>';
+      return '<button onclick="admCalView(\''+v+'\')" style="padding:6px 10px;background:'+(active?'rgba(60,100,50,0.35)':'transparent')+';border:0;border-right:1px solid rgba(186,152,98,0.12);color:'+(active?'#e0caa8':'#9a7a5a')+';font-size:11px;font-weight:'+(active?'700':'500')+';cursor:pointer;font-family:inherit;">'+lbl+'</button>';
     }).join('')
     +'</div>';
   var html='<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem;">'
@@ -4927,7 +4928,7 @@ window.admB2bDiscount=function(i){
     +'</div>'
     +'<div style="display:flex;gap:0.5rem;">'
     +'<button onclick="(function(){var v=parseInt(document.getElementById(\'discInp\').value,10);DATA.b2bClients['+i+'].discount=v;if(window.sb&&DATA.b2bClients['+i+'].epost){window.sb.from(\'b2b_applications\').update({discount:v}).eq(\'email\',DATA.b2bClients['+i+'].epost).then(function(){});}document.getElementById(\'discOverlay\').remove();go(\'bedriftskunder\');if(window.showToast)window.showToast(DATA.b2bClients['+i+'].firma+\': \'+v+\'% rabatt satt\');})()" style="flex:1;padding:12px;background:rgba(60,100,50,0.4);border:1px solid rgba(120,190,100,0.4);border-radius:12px;font-size:13px;font-weight:700;color:#e0caa8;cursor:pointer;font-family:inherit;">Lagre rabatt</button>'
-    +'<button onclick="document.getElementById(\'discOverlay\').remove()" style="padding:12px 16px;background:transparent;border:1px solid rgba(80,120,70,0.25);border-radius:12px;font-size:13px;color:#9a7a5a;cursor:pointer;font-family:inherit;">Avbryt</button>'
+    +'<button onclick="document.getElementById(\'discOverlay\').remove()" style="padding:12px 16px;background:transparent;border:1px solid rgba(186,152,98,0.2);border-radius:12px;font-size:13px;color:#9a7a5a;cursor:pointer;font-family:inherit;">Avbryt</button>'
     +'</div>'
     +'</div>';
   document.body.appendChild(overlay);
@@ -4960,7 +4961,7 @@ window.admB2bSendOffer=function(i){
     +'</div>'
     +'<div style="margin-bottom:1.25rem;">'
     +'<label style="font-size:10px;color:#9a7a5a;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:5px;">Melding til bedriften (valgfritt)</label>'
-    +'<textarea id="offerMsg" placeholder="f.eks. Gjelder fra neste måned. Minimum 10 besøk per år." style="width:100%;box-sizing:border-box;background:#081209;border:1px solid rgba(80,120,70,0.25);border-radius:10px;padding:8px;color:#c0d4bc;font-size:12px;font-family:inherit;resize:none;height:64px;"></textarea>'
+    +'<textarea id="offerMsg" placeholder="f.eks. Gjelder fra neste måned. Minimum 10 besøk per år." style="width:100%;box-sizing:border-box;background:#081209;border:1px solid rgba(186,152,98,0.2);border-radius:10px;padding:8px;color:#c0d4bc;font-size:12px;font-family:inherit;resize:none;height:64px;"></textarea>'
     +'</div>'
     +'<div style="display:flex;gap:0.5rem;">'
     +'<button onclick="(function(){'
@@ -5491,7 +5492,7 @@ if(window.renderNailsGrid) window.renderNailsGrid();
           +'</div>';
       });
     });
-    var stylistCard='<div style="display:flex;align-items:center;gap:12px;padding:12px 0 16px;border-bottom:1px solid rgba(80,120,70,0.15);margin-bottom:6px;">'
+    var stylistCard='<div style="display:flex;align-items:center;gap:12px;padding:12px 0 16px;border-bottom:1px solid rgba(186,152,98,0.12);margin-bottom:6px;">'
       +'<div style="width:44px;height:44px;border-radius:50%;background:'+stylistCol+'22;border:2px solid '+stylistCol+'66;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:'+stylistCol+';flex-shrink:0;">'+stylistInitial+'</div>'
       +'<div><div style="font-size:14px;font-weight:700;color:#e4cda8;">'+stylistName+'</div><div style="font-size:11px;color:#9a7a5a;">'+stylistRole+' · Yeganeh Style</div></div>'
       +'</div>';

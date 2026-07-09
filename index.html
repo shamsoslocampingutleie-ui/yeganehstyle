@@ -321,14 +321,13 @@ nav {
   gap: 0;
 }
 
-/* Logo: invert so black logo becomes white, then screen-blend to knock out background */
+/* Logo: transparent PNG (white logo, no background) */
 .hero-logo {
   width: auto; height: auto;
-  max-width: 480px; max-height: 220px;
+  max-width: 520px; max-height: 240px;
   object-fit: contain;
   margin-bottom: 3.5rem;
-  filter: invert(1);
-  mix-blend-mode: screen;
+  opacity: 0.92;
 }
 
 /* Divider line above buttons */
@@ -1397,7 +1396,7 @@ nav { }
 <!-- HERO -->
 <section class="hero" id="hjem">
   <div class="hero-inner">
-    <img class="hero-logo" src="https://cauftwsojtumogyshmqq.supabase.co/storage/v1/object/public/product-images/logo.jpeg" alt="Yeganeh Style AS" draggable="false">
+    <img class="hero-logo" src="https://cauftwsojtumogyshmqq.supabase.co/storage/v1/object/public/product-images/logo-white.png" alt="Yeganeh Style AS" draggable="false">
     <div class="hero-divider"></div>
     <div class="hero-btns">
       <button class="hero-btn" onclick="openProdOverlay()">Produkter</button>

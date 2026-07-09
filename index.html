@@ -1823,8 +1823,8 @@ nav { }
 </div>
 
 <!-- B2B PORTAL (full-screen overlay) -->
-<div id="b2bPortal" style="display:none;position:fixed;inset:0;z-index:960;background:#060d06;overflow-y:auto;-webkit-overflow-scrolling:touch;">
-  <div style="position:sticky;top:0;z-index:10;background:rgba(4,8,4,0.96);backdrop-filter:blur(14px);border-bottom:1px solid rgba(60,100,50,0.2);display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem;height:54px;">
+<div id="b2bPortal" style="display:none;position:fixed;inset:0;z-index:960;background:#0e0a06;overflow-y:auto;-webkit-overflow-scrolling:touch;">
+  <div style="position:sticky;top:0;z-index:10;background:rgba(16,11,6,0.97);backdrop-filter:blur(14px);border-bottom:1px solid rgba(200,160,80,0.18);display:flex;align-items:center;justify-content:space-between;padding:0 1.25rem;height:54px;">
     <div style="display:flex;align-items:center;gap:8px;">
       <svg viewBox="0 0 32 32" fill="none" style="width:20px;height:20px"><path d="M8 4 Q10 8 16 16" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/><path d="M24 4 Q22 8 16 16" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/><path d="M16 16 Q12 22 10 26" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="27" r="2.5" stroke="#c97d6e" stroke-width="1.8" fill="none"/><path d="M16 16 Q20 22 22 26" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/><circle cx="23" cy="27" r="2.5" stroke="#c97d6e" stroke-width="1.8" fill="none"/><circle cx="16" cy="16" r="1.5" fill="#c97d6e"/></svg>
       <span style="font-size:13px;font-weight:600;color:#e4cda8;">Yeganeh Style</span>
@@ -2986,7 +2986,7 @@ function renderPortal(){
       +'<div style="font-size:20px;font-weight:900;color:#e8c04a;margin-bottom:4px;">'+acc.offer_discount+'% rabatt</div>'
       +(acc.offer_message?'<div style="font-size:12px;color:#e0d4b8;margin-bottom:1rem;font-style:italic;">"'+acc.offer_message+'"</div>':'')
       +'<div style="display:flex;gap:0.5rem;">'
-      +'<button onclick="b2bAcceptOffer()" style="flex:1;padding:10px;background:rgba(60,100,50,0.4);border:1px solid rgba(120,190,100,0.4);border-radius:12px;font-size:12px;font-weight:700;color:#e0caa8;cursor:pointer;font-family:inherit;">✓ Aksepter tilbud</button>'
+      +'<button onclick="b2bAcceptOffer()" style="flex:1;padding:10px;background:rgba(200,160,60,0.3);border:1px solid rgba(212,168,80,0.55);border-radius:12px;font-size:12px;font-weight:700;color:#f0d870;cursor:pointer;font-family:inherit;">✓ Aksepter tilbud</button>'
       +'<button onclick="b2bDeclineOffer()" style="padding:10px 14px;background:transparent;border:1px solid rgba(192,57,43,0.3);border-radius:12px;font-size:12px;color:#c0392b;cursor:pointer;font-family:inherit;">Avslå</button>'
       +'</div>'
       +'</div>';
@@ -3041,7 +3041,7 @@ function renderPortal(){
   var tabNav='<div style="display:grid;grid-template-columns:repeat(2,1fr);border:1px solid rgba(186,152,98,0.15);border-radius:12px;overflow:hidden;margin-bottom:1.25rem;">';
   tabs.forEach(function(t){
     var active=B2B_TAB===t[0];
-    tabNav+='<button onclick="b2bTab(\''+t[0]+'\')" style="padding:10px 4px;background:'+(active?'rgba(60,100,50,0.35)':'transparent')+';border:0;border-right:1px solid rgba(186,152,98,0.1);color:'+(active?'#e0caa8':'#c8a870')+';font-size:11px;font-weight:'+(active?'700':'500')+';cursor:pointer;font-family:inherit;">'+t[1]+'</button>';
+    tabNav+='<button onclick="b2bTab(\''+t[0]+'\')" style="padding:10px 4px;background:'+(active?'rgba(200,160,60,0.2)':'transparent')+';border:0;border-right:1px solid rgba(186,152,98,0.1);color:'+(active?'#f0d860':'#c8a870')+';font-size:11px;font-weight:'+(active?'700':'500')+';cursor:pointer;font-family:inherit;">'+t[1]+'</button>';
   });
   tabNav+='</div>';
 
@@ -3493,7 +3493,6 @@ var TABS=[
   {id:'produkter',label:'Produkter'},
   {id:'kalender',label:'✂ Hadi'},
   {id:'timer',label:'Timer'},
-  {id:'behandlinger',label:'Behandlinger'},
   {id:'nails',label:'💅 MH Nails'},
   {id:'ansatte',label:'Ansatte'},
   {id:'apningstider',label:'Åpningstider'},
@@ -3536,7 +3535,7 @@ function input(id,label,ph,type){
 function renderTabs(){
   var rows=[
     ['oversikt','ordre','produkter'],
-    ['kalender','timer','behandlinger','nails'],
+    ['kalender','timer','nails'],
     ['ansatte','apningstider','anmeldelser','rabatt','bedriftskunder','innhold']
   ];
   var html='';
@@ -3547,7 +3546,7 @@ function renderTabs(){
       if(!t) return;
       var active=t.id===currentTab;
       var isNails=t.id==='nails';
-      html+='<button onclick="admGo(\''+t.id+'\');" style="background:'+(active?(isNails?'rgba(201,125,110,0.2)':'rgba(138,180,138,0.18)'):'rgba(255,255,255,0.03)')+';border:1px solid '+(active?(isNails?'rgba(201,125,110,0.5)':'rgba(138,180,138,0.5)'):'rgba(80,100,70,0.2)')+';border-radius:10px;padding:6px 14px;font-size:12px;font-weight:'+(active?'600':'400')+';color:'+(active?(isNails?'#c97d6e':'#b8915a'):'#7a5a3a')+';cursor:pointer;white-space:nowrap;transition:all 0.15s;font-family:inherit;">'+t.label+'</button>';
+      html+='<button onclick="admGo(\''+t.id+'\');" style="background:'+(active?(isNails?'rgba(201,125,110,0.2)':'rgba(200,160,60,0.18)'):'rgba(255,255,255,0.03)')+';border:1px solid '+(active?(isNails?'rgba(201,125,110,0.55)':'rgba(200,160,60,0.5)'):'rgba(180,140,60,0.15)')+';border-radius:10px;padding:6px 14px;font-size:12px;font-weight:'+(active?'600':'400')+';color:'+(active?(isNails?'#f0b0a0':'#f0d060'):'#a08850')+';cursor:pointer;white-space:nowrap;transition:all 0.15s;font-family:inherit;">'+t.label+'</button>';
     });
     html+='</div>';
   });
@@ -3822,7 +3821,7 @@ function viewKalenderMnd(){
   var daysInMonth=new Date(y,m+1,0).getDate();
   var todayIso=isoDate(new Date());
   var dayNames=['Man','Tir','Ons','Tor','Fre','Lør','Søn'];
-  var html='<div style="background:#0d1a0f;border:1px solid #2a1e12;border-radius:14px;overflow:hidden;">'
+  var html='<div style="background:#140f08;border:1px solid rgba(200,160,80,0.18);border-radius:14px;overflow:hidden;">'
     +'<div style="display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid #2a1e12;">';
   dayNames.forEach(function(n){
     html+='<div style="padding:8px 4px;text-align:center;font-size:10px;font-weight:700;color:#b09060;text-transform:uppercase;letter-spacing:0.06em;">'+n+'</div>';
@@ -3875,7 +3874,7 @@ function viewKalenderDag(){
       +'<div style="flex:1;padding:4px 8px;display:flex;align-items:center;">';
     if(bk){
       var bkIdx=DATA.bookings.indexOf(bk);
-      html+='<div style="width:100%;background:rgba(138,180,138,0.15);border-left:3px solid #b09070;border-radius:6px;padding:6px 10px;cursor:pointer;" onclick="admEditBkInline('+bkIdx+')">'
+      html+='<div style="width:100%;background:rgba(200,160,60,0.15);border-left:3px solid #c8a060;border-radius:6px;padding:6px 10px;cursor:pointer;" onclick="admEditBkInline('+bkIdx+')">'
         +'<div style="display:flex;justify-content:space-between;align-items:center;">'
         +'<div><b style="font-size:12px;color:#e4cda8;">'+bk.customer+'</b><span style="font-size:10px;color:#c8a870;margin-left:8px;">'+bk.phone+'</span></div>'
         +badge(bk.status)+'</div>'
@@ -3885,7 +3884,7 @@ function viewKalenderDag(){
       html+='<div style="width:100%;background:rgba(192,57,43,0.1);border-left:3px solid #c0392b;border-radius:6px;padding:6px 10px;">'
         +'<div style="font-size:11px;color:#c0392b;">Blokkert: '+(bl.note||'Pause')+'</div></div>';
     } else {
-      html+='<div style="width:100%;cursor:pointer;border-radius:6px;min-height:28px;transition:background 0.1s;" onmouseenter="this.style.background=\'rgba(138,180,138,0.08)\'" onmouseleave="this.style.background=\'\'" onclick="admQuickBook(\''+iso+'\',\''+sl+'\')" title="Opprett booking '+sl+'"></div>';
+      html+='<div style="width:100%;cursor:pointer;border-radius:6px;min-height:28px;transition:background 0.1s;" onmouseenter="this.style.background=\'rgba(200,160,60,0.08)\'" onmouseleave="this.style.background=\'\'" onclick="admQuickBook(\''+iso+'\',\''+sl+'\')" title="Opprett booking '+sl+'"></div>';
     }
     html+='</div></div>';
   }
@@ -3911,13 +3910,13 @@ function viewKalenderUke(){
       for(var j=0;j<dayBks.length;j++){
         var b=dayBks[j];
         var bi=DATA.bookings.indexOf(b);
-        bkHtml+='<div style="background:rgba(138,180,138,0.2);border-left:2px solid #b09070;border-radius:4px;padding:3px 5px;margin-bottom:3px;cursor:pointer;font-size:10px;" onclick="admEditBkInline('+bi+')">'
+        bkHtml+='<div style="background:rgba(200,160,60,0.2);border-left:2px solid #c8a060;border-radius:4px;padding:3px 5px;margin-bottom:3px;cursor:pointer;font-size:10px;" onclick="admEditBkInline('+bi+')">'
           +'<b style="color:#e4cda8;">'+b.time+'</b><br><span style="color:#b09070;">'+b.customer.split(' ')[0]+'</span>'
           +'</div>';
       }
       if(!oh||!oh.open) bkHtml='<div style="font-size:9px;color:#c0392b;text-align:center;padding:6px 0;">Stengt</div>';
       else if(!bkHtml) bkHtml='<div style="font-size:9px;color:#b09060;text-align:center;padding:6px 0;">Ledig</div>';
-      cols+='<div style="background:'+(isToday?'rgba(138,180,138,0.07)':'#1a1410')+';border:1px solid '+(isToday?'rgba(138,180,138,0.35)':'#2a1e12')+';border-radius:10px;padding:8px;cursor:pointer;" onclick="admCalDay(\''+iso+'\')">'
+      cols+='<div style="background:'+(isToday?'rgba(200,160,60,0.1)':'#1a1410')+';border:1px solid '+(isToday?'rgba(212,168,80,0.4)':'#2a1e12')+';border-radius:10px;padding:8px;cursor:pointer;" onclick="admCalDay(\''+iso+'\')">'
         +'<div style="text-align:center;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid #2a1e1255;">'
         +'<div style="font-size:9px;color:#c8a870;text-transform:uppercase;letter-spacing:0.08em;">'+dayShort[day.getDay()]+'</div>'
         +'<div style="font-size:17px;font-weight:700;color:'+(isToday?'#b8915a':'#e4cda8')+';">'+day.getDate()+'</div>'
@@ -3994,7 +3993,7 @@ function viewAnsatte(){
       +'<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;">'
       +schKeys.map(function(k,ki){
         var sch=emp.schedule[k];var open=sch&&sch!=='Stengt';
-        return '<div style="background:'+(open?'rgba(138,180,138,0.12)':'rgba(192,57,43,0.08)')+';border:1px solid '+(open?'rgba(138,180,138,0.2)':'rgba(192,57,43,0.15)')+';border-radius:6px;padding:4px 2px;text-align:center;">'
+        return '<div style="background:'+(open?'rgba(200,160,60,0.12)':'rgba(192,57,43,0.08)')+';border:1px solid '+(open?'rgba(200,160,60,0.25)':'rgba(192,57,43,0.15)')+';border-radius:6px;padding:4px 2px;text-align:center;">'
           +'<div style="font-size:8px;color:#c8a870;text-transform:uppercase;">'+schLabels[ki]+'</div>'
           +(open?'<div style="font-size:7.5px;color:#b8915a;margin-top:2px;">'+sch+'</div>':'<div style="font-size:9px;color:#c0392b;margin-top:2px;">✕</div>')
           +'</div>';
@@ -4087,7 +4086,7 @@ function viewBehandlinger(){
     +btn('+ Ny tjeneste','admNewTreat()','#b09070')
     +'</div>'
     +_buildTreatForm(false)
-    +'<div style="background:#0d1a0f;border:1px solid rgba(140,108,60,0.18);border-radius:14px;overflow:hidden;">'
+    +'<div style="background:#100c06;border:1px solid rgba(140,108,60,0.18);border-radius:14px;overflow:hidden;">'
     +(rows||'<div style="padding:2rem;text-align:center;color:#b09060;">Ingen tjenester. Klikk "+ Ny tjeneste".</div>')
     +'</div>';
 }
@@ -4350,7 +4349,7 @@ function viewChat(){
       var mine=m.from==='admin';
       msgs+='<div style="display:flex;justify-content:'+(mine?'flex-end':'flex-start')+';margin-bottom:8px;">'
         +'<div style="max-width:75%;padding:8px 12px;border-radius:14px;font-size:13px;line-height:1.4;'
-        +(mine?'background:rgba(138,180,138,0.2);color:#e0caa8;border:1px solid rgba(138,180,138,0.3);':'background:#181208;color:#e4cda8;border:1px solid #2a1e12;')
+        +(mine?'background:rgba(200,160,60,0.2);color:#f0e0b0;border:1px solid rgba(200,160,60,0.35);':'background:#181208;color:#e4cda8;border:1px solid #2a1e12;')
         +'">'+m.text+'<div style="font-size:9px;color:#c8a870;margin-top:3px;text-align:right;">'+m.time+'</div></div></div>';
     }
     html='<div style="margin-bottom:0.5rem;">'+btn('< Tilbake','admBackChat()','#c8a870')+'</div>'
@@ -4358,7 +4357,7 @@ function viewChat(){
         '<div style="padding:1rem;max-height:50vh;overflow-y:auto;" id="admChatMsgs">'+msgs+'</div>'
         +'<div style="padding:0.75rem;border-top:1px solid #2a1e12;display:flex;gap:0.5rem;">'
         +'<input id="admChatInput" placeholder="Skriv melding..." style="flex:1;padding:10px 13px;background:#181208;border:1px solid #2a1e12;border-radius:20px;font-size:16px;color:#e4cda8;" onkeydown="if(event.key===\'Enter\')admSendMsg()">'
-        +'<button onclick="admSendMsg()" style="padding:10px 18px;border-radius:20px;background:rgba(138,180,138,0.2);border:1px solid rgba(138,180,138,0.4);color:#b8915a;font-size:13px;font-weight:600;cursor:pointer;">Send</button>'
+        +'<button onclick="admSendMsg()" style="padding:10px 18px;border-radius:20px;background:rgba(200,160,60,0.22);border:1px solid rgba(200,160,60,0.45);color:#f0d060;font-size:13px;font-weight:600;cursor:pointer;">Send</button>'
         +'</div>');
   }
   return html;
@@ -5062,7 +5061,7 @@ window.admB2bDiscount=function(i){
       +'<div style="font-size:9px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:inherit;margin-top:2px;">'+t.lbl+'</div>'
       +'</button>';
   }).join('');
-  overlay.innerHTML='<div style="background:#0d1a0f;border:1px solid rgba(140,108,60,0.26);border-radius:20px;padding:1.5rem;width:100%;max-width:420px;">'
+  overlay.innerHTML='<div style="background:#100c06;border:1px solid rgba(140,108,60,0.26);border-radius:20px;padding:1.5rem;width:100%;max-width:420px;">'
     +'<div style="font-size:14px;font-weight:700;color:#e4cda8;margin-bottom:4px;">B2B-rabatt</div>'
     +'<div style="font-size:11px;color:#c8a870;margin-bottom:1.25rem;">'+c.firma+'</div>'
     +'<div style="display:flex;gap:6px;margin-bottom:1.25rem;">'+tierBtns+'</div>'
@@ -5072,7 +5071,7 @@ window.admB2bDiscount=function(i){
     +'<div style="text-align:center;font-size:22px;font-weight:800;color:#e8c04a;margin-top:4px;" id="discVal">'+cur+'%</div>'
     +'</div>'
     +'<div style="display:flex;gap:0.5rem;">'
-    +'<button onclick="(function(){var v=parseInt(document.getElementById(\'discInp\').value,10);DATA.b2bClients['+i+'].discount=v;if(window.sb&&DATA.b2bClients['+i+'].epost){window.sb.from(\'b2b_applications\').update({discount:v}).eq(\'email\',DATA.b2bClients['+i+'].epost).then(function(){});}document.getElementById(\'discOverlay\').remove();go(\'bedriftskunder\');if(window.showToast)window.showToast(DATA.b2bClients['+i+'].firma+\': \'+v+\'% rabatt satt\');})()" style="flex:1;padding:12px;background:rgba(60,100,50,0.4);border:1px solid rgba(120,190,100,0.4);border-radius:12px;font-size:13px;font-weight:700;color:#e0caa8;cursor:pointer;font-family:inherit;">Lagre rabatt</button>'
+    +'<button onclick="(function(){var v=parseInt(document.getElementById(\'discInp\').value,10);DATA.b2bClients['+i+'].discount=v;if(window.sb&&DATA.b2bClients['+i+'].epost){window.sb.from(\'b2b_applications\').update({discount:v}).eq(\'email\',DATA.b2bClients['+i+'].epost).then(function(){});}document.getElementById(\'discOverlay\').remove();go(\'bedriftskunder\');if(window.showToast)window.showToast(DATA.b2bClients['+i+'].firma+\': \'+v+\'% rabatt satt\');})()" style="flex:1;padding:12px;background:rgba(200,160,60,0.3);border:1px solid rgba(212,168,80,0.55);border-radius:12px;font-size:13px;font-weight:700;color:#f0d860;cursor:pointer;font-family:inherit;">Lagre rabatt</button>'
     +'<button onclick="document.getElementById(\'discOverlay\').remove()" style="padding:12px 16px;background:transparent;border:1px solid rgba(186,152,98,0.2);border-radius:12px;font-size:13px;color:#c8a870;cursor:pointer;font-family:inherit;">Avbryt</button>'
     +'</div>'
     +'</div>';
@@ -5095,7 +5094,7 @@ window.admB2bSendOffer=function(i){
       +'</button>';
   }).join('');
   var defaultDisc=Math.max(cur+5,10);
-  overlay.innerHTML='<div style="background:#0d1a0f;border:1px solid rgba(201,125,110,0.3);border-radius:20px;padding:1.5rem;width:100%;max-width:440px;">'
+  overlay.innerHTML='<div style="background:#100c06;border:1px solid rgba(201,125,110,0.3);border-radius:20px;padding:1.5rem;width:100%;max-width:440px;">'
     +'<div style="font-size:14px;font-weight:700;color:#e4cda8;margin-bottom:3px;">📩 Send pristilbud</div>'
     +'<div style="font-size:11px;color:#c97d6e;font-weight:600;margin-bottom:1.25rem;">'+c.firma+' ønsker en bedre avtale</div>'
     +'<div style="display:flex;gap:5px;margin-bottom:1rem;">'+tierBtns+'</div>'

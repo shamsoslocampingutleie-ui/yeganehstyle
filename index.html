@@ -1111,14 +1111,14 @@ nav { }
 .timma-step-h { font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:300;color:#e8f0e4;margin:0 0 1.5rem;line-height:1.2; }
 /* Category cards */
 .timma-cat-grid { display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;margin-bottom:1rem; }
-.timma-cat-card { background:rgba(10,20,10,0.7);border:1px solid rgba(140,108,60,0.18);border-radius:16px;padding:1.5rem 1.25rem;cursor:pointer;transition:all 0.2s;text-align:left; }
+.timma-cat-card { background:rgba(26,18,8,0.7);border:1px solid rgba(140,108,60,0.18);border-radius:16px;padding:1.5rem 1.25rem;cursor:pointer;transition:all 0.2s;text-align:left; }
 .timma-cat-card:hover,.timma-cat-card.sel { border-color:rgba(184,148,96,0.45);background:rgba(46,34,16,0.85); }
 .timma-cat-icon { font-size:1.8rem;margin-bottom:0.6rem; }
 .timma-cat-name { font-size:14px;font-weight:700;color:#e4cda8; }
 .timma-cat-sub { font-size:11px;color:#c8a870;margin-top:3px; }
 /* Service list */
 .timma-svc-list { display:flex;flex-direction:column;gap:0.5rem; }
-.timma-svc-row { display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1rem;background:rgba(10,20,10,0.7);border:1px solid rgba(186,152,98,0.15);border-radius:12px;cursor:pointer;transition:all 0.2s;gap:0.75rem; }
+.timma-svc-row { display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1rem;background:rgba(26,18,8,0.7);border:1px solid rgba(186,152,98,0.15);border-radius:12px;cursor:pointer;transition:all 0.2s;gap:0.75rem; }
 .timma-svc-row:hover,.timma-svc-row.sel { border-color:rgba(184,148,96,0.42);background:rgba(46,34,16,0.85); }
 .timma-svc-name { font-size:13px;font-weight:600;color:#e4cda8; }
 .timma-svc-dur { font-size:11px;color:#c8a870;margin-top:2px; }
@@ -1134,21 +1134,21 @@ nav { }
 .timma-cal-day { text-align:center;padding:6px 2px;font-size:13px;border-radius:8px;cursor:pointer;color:#c8a870;transition:all 0.15s; }
 .timma-cal-day.avail { color:#e0d4b8;cursor:pointer; }
 .timma-cal-day.avail:hover { background:rgba(184,148,96,0.1);color:#e4cda8; }
-.timma-cal-day.sel { background:#2d5a2a;color:#e8f0e4;font-weight:700; }
+.timma-cal-day.sel { background:#7a5c20;color:#f5e6c8;font-weight:700; }
 .timma-cal-day.today { outline:1px solid rgba(184,148,96,0.32);outline-offset:-1px; }
 .timma-cal-day.disabled,.timma-cal-day.empty { color:#2a1e12;cursor:default;pointer-events:none; }
 /* Time slots */
 .timma-time-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem; }
-.timma-time-pill { padding:10px 4px;text-align:center;background:rgba(10,20,10,0.7);border:1px solid rgba(140,108,60,0.18);border-radius:10px;font-size:13px;font-weight:600;color:#e0d4b8;cursor:pointer;transition:all 0.18s;font-family:inherit; }
+.timma-time-pill { padding:10px 4px;text-align:center;background:rgba(26,18,8,0.7);border:1px solid rgba(140,108,60,0.18);border-radius:10px;font-size:13px;font-weight:600;color:#e0d4b8;cursor:pointer;transition:all 0.18s;font-family:inherit; }
 .timma-time-pill:hover { border-color:rgba(184,148,96,0.38);color:#e4cda8; }
-.timma-time-pill.sel { background:#2d5a2a;border-color:#4a8a45;color:#e8f0e4; }
+.timma-time-pill.sel { background:#7a5c20;border-color:#c8a870;color:#f5e6c8; }
 /* Contact form */
 .timma-field { margin-bottom:0.85rem; }
 .timma-label { display:block;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#c8a870;margin-bottom:5px; }
-.timma-input { width:100%;padding:12px 14px;background:rgba(10,20,10,0.8);border:1px solid rgba(140,108,60,0.26);border-radius:12px;font-size:15px;color:#e4cda8;box-sizing:border-box;font-family:inherit;outline:none;transition:border 0.2s; }
+.timma-input { width:100%;padding:12px 14px;background:rgba(26,18,8,0.8);border:1px solid rgba(140,108,60,0.26);border-radius:12px;font-size:15px;color:#e4cda8;box-sizing:border-box;font-family:inherit;outline:none;transition:border 0.2s; }
 .timma-input:focus { border-color:rgba(200,160,80,0.65); box-shadow: 0 0 0 3px rgba(200,160,80,0.12); }
 /* Summary card */
-.timma-summary { background:rgba(10,20,10,0.7);border:1px solid rgba(140,108,60,0.18);border-radius:14px;padding:1.1rem;margin-bottom:1.25rem; }
+.timma-summary { background:rgba(12,9,6,0.7);border:1px solid rgba(140,108,60,0.18);border-radius:14px;padding:1.1rem;margin-bottom:1.25rem; }
 .timma-sum-row { display:flex;justify-content:space-between;align-items:baseline;padding:4px 0;font-size:13px; }
 .timma-sum-label { color:#c8a870; }
 .timma-sum-val { color:#e4cda8;font-weight:600; }
@@ -2517,7 +2517,7 @@ function renderNailsGrid(){
   var svcs=_DATA.treatments.filter(function(t){return t.type==='nails'&&t.active;});
   g.innerHTML=svcs.map(function(t){
     var icon=icons[t.cat.toLowerCase()]||'💅';
-    return '<div onclick="openTimma()" style="background:rgba(10,18,10,0.85);border:1px solid rgba(186,152,98,0.15);border-radius:14px;padding:1.1rem;cursor:pointer;transition:border-color 0.2s;" onmouseenter="this.style.borderColor=\'rgba(201,125,110,0.4)\'" onmouseleave="this.style.borderColor=\'rgba(186,152,98,0.15)\'">'
+    return '<div onclick="openTimma()" style="background:rgba(12,9,6,0.85);border:1px solid rgba(186,152,98,0.15);border-radius:14px;padding:1.1rem;cursor:pointer;transition:border-color 0.2s;" onmouseenter="this.style.borderColor=\'rgba(201,125,110,0.4)\'" onmouseleave="this.style.borderColor=\'rgba(186,152,98,0.15)\'">'
       +'<div style="font-size:1.4rem;margin-bottom:0.4rem;">'+icon+'</div>'
       +'<div style="font-size:13px;font-weight:600;color:#e4cda8;margin-bottom:2px;">'+t.name+'</div>'
       +'<div style="font-size:11px;color:#c8a870;margin-bottom:6px;">'+t.duration+' min</div>'
@@ -3023,7 +3023,7 @@ function renderPortal(){
     var prog=tier.nextSpend?Math.min(100,Math.round((totalSpend/tier.nextSpend)*100)):0;
     var krLeft=tier.nextSpend?Math.max(0,tier.nextSpend-totalSpend):0;
     function fmtKr(n){return n>=1000?(n/1000).toFixed(0)+' 000 kr':n+' kr';}
-    tierCard='<div style="background:linear-gradient(135deg,rgba(10,22,12,0.95),rgba(15,28,15,0.95));border:1px solid '+tier.col+'44;border-radius:18px;padding:1.25rem;margin-bottom:1rem;">'
+    tierCard='<div style="background:linear-gradient(135deg,rgba(20,14,8,0.95),rgba(12,9,6,0.95));border:1px solid '+tier.col+'44;border-radius:18px;padding:1.25rem;margin-bottom:1rem;">'
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">'
       +'<div>'
       +'<div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:'+tier.col+';margin-bottom:3px;">Ditt nivå nå</div>'
@@ -3048,7 +3048,7 @@ function renderPortal(){
       +'</div>'
       +'</div>';
   } else if(disc>=25){
-    tierCard='<div style="background:linear-gradient(135deg,rgba(201,125,110,0.12),rgba(10,22,12,0.95));border:1px solid #c97d6e44;border-radius:18px;padding:1.25rem;margin-bottom:1rem;text-align:center;">'
+    tierCard='<div style="background:linear-gradient(135deg,rgba(201,125,110,0.12),rgba(12,9,6,0.95));border:1px solid #c97d6e44;border-radius:18px;padding:1.25rem;margin-bottom:1rem;text-align:center;">'
       +'<div style="font-size:2.5rem;margin-bottom:4px;">👑</div>'
       +'<div style="font-size:15px;font-weight:800;color:#c97d6e;">Elite-bedriftskunde</div>'
       +'<div style="font-size:11px;color:#c8a870;margin-top:6px;line-height:1.6;">Du nyter vår høyeste rabatt på <b style="color:#c97d6e;">'+disc+'%</b> på alt.<br>Takk for lojaliteten til Yeganeh Style! 🙏</div>'
@@ -3058,7 +3058,7 @@ function renderPortal(){
   // Pending offer card
   var offerCard='';
   if(hasOffer){
-    offerCard='<div style="background:linear-gradient(135deg,rgba(232,192,74,0.08),rgba(10,22,12,0.95));border:2px solid rgba(232,192,74,0.4);border-radius:18px;padding:1.25rem;margin-bottom:1rem;animation:pulse 2s infinite;">'
+    offerCard='<div style="background:linear-gradient(135deg,rgba(232,192,74,0.08),rgba(12,9,6,0.95));border:2px solid rgba(232,192,74,0.4);border-radius:18px;padding:1.25rem;margin-bottom:1rem;animation:pulse 2s infinite;">'
       +'<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#e8c04a;margin-bottom:6px;">📬 Nytt pristilbud fra Yeganeh Style</div>'
       +'<div style="font-size:20px;font-weight:900;color:#e8c04a;margin-bottom:4px;">'+acc.offer_discount+'% rabatt</div>'
       +(acc.offer_message?'<div style="font-size:12px;color:#e0d4b8;margin-bottom:1rem;font-style:italic;">"'+acc.offer_message+'"</div>':'')
@@ -3228,7 +3228,7 @@ function renderPortal(){
       +b2pInfoRow('Status','✓ Godkjent bedriftskunde')
       +'</div>'
       +'</div>'
-      +'<div class="b2p-card" style="background:linear-gradient(135deg,rgba(232,192,74,0.05),rgba(10,18,10,0.9));border-color:rgba(232,192,74,0.2);">'
+      +'<div class="b2p-card" style="background:linear-gradient(135deg,rgba(232,192,74,0.05),rgba(12,9,6,0.9));border-color:rgba(232,192,74,0.2);">'
       +'<div class="b2p-card-title" style="color:#e8c04a;">🏆 Lojalitetsprogram — Jo mer du kjøper, jo mer sparer du</div>'
       +'<div style="font-size:13px;color:#f0d8a8;margin-bottom:0.75rem;line-height:1.7;">Rabatten gjelder kun NAK Hair-produkter. Frisør- og negletjenester inngår ikke i lojalitetsprogrammet. Nivå beregnes basert på totalt produktkjøp.</div>'
       +allTiers
@@ -5304,7 +5304,7 @@ window.admB2bSendOffer=function(i){
     +'</div>'
     +'<div style="margin-bottom:1.25rem;">'
     +'<label style="font-size:10px;color:#c8a870;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:5px;">Melding til bedriften (valgfritt)</label>'
-    +'<textarea id="offerMsg" placeholder="f.eks. Gjelder fra neste måned. Minimum 10 besøk per år." style="width:100%;box-sizing:border-box;background:#081209;border:1px solid rgba(186,152,98,0.2);border-radius:10px;padding:8px;color:#e0d4b8;font-size:12px;font-family:inherit;resize:none;height:64px;"></textarea>'
+    +'<textarea id="offerMsg" placeholder="f.eks. Gjelder fra neste måned. Minimum 10 besøk per år." style="width:100%;box-sizing:border-box;background:#1a1208;border:1px solid rgba(186,152,98,0.2);border-radius:10px;padding:8px;color:#e0d4b8;font-size:12px;font-family:inherit;resize:none;height:64px;"></textarea>'
     +'</div>'
     +'<div style="display:flex;gap:0.5rem;">'
     +'<button onclick="(function(){'
@@ -5993,6 +5993,14 @@ if(window.renderNailsGrid) window.renderNailsGrid();
       service:ST.svc?ST.svc.name:'', price:ST.svc?ST.svc.price+' kr':'',
       status:'ny', cat:ST.cat
     });
+    if(window.sb){
+      window.sb.from('bookings').insert({
+        customer_name:ST.name, phone:ST.phone,
+        service:ST.svc?ST.svc.name:'', service_price:ST.svc?ST.svc.price+' kr':'',
+        booking_date:ST.date, booking_time:ST.time,
+        status:'ny'
+      }).then(function(){},function(){});
+    }
     ST.step=6; renderTimma();
     if(window.showToast)window.showToast('Booking sendt!');
   };

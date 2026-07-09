@@ -30,6 +30,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://cauftwsojtumogyshmqq.supabase.co" crossorigin>
+<!-- Preload hero logo (LCP element) -->
+<link rel="preload" as="image" href="https://cauftwsojtumogyshmqq.supabase.co/storage/v1/object/public/product-images/logo-white.png" fetchpriority="high">
 <!-- Preload critical fonts -->
 <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtKky2F7g.woff2">
@@ -193,13 +195,12 @@ nav {
 
 /* Logo */
 .nav-logo {
-  display: flex; align-items: center; gap: 8px;
-  text-decoration: none; color: var(--text);
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 300; font-size: 17px; letter-spacing: 0.06em;
-  white-space: nowrap; flex-shrink: 0;
+  display: flex; align-items: center;
+  text-decoration: none;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
 }
-.nav-logo svg { width: 24px; height: 24px; flex-shrink: 0; }
+.nav-logo-img { height: 30px; width: auto; opacity: 0.9; display: block; }
 
 /* Center links */
 .nav-links {
@@ -375,7 +376,7 @@ nav {
 /* ── PRODUCTS OVERLAY ── */
 .prod-overlay {
   position: fixed; inset: 0; z-index: 500;
-  background: #080e09; display: flex; flex-direction: column;
+  background: #0c0906; display: flex; flex-direction: column;
   transform: translateY(100%); transition: transform 0.32s cubic-bezier(.4,0,.2,1);
   will-change: transform;
 }
@@ -1005,7 +1006,7 @@ input[type="date"] {
 .pay-method-sub { font-size: 11px; color: var(--gray); }
 .pay-radio { margin-left: auto; width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; }
 .pay-method.selected .pay-radio { border-color: var(--accent); background: var(--accent); }
-.pay-method.selected .pay-radio::after { content: ''; width: 8px; height: 8px; background: #0d1610; border-radius: 50%; }
+.pay-method.selected .pay-radio::after { content: ''; width: 8px; height: 8px; background: #100c08; border-radius: 50%; }
 .order-summary { background: rgba(18,34,16,0.6); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; margin-bottom: 1rem; }
 .order-row { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px; color: var(--text-dim); }
 .order-row.total { font-size: 14px; font-weight: 700; color: var(--text); border-top: 1px solid var(--border); padding-top: 8px; margin-top: 8px; margin-bottom: 0; }
@@ -1046,57 +1047,57 @@ nav { }
 .b2p-spin {
   width: 36px; height: 36px;
   border: 3px solid rgba(184,148,96,0.12);
-  border-top-color: #9ec49a;
+  border-top-color: #b8915a;
   border-radius: 50%;
   animation: b2pSpin 0.75s linear infinite;
 }
 .b2p-center { display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:50vh;text-align:center;padding:2rem 1rem; }
 .b2p-auth-wrap { max-width:460px;margin:0 auto;padding:1rem 1rem 3rem; }
-.b2p-eyebrow { font-size:10px;color:#9ec49a;letter-spacing:0.15em;text-transform:uppercase;font-weight:600;margin-bottom:6px; }
+.b2p-eyebrow { font-size:10px;color:#b8915a;letter-spacing:0.15em;text-transform:uppercase;font-weight:600;margin-bottom:6px; }
 .b2p-h2 { font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:300;color:#f0e4ce;margin:0 0 8px; }
 .b2p-tabs { display:grid;grid-template-columns:1fr 1fr;border:1px solid rgba(140,108,60,0.18);border-radius:10px;overflow:hidden;margin-bottom:1.5rem; }
-.b2p-tab { padding:11px;background:transparent;border:0;color:#7a9478;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.2s; }
-.b2p-tab-a { background:rgba(140,108,60,0.18);color:#9ec49a; }
+.b2p-tab { padding:11px;background:transparent;border:0;color:#9a7a5a;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.2s; }
+.b2p-tab-a { background:rgba(140,108,60,0.18);color:#b8915a; }
 .b2p-fi { margin-bottom:0.8rem; }
-.b2p-label { display:block;font-size:10px;color:#7a9478;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;font-weight:500; }
+.b2p-label { display:block;font-size:10px;color:#9a7a5a;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;font-weight:500; }
 .b2p-input { width:100%;padding:11px 13px;background:rgba(15,28,15,0.9);border:1px solid rgba(140,108,60,0.26);border-radius:10px;font-size:15px;color:#f0e4ce;font-family:inherit;box-sizing:border-box;outline:none;transition:border-color 0.2s; }
 .b2p-input:focus { border-color:rgba(184,148,96,0.45); }
-.b2p-input::placeholder { color:#3a5a38; }
-.b2p-btn-main { display:block;width:100%;padding:13px;background:rgba(140,108,60,0.26);border:1px solid rgba(184,148,96,0.35);border-radius:12px;color:#9ec49a;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:background 0.2s;text-align:center; }
+.b2p-input::placeholder { color:#3a2c1a; }
+.b2p-btn-main { display:block;width:100%;padding:13px;background:rgba(140,108,60,0.26);border:1px solid rgba(184,148,96,0.35);border-radius:12px;color:#b8915a;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;transition:background 0.2s;text-align:center; }
 .b2p-btn-main:hover { background:rgba(140,108,60,0.38); }
-.b2p-btn-sec { padding:9px 20px;background:transparent;border:1px solid rgba(80,120,70,0.25);border-radius:8px;color:#7a9478;font-size:12px;cursor:pointer;font-family:inherit;transition:all 0.2s; }
-.b2p-btn-sec:hover { border-color:rgba(80,120,70,0.5);color:#9ec49a; }
-.b2p-btn-sm { padding:9px 13px;background:rgba(80,120,70,0.15);border:1px solid rgba(140,108,60,0.26);border-radius:8px;color:#9ec49a;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap; }
+.b2p-btn-sec { padding:9px 20px;background:transparent;border:1px solid rgba(80,120,70,0.25);border-radius:8px;color:#9a7a5a;font-size:12px;cursor:pointer;font-family:inherit;transition:all 0.2s; }
+.b2p-btn-sec:hover { border-color:rgba(80,120,70,0.5);color:#b8915a; }
+.b2p-btn-sm { padding:9px 13px;background:rgba(80,120,70,0.15);border:1px solid rgba(140,108,60,0.26);border-radius:8px;color:#b8915a;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap; }
 .b2p-err { font-size:12px;color:#e07060;padding:9px 12px;background:rgba(220,80,60,0.08);border:1px solid rgba(220,80,60,0.2);border-radius:8px;margin-bottom:0.85rem; }
-.b2p-link { color:#9ec49a;cursor:pointer;text-decoration:underline; }
+.b2p-link { color:#b8915a;cursor:pointer;text-decoration:underline; }
 .b2p-brreg-ok { background:rgba(80,120,70,0.1);border-radius:8px;padding:8px 10px;border:1px solid rgba(140,108,60,0.18); }
 .b2p-status-icon { width:64px;height:64px;border-radius:50%;border:2px solid rgba(184,148,96,0.32);display:flex;align-items:center;justify-content:center;font-size:28px;margin:0 auto 1.25rem; }
 .b2p-welcome-card { background:linear-gradient(135deg,rgba(25,50,20,0.85),rgba(12,24,12,0.85));border:1px solid rgba(80,120,70,0.25);border-radius:16px;padding:1.5rem;margin-bottom:1rem;display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:1rem; }
 .b2p-campaign { background:linear-gradient(135deg,rgba(201,125,110,0.12),rgba(201,125,110,0.04));border:1px solid rgba(201,125,110,0.2);border-radius:14px;padding:1.25rem;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap; }
 .b2p-card { background:rgba(10,18,10,0.7);border:1px solid rgba(80,120,70,0.18);border-radius:14px;padding:1.25rem; }
 .b2p-card-title { font-size:12px;font-weight:700;color:#c8dfc4;margin-bottom:0.75rem;padding-bottom:0.5rem;border-bottom:1px solid rgba(80,120,70,0.12);letter-spacing:0.04em; }
-.b2p-cat-head { font-size:9px;color:#9ec49a;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;margin-bottom:0.4rem; }
+.b2p-cat-head { font-size:9px;color:#b8915a;text-transform:uppercase;letter-spacing:0.12em;font-weight:700;margin-bottom:0.4rem; }
 .b2p-price-row { display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(80,120,70,0.1);gap:0.75rem; }
 .b2p-price-row:last-child { border-bottom:none; }
 .b2p-price-name { font-size:12px;color:#c0d4bc;flex:1; }
-.b2p-retail { font-size:10px;color:#3a5a38;text-decoration:line-through; }
-.b2p-b2bprice { font-size:14px;font-weight:700;color:#9ec49a; }
+.b2p-retail { font-size:10px;color:#3a2c1a;text-decoration:line-through; }
+.b2p-b2bprice { font-size:14px;font-weight:700;color:#b8915a; }
 .b2p-disc-badge { font-size:9px;color:#e8c04a;font-weight:600; }
 
 /* ── TIMMA BOOKING PORTAL ── */
 #timmaPortal { display:none;position:fixed;inset:0;z-index:9500;background:#07100a;overflow-y:auto;-webkit-overflow-scrolling:touch; }
 .timma-header { position:sticky;top:0;z-index:10;background:rgba(7,16,10,0.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(80,120,70,0.18);padding:0 1.25rem; }
 .timma-header-inner { max-width:600px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:52px;gap:1rem; }
-.timma-back-btn { background:none;border:none;color:#7a9478;cursor:pointer;font-size:20px;padding:4px 8px;border-radius:8px;line-height:1;font-family:inherit; }
-.timma-back-btn:hover { color:#9ec49a;background:rgba(80,120,70,0.1); }
+.timma-back-btn { background:none;border:none;color:#9a7a5a;cursor:pointer;font-size:20px;padding:4px 8px;border-radius:8px;line-height:1;font-family:inherit; }
+.timma-back-btn:hover { color:#b8915a;background:rgba(80,120,70,0.1); }
 .timma-steps { display:flex;align-items:center;gap:4px;flex:1;justify-content:center; }
 .timma-step-dot { width:7px;height:7px;border-radius:50%;background:rgba(80,120,70,0.25);transition:all 0.2s; }
-.timma-step-dot.active { background:#9ec49a;width:22px;border-radius:4px; }
+.timma-step-dot.active { background:#b8915a;width:22px;border-radius:4px; }
 .timma-step-dot.done { background:rgba(184,148,96,0.38); }
-.timma-close-btn { background:none;border:none;color:#7a9478;cursor:pointer;font-size:22px;padding:4px 8px;border-radius:8px;line-height:1;font-family:inherit; }
+.timma-close-btn { background:none;border:none;color:#9a7a5a;cursor:pointer;font-size:22px;padding:4px 8px;border-radius:8px;line-height:1;font-family:inherit; }
 .timma-close-btn:hover { color:#e4cda8; }
 .timma-body { max-width:600px;margin:0 auto;padding:2rem 1.25rem 5rem; }
-.timma-step-label { font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#7a9478;margin-bottom:0.5rem; }
+.timma-step-label { font-size:10px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:#9a7a5a;margin-bottom:0.5rem; }
 .timma-step-h { font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:300;color:#e8f0e4;margin:0 0 1.5rem;line-height:1.2; }
 /* Category cards */
 .timma-cat-grid { display:grid;grid-template-columns:1fr 1fr;gap:0.85rem;margin-bottom:1rem; }
@@ -1104,28 +1105,28 @@ nav { }
 .timma-cat-card:hover,.timma-cat-card.sel { border-color:rgba(184,148,96,0.45);background:rgba(20,40,18,0.8); }
 .timma-cat-icon { font-size:1.8rem;margin-bottom:0.6rem; }
 .timma-cat-name { font-size:14px;font-weight:700;color:#e4cda8; }
-.timma-cat-sub { font-size:11px;color:#7a9478;margin-top:3px; }
+.timma-cat-sub { font-size:11px;color:#9a7a5a;margin-top:3px; }
 /* Service list */
 .timma-svc-list { display:flex;flex-direction:column;gap:0.5rem; }
 .timma-svc-row { display:flex;align-items:center;justify-content:space-between;padding:0.9rem 1rem;background:rgba(10,20,10,0.7);border:1px solid rgba(80,120,70,0.18);border-radius:12px;cursor:pointer;transition:all 0.2s;gap:0.75rem; }
 .timma-svc-row:hover,.timma-svc-row.sel { border-color:rgba(184,148,96,0.42);background:rgba(20,40,18,0.8); }
 .timma-svc-name { font-size:13px;font-weight:600;color:#e4cda8; }
-.timma-svc-dur { font-size:11px;color:#7a9478;margin-top:2px; }
-.timma-svc-price { font-size:14px;font-weight:700;color:#9ec49a;flex-shrink:0; }
+.timma-svc-dur { font-size:11px;color:#9a7a5a;margin-top:2px; }
+.timma-svc-price { font-size:14px;font-weight:700;color:#b8915a;flex-shrink:0; }
 /* Calendar */
 .timma-cal { background:rgba(10,20,10,0.5);border:1px solid rgba(80,120,70,0.18);border-radius:16px;overflow:hidden; }
 .timma-cal-header { display:flex;align-items:center;justify-content:space-between;padding:0.85rem 1rem;border-bottom:1px solid rgba(80,120,70,0.12); }
-.timma-cal-nav { background:none;border:none;color:#7a9478;cursor:pointer;font-size:18px;padding:4px 10px;border-radius:8px;font-family:inherit; }
-.timma-cal-nav:hover { color:#9ec49a;background:rgba(80,120,70,0.1); }
+.timma-cal-nav { background:none;border:none;color:#9a7a5a;cursor:pointer;font-size:18px;padding:4px 10px;border-radius:8px;font-family:inherit; }
+.timma-cal-nav:hover { color:#b8915a;background:rgba(80,120,70,0.1); }
 .timma-cal-month { font-size:13px;font-weight:700;color:#e4cda8;text-transform:capitalize; }
 .timma-cal-grid { display:grid;grid-template-columns:repeat(7,1fr);padding:0.5rem; }
-.timma-cal-day-name { font-size:10px;font-weight:600;color:#3a5a38;text-align:center;padding:4px 0;text-transform:uppercase; }
-.timma-cal-day { text-align:center;padding:6px 2px;font-size:13px;border-radius:8px;cursor:pointer;color:#7a9478;transition:all 0.15s; }
+.timma-cal-day-name { font-size:10px;font-weight:600;color:#3a2c1a;text-align:center;padding:4px 0;text-transform:uppercase; }
+.timma-cal-day { text-align:center;padding:6px 2px;font-size:13px;border-radius:8px;cursor:pointer;color:#9a7a5a;transition:all 0.15s; }
 .timma-cal-day.avail { color:#c0d4bc;cursor:pointer; }
 .timma-cal-day.avail:hover { background:rgba(184,148,96,0.1);color:#e4cda8; }
 .timma-cal-day.sel { background:#2d5a2a;color:#e8f0e4;font-weight:700; }
 .timma-cal-day.today { outline:1px solid rgba(184,148,96,0.32);outline-offset:-1px; }
-.timma-cal-day.disabled,.timma-cal-day.empty { color:#1e2e21;cursor:default;pointer-events:none; }
+.timma-cal-day.disabled,.timma-cal-day.empty { color:#2a1e12;cursor:default;pointer-events:none; }
 /* Time slots */
 .timma-time-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem; }
 .timma-time-pill { padding:10px 4px;text-align:center;background:rgba(10,20,10,0.7);border:1px solid rgba(140,108,60,0.18);border-radius:10px;font-size:13px;font-weight:600;color:#c0d4bc;cursor:pointer;transition:all 0.18s;font-family:inherit; }
@@ -1133,13 +1134,13 @@ nav { }
 .timma-time-pill.sel { background:#2d5a2a;border-color:#4a8a45;color:#e8f0e4; }
 /* Contact form */
 .timma-field { margin-bottom:0.85rem; }
-.timma-label { display:block;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#7a9478;margin-bottom:5px; }
+.timma-label { display:block;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#9a7a5a;margin-bottom:5px; }
 .timma-input { width:100%;padding:12px 14px;background:rgba(10,20,10,0.8);border:1px solid rgba(140,108,60,0.26);border-radius:12px;font-size:15px;color:#e4cda8;box-sizing:border-box;font-family:inherit;outline:none;transition:border 0.2s; }
 .timma-input:focus { border-color:rgba(184,148,96,0.45); }
 /* Summary card */
 .timma-summary { background:rgba(10,20,10,0.7);border:1px solid rgba(140,108,60,0.18);border-radius:14px;padding:1.1rem;margin-bottom:1.25rem; }
 .timma-sum-row { display:flex;justify-content:space-between;align-items:baseline;padding:4px 0;font-size:13px; }
-.timma-sum-label { color:#7a9478; }
+.timma-sum-label { color:#9a7a5a; }
 .timma-sum-val { color:#e4cda8;font-weight:600; }
 /* Bottom CTA */
 .timma-cta-bar { position:sticky;bottom:0;background:rgba(7,16,10,0.95);backdrop-filter:blur(10px);border-top:1px solid rgba(80,120,70,0.15);padding:1rem 1.25rem;margin:0 -1.25rem -5rem; }
@@ -1150,18 +1151,22 @@ nav { }
 .timma-confirm-wrap { text-align:center;padding:2rem 0; }
 .timma-confirm-icon { font-size:3rem;margin-bottom:1rem; }
 .timma-confirm-h { font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:#e8f0e4;margin:0 0 0.5rem; }
-.timma-confirm-sub { font-size:13px;color:#7a9478;line-height:1.6; }
+.timma-confirm-sub { font-size:13px;color:#9a7a5a;line-height:1.6; }
 
 /* ═══════════════════════════════════════════════
    MOBIL — komplett responsivt design
    ═══════════════════════════════════════════════ */
 @media (max-width: 767px) {
 
+  /* ── NAV ── */
+  nav { height: 56px; }
+  .nav-logo-img { height: 28px; }
+
   /* ── HERO: logo + 3 knapper på mobil ── */
-  .hero { padding: 3rem 1.5rem 3rem; min-height: 82svh; min-height: 82vh; }
-  .hero-logo { max-width: 260px; max-height: 130px; margin-bottom: 2.5rem; }
-  .hero-divider { margin-bottom: 1.8rem; }
-  .hero-btns { flex-direction: column; width: 100%; gap: 0.55rem; }
+  .hero { padding: 2.5rem 1.5rem 2.5rem; min-height: 85svh; min-height: 85vh; }
+  .hero-logo { max-width: 220px; max-height: 110px; margin-bottom: 2rem; }
+  .hero-divider { margin-bottom: 1.6rem; }
+  .hero-btns { flex-direction: column; width: 100%; gap: 0.5rem; }
   .hero-btn { width: 100%; padding: 16px 20px; font-size: 11px; justify-content: center; border-radius: 3px; }
 
   /* ── BOOKING STRIP + B2B STRIP ── */
@@ -1236,11 +1241,14 @@ nav { }
   .contact-card { padding: 0.8rem; }
   .contact-card-value { font-size: 13px; }
 
+  /* ── PRODUCTS GRID on mobile: always 2 cols ── */
+  .product-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 0.55rem; }
+
   /* ── FOOTER ── */
   footer { padding: 1.5rem 1rem; padding-bottom: calc(1.25rem + env(safe-area-inset-bottom, 0)); }
-  .footer-grid { grid-template-columns: repeat(3, 1fr); gap: 0.75rem 0.5rem; margin-bottom: 1rem; }
-  .footer-col h4 { font-size: 8px; margin-bottom: 0.4rem; letter-spacing: 0.1em; }
-  .footer-col a { font-size: 10px; margin-bottom: 0.2rem; }
+  .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 1.25rem 1rem; margin-bottom: 1rem; }
+  .footer-col h4 { font-size: 9px; margin-bottom: 0.5rem; letter-spacing: 0.1em; }
+  .footer-col a, .footer-col span { font-size: 11px; margin-bottom: 0.25rem; }
 
   /* ── MODALS ── */
   .modal { padding: 1.1rem 1rem max(2rem, calc(env(safe-area-inset-bottom) + 1.25rem)); }
@@ -1267,29 +1275,20 @@ nav { }
 
 /* ── Svært smale skjermer (≤400px) ── */
 @media (max-width: 400px) {
-  .hero h1 { font-size: 1.65rem; }
   .section-wrap { padding: 1rem 0.65rem; }
-  .nav-logo { font-size: 15px; }
+  .nav-logo-img { height: 24px; }
   .trust-item:nth-child(3), .trust-item:nth-child(4) { display: none; }
 }
 </style>
 </head>
 <body>
-<a href="#main-content" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:9999;background:#0d1610;color:#9ec49a;padding:8px 16px;border-radius:0 0 8px 0;" onfocus="this.style.left='0';this.style.width='auto';this.style.height='auto';" onblur="this.style.left='-9999px';this.style.width='1px';this.style.height='1px';">Hopp til innhold</a>
+<a href="#main-content" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:9999;background:#100c08;color:#b8915a;padding:8px 16px;border-radius:0 0 8px 0;" onfocus="this.style.left='0';this.style.width='auto';this.style.height='auto';" onblur="this.style.left='-9999px';this.style.width='1px';this.style.height='1px';">Hopp til innhold</a>
 <!-- NAV -->
 <nav>
   <!-- Logo -->
-  <a href="#" class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
-    <svg viewBox="0 0 32 32" fill="none">
-      <path d="M8 4 Q10 8 16 16" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/>
-      <path d="M24 4 Q22 8 16 16" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/>
-      <path d="M16 16 Q12 22 10 26" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/>
-      <circle cx="9" cy="27" r="2.5" stroke="#c97d6e" stroke-width="1.8" fill="none"/>
-      <path d="M16 16 Q20 22 22 26" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/>
-      <circle cx="23" cy="27" r="2.5" stroke="#c97d6e" stroke-width="1.8" fill="none"/>
-      <circle cx="16" cy="16" r="1.5" fill="#c97d6e"/>
-    </svg>
-    Yeganeh Style
+  <a href="#" class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" aria-label="Yeganeh Style – til toppen">
+    <img src="https://cauftwsojtumogyshmqq.supabase.co/storage/v1/object/public/product-images/logo-white.png"
+         alt="Yeganeh Style" class="nav-logo-img" fetchpriority="high">
   </a>
 
   <!-- Desktop dropdown nav -->
@@ -1358,16 +1357,8 @@ nav { }
 <div class="mobile-menu" id="mobileMenu">
   <div class="mm-header">
     <span class="mm-logo">
-      <svg viewBox="0 0 32 32" fill="none" width="20" height="20">
-        <path d="M8 4 Q10 8 16 16" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/>
-        <path d="M24 4 Q22 8 16 16" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/>
-        <path d="M16 16 Q12 22 10 26" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="9" cy="27" r="2.5" stroke="#c97d6e" stroke-width="1.8" fill="none"/>
-        <path d="M16 16 Q20 22 22 26" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/>
-        <circle cx="23" cy="27" r="2.5" stroke="#c97d6e" stroke-width="1.8" fill="none"/>
-        <circle cx="16" cy="16" r="1.5" fill="#c97d6e"/>
-      </svg>
-      Yeganeh Style
+      <img src="https://cauftwsojtumogyshmqq.supabase.co/storage/v1/object/public/product-images/logo-white.png"
+           alt="Yeganeh Style" style="height:26px;width:auto;opacity:0.9;">
     </span>
     <button class="mobile-menu-close" onclick="closeMenu()" aria-label="Lukk meny">✕</button>
   </div>
@@ -1377,9 +1368,9 @@ nav { }
     <a onclick="openTimma();closeMenu()">Negler</a>
 
     <div class="mm-section">Produkter</div>
-    <a onclick="goTo('produkter');filterTab('alle',null);closeMenu()">Bestselgende</a>
-    <a onclick="goTo('produkter');filterTab('shampoo',null);closeMenu()">Nyheter</a>
-    <a onclick="goTo('produkter');filterTab('styling',null);closeMenu()">Tilbud</a>
+    <a onclick="closeMenu();openProdOverlay()">Alle produkter</a>
+    <a onclick="closeMenu();openProdOverlay('shampoo')">Shampoo</a>
+    <a onclick="closeMenu();openProdOverlay('styling')">Styling</a>
 
     <div class="mm-section">Bedrift</div>
     <a onclick="openB2B();closeMenu()">Bedriftsportal</a>
@@ -1396,7 +1387,7 @@ nav { }
 <!-- HERO -->
 <section class="hero" id="hjem">
   <div class="hero-inner">
-    <img class="hero-logo" src="https://cauftwsojtumogyshmqq.supabase.co/storage/v1/object/public/product-images/logo-white.png" alt="Yeganeh Style AS" draggable="false">
+    <img class="hero-logo" src="https://cauftwsojtumogyshmqq.supabase.co/storage/v1/object/public/product-images/logo-white.png" alt="Yeganeh Style AS" draggable="false" fetchpriority="high">
     <div class="hero-divider"></div>
     <div class="hero-btns">
       <button class="hero-btn" onclick="openProdOverlay()">Produkter</button>
@@ -1672,7 +1663,7 @@ nav { }
 </main>
 <!-- FOOTER -->
 <footer>
-  <div class="footer-grid">
+  <div class="footer-grid" style="grid-template-columns:repeat(4,1fr);">
     <div class="footer-col">
       <h4>Tjenester</h4>
       <a onclick="openService('herreklipp')">Herreklipp</a>
@@ -1685,28 +1676,38 @@ nav { }
     <div class="footer-col">
       <h4>Nettsted</h4>
       <a onclick="window.scrollTo({top:0,behavior:'smooth'})">Hjem</a>
-      <a onclick="goTo('produkter')">Produkter</a>
+      <a onclick="openProdOverlay()">Produkter</a>
       <a onclick="openB2B()">Bedriftsportal</a>
       <a onclick="openContact()">Kontakt</a>
+      <a onclick="openInfo('personvern')">Personvern</a>
+      <a onclick="openInfo('retur')">Retur</a>
     </div>
     <div class="footer-col">
-      <h4>Info</h4>
-      <a onclick="openInfo('personvern')">Personvern</a>
-      <a onclick="openInfo('vilkar')">Vilkår</a>
-      <a onclick="openInfo('gdpr')">GDPR &amp; Cookies</a>
-      <a onclick="openInfo('retur')">Retur</a>
+      <h4>Kontakt</h4>
+      <a href="tel:+4797855154">+47 978 55 154</a>
+      <a href="mailto:post@yeganehstyle.no">post@yeganehstyle.no</a>
+      <span style="color:var(--text-dim);font-size:11px;margin-top:4px;display:block;">Flaenbakken 2, 2072 Råholt</span>
+    </div>
+    <div class="footer-col">
+      <h4>Åpningstider</h4>
+      <span style="color:var(--text-dim);font-size:11px;line-height:1.9;">
+        Man–Ons, Fre: 09–18<br>
+        Torsdag: 09–20<br>
+        Lørdag: 10–16<br>
+        Søndag: Stengt
+      </span>
     </div>
   </div>
   <div class="footer-bottom">
-    <div class="footer-bottom-top" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;">
+    <div class="footer-bottom-top" style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;flex-wrap:wrap;gap:0.5rem;">
       <div class="footer-social" style="margin-bottom:0;">
-        <a href="#">Instagram</a>
+        <a href="https://www.instagram.com/yeganehstyle/" target="_blank" rel="noopener">Instagram</a>
         <span style="color:var(--border)">·</span>
-        <a href="#">Facebook</a>
+        <a href="https://www.facebook.com/yeganehstyle/" target="_blank" rel="noopener">Facebook</a>
       </div>
-      <button onclick="openModal('adminModal')" style="font-size:11px;color:#5a7a5a;background:rgba(255,255,255,0.04);border:1px solid rgba(140,108,60,0.18);border-radius:8px;padding:5px 12px;cursor:pointer;letter-spacing:0.03em;">Logg inn</button>
+      <button onclick="openModal('adminModal')" style="font-size:11px;color:var(--text-dim);background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:8px;padding:5px 12px;cursor:pointer;letter-spacing:0.03em;">Logg inn</button>
     </div>
-    <p class="footer-copy">© 2026 Yeganeh Style AS · Org.nr 913 518 241 · Råholt</p>
+    <p class="footer-copy">© 2026 Yeganeh Style AS · Org.nr 913 518 241 · Flaenbakken 2, 2072 Råholt</p>
     <div class="pay-icons">
       <span class="pay-badge">Vipps</span><span class="pay-badge">Klarna</span>
       <span class="pay-badge">Apple Pay</span><span class="pay-badge">Google Pay</span>
@@ -1801,7 +1802,7 @@ nav { }
       <button class="confirm-btn" onclick="confirmBooking()">Bekreft bestilling</button>
     </div>
     <div class="success-msg" id="bookingSuccess">
-      <div class="success-icon" style="color:#6dca8a;font-size:2rem;">&check;</div>
+      <div class="success-icon" style="color:#c8a870;font-size:2rem;">&check;</div>
       <h3>Booking bekreftet!</h3>
       <p>Vi gleder oss til å se deg. Bekreftelse sendt til din telefon.</p>
     </div>
@@ -1822,9 +1823,9 @@ nav { }
     <div style="display:flex;align-items:center;gap:8px;">
       <svg viewBox="0 0 32 32" fill="none" style="width:20px;height:20px"><path d="M8 4 Q10 8 16 16" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/><path d="M24 4 Q22 8 16 16" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/><path d="M16 16 Q12 22 10 26" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="27" r="2.5" stroke="#c97d6e" stroke-width="1.8" fill="none"/><path d="M16 16 Q20 22 22 26" stroke="#c97d6e" stroke-width="2" stroke-linecap="round"/><circle cx="23" cy="27" r="2.5" stroke="#c97d6e" stroke-width="1.8" fill="none"/><circle cx="16" cy="16" r="1.5" fill="#c97d6e"/></svg>
       <span style="font-size:13px;font-weight:600;color:#e4cda8;">Yeganeh Style</span>
-      <span style="font-size:10px;color:#3a5a38;padding:2px 7px;border:1px solid rgba(140,108,60,0.18);border-radius:4px;letter-spacing:0.08em;">B2B</span>
+      <span style="font-size:10px;color:#3a2c1a;padding:2px 7px;border:1px solid rgba(140,108,60,0.18);border-radius:4px;letter-spacing:0.08em;">B2B</span>
     </div>
-    <button onclick="closeB2BPortal()" style="background:none;border:1px solid rgba(80,120,70,0.25);border-radius:8px;padding:6px 14px;color:#7a9478;font-size:12px;cursor:pointer;font-family:inherit;">Lukk ✕</button>
+    <button onclick="closeB2BPortal()" style="background:none;border:1px solid rgba(80,120,70,0.25);border-radius:8px;padding:6px 14px;color:#9a7a5a;font-size:12px;cursor:pointer;font-family:inherit;">Lukk ✕</button>
   </div>
   <div id="b2pBody" style="min-height:calc(100vh - 54px);padding:1.5rem 1rem 1rem;"></div>
 </div>
@@ -1892,7 +1893,7 @@ nav { }
       <button class="confirm-btn" onclick="submitReview()">Send anmeldelse</button>
     </div>
     <div class="success-msg" id="reviewSuccess">
-      <div class="success-icon" style="color:#6dca8a;font-size:2rem;">&check;</div>
+      <div class="success-icon" style="color:#c8a870;font-size:2rem;">&check;</div>
       <h3>Takk for din anmeldelse!</h3>
       <p>Den publiseres etter en kort gjennomgang.</p>
     </div>
@@ -1975,7 +1976,7 @@ nav { }
       <button class="confirm-btn" id="payBtn" onclick="confirmPayment()">Betal nå</button>
     </div>
     <div class="success-msg" id="checkoutSuccess">
-      <div class="success-icon" style="color:#6dca8a;font-size:2rem;">&check;</div>
+      <div class="success-icon" style="color:#c8a870;font-size:2rem;">&check;</div>
       <h3>Bestilling mottatt!</h3>
       <p id="checkoutSuccessMsg">Kvittering sendes til din e-post. Levering 2–4 virkedager.</p>
     </div>
@@ -1990,8 +1991,8 @@ nav { }
     <div id="adminLoginForm">
       <div style="text-align:center;margin-bottom:1.5rem;">
         <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(80,120,70,0.1);border:1px solid rgba(140,108,60,0.18);border-radius:10px;padding:6px 14px;margin-bottom:1rem;">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9ec49a" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-          <span style="font-size:11px;font-weight:600;color:#9ec49a;letter-spacing:0.06em;">YEGANEH STYLE</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#b8915a" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          <span style="font-size:11px;font-weight:600;color:#b8915a;letter-spacing:0.06em;">YEGANEH STYLE</span>
         </div>
         <h2 style="font-size:1.5rem;font-family:'Cormorant Garamond',serif;font-weight:400;">Logg inn</h2>
         <p style="font-size:12px;color:var(--gray);margin-top:4px;">Admin og bedriftskunder bruker samme innlogging</p>
@@ -2003,8 +2004,8 @@ nav { }
         <div id="adminErr" style="color:#e07060;font-size:12px;margin-bottom:0.75rem;display:none;padding:8px 12px;background:rgba(224,112,96,0.08);border-radius:8px;border:1px solid rgba(224,112,96,0.2);">Noe gikk galt. Prøv igjen.</div>
         <button class="confirm-btn" onclick="doAdminLogin()" style="width:100%;">Logg inn →</button>
         <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(80,120,70,0.12);display:flex;flex-direction:column;align-items:center;gap:8px;">
-          <button onclick="showAuthForgot()" style="background:none;border:none;font-size:11px;color:#7a9478;cursor:pointer;font-family:inherit;padding:0;">Glemt passord? <span style="color:#9ec49a;font-weight:600;">Tilbakestill →</span></button>
-          <button onclick="closeModal('adminModal');openB2B();" style="background:none;border:none;font-size:11px;color:#7a9478;cursor:pointer;font-family:inherit;padding:0;">Ny bedriftskunde? <span style="color:#9ec49a;font-weight:600;">Registrer her →</span></button>
+          <button onclick="showAuthForgot()" style="background:none;border:none;font-size:11px;color:#9a7a5a;cursor:pointer;font-family:inherit;padding:0;">Glemt passord? <span style="color:#b8915a;font-weight:600;">Tilbakestill →</span></button>
+          <button onclick="closeModal('adminModal');openB2B();" style="background:none;border:none;font-size:11px;color:#9a7a5a;cursor:pointer;font-family:inherit;padding:0;">Ny bedriftskunde? <span style="color:#b8915a;font-weight:600;">Registrer her →</span></button>
         </div>
       </div>
 
@@ -2013,10 +2014,10 @@ nav { }
         <p style="font-size:13px;color:var(--text-dim);margin-bottom:1.2rem;text-align:center;">Skriv inn e-postadressen din, så sender vi en lenke for å sette nytt passord.</p>
         <div class="form-group"><label>E-postadresse</label><input type="email" id="adminForgotEmail" placeholder="din@epost.no" autocomplete="email" onkeydown="if(event.key==='Enter')doSendReset()"></div>
         <div id="adminForgotErr" style="color:#e07060;font-size:12px;margin-bottom:0.75rem;display:none;padding:8px 12px;background:rgba(224,112,96,0.08);border-radius:8px;border:1px solid rgba(224,112,96,0.2);"></div>
-        <div id="adminForgotOk" style="color:#6dca8a;font-size:12px;margin-bottom:0.75rem;display:none;padding:8px 12px;background:rgba(109,202,138,0.08);border-radius:8px;border:1px solid rgba(109,202,138,0.2);text-align:center;">E-post sendt! Sjekk innboksen din.</div>
+        <div id="adminForgotOk" style="color:#c8a870;font-size:12px;margin-bottom:0.75rem;display:none;padding:8px 12px;background:rgba(109,202,138,0.08);border-radius:8px;border:1px solid rgba(109,202,138,0.2);text-align:center;">E-post sendt! Sjekk innboksen din.</div>
         <button class="confirm-btn" onclick="doSendReset()" id="forgotSendBtn" style="width:100%;">Send tilbakestillingslenke →</button>
         <div style="margin-top:1rem;text-align:center;">
-          <button onclick="showAuthLogin()" style="background:none;border:none;font-size:11px;color:#7a9478;cursor:pointer;font-family:inherit;">← Tilbake til innlogging</button>
+          <button onclick="showAuthLogin()" style="background:none;border:none;font-size:11px;color:#9a7a5a;cursor:pointer;font-family:inherit;">← Tilbake til innlogging</button>
         </div>
       </div>
 
@@ -2205,7 +2206,7 @@ function updateCartUI(){
   if(fpEl){
     var threshold=499;
     if(sum>=threshold){
-      fpEl.innerHTML='<div style="background:rgba(39,174,96,0.12);border:1px solid rgba(39,174,96,0.3);border-radius:10px;padding:8px 12px;font-size:11px;color:#6dca8a;margin-bottom:0.75rem;">✓ Du har gratis frakt!</div>';
+      fpEl.innerHTML='<div style="background:rgba(39,174,96,0.12);border:1px solid rgba(39,174,96,0.3);border-radius:10px;padding:8px 12px;font-size:11px;color:#c8a870;margin-bottom:0.75rem;">✓ Du har gratis frakt!</div>';
     } else {
       var mangler=threshold-sum;
       var pct=Math.round((sum/threshold)*100);
@@ -2484,9 +2485,9 @@ function openProduct(id){
   var p=null;for(var i=0;i<PRODUCTS.length;i++){if(String(PRODUCTS[i].id)===sid){p=PRODUCTS[i];break;}}
   if(!p) return;
   var oldHtml=p.oldPrice?'<span style="font-size:13px;color:var(--muted);text-decoration:line-through;margin-right:8px">'+p.oldPrice+' kr</span>':'';
-  var saveHtml=p.oldPrice?'<span style="font-size:11px;color:#6dca8a;font-weight:600;margin-left:6px">Spar '+(p.oldPrice-p.price)+' kr</span>':'';
+  var saveHtml=p.oldPrice?'<span style="font-size:11px;color:#c8a870;font-weight:600;margin-left:6px">Spar '+(p.oldPrice-p.price)+' kr</span>':'';
   var stock=p.stock!=null?p.stock:20;
-  var stockHtml=stock>0?'<span style="color:#6dca8a">● På lager</span>':'<span style="color:#e07060">● Utsolgt</span>';
+  var stockHtml=stock>0?'<span style="color:#c8a870">● På lager</span>':'<span style="color:#e07060">● Utsolgt</span>';
   var visual=p.img
     ? '<div style="text-align:center;background:rgba(18,34,16,0.9);border-radius:14px;padding:0;margin-bottom:1.25rem;overflow:hidden"><img src="'+p.img+'" alt="'+p.name+'" style="width:100%;max-height:240px;object-fit:cover"></div>'
     : '<div style="text-align:center;font-size:5rem;background:rgba(18,34,16,0.9);border-radius:14px;padding:2rem;margin-bottom:1.25rem">'+(p.emoji||'<span style="font-family:Cormorant Garamond,serif;color:var(--accent)">'+p.name.charAt(0)+'</span>')+'</div>';
@@ -2517,7 +2518,7 @@ function renderNailsGrid(){
     return '<div onclick="openTimma()" style="background:rgba(10,18,10,0.85);border:1px solid rgba(80,120,70,0.18);border-radius:14px;padding:1.1rem;cursor:pointer;transition:border-color 0.2s;" onmouseenter="this.style.borderColor=\'rgba(201,125,110,0.4)\'" onmouseleave="this.style.borderColor=\'rgba(80,120,70,0.18)\'">'
       +'<div style="font-size:1.4rem;margin-bottom:0.4rem;">'+icon+'</div>'
       +'<div style="font-size:13px;font-weight:600;color:#e4cda8;margin-bottom:2px;">'+t.name+'</div>'
-      +'<div style="font-size:11px;color:#7a9478;margin-bottom:6px;">'+t.duration+' min</div>'
+      +'<div style="font-size:11px;color:#9a7a5a;margin-bottom:6px;">'+t.duration+' min</div>'
       +'<div style="font-size:13px;font-weight:700;color:#c97d6e;">'+t.price+' kr</div>'
       +'</div>';
   }).join('');
@@ -2796,7 +2797,7 @@ window.closeB2BPortal=function(){
 };
 
 function render(html){var c=document.getElementById('b2pBody');if(c) c.innerHTML=html;}
-function showSpin(msg){render('<div class="b2p-center"><div class="b2p-spin"></div>'+(msg?'<div style="color:#7a9478;font-size:12px;margin-top:12px;">'+msg+'</div>':'')+'</div>');}
+function showSpin(msg){render('<div class="b2p-center"><div class="b2p-spin"></div>'+(msg?'<div style="color:#9a7a5a;font-size:12px;margin-top:12px;">'+msg+'</div>':'')+'</div>');}
 function showE(id,msg){var e=document.getElementById(id);if(e){e.textContent=msg;e.style.display='block';}}
 function hideE(id){var e=document.getElementById(id);if(e) e.style.display='none';}
 function val(id){var e=document.getElementById(id);return e?e.value:'';}
@@ -2846,7 +2847,7 @@ function renderAuth(){
     +'<div style="text-align:center;margin-bottom:1.75rem;">'
     +'<div class="b2p-eyebrow">Eksklusiv tilgang</div>'
     +'<h2 class="b2p-h2">Bedriftsportal</h2>'
-    +'<p style="color:#7a9478;font-size:12px;line-height:1.6;margin-top:4px;">Logg inn eller registrer din bedrift for å få tilgang til eksklusive B2B-priser og avtaler.</p>'
+    +'<p style="color:#9a7a5a;font-size:12px;line-height:1.6;margin-top:4px;">Logg inn eller registrer din bedrift for å få tilgang til eksklusive B2B-priser og avtaler.</p>'
     +'</div>'
     +'<div class="b2p-tabs">'
     +'<button class="b2p-tab'+(isL?' b2p-tab-a':'')+'" onclick="b2bSetTab(\'login\')">Logg inn</button>'
@@ -2861,7 +2862,7 @@ function loginForm(){
     +fi('b2lPass','Passord','password','••••••••••','current-password')
     +'<div id="b2lErr" class="b2p-err" style="display:none;"></div>'
     +'<button class="b2p-btn-main" onclick="b2bDoLogin()">Logg inn som bedrift →</button>'
-    +'<p style="text-align:center;font-size:11px;color:#3a5a38;margin-top:0.75rem;">Ikke registrert? <span class="b2p-link" onclick="b2bSetTab(\'register\')">Registrer bedrift</span></p>';
+    +'<p style="text-align:center;font-size:11px;color:#3a2c1a;margin-top:0.75rem;">Ikke registrert? <span class="b2p-link" onclick="b2bSetTab(\'register\')">Registrer bedrift</span></p>';
 }
 
 function regForm(){
@@ -2881,7 +2882,7 @@ function regForm(){
     +'<div id="b2rAutoCheck" style="display:none;font-size:11px;padding:9px 12px;background:rgba(232,192,74,0.08);border:1px solid rgba(232,192,74,0.22);border-radius:8px;color:#b8944a;margin-bottom:0.85rem;line-height:1.6;"></div>'
     +'<div id="b2rErr" class="b2p-err" style="display:none;"></div>'
     +'<button class="b2p-btn-main" onclick="b2bDoRegister()">Registrer bedriftskonto →</button>'
-    +'<p style="text-align:center;font-size:10px;color:#3a5a38;margin-top:0.75rem;line-height:1.55;">Org.nr verifiseres mot Brønnøysundregistrene.<br>Konto gjennomgås og aktiveres innen 1–2 virkedager.</p>';
+    +'<p style="text-align:center;font-size:10px;color:#3a2c1a;margin-top:0.75rem;line-height:1.55;">Org.nr verifiseres mot Brønnøysundregistrene.<br>Konto gjennomgås og aktiveres innen 1–2 virkedager.</p>';
 }
 
 // ── STATES ──
@@ -2889,7 +2890,7 @@ function renderPending(){
   render('<div class="b2p-center">'
     +'<div class="b2p-status-icon" style="border-color:rgba(232,192,74,0.5);">⏳</div>'
     +'<h2 class="b2p-h2">Søknad til behandling</h2>'
-    +'<p style="color:#7a9478;font-size:12px;line-height:1.7;margin-bottom:1.5rem;max-width:380px;">Din søknad er mottatt og gjennomgås av oss. Du vil motta bekreftelse på <b style="color:#a8c4a0;">'+((BST.account||{}).email||'')+'</b> innen 1–2 virkedager.</p>'
+    +'<p style="color:#9a7a5a;font-size:12px;line-height:1.7;margin-bottom:1.5rem;max-width:380px;">Din søknad er mottatt og gjennomgås av oss. Du vil motta bekreftelse på <b style="color:#b09070;">'+((BST.account||{}).email||'')+'</b> innen 1–2 virkedager.</p>'
     +'<button class="b2p-btn-sec" onclick="b2bDoLogout()">Logg ut</button>'
     +'</div>');
 }
@@ -2897,7 +2898,7 @@ function renderRejected(){
   render('<div class="b2p-center">'
     +'<div class="b2p-status-icon" style="border-color:rgba(220,80,60,0.4);">✕</div>'
     +'<h2 class="b2p-h2">Søknad ikke godkjent</h2>'
-    +'<p style="color:#7a9478;font-size:12px;line-height:1.7;margin-bottom:1.5rem;max-width:380px;">Dessverre ble søknaden avslått. Ta kontakt på <a href="mailto:post@yeganehstyle.no" style="color:#9ec49a;">post@yeganehstyle.no</a> for spørsmål.</p>'
+    +'<p style="color:#9a7a5a;font-size:12px;line-height:1.7;margin-bottom:1.5rem;max-width:380px;">Dessverre ble søknaden avslått. Ta kontakt på <a href="mailto:post@yeganehstyle.no" style="color:#b8915a;">post@yeganehstyle.no</a> for spørsmål.</p>'
     +'<button class="b2p-btn-sec" onclick="b2bDoLogout()">Logg ut</button>'
     +'</div>');
 }
@@ -2905,7 +2906,7 @@ function renderSuspended(){
   render('<div class="b2p-center">'
     +'<div class="b2p-status-icon" style="border-color:rgba(180,80,60,0.4);">🔒</div>'
     +'<h2 class="b2p-h2">Konto sperret</h2>'
-    +'<p style="color:#7a9478;font-size:12px;line-height:1.7;margin-bottom:1.5rem;max-width:380px;">Kontoen er midlertidig sperret. Kontakt oss på <a href="mailto:post@yeganehstyle.no" style="color:#9ec49a;">post@yeganehstyle.no</a>.</p>'
+    +'<p style="color:#9a7a5a;font-size:12px;line-height:1.7;margin-bottom:1.5rem;max-width:380px;">Kontoen er midlertidig sperret. Kontakt oss på <a href="mailto:post@yeganehstyle.no" style="color:#b8915a;">post@yeganehstyle.no</a>.</p>'
     +'<button class="b2p-btn-sec" onclick="b2bDoLogout()">Logg ut</button>'
     +'</div>');
 }
@@ -2913,11 +2914,11 @@ function renderSuspended(){
 // ── PORTAL ──
 var B2B_TAB='priser';
 var B2B_TIERS=[
-  {pct:0,  spend:0,      lbl:'Standard', col:'#3a5a38', icon:'○',  next:5,  nextSpend:10000, nextLbl:'Bronze'},
+  {pct:0,  spend:0,      lbl:'Standard', col:'#3a2c1a', icon:'○',  next:5,  nextSpend:10000, nextLbl:'Bronze'},
   {pct:5,  spend:10000,  lbl:'Bronze',   col:'#cd7f32', icon:'🥉', next:10, nextSpend:25000, nextLbl:'Silver'},
   {pct:10, spend:25000,  lbl:'Silver',   col:'#a8b8b8', icon:'🥈', next:15, nextSpend:50000, nextLbl:'Gold'},
   {pct:15, spend:50000,  lbl:'Gold',     col:'#e8c04a', icon:'🥇', next:20, nextSpend:100000,nextLbl:'Platinum'},
-  {pct:20, spend:100000, lbl:'Platinum', col:'#9ec49a', icon:'💎', next:25, nextSpend:200000,nextLbl:'Elite'},
+  {pct:20, spend:100000, lbl:'Platinum', col:'#b8915a', icon:'💎', next:25, nextSpend:200000,nextLbl:'Elite'},
   {pct:25, spend:200000, lbl:'Elite',    col:'#c97d6e', icon:'👑', next:null,nextSpend:null,  nextLbl:null}
 ];
 function getTier(d){var t=B2B_TIERS[0];for(var i=B2B_TIERS.length-1;i>=0;i--){if(d>=B2B_TIERS[i].pct){t=B2B_TIERS[i];break;}}return t;}
@@ -2945,10 +2946,10 @@ function renderPortal(){
       +'<div>'
       +'<div style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:'+tier.col+';margin-bottom:3px;">Ditt nivå nå</div>'
       +'<div style="font-size:20px;font-weight:800;color:#e4cda8;">'+tier.icon+' '+tier.lbl+'</div>'
-      +(disc?'<div style="font-size:13px;color:'+tier.col+';font-weight:700;">'+disc+'% rabatt</div>':'<div style="font-size:11px;color:#3a5a38;">Ingen rabatt ennå</div>')
+      +(disc?'<div style="font-size:13px;color:'+tier.col+';font-weight:700;">'+disc+'% rabatt</div>':'<div style="font-size:11px;color:#3a2c1a;">Ingen rabatt ennå</div>')
       +'</div>'
       +'<div style="text-align:right;">'
-      +'<div style="font-size:10px;color:#7a9478;margin-bottom:2px;">Neste nivå</div>'
+      +'<div style="font-size:10px;color:#9a7a5a;margin-bottom:2px;">Neste nivå</div>'
       +'<div style="font-size:18px;font-weight:800;color:'+nextTierObj.col+';">'+nextTierObj.icon+' '+nextTierObj.lbl+'</div>'
       +'<div style="font-size:13px;color:'+nextTierObj.col+';font-weight:700;">'+nextTierObj.pct+'% rabatt</div>'
       +'</div>'
@@ -2956,7 +2957,7 @@ function renderPortal(){
       +'<div style="background:rgba(0,0,0,0.4);border-radius:999px;height:10px;margin-bottom:8px;overflow:hidden;">'
       +'<div style="background:linear-gradient(90deg,'+tier.col+','+nextTierObj.col+');height:100%;width:'+prog+'%;border-radius:999px;transition:width 1s ease;min-width:'+(prog>0?'10px':'0')+'"></div>'
       +'</div>'
-      +'<div style="display:flex;justify-content:space-between;font-size:10px;color:#7a9478;margin-bottom:0.75rem;">'
+      +'<div style="display:flex;justify-content:space-between;font-size:10px;color:#9a7a5a;margin-bottom:0.75rem;">'
       +'<span>'+(totalSpend?fmtKr(totalSpend)+' kjøpt':'Ingen kjøp registrert')+'</span>'
       +'<span style="color:'+nextTierObj.col+';font-weight:700;">Mål: '+fmtKr(tier.nextSpend||0)+'</span>'
       +'</div>'
@@ -2968,7 +2969,7 @@ function renderPortal(){
     tierCard='<div style="background:linear-gradient(135deg,rgba(201,125,110,0.12),rgba(10,22,12,0.95));border:1px solid #c97d6e44;border-radius:18px;padding:1.25rem;margin-bottom:1rem;text-align:center;">'
       +'<div style="font-size:2.5rem;margin-bottom:4px;">👑</div>'
       +'<div style="font-size:15px;font-weight:800;color:#c97d6e;">Elite-bedriftskunde</div>'
-      +'<div style="font-size:11px;color:#7a9478;margin-top:6px;line-height:1.6;">Du nyter vår høyeste rabatt på <b style="color:#c97d6e;">'+disc+'%</b> på alt.<br>Takk for lojaliteten til Yeganeh Style! 🙏</div>'
+      +'<div style="font-size:11px;color:#9a7a5a;margin-top:6px;line-height:1.6;">Du nyter vår høyeste rabatt på <b style="color:#c97d6e;">'+disc+'%</b> på alt.<br>Takk for lojaliteten til Yeganeh Style! 🙏</div>'
       +'</div>';
   }
 
@@ -2992,7 +2993,7 @@ function renderPortal(){
     +'<h2 class="b2p-h2" style="margin-bottom:6px;">'+(acc.firma||'Din bedrift')+'</h2>'
     +'<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">'
     +tierBadge
-    +'<span style="font-size:11px;color:#7a9478;">Org.nr: '+fmtOrg(acc.org_nr||'')+'</span>'
+    +'<span style="font-size:11px;color:#9a7a5a;">Org.nr: '+fmtOrg(acc.org_nr||'')+'</span>'
     +'</div>'
     +'</div>'
     +'<button class="b2p-btn-sec" onclick="b2bDoLogout()">Logg ut</button>'
@@ -3005,7 +3006,7 @@ function renderPortal(){
   var tabNav='<div style="display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(80,120,70,0.18);border-radius:12px;overflow:hidden;margin-bottom:1.25rem;">';
   tabs.forEach(function(t){
     var active=B2B_TAB===t[0];
-    tabNav+='<button onclick="b2bTab(\''+t[0]+'\')" style="padding:10px 4px;background:'+(active?'rgba(60,100,50,0.35)':'transparent')+';border:0;border-right:1px solid rgba(80,120,70,0.12);color:'+(active?'#e0caa8':'#7a9478')+';font-size:11px;font-weight:'+(active?'700':'500')+';cursor:pointer;font-family:inherit;">'+t[1]+'</button>';
+    tabNav+='<button onclick="b2bTab(\''+t[0]+'\')" style="padding:10px 4px;background:'+(active?'rgba(60,100,50,0.35)':'transparent')+';border:0;border-right:1px solid rgba(80,120,70,0.12);color:'+(active?'#e0caa8':'#9a7a5a')+';font-size:11px;font-weight:'+(active?'700':'500')+';cursor:pointer;font-family:inherit;">'+t[1]+'</button>';
   });
   tabNav+='</div>';
 
@@ -3016,9 +3017,9 @@ function renderPortal(){
     B2B_PRICES.forEach(function(p){if(!cats[p.cat])cats[p.cat]=[];cats[p.cat].push(p);});
     content='<div class="b2p-campaign"><div><div class="b2p-eyebrow" style="color:#c97d6e;">Aktiv kampanje</div>'
       +'<div style="font-size:14px;color:#f0e4ce;font-weight:600;margin-top:3px;">Kjøp for 5 000 kr+ og få gratis frakt</div>'
-      +'<div style="font-size:11px;color:#7a9478;margin-top:3px;">Gjelder alle B2B-ordrer.</div></div><div style="font-size:2rem;">📦</div></div>'
+      +'<div style="font-size:11px;color:#9a7a5a;margin-top:3px;">Gjelder alle B2B-ordrer.</div></div><div style="font-size:2rem;">📦</div></div>'
       +'<div class="b2p-card"><div class="b2p-card-title">NAK Hair – Produkter med B2B-pris</div>'
-      +'<div style="font-size:10px;color:#7a9478;margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid rgba(80,120,70,0.1);">Alle priser eks. mva · Din rabatt: <b style="color:#e8c04a;">'+(disc?disc+'%':'standard B2B')+'</b></div>';
+      +'<div style="font-size:10px;color:#9a7a5a;margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid rgba(80,120,70,0.1);">Alle priser eks. mva · Din rabatt: <b style="color:#e8c04a;">'+(disc?disc+'%':'standard B2B')+'</b></div>';
     Object.keys(cats).forEach(function(cat){
       content+='<div style="margin-bottom:1.25rem;"><div class="b2p-cat-head">'+cat+'</div>';
       cats[cat].forEach(function(p){
@@ -3045,14 +3046,14 @@ function renderPortal(){
       treatCats[k].push(t);
     });
     content='<div class="b2p-card"><div class="b2p-card-title">Frisørtjenester og neglepleie – B2B-priser</div>'
-      +'<div style="font-size:10px;color:#7a9478;margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid rgba(80,120,70,0.1);">'
+      +'<div style="font-size:10px;color:#9a7a5a;margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid rgba(80,120,70,0.1);">'
       +(disc?'Din bedriftsrabatt: <b style="color:#e8c04a;">'+disc+'%</b> på alle tjenester.':'Kontakt oss for bedriftspriser på tjenester.')+'</div>';
     Object.keys(treatCats).forEach(function(cat){
       content+='<div style="margin-bottom:1.25rem;"><div class="b2p-cat-head">'+cat+'</div>';
       treatCats[cat].forEach(function(t){
         var fp=disc?Math.round(t.price*(1-disc/100)):t.price;
         content+='<div class="b2p-price-row">'
-          +'<div><div class="b2p-price-name">'+t.name+'</div><div style="font-size:10px;color:#7a9478;">'+t.duration+' min</div></div>'
+          +'<div><div class="b2p-price-name">'+t.name+'</div><div style="font-size:10px;color:#9a7a5a;">'+t.duration+' min</div></div>'
           +'<div style="text-align:right;flex-shrink:0;">'
           +(disc?'<div class="b2p-retail">'+t.price+' kr</div><div class="b2p-b2bprice">'+fp+' kr</div><div class="b2p-disc-badge">−'+disc+'%</div>':'<div class="b2p-b2bprice">'+t.price+' kr</div>')
           +'</div></div>';
@@ -3064,23 +3065,23 @@ function renderPortal(){
   } else if(B2B_TAB==='bestilling'){
     content='<div class="b2p-card">'
       +'<div class="b2p-card-title">Bestill som bedriftskunde</div>'
-      +'<p style="font-size:12px;color:#7a9478;line-height:1.7;margin-bottom:1.25rem;">Send e-post med produktnavn og antall. Oppgi bedriftsnavn og org.nr i emnefeltet. Vi fakturerer med din avtalte rabatt.</p>'
+      +'<p style="font-size:12px;color:#9a7a5a;line-height:1.7;margin-bottom:1.25rem;">Send e-post med produktnavn og antall. Oppgi bedriftsnavn og org.nr i emnefeltet. Vi fakturerer med din avtalte rabatt.</p>'
       +'<div style="display:flex;flex-direction:column;gap:0.75rem;">'
       +'<a href="mailto:post@yeganehstyle.no?subject=B2B+Bestilling+%E2%80%93+'+encodeURIComponent(acc.firma||'Bedrift')+'&body=Firma%3A+'+encodeURIComponent(acc.firma||'')+'+%0AOrg.nr%3A+'+encodeURIComponent(acc.org_nr||'')+'%0A%0AProdukt%2FTjeneste%3A+%0AAntall%3A+%0AKommentar%3A" class="b2p-btn-main" style="display:flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;">✉ Send bestilling på e-post</a>'
       +'<a href="tel:+4797855154" class="b2p-btn-sec" style="display:flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;">📞 Ring +47 978 55 154</a>'
       +'</div>'
       +'<div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(80,120,70,0.12);">'
-      +'<div style="font-size:11px;font-weight:700;color:#7a9478;margin-bottom:0.6rem;text-transform:uppercase;letter-spacing:0.08em;">Ordrehistorikk</div>';
+      +'<div style="font-size:11px;font-weight:700;color:#9a7a5a;margin-bottom:0.6rem;text-transform:uppercase;letter-spacing:0.08em;">Ordrehistorikk</div>';
     var myOrders=(DATA.bookings||[]).filter(function(b){return b.phone&&acc.kontakt;}).slice(0,5);
     if(myOrders.length){
       myOrders.forEach(function(b){
-        content+='<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(140,108,60,0.08);font-size:11px;color:#7a9478;">'
+        content+='<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(140,108,60,0.08);font-size:11px;color:#9a7a5a;">'
           +'<span>'+b.date+' '+b.time+' · '+b.service+'</span>'
-          +'<span style="color:#9ec49a;font-weight:600;">'+b.price+'</span>'
+          +'<span style="color:#b8915a;font-weight:600;">'+b.price+'</span>'
           +'</div>';
       });
     } else {
-      content+='<div style="font-size:11px;color:#3a5a38;padding:0.75rem 0;">Ingen ordrer ennå.</div>';
+      content+='<div style="font-size:11px;color:#3a2c1a;padding:0.75rem 0;">Ingen ordrer ennå.</div>';
     }
     content+='</div></div>';
 
@@ -3094,11 +3095,11 @@ function renderPortal(){
         +'<div style="display:flex;align-items:center;gap:10px;">'
         +'<div style="font-size:18px;opacity:'+(isUnlocked?'1':'0.3')+'">' +t.icon+'</div>'
         +'<div>'
-        +'<div style="font-size:12px;font-weight:700;color:'+(isCurrentTier?t.col:isUnlocked?'#7a9478':'#2a4a28')+';">'+t.lbl+(isCurrentTier?' ← ditt nivå':'')+'</div>'
-        +'<div style="font-size:10px;color:#3a5a38;">Fra '+t.spend.toLocaleString('no-NO')+' kr kjøpt</div>'
+        +'<div style="font-size:12px;font-weight:700;color:'+(isCurrentTier?t.col:isUnlocked?'#9a7a5a':'#2a2010')+';">'+t.lbl+(isCurrentTier?' ← ditt nivå':'')+'</div>'
+        +'<div style="font-size:10px;color:#3a2c1a;">Fra '+t.spend.toLocaleString('no-NO')+' kr kjøpt</div>'
         +'</div>'
         +'</div>'
-        +'<div style="font-size:16px;font-weight:900;color:'+(isCurrentTier?t.col:isUnlocked?'#4a7a48':'#1e3a1c')+';opacity:'+(isUnlocked?'1':'0.4')+'">' +t.pct+'%</div>'
+        +'<div style="font-size:16px;font-weight:900;color:'+(isCurrentTier?t.col:isUnlocked?'#7a5a3a':'#1e3a1c')+';opacity:'+(isUnlocked?'1':'0.4')+'">' +t.pct+'%</div>'
         +'</div>';
     });
     allTiers+='</div>';
@@ -3117,11 +3118,11 @@ function renderPortal(){
       +'</div>'
       +'<div class="b2p-card" style="background:linear-gradient(135deg,rgba(232,192,74,0.05),rgba(10,18,10,0.9));border-color:rgba(232,192,74,0.2);">'
       +'<div class="b2p-card-title" style="color:#e8c04a;">🏆 Lojalitetsprogram — Jo mer du kjøper, jo mer sparer du</div>'
-      +'<div style="font-size:11px;color:#7a9478;margin-bottom:0.5rem;line-height:1.6;">Rabatten gjelder alle frisørtjenester, neglepleie og NAK Hair-produkter. Nivå beregnes basert på totalt kjøp.</div>'
+      +'<div style="font-size:11px;color:#9a7a5a;margin-bottom:0.5rem;line-height:1.6;">Rabatten gjelder alle frisørtjenester, neglepleie og NAK Hair-produkter. Nivå beregnes basert på totalt kjøp.</div>'
       +allTiers
-      +'<p style="font-size:11px;color:#7a9478;line-height:1.6;margin:0.5rem 0 1rem;">Be om oppgradering av din avtale. Vi sender tilbake et skreddersydd pristilbud basert på din kjøpshistorikk.</p>'
+      +'<p style="font-size:11px;color:#9a7a5a;line-height:1.6;margin:0.5rem 0 1rem;">Be om oppgradering av din avtale. Vi sender tilbake et skreddersydd pristilbud basert på din kjøpshistorikk.</p>'
       +(reqSent
-        ?'<div style="padding:10px;background:rgba(60,100,50,0.2);border-radius:10px;font-size:11px;color:#9ec49a;text-align:center;">✓ Forespørsel sendt — vi svarer innen 1 virkedag</div>'
+        ?'<div style="padding:10px;background:rgba(60,100,50,0.2);border-radius:10px;font-size:11px;color:#b8915a;text-align:center;">✓ Forespørsel sendt — vi svarer innen 1 virkedag</div>'
         :(acc.offer_status==='offer_sent'
           ?'<div style="padding:10px;background:rgba(232,192,74,0.1);border-radius:10px;font-size:11px;color:#e8c04a;text-align:center;">📬 Du har et åpent tilbud — se toppen av siden</div>'
           :'<button onclick="b2bRequestOffer()" class="b2p-btn-main" style="width:100%;">📩 Be om bedre avtalepris</button>'))
@@ -3136,7 +3137,7 @@ function renderPortal(){
 
 function b2pInfoRow(label,val){
   return '<div style="display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px solid rgba(80,120,70,0.1);gap:1rem;">'
-    +'<span style="font-size:11px;color:#7a9478;flex-shrink:0;">'+label+'</span>'
+    +'<span style="font-size:11px;color:#9a7a5a;flex-shrink:0;">'+label+'</span>'
     +'<span style="font-size:12px;font-weight:600;color:#c0d4bc;text-align:right;">'+val+'</span>'
     +'</div>';
 }
@@ -3193,15 +3194,15 @@ window.b2bCheckOrg=async function(){
   if(!nr){res.innerHTML='<span style="color:#e07060;">Skriv inn org.nr</span>';return;}
   if(!validOrgNr(nr)){res.innerHTML='<span style="color:#e07060;">❌ Ugyldig organisasjonsnummer (kontrollsiffer stemmer ikke)</span>';return;}
   if(btn){btn.textContent='...';btn.disabled=true;}
-  res.innerHTML='<span style="color:#7a9478;">Sjekker mot Brønnøysundregistrene...</span>';
+  res.innerHTML='<span style="color:#9a7a5a;">Sjekker mot Brønnøysundregistrene...</span>';
   var data=await brregLookup(nr);
   if(btn){btn.textContent='Sjekk →';btn.disabled=false;}
   if(!data){res.innerHTML='<span style="color:#e07060;">❌ Organisasjonsnummeret ble ikke funnet i registeret</span>';BST.brreg=null;return;}
   BST.brreg=data;
   var dot=data.konkurs||data.underAvvikling?'🔴':'🟢';
   var stxt=data.konkurs?'Under konkurs':data.underAvvikling?'Under avvikling':'Aktivt selskap';
-  res.innerHTML='<div class="b2p-brreg-ok"><div style="color:#9ec49a;font-weight:600;">'+dot+' '+data.navn+'</div>'
-    +'<div style="color:#7a9478;margin-top:3px;">'+stxt+(data.naeringskode1?' · '+data.naeringskode1.beskrivelse:'')+(data.forretningsadresse?' · '+data.forretningsadresse.poststed:'')+'</div></div>';
+  res.innerHTML='<div class="b2p-brreg-ok"><div style="color:#b8915a;font-weight:600;">'+dot+' '+data.navn+'</div>'
+    +'<div style="color:#9a7a5a;margin-top:3px;">'+stxt+(data.naeringskode1?' · '+data.naeringskode1.beskrivelse:'')+(data.forretningsadresse?' · '+data.forretningsadresse.poststed:'')+'</div></div>';
   var fEl=document.getElementById('b2rFirma');
   if(fEl&&!fEl.value.trim()) fEl.value=data.navn;
 };
@@ -3291,14 +3292,14 @@ document.addEventListener('keydown',function(e){
 
 <!-- ═══════ ADMIN PANEL ═══════ -->
 <div id="adminPanel" style="display:none;position:fixed;inset:0;z-index:1000;background:#0a1209;overflow-y:auto;-webkit-overflow-scrolling:touch;-webkit-text-size-adjust:100%;font-size:14px;box-sizing:border-box;">
-<div style="position:sticky;top:0;background:rgba(10,7,4,0.97);border-bottom:1px solid #1e2e21;display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1rem;z-index:10;">
+<div style="position:sticky;top:0;background:rgba(10,7,4,0.97);border-bottom:1px solid #2a1e12;display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1rem;z-index:10;">
   <span style="font-size:14px;font-weight:600;color:#e4cda8;">Yeganeh Admin</span>
   <div style="display:flex;gap:6px;">
-    <button onclick="if(window.sb){window.sb.auth.signOut().then(function(){closeAdminPanel();if(window.showToast)window.showToast('Logget ut');});}" style="background:none;border:1px solid #1e2e21;border-radius:8px;padding:6px 12px;color:#7a9478;font-size:12px;cursor:pointer;">Logg ut</button>
-    <button onclick="closeAdminPanel()" style="background:none;border:1px solid #1e2e21;border-radius:8px;padding:6px 12px;color:#7a9478;font-size:12px;cursor:pointer;">Lukk</button>
+    <button onclick="if(window.sb){window.sb.auth.signOut().then(function(){closeAdminPanel();if(window.showToast)window.showToast('Logget ut');});}" style="background:none;border:1px solid #2a1e12;border-radius:8px;padding:6px 12px;color:#9a7a5a;font-size:12px;cursor:pointer;">Logg ut</button>
+    <button onclick="closeAdminPanel()" style="background:none;border:1px solid #2a1e12;border-radius:8px;padding:6px 12px;color:#9a7a5a;font-size:12px;cursor:pointer;">Lukk</button>
   </div>
 </div>
-<div id="admTabs" style="padding:0.6rem 1rem 0.75rem;background:rgba(8,16,8,0.9);border-bottom:1px solid #1e2e21;"></div>
+<div id="admTabs" style="padding:0.6rem 1rem 0.75rem;background:rgba(8,16,8,0.9);border-bottom:1px solid #2a1e12;"></div>
 <div id="admBody" style="padding:1rem;"></div>
 </div>
 
@@ -3327,7 +3328,7 @@ var editEmpId=null;
 DATA.b2bClients=[];
 DATA.blocks=[];
 DATA.employees=[
-  {id:1,name:'Yeganeh',role:'Innehaver / Frisør',phone:'+47 978 55 154',color:'#9ec49a',schedule:{1:'09:00-18:00',2:'09:00-18:00',3:'09:00-18:00',4:'09:00-20:00',5:'09:00-18:00',6:'10:00-16:00',0:'Stengt'}},
+  {id:1,name:'Yeganeh',role:'Innehaver / Frisør',phone:'+47 978 55 154',color:'#b8915a',schedule:{1:'09:00-18:00',2:'09:00-18:00',3:'09:00-18:00',4:'09:00-20:00',5:'09:00-18:00',6:'10:00-16:00',0:'Stengt'}},
   {id:2,name:'Hadi',role:'Frisør',phone:'',color:'#c97d6e',schedule:{1:'09:00-18:00',2:'09:00-18:00',3:'09:00-18:00',4:'09:00-20:00',5:'09:00-18:00',6:'10:00-16:00',0:'Stengt'}},
   {id:3,name:'MH Nails',role:'Negledesigner',phone:'',color:'#e8c04a',schedule:{1:'10:00-18:00',2:'10:00-18:00',3:'10:00-18:00',4:'10:00-18:00',5:'10:00-18:00',6:'10:00-16:00',0:'Stengt'}}
 ];
@@ -3466,31 +3467,31 @@ var TABS=[
 function el(id){return document.getElementById(id);}
 
 function badge(s){
-  var map={ny:'#c0392b',pakket:'#d4a017',sendt:'#2980b9',levert:'#27ae60',refundert:'#27ae60',bekreftet:'#2980b9',fullfort:'#27ae60',aapen:'#c0392b',godkjent:'#d4a017'};
-  var c=map[s]||'#7a9478';
+  var map={ny:'#c0392b',pakket:'#d4a017',sendt:'#2980b9',levert:'#c0925a',refundert:'#c0925a',bekreftet:'#2980b9',fullfort:'#c0925a',aapen:'#c0392b',godkjent:'#d4a017'};
+  var c=map[s]||'#9a7a5a';
   return '<span style="display:inline-block;padding:2px 8px;border-radius:8px;font-size:10px;font-weight:600;background:'+c+'22;color:'+c+';border:1px solid '+c+'44">'+s+'</span>';
 }
 function btn(label,action,color){
-  var c=color||'#8ab48a';
+  var c=color||'#b09070';
   var safeAction=action.replace(/"/g,'&quot;');
   return '<button onclick="'+safeAction+'" style="padding:5px 10px;border-radius:12px;font-size:11px;font-weight:600;cursor:pointer;background:'+c+'22;border:1px solid '+c+'55;color:'+c+';margin:1px;">'+label+'</button>';
 }
 function card(title,inner){
-  return '<div style="background:#111f14;border:1px solid #1e2e21;border-radius:12px;overflow:hidden;margin-bottom:1rem;">'
-    +(title?'<div style="padding:0.75rem 1rem;border-bottom:1px solid #1e2e21;font-size:13px;font-weight:600;color:#e4cda8;">'+title+'</div>':'')
+  return '<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:12px;overflow:hidden;margin-bottom:1rem;">'
+    +(title?'<div style="padding:0.75rem 1rem;border-bottom:1px solid #2a1e12;font-size:13px;font-weight:600;color:#e4cda8;">'+title+'</div>':'')
     +inner+'</div>';
 }
 function tbl(headers,rows){
   var h='<tr>';
-  for(var i=0;i<headers.length;i++) h+='<th style="padding:8px 10px;text-align:left;font-size:10px;color:#7a9478;text-transform:uppercase;border-bottom:1px solid #1e2e21;white-space:nowrap;">'+headers[i]+'</th>';
+  for(var i=0;i<headers.length;i++) h+='<th style="padding:8px 10px;text-align:left;font-size:10px;color:#9a7a5a;text-transform:uppercase;border-bottom:1px solid #2a1e12;white-space:nowrap;">'+headers[i]+'</th>';
   h+='</tr>';
   return '<div style="overflow-x:auto;-webkit-overflow-scrolling:touch;"><table style="width:100%;border-collapse:collapse;font-size:12px;color:#e4cda8;"><thead>'+h+'</thead><tbody>'+rows+'</tbody></table></div>';
 }
 function stat(label,val,color){
-  return '<div style="background:#111f14;border:1px solid #1e2e21;border-radius:12px;padding:0.85rem;"><div style="font-size:10px;color:#7a9478;text-transform:uppercase;margin-bottom:4px;">'+label+'</div><div style="font-size:1.3rem;font-weight:700;color:'+(color||'#e4cda8')+';">'+val+'</div></div>';
+  return '<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:12px;padding:0.85rem;"><div style="font-size:10px;color:#9a7a5a;text-transform:uppercase;margin-bottom:4px;">'+label+'</div><div style="font-size:1.3rem;font-weight:700;color:'+(color||'#e4cda8')+';">'+val+'</div></div>';
 }
 function input(id,label,ph,type){
-  return '<div style="margin-bottom:0.6rem;"><label style="display:block;font-size:10px;color:#7a9478;text-transform:uppercase;margin-bottom:3px;">'+label+'</label><input id="'+id+'" type="'+(type||'text')+'" placeholder="'+(ph||'')+'" style="width:100%;padding:9px 11px;background:#162019;border:1px solid #1e2e21;border-radius:8px;font-size:16px;color:#e4cda8;box-sizing:border-box;"></div>';
+  return '<div style="margin-bottom:0.6rem;"><label style="display:block;font-size:10px;color:#9a7a5a;text-transform:uppercase;margin-bottom:3px;">'+label+'</label><input id="'+id+'" type="'+(type||'text')+'" placeholder="'+(ph||'')+'" style="width:100%;padding:9px 11px;background:#181208;border:1px solid #2a1e12;border-radius:8px;font-size:16px;color:#e4cda8;box-sizing:border-box;"></div>';
 }
 
 function renderTabs(){
@@ -3507,7 +3508,7 @@ function renderTabs(){
       if(!t) return;
       var active=t.id===currentTab;
       var isNails=t.id==='nails';
-      html+='<button onclick="admGo(\''+t.id+'\');" style="background:'+(active?(isNails?'rgba(201,125,110,0.2)':'rgba(138,180,138,0.18)'):'rgba(255,255,255,0.03)')+';border:1px solid '+(active?(isNails?'rgba(201,125,110,0.5)':'rgba(138,180,138,0.5)'):'rgba(80,100,70,0.2)')+';border-radius:10px;padding:6px 14px;font-size:12px;font-weight:'+(active?'600':'400')+';color:'+(active?(isNails?'#c97d6e':'#9ec49a'):'#5a7a5a')+';cursor:pointer;white-space:nowrap;transition:all 0.15s;font-family:inherit;">'+t.label+'</button>';
+      html+='<button onclick="admGo(\''+t.id+'\');" style="background:'+(active?(isNails?'rgba(201,125,110,0.2)':'rgba(138,180,138,0.18)'):'rgba(255,255,255,0.03)')+';border:1px solid '+(active?(isNails?'rgba(201,125,110,0.5)':'rgba(138,180,138,0.5)'):'rgba(80,100,70,0.2)')+';border-radius:10px;padding:6px 14px;font-size:12px;font-weight:'+(active?'600':'400')+';color:'+(active?(isNails?'#c97d6e':'#b8915a'):'#7a5a3a')+';cursor:pointer;white-space:nowrap;transition:all 0.15s;font-family:inherit;">'+t.label+'</button>';
     });
     html+='</div>';
   });
@@ -3537,7 +3538,7 @@ function go(tab){
   else if(tab==='nails') b.innerHTML=viewNails();
   else if(tab==='bedriftskunder') b.innerHTML=viewBedriftskunder();
   else if(tab==='kunder') b.innerHTML=viewKunder();
-  else if(tab==='innhold'){if(window.renderInnhold)window.renderInnhold();}
+  else if(tab==='innhold') b.innerHTML=viewInnhold();
 }
 
 function viewOversikt(){
@@ -3554,16 +3555,16 @@ function viewOversikt(){
   var rows='';
   for(i=0;i<Math.min(4,DATA.orders.length);i++){
     var o=DATA.orders[i];
-    rows+='<tr><td style="padding:8px 10px;border-bottom:1px solid #1e2e2155;"><b>'+o.id+'</b></td><td style="padding:8px 10px;border-bottom:1px solid #1e2e2155;">'+o.customer+'</td><td style="padding:8px 10px;border-bottom:1px solid #1e2e2155;">'+o.total+' kr</td><td style="padding:8px 10px;border-bottom:1px solid #1e2e2155;">'+badge(o.status)+'</td></tr>';
+    rows+='<tr><td style="padding:8px 10px;border-bottom:1px solid #2a1e1255;"><b>'+o.id+'</b></td><td style="padding:8px 10px;border-bottom:1px solid #2a1e1255;">'+o.customer+'</td><td style="padding:8px 10px;border-bottom:1px solid #2a1e1255;">'+o.total+' kr</td><td style="padding:8px 10px;border-bottom:1px solid #2a1e1255;">'+badge(o.status)+'</td></tr>';
   }
   return '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:1rem;">'
-    +stat('I dag','2 448 kr','#8ab48a')
+    +stat('I dag','2 448 kr','#b09070')
     +stat('Denne mnd','48 320 kr')
     +stat('Nye ordre',nyOrd,'#c97d6e')
     +stat('Forespørsler',nyReq,'#e8c04a')
     +stat('Uleste meldinger',unread,'#60a8da')
     +stat('Nye anmeldelser',pendRev,'#e8c04a')
-    +stat('Produkter',(window.PRODUCTS||[]).length,'#9ec49a')
+    +stat('Produkter',(window.PRODUCTS||[]).length,'#b8915a')
     +'</div>'
     +card('Siste bestillinger',tbl(['#','Kunde','Belop','Status'],rows));
 }
@@ -3575,18 +3576,18 @@ function viewOrdre(){
     var actions='';
     if(o.status==='ny') actions+=btn('Pakk',"admOrd('"+o.id+"','pakket')",'#d4a017');
     if(o.status==='pakket') actions+=btn('Send',"admOrd('"+o.id+"','sendt')",'#2980b9');
-    if(o.status==='sendt') actions+=btn('Levert',"admOrd('"+o.id+"','levert')",'#27ae60');
+    if(o.status==='sendt') actions+=btn('Levert',"admOrd('"+o.id+"','levert')",'#c0925a');
     if(o.status!=='refundert'&&o.status!=='levert') actions+=btn('Refunder',"admOrd('"+o.id+"','refundert')",'#c0392b');
     actions+=btn('Etikett',"admLabel('"+o.id+"')",'#9b8ab4');
-    html+='<div style="background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
+    html+='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem;">'
-      +'<div><b style="font-size:14px;color:#e4cda8;">'+o.id+'</b> <span style="font-size:11px;color:#7a9478;">'+o.date+'</span></div>'
+      +'<div><b style="font-size:14px;color:#e4cda8;">'+o.id+'</b> <span style="font-size:11px;color:#9a7a5a;">'+o.date+'</span></div>'
       +badge(o.status)+'</div>'
       +'<div style="font-size:13px;color:#e4cda8;margin-bottom:2px;"><b>'+o.customer+'</b></div>'
-      +'<div style="font-size:11px;color:#7a9478;margin-bottom:0.5rem;">'+o.phone+' &middot; '+o.email+'<br>'+o.address+'</div>'
-      +'<div style="font-size:12px;color:#a8c4a0;background:#162019;border-radius:8px;padding:0.5rem 0.7rem;margin-bottom:0.6rem;">'+o.items+'</div>'
+      +'<div style="font-size:11px;color:#9a7a5a;margin-bottom:0.5rem;">'+o.phone+' &middot; '+o.email+'<br>'+o.address+'</div>'
+      +'<div style="font-size:12px;color:#b09070;background:#181208;border-radius:8px;padding:0.5rem 0.7rem;margin-bottom:0.6rem;">'+o.items+'</div>'
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem;">'
-      +'<span style="font-size:11px;color:#7a9478;">'+o.payment+'</span>'
+      +'<span style="font-size:11px;color:#9a7a5a;">'+o.payment+'</span>'
       +'<b style="font-size:15px;color:#e4cda8;">'+o.total+' kr</b></div>'
       +'<div style="display:flex;flex-wrap:wrap;gap:2px;">'+actions+'</div>'
       +'</div>';
@@ -3600,16 +3601,16 @@ function viewTimer(){
     var b=DATA.bookings[i];
     var actions='';
     if(b.status==='ny') actions+=btn('Bekreft',"admBk("+i+",'bekreftet')",'#2980b9');
-    if(b.status!=='fullfort') actions+=btn('Fullfort',"admBk("+i+",'fullfort')",'#27ae60');
+    if(b.status!=='fullfort') actions+=btn('Fullfort',"admBk("+i+",'fullfort')",'#c0925a');
     actions+=btn('Avlys','admBkDel('+i+')','#c0392b');
-    html+='<div style="background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
+    html+='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">'
-      +'<div><b style="font-size:15px;color:#e4cda8;">'+b.time+'</b> <span style="font-size:11px;color:#7a9478;">'+b.date+'</span></div>'
+      +'<div><b style="font-size:15px;color:#e4cda8;">'+b.time+'</b> <span style="font-size:11px;color:#9a7a5a;">'+b.date+'</span></div>'
       +badge(b.status)+'</div>'
-      +'<div style="font-size:13px;color:#e4cda8;"><b>'+b.customer+'</b> <span style="font-size:11px;color:#7a9478;">'+b.phone+'</span></div>'
+      +'<div style="font-size:13px;color:#e4cda8;"><b>'+b.customer+'</b> <span style="font-size:11px;color:#9a7a5a;">'+b.phone+'</span></div>'
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin:0.4rem 0 0.6rem;">'
-      +'<span style="font-size:12px;color:#a8c4a0;">'+b.service+'</span>'
-      +'<b style="font-size:13px;color:#9ec49a;">'+b.price+'</b></div>'
+      +'<span style="font-size:12px;color:#b09070;">'+b.service+'</span>'
+      +'<b style="font-size:13px;color:#b8915a;">'+b.price+'</b></div>'
       +'<div style="display:flex;flex-wrap:wrap;gap:2px;">'+actions+'</div>'
       +'</div>';
   }
@@ -3619,43 +3620,106 @@ function viewTimer(){
 function viewProdukter(){
   var cards='',i;
   var prods=window.PRODUCTS||[];
+  var selCss='width:100%;padding:9px 11px;background:#181208;border:1px solid #2a1e12;border-radius:8px;font-size:15px;color:#e4cda8;box-sizing:border-box;';
+  var chkCss='width:18px;height:18px;accent-color:#b8915a;cursor:pointer;';
+
+  // ── Product list ──
   for(i=0;i<prods.length;i++){
     var p=prods[i];
     var stock=p.stock!=null?p.stock:20;
-    var sc=stock<10?'#e07060':stock<20?'#e8c04a':'#6dca8a';
-    var img=p.img?'<img src="'+p.img+'" alt="'+p.name+'" loading="lazy" style="width:46px;height:46px;border-radius:10px;object-fit:cover;">':'<div style="width:46px;height:46px;border-radius:10px;background:#162019;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#5a7a58;">'+p.name.charAt(0)+'</div>';
-    var priceHtml=p.oldPrice?'<b style="color:#e07060;">'+p.price+' kr</b> <span style="text-decoration:line-through;color:#7a9478;font-size:11px;">'+p.oldPrice+' kr</span>':'<b>'+p.price+' kr</b>';
-    cards+='<div style="background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:0.85rem;margin-bottom:0.6rem;display:flex;gap:0.75rem;align-items:flex-start;">'
+    var sc=stock<5?'#e07060':stock<15?'#e8c04a':'#76c87a';
+    var vis=p.visible!==false;
+    var badgeTxt={best:'⭐ Bestselger',ny:'🆕 Ny',sale:'🏷 Tilbud',salg:'🏷 Tilbud'}[p.badge]||'';
+    var img=p.img
+      ?'<img src="'+p.img+'" alt="'+p.name+'" loading="lazy" style="width:60px;height:60px;border-radius:12px;object-fit:cover;flex-shrink:0;">'
+      :'<div style="width:60px;height:60px;border-radius:12px;background:#241c10;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">'+(p.emoji||'🧴')+'</div>';
+    var priceHtml=p.oldPrice
+      ?'<b style="color:#e07060;">'+p.price+' kr</b> <s style="color:#9a7a5a;font-size:11px;">'+p.oldPrice+' kr</s>'
+      :'<b style="color:#b8915a;">'+p.price+' kr</b>';
+    cards+='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:0.9rem;margin-bottom:0.6rem;display:flex;gap:0.85rem;align-items:flex-start;">'
       +img
       +'<div style="flex:1;min-width:0;">'
-      +'<div style="font-size:13px;font-weight:600;color:#e4cda8;">'+p.name+'</div>'
-      +'<div style="font-size:11px;color:#7a9478;margin:2px 0;">'+p.desc+'</div>'
-      +'<div style="font-size:12px;color:#a8c4a0;">'+priceHtml+' &middot; <span style="color:'+sc+';">'+stock+' på lager</span> &middot; '+catLabel(p.cat)+'</div>'
-      +'<div style="display:flex;gap:3px;margin-top:0.5rem;flex-wrap:wrap;">'+btn('Rediger',"admEditP('"+p.id+"')")+btn(p.oldPrice?'Avslutt tilbud':'Tilbud',"admSaleP('"+p.id+"')","#e8c04a")+btn('Slett',"admDelP('"+p.id+"')","#c0392b")+'</div>'
-      +'<div id="saleBox-'+p.id+'" style="display:none;margin-top:0.5rem;background:#162019;border-radius:8px;padding:0.6rem;">'
-      +'<label style="display:block;font-size:10px;color:#7a9478;text-transform:uppercase;margin-bottom:4px;">Tilbudspris (vanlig '+p.price+' kr)</label>'
-      +'<div style="display:flex;gap:0.4rem;">'
-      +'<input id="saleInput-'+p.id+'" type="number" placeholder="'+Math.round(p.price*0.8)+'" style="flex:1;padding:8px 10px;background:#0d1610;border:1px solid #1e2e21;border-radius:8px;font-size:16px;color:#e4cda8;box-sizing:border-box;">'
-      +btn('Aktiver',"admApplySale('"+p.id+"')")
+      +'<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:3px;">'
+      +'<span style="font-size:14px;font-weight:700;color:#f0e4ce;">'+p.name+'</span>'
+      +(badgeTxt?'<span style="font-size:9px;background:#b8915a22;border:1px solid #b8915a44;color:#b8915a;padding:2px 7px;border-radius:20px;font-weight:700;">'+badgeTxt+'</span>':'')
+      +(vis?'':'<span style="font-size:9px;background:#c0392b22;border:1px solid #c0392b44;color:#c0392b;padding:2px 7px;border-radius:20px;font-weight:700;">Skjult</span>')
+      +'</div>'
+      +'<div style="font-size:11px;color:#9a7a5a;margin-bottom:4px;">'+(p.brand||'NAK Hair')+' · '+catLabel(p.cat)+'</div>'
+      +'<div style="font-size:12px;color:#b09070;margin-bottom:6px;">'+priceHtml+' <span style="color:#9a7a5a;margin-left:6px;">·</span> <span style="color:'+sc+';margin-left:6px;">'+stock+' stk</span></div>'
+      +'<div style="display:flex;gap:4px;flex-wrap:wrap;">'
+      +btn('✏ Rediger',"admEditP('"+p.id+"')",'#b8915a')
+      +btn(p.oldPrice?'✕ Avslutt tilbud':'% Tilbud',"admSaleP('"+p.id+"')","#e8c04a")
+      +btn('🗑 Slett',"admDelP('"+p.id+"')","#c0392b")
+      +'</div>'
+      +'<div id="saleBox-'+p.id+'" style="display:none;margin-top:0.6rem;background:#100c08;border:1px solid #2a1e12;border-radius:10px;padding:0.75rem;">'
+      +'<div style="font-size:10px;color:#9a7a5a;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Tilbudspris (nåværende: '+p.price+' kr)</div>'
+      +'<div style="display:flex;gap:0.5rem;align-items:center;">'
+      +'<input id="saleInput-'+p.id+'" type="number" placeholder="'+Math.round(p.price*0.8)+'" style="flex:1;padding:9px 11px;background:#181208;border:1px solid #2a1e12;border-radius:8px;font-size:16px;color:#e4cda8;box-sizing:border-box;">'
+      +btn('✓ Aktiver',"admApplySale('"+p.id+"')","#76c87a")
       +'</div></div>'
       +'</div></div>';
   }
-  var form='<div id="admProdForm" style="display:none;background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:1rem;margin-bottom:1rem;">'
-    +'<div id="admProdFormTitle" style="font-size:13px;font-weight:600;color:#e4cda8;margin-bottom:0.75rem;">Nytt produkt</div>'
-    +input('admPName','Navn','Produktnavn')
-    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;">'
-    +input('admPPrice','Pris (kr)','299','number')
-    +input('admPStock','Lager','50','number')
+
+  // ── Add/Edit form (all fields) ──
+  var form='<div id="admProdForm" style="display:none;background:#1a1410;border:1px solid #b8915a44;border-radius:16px;padding:1.2rem;margin-bottom:1.2rem;">'
+    +'<div id="admProdFormTitle" style="font-size:15px;font-weight:700;color:#f0e4ce;margin-bottom:1rem;letter-spacing:0.02em;">Nytt produkt</div>'
+    // Row 1: Name + Brand
+    +'<div style="display:grid;grid-template-columns:2fr 1fr;gap:0.6rem;">'
+    +input('admPName','Produktnavn','f.eks. Smooth Shampoo')
+    +input('admPBrand','Merke','NAK Hair')
     +'</div>'
-    +'<div style="margin-bottom:0.6rem;"><label style="display:block;font-size:10px;color:#7a9478;text-transform:uppercase;margin-bottom:3px;">Kategori</label><select id="admPCat" style="width:100%;padding:9px 11px;background:#162019;border:1px solid #1e2e21;border-radius:8px;font-size:16px;color:#e4cda8;box-sizing:border-box;"><option value="shampoo">Shampoo</option><option value="conditioner">Conditioner</option><option value="behandling">Behandling</option><option value="styling">Styling</option></select></div>'
-    +input('admPDesc','Beskrivelse','Kort beskrivelse')
-    +'<div style="margin-bottom:0.6rem;"><label style="display:block;font-size:10px;color:#7a9478;text-transform:uppercase;margin-bottom:3px;">Produktbilde</label><input type="file" id="admPImg" accept="image/*" onchange="admPImgPreview(event)" style="width:100%;font-size:14px;color:#7a9478;"><div id="admPImgPrev" style="margin-top:6px;"></div></div>'
-    +'<div style="display:flex;gap:0.5rem;">'+btn('Lagre produkt','admSaveP()')+btn('Avbryt',"document.getElementById('admProdForm').style.display='none'",'#7a9478')+'</div>'
+    // Row 2: Category + Badge
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:0.6rem;">'
+    +'<div><label style="display:block;font-size:10px;color:#9a7a5a;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px;">Kategori</label>'
+    +'<select id="admPCat" style="'+selCss+'"><option value="shampoo">Shampoo</option><option value="conditioner">Conditioner</option><option value="behandling">Behandling</option><option value="styling">Styling</option></select></div>'
+    +'<div><label style="display:block;font-size:10px;color:#9a7a5a;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px;">Badge</label>'
+    +'<select id="admPBadge" style="'+selCss+'"><option value="">Ingen</option><option value="best">⭐ Bestselger</option><option value="ny">🆕 Ny</option><option value="sale">🏷 Tilbud</option></select></div>'
+    +'</div>'
+    // Row 3: Price + Old price + Stock + Sort
+    +'<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:0.6rem;">'
+    +input('admPPrice','Pris (kr)','299','number')
+    +input('admPOldPrice','Gammel pris','0','number')
+    +input('admPStock','Lager (stk)','50','number')
+    +input('admPSort','Sortering','0','number')
+    +'</div>'
+    // Description
+    +'<div style="margin-bottom:0.6rem;"><label style="display:block;font-size:10px;color:#9a7a5a;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:3px;">Beskrivelse</label>'
+    +'<textarea id="admPDesc" rows="2" placeholder="Kort produktbeskrivelse..." style="width:100%;padding:9px 11px;background:#181208;border:1px solid #2a1e12;border-radius:8px;font-size:15px;color:#e4cda8;box-sizing:border-box;resize:vertical;font-family:inherit;"></textarea></div>'
+    // Row: Emoji + Visible
+    +'<div style="display:grid;grid-template-columns:1fr auto;gap:0.6rem;align-items:end;margin-bottom:0.75rem;">'
+    +input('admPEmoji','Emoji (reserveikon)','🧴')
+    +'<div style="padding-bottom:0.6rem;display:flex;align-items:center;gap:8px;white-space:nowrap;">'
+    +'<input type="checkbox" id="admPVisible" style="'+chkCss+'" checked>'
+    +'<label for="admPVisible" style="font-size:13px;color:#b09070;cursor:pointer;">Synlig på siden</label>'
+    +'</div></div>'
+    // Image upload
+    +'<div style="margin-bottom:0.9rem;">'
+    +'<label style="display:block;font-size:10px;color:#9a7a5a;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Produktbilde</label>'
+    +'<div style="display:flex;align-items:center;gap:0.75rem;">'
+    +'<div id="admPImgPrev" style="width:64px;height:64px;border-radius:12px;background:#241c10;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:24px;">🖼</div>'
+    +'<div style="flex:1;"><input type="file" id="admPImg" accept="image/*" onchange="admPImgPreview(event)" style="width:100%;font-size:13px;color:#9a7a5a;"></div>'
+    +'</div></div>'
+    // Buttons
+    +'<div style="display:flex;gap:0.6rem;border-top:1px solid #2a1e12;padding-top:0.9rem;">'
+    +'<button onclick="admSaveP()" style="flex:1;padding:12px;background:#b8915a22;border:1px solid #b8915a66;border-radius:10px;color:#f0e4ce;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:0.03em;">💾 Lagre produkt</button>'
+    +'<button onclick="document.getElementById(\'admProdForm\').style.display=\'none\'" style="padding:12px 18px;background:#2a1e12;border:1px solid #3a2a1a;border-radius:10px;color:#9a7a5a;font-size:13px;cursor:pointer;font-family:inherit;">Avbryt</button>'
+    +'</div>'
     +'</div>';
-  return '<div style="margin-bottom:0.75rem;">'+btn('+ Nytt produkt',"admNewP()")+'</div>'
+
+  var emptyState=prods.length===0
+    ?'<div style="text-align:center;padding:3rem 1rem;background:#1a1410;border:1px dashed #2a1e12;border-radius:14px;">'
+      +'<div style="font-size:3rem;margin-bottom:1rem;">📦</div>'
+      +'<div style="font-size:15px;font-weight:600;color:#e4cda8;margin-bottom:6px;">Ingen produkter ennå</div>'
+      +'<div style="font-size:13px;color:#9a7a5a;">Klikk «+ Nytt produkt» for å legge til ditt første produkt</div>'
+      +'</div>'
+    :'';
+
+  return '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">'
+    +'<div style="font-size:15px;font-weight:700;color:#f0e4ce;">Produkter <span style="font-size:12px;font-weight:400;color:#9a7a5a;">('+prods.length+')</span></div>'
+    +'<button onclick="admNewP()" style="padding:9px 18px;background:#b8915a22;border:1px solid #b8915a66;border-radius:10px;color:#b8915a;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:0.04em;">+ Nytt produkt</button>'
+    +'</div>'
     +form
-    +'<div style="font-size:14px;font-weight:600;color:#e4cda8;margin-bottom:0.75rem;">Produkter ('+prods.length+')</div>'
-    +cards;
+    +(emptyState||cards);
 }
 function catLabel(c){var m={shampoo:'Shampoo',conditioner:'Conditioner',behandling:'Behandling',styling:'Styling'};return m[c]||c;}
 
@@ -3670,17 +3734,17 @@ function viewKalender(){
     +['måned','uke','dag'].map(function(v){
       var active=calView===v;
       var lbl=v==='måned'?'Mnd':v==='uke'?'Uke':'Dag';
-      return '<button onclick="admCalView(\''+v+'\')" style="padding:6px 10px;background:'+(active?'rgba(60,100,50,0.35)':'transparent')+';border:0;border-right:1px solid rgba(80,120,70,0.15);color:'+(active?'#e0caa8':'#7a9478')+';font-size:11px;font-weight:'+(active?'700':'500')+';cursor:pointer;font-family:inherit;">'+lbl+'</button>';
+      return '<button onclick="admCalView(\''+v+'\')" style="padding:6px 10px;background:'+(active?'rgba(60,100,50,0.35)':'transparent')+';border:0;border-right:1px solid rgba(80,120,70,0.15);color:'+(active?'#e0caa8':'#9a7a5a')+';font-size:11px;font-weight:'+(active?'700':'500')+';cursor:pointer;font-family:inherit;">'+lbl+'</button>';
     }).join('')
     +'</div>';
   var html='<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem;">'
     +'<div style="display:flex;align-items:center;gap:4px;">'
-    +'<button onclick="admCalPrev()" style="'+btnCss('#162019')+'padding:6px 10px;font-size:16px;">◀</button>'
-    +'<button onclick="admCalToday()" style="'+btnCss('#162019')+'font-size:11px;">I dag</button>'
-    +'<button onclick="admCalNext()" style="'+btnCss('#162019')+'padding:6px 10px;font-size:16px;">▶</button>'
+    +'<button onclick="admCalPrev()" style="'+btnCss('#181208')+'padding:6px 10px;font-size:16px;">◀</button>'
+    +'<button onclick="admCalToday()" style="'+btnCss('#181208')+'font-size:11px;">I dag</button>'
+    +'<button onclick="admCalNext()" style="'+btnCss('#181208')+'padding:6px 10px;font-size:16px;">▶</button>'
     +'</div>'
     +'<b style="font-size:13px;color:#e4cda8;">'+label+'</b>'
-    +'<div style="display:flex;gap:6px;align-items:center;">'+viewBtns+btn('+ Ny time','admNewBooking()','#8ab48a')+'</div>'
+    +'<div style="display:flex;gap:6px;align-items:center;">'+viewBtns+btn('+ Ny time','admNewBooking()','#b09070')+'</div>'
     +'</div>';
   if(calView==='dag') html+=viewKalenderDag();
   else if(calView==='uke') html+=viewKalenderUke();
@@ -3695,14 +3759,14 @@ function viewKalenderMnd(){
   var daysInMonth=new Date(y,m+1,0).getDate();
   var todayIso=isoDate(new Date());
   var dayNames=['Man','Tir','Ons','Tor','Fre','Lør','Søn'];
-  var html='<div style="background:#0d1a0f;border:1px solid #1e2e21;border-radius:14px;overflow:hidden;">'
-    +'<div style="display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid #1e2e21;">';
+  var html='<div style="background:#0d1a0f;border:1px solid #2a1e12;border-radius:14px;overflow:hidden;">'
+    +'<div style="display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid #2a1e12;">';
   dayNames.forEach(function(n){
-    html+='<div style="padding:8px 4px;text-align:center;font-size:10px;font-weight:700;color:#3a5a38;text-transform:uppercase;letter-spacing:0.06em;">'+n+'</div>';
+    html+='<div style="padding:8px 4px;text-align:center;font-size:10px;font-weight:700;color:#3a2c1a;text-transform:uppercase;letter-spacing:0.06em;">'+n+'</div>';
   });
   html+='</div><div style="display:grid;grid-template-columns:repeat(7,1fr);">';
   for(var i=0;i<firstDayMon;i++){
-    html+='<div style="min-height:80px;border-right:1px solid #1e2e2133;border-bottom:1px solid #1e2e2133;background:rgba(0,0,0,0.2);"></div>';
+    html+='<div style="min-height:80px;border-right:1px solid #2a1e1233;border-bottom:1px solid #2a1e1233;background:rgba(0,0,0,0.2);"></div>';
   }
   for(var d=1;d<=daysInMonth;d++){
     var dateStr=y+'-'+(m+1<10?'0':'')+(m+1)+'-'+(d<10?'0':'')+d;
@@ -3715,16 +3779,16 @@ function viewKalenderMnd(){
     var isLastCol=col===6;
     var dayBks=DATA.bookings.filter(function(b){return parseBookingDate(b.date)===dateStr;});
     var closed=!isOpen||isBlocked;
-    html+='<div onclick="admCalDay(\''+dateStr+'\')" style="min-height:80px;padding:6px;border-right:'+(isLastCol?'0':'1px solid #1e2e2133')+';border-bottom:1px solid #1e2e2133;background:'+(isToday?'rgba(80,140,60,0.1)':closed?'rgba(0,0,0,0.15)':'transparent')+';cursor:pointer;transition:background 0.15s;position:relative;" onmouseenter="this.style.background=\''+(closed?'rgba(0,0,0,0.15)':'rgba(30,50,28,0.5)')+'\'" onmouseleave="this.style.background=\''+(isToday?'rgba(80,140,60,0.1)':closed?'rgba(0,0,0,0.15)':'transparent')+'\'">'
-      +'<div style="font-size:13px;font-weight:'+(isToday?'800':'600')+';color:'+(isToday?'#9ec49a':closed?'#2a3a2a':'#c0d4bc')+';margin-bottom:4px;'+(isToday?'background:rgba(80,140,60,0.2);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;':'')+'">'+d+'</div>';
+    html+='<div onclick="admCalDay(\''+dateStr+'\')" style="min-height:80px;padding:6px;border-right:'+(isLastCol?'0':'1px solid #2a1e1233')+';border-bottom:1px solid #2a1e1233;background:'+(isToday?'rgba(80,140,60,0.1)':closed?'rgba(0,0,0,0.15)':'transparent')+';cursor:pointer;transition:background 0.15s;position:relative;" onmouseenter="this.style.background=\''+(closed?'rgba(0,0,0,0.15)':'rgba(30,50,28,0.5)')+'\'" onmouseleave="this.style.background=\''+(isToday?'rgba(80,140,60,0.1)':closed?'rgba(0,0,0,0.15)':'transparent')+'\'">'
+      +'<div style="font-size:13px;font-weight:'+(isToday?'800':'600')+';color:'+(isToday?'#b8915a':closed?'#2a3a2a':'#c0d4bc')+';margin-bottom:4px;'+(isToday?'background:rgba(80,140,60,0.2);border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;':'')+'">'+d+'</div>';
     if(closed){
       html+='<div style="font-size:9px;color:#c0392b;font-weight:600;">'+(isBlocked?'Stengt':'Fri')+'</div>';
     } else {
       dayBks.slice(0,3).forEach(function(b){
-        html+='<div style="background:rgba(138,180,138,0.18);border-left:2px solid #8ab48a;border-radius:3px;padding:2px 4px;margin-bottom:2px;font-size:9px;color:#a8c4a0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+b.time+' '+b.customer.split(' ')[0]+'</div>';
+        html+='<div style="background:rgba(138,180,138,0.18);border-left:2px solid #b09070;border-radius:3px;padding:2px 4px;margin-bottom:2px;font-size:9px;color:#b09070;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">'+b.time+' '+b.customer.split(' ')[0]+'</div>';
       });
-      if(dayBks.length>3) html+='<div style="font-size:9px;color:#7a9478;">+'+( dayBks.length-3)+' til</div>';
-      if(!dayBks.length) html+='<div style="font-size:9px;color:#2a4a28;">Ledig</div>';
+      if(dayBks.length>3) html+='<div style="font-size:9px;color:#9a7a5a;">+'+( dayBks.length-3)+' til</div>';
+      if(!dayBks.length) html+='<div style="font-size:9px;color:#2a2010;">Ledig</div>';
     }
     html+='</div>';
   }
@@ -3737,22 +3801,22 @@ function viewKalenderDag(){
   var slots=[];for(var h=8;h<=20;h++){slots.push((h<10?'0':'')+h+':00');if(h<20)slots.push((h<10?'0':'')+h+':30');}
   var dayBks=DATA.bookings.filter(function(b){return parseBookingDate(b.date)===iso;});
   var dayNames=['Søndag','Mandag','Tirsdag','Onsdag','Torsdag','Fredag','Lørdag'];
-  var html='<div style="font-size:11px;color:#7a9478;margin-bottom:0.5rem;">'+dayNames[d.getDay()]+' '+fmtDateD(d)+' · '+dayBks.length+' timer</div>'
-    +'<div style="background:#111f14;border:1px solid #1e2e21;border-radius:12px;overflow:hidden;">';
+  var html='<div style="font-size:11px;color:#9a7a5a;margin-bottom:0.5rem;">'+dayNames[d.getDay()]+' '+fmtDateD(d)+' · '+dayBks.length+' timer</div>'
+    +'<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:12px;overflow:hidden;">';
   for(var i=0;i<slots.length;i++){
     var sl=slots[i];
     var bk=null;for(var j=0;j<dayBks.length;j++) if(dayBks[j].time===sl){bk=dayBks[j];break;}
     var bl=null;for(var k=0;k<DATA.blocks.length;k++) if(DATA.blocks[k].date===iso&&DATA.blocks[k].from===sl){bl=DATA.blocks[k];break;}
-    html+='<div style="display:flex;border-bottom:1px solid #1e2e2133;min-height:'+(sl.endsWith(':00')?'48':'32')+'px;">'
-      +'<div style="width:52px;flex-shrink:0;padding:6px 4px 6px 8px;font-size:'+(sl.endsWith(':00')?'10':'9')+'px;color:'+(sl.endsWith(':00')?'#a8c4a0':'#3a5a38')+';border-right:1px solid #1e2e21;display:flex;align-items:center;">'+sl+'</div>'
+    html+='<div style="display:flex;border-bottom:1px solid #2a1e1233;min-height:'+(sl.endsWith(':00')?'48':'32')+'px;">'
+      +'<div style="width:52px;flex-shrink:0;padding:6px 4px 6px 8px;font-size:'+(sl.endsWith(':00')?'10':'9')+'px;color:'+(sl.endsWith(':00')?'#c4a87a':'#3a2c1a')+';border-right:1px solid #2a1e12;display:flex;align-items:center;">'+sl+'</div>'
       +'<div style="flex:1;padding:4px 8px;display:flex;align-items:center;">';
     if(bk){
       var bkIdx=DATA.bookings.indexOf(bk);
-      html+='<div style="width:100%;background:rgba(138,180,138,0.15);border-left:3px solid #8ab48a;border-radius:6px;padding:6px 10px;cursor:pointer;" onclick="admEditBkInline('+bkIdx+')">'
+      html+='<div style="width:100%;background:rgba(138,180,138,0.15);border-left:3px solid #b09070;border-radius:6px;padding:6px 10px;cursor:pointer;" onclick="admEditBkInline('+bkIdx+')">'
         +'<div style="display:flex;justify-content:space-between;align-items:center;">'
-        +'<div><b style="font-size:12px;color:#e4cda8;">'+bk.customer+'</b><span style="font-size:10px;color:#7a9478;margin-left:8px;">'+bk.phone+'</span></div>'
+        +'<div><b style="font-size:12px;color:#e4cda8;">'+bk.customer+'</b><span style="font-size:10px;color:#9a7a5a;margin-left:8px;">'+bk.phone+'</span></div>'
         +badge(bk.status)+'</div>'
-        +'<div style="font-size:10px;color:#a8c4a0;">'+bk.service+' · '+bk.price+'</div>'
+        +'<div style="font-size:10px;color:#b09070;">'+bk.service+' · '+bk.price+'</div>'
         +'</div>';
     } else if(bl){
       html+='<div style="width:100%;background:rgba(192,57,43,0.1);border-left:3px solid #c0392b;border-radius:6px;padding:6px 10px;">'
@@ -3772,7 +3836,7 @@ function viewKalenderUke(){
   var dayShort=['Søn','Man','Tir','Ons','Tor','Fre','Lør'];
   var dayKeys=[1,2,3,4,5,6,0];
   var todayIso=isoDate(new Date());
-  var weekHtml='<div style="font-size:11px;color:#7a9478;margin-bottom:0.75rem;">Uke '+getWeekNum(mon)+' · '+fmtDateD(mon)+' – '+fmtDateD(new Date(mon.getTime()+6*86400000))+'</div>';
+  var weekHtml='<div style="font-size:11px;color:#9a7a5a;margin-bottom:0.75rem;">Uke '+getWeekNum(mon)+' · '+fmtDateD(mon)+' – '+fmtDateD(new Date(mon.getTime()+6*86400000))+'</div>';
   var cols='';
   for(var i=0;i<7;i++){
     (function(dayIdx){
@@ -3784,16 +3848,16 @@ function viewKalenderUke(){
       for(var j=0;j<dayBks.length;j++){
         var b=dayBks[j];
         var bi=DATA.bookings.indexOf(b);
-        bkHtml+='<div style="background:rgba(138,180,138,0.2);border-left:2px solid #8ab48a;border-radius:4px;padding:3px 5px;margin-bottom:3px;cursor:pointer;font-size:10px;" onclick="admEditBkInline('+bi+')">'
-          +'<b style="color:#e4cda8;">'+b.time+'</b><br><span style="color:#a8c4a0;">'+b.customer.split(' ')[0]+'</span>'
+        bkHtml+='<div style="background:rgba(138,180,138,0.2);border-left:2px solid #b09070;border-radius:4px;padding:3px 5px;margin-bottom:3px;cursor:pointer;font-size:10px;" onclick="admEditBkInline('+bi+')">'
+          +'<b style="color:#e4cda8;">'+b.time+'</b><br><span style="color:#b09070;">'+b.customer.split(' ')[0]+'</span>'
           +'</div>';
       }
       if(!oh||!oh.open) bkHtml='<div style="font-size:9px;color:#c0392b;text-align:center;padding:6px 0;">Stengt</div>';
-      else if(!bkHtml) bkHtml='<div style="font-size:9px;color:#3a5a38;text-align:center;padding:6px 0;">Ledig</div>';
-      cols+='<div style="background:'+(isToday?'rgba(138,180,138,0.07)':'#111f14')+';border:1px solid '+(isToday?'rgba(138,180,138,0.35)':'#1e2e21')+';border-radius:10px;padding:8px;cursor:pointer;" onclick="admCalDay(\''+iso+'\')">'
-        +'<div style="text-align:center;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid #1e2e2155;">'
-        +'<div style="font-size:9px;color:#7a9478;text-transform:uppercase;letter-spacing:0.08em;">'+dayShort[day.getDay()]+'</div>'
-        +'<div style="font-size:17px;font-weight:700;color:'+(isToday?'#9ec49a':'#e4cda8')+';">'+day.getDate()+'</div>'
+      else if(!bkHtml) bkHtml='<div style="font-size:9px;color:#3a2c1a;text-align:center;padding:6px 0;">Ledig</div>';
+      cols+='<div style="background:'+(isToday?'rgba(138,180,138,0.07)':'#1a1410')+';border:1px solid '+(isToday?'rgba(138,180,138,0.35)':'#2a1e12')+';border-radius:10px;padding:8px;cursor:pointer;" onclick="admCalDay(\''+iso+'\')">'
+        +'<div style="text-align:center;margin-bottom:6px;padding-bottom:6px;border-bottom:1px solid #2a1e1255;">'
+        +'<div style="font-size:9px;color:#9a7a5a;text-transform:uppercase;letter-spacing:0.08em;">'+dayShort[day.getDay()]+'</div>'
+        +'<div style="font-size:17px;font-weight:700;color:'+(isToday?'#b8915a':'#e4cda8')+';">'+day.getDate()+'</div>'
         +'</div>'
         +bkHtml+'</div>';
     })(i);
@@ -3809,31 +3873,31 @@ function ohTimeSel(id,val,onch){
       opts+='<option value="'+v+'"'+(v===val?' selected':'')+'>'+v+'</option>';
     });
   }
-  return '<select id="'+id+'" onchange="'+onch+'" style="padding:7px 8px;background:#162019;border:1px solid #1e2e21;border-radius:8px;font-size:13px;color:#e4cda8;cursor:pointer;font-family:inherit;">'+opts+'</select>';
+  return '<select id="'+id+'" onchange="'+onch+'" style="padding:7px 8px;background:#181208;border:1px solid #2a1e12;border-radius:8px;font-size:13px;color:#e4cda8;cursor:pointer;font-family:inherit;">'+opts+'</select>';
 }
 
 function viewApningstider(){
   var days=[{k:1,l:'Mandag'},{k:2,l:'Tirsdag'},{k:3,l:'Onsdag'},{k:4,l:'Torsdag'},{k:5,l:'Fredag'},{k:6,l:'Lørdag'},{k:0,l:'Søndag'}];
   var html='<div style="font-size:14px;font-weight:600;color:#e4cda8;margin-bottom:0.75rem;">Åpningstider</div>'
-    +'<div style="background:#111f14;border:1px solid #1e2e21;border-radius:14px;overflow:hidden;margin-bottom:0.75rem;">';
+    +'<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;overflow:hidden;margin-bottom:0.75rem;">';
   for(var i=0;i<days.length;i++){
     var d=days[i];var oh=DATA.openingHours[d.k];
     var isLast=i===days.length-1;
-    html+='<div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;'+(isLast?'':'border-bottom:1px solid #1e2e2155;')+'flex-wrap:wrap;">'
+    html+='<div style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem 1rem;'+(isLast?'':'border-bottom:1px solid #2a1e1255;')+'flex-wrap:wrap;">'
       +'<div style="min-width:70px;font-size:13px;font-weight:600;color:#e4cda8;">'+d.l+'</div>'
       +'<label style="display:flex;align-items:center;gap:6px;cursor:pointer;">'
-      +'<input type="checkbox" '+(oh.open?'checked':'')+' onchange="admOhToggle('+d.k+',this.checked)" style="width:16px;height:16px;accent-color:#8ab48a;">'
-      +'<span style="font-size:12px;color:#a8c4a0;">Åpen</span>'
+      +'<input type="checkbox" '+(oh.open?'checked':'')+' onchange="admOhToggle('+d.k+',this.checked)" style="width:16px;height:16px;accent-color:#b09070;">'
+      +'<span style="font-size:12px;color:#b09070;">Åpen</span>'
       +'</label>'
       +(oh.open
         ? ohTimeSel('ohFrom'+d.k, oh.from||'09:00', 'admOhFrom('+d.k+',this.value)')
-          +'<span style="color:#7a9478;font-size:12px;">–</span>'
+          +'<span style="color:#9a7a5a;font-size:12px;">–</span>'
           +ohTimeSel('ohTo'+d.k, oh.to||'18:00', 'admOhTo('+d.k+',this.value)')
         : '<span style="font-size:12px;color:#c0392b;font-style:italic;">Stengt</span>')
       +'</div>';
   }
   html+='</div>'
-    +'<div style="margin-bottom:1rem;">'+btn('💾 Lagre åpningstider','admSaveOh()','#27ae60')+'</div>';
+    +'<div style="margin-bottom:1rem;">'+btn('💾 Lagre åpningstider','admSaveOh()','#c0925a')+'</div>';
   // Blocked days
   html+=card('Steng enkeltdag / Ferie',
     '<div style="padding:0.75rem;">'
@@ -3843,8 +3907,8 @@ function viewApningstider(){
     +'</div>'
     +btn('Steng denne dagen','admAddBlock()')
     +(DATA.blocks.length?'<div style="margin-top:0.75rem;">'+DATA.blocks.map(function(bl,bi){
-      return '<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1e2e2133;font-size:12px;">'
-        +'<span style="color:#e4cda8;">'+bl.date+'</span><span style="color:#7a9478;margin:0 8px;">'+bl.note+'</span>'
+      return '<div style="display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid #2a1e1233;font-size:12px;">'
+        +'<span style="color:#e4cda8;">'+bl.date+'</span><span style="color:#9a7a5a;margin:0 8px;">'+bl.note+'</span>'
         +btn('Fjern','admRemoveBlock('+bi+')','#c0392b')+'</div>';
     }).join('')+'</div>':'')
     +'</div>');
@@ -3856,11 +3920,11 @@ function viewAnsatte(){
   for(var i=0;i<DATA.employees.length;i++){
     var emp=DATA.employees[i];
     var schKeys=[1,2,3,4,5,6,0];var schLabels=['Man','Tir','Ons','Tor','Fre','Lør','Søn'];
-    empHtml+='<div style="background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
+    empHtml+='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem;">'
       +'<div style="display:flex;align-items:center;gap:0.75rem;">'
-      +'<div style="width:40px;height:40px;border-radius:50%;background:'+(emp.color||'#8ab48a')+'22;border:2px solid '+(emp.color||'#8ab48a')+';display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:'+(emp.color||'#8ab48a')+';">'+emp.name.charAt(0)+'</div>'
-      +'<div><div style="font-size:14px;font-weight:600;color:#e4cda8;">'+emp.name+'</div><div style="font-size:11px;color:#7a9478;">'+emp.role+(emp.phone?' · '+emp.phone:'')+'</div></div>'
+      +'<div style="width:40px;height:40px;border-radius:50%;background:'+(emp.color||'#b09070')+'22;border:2px solid '+(emp.color||'#b09070')+';display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;color:'+(emp.color||'#b09070')+';">'+emp.name.charAt(0)+'</div>'
+      +'<div><div style="font-size:14px;font-weight:600;color:#e4cda8;">'+emp.name+'</div><div style="font-size:11px;color:#9a7a5a;">'+emp.role+(emp.phone?' · '+emp.phone:'')+'</div></div>'
       +'</div>'
       +'<div>'+btn('Rediger','admEditEmp('+i+')')+btn('Slett','admDelEmp('+i+')','#c0392b')+'</div>'
       +'</div>'
@@ -3868,41 +3932,41 @@ function viewAnsatte(){
       +schKeys.map(function(k,ki){
         var sch=emp.schedule[k];var open=sch&&sch!=='Stengt';
         return '<div style="background:'+(open?'rgba(138,180,138,0.12)':'rgba(192,57,43,0.08)')+';border:1px solid '+(open?'rgba(138,180,138,0.2)':'rgba(192,57,43,0.15)')+';border-radius:6px;padding:4px 2px;text-align:center;">'
-          +'<div style="font-size:8px;color:#7a9478;text-transform:uppercase;">'+schLabels[ki]+'</div>'
-          +(open?'<div style="font-size:7.5px;color:#9ec49a;margin-top:2px;">'+sch+'</div>':'<div style="font-size:9px;color:#c0392b;margin-top:2px;">✕</div>')
+          +'<div style="font-size:8px;color:#9a7a5a;text-transform:uppercase;">'+schLabels[ki]+'</div>'
+          +(open?'<div style="font-size:7.5px;color:#b8915a;margin-top:2px;">'+sch+'</div>':'<div style="font-size:9px;color:#c0392b;margin-top:2px;">✕</div>')
           +'</div>';
       }).join('')
       +'</div>'
       +'</div>';
   }
-  if(!empHtml) empHtml='<div style="background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:2rem;text-align:center;color:#3a5a38;">Ingen ansatte registrert.</div>';
+  if(!empHtml) empHtml='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:2rem;text-align:center;color:#3a2c1a;">Ingen ansatte registrert.</div>';
 
-  var form='<div id="admEmpForm" style="display:none;background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:1rem;margin-bottom:1rem;">'
+  var form='<div id="admEmpForm" style="display:none;background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:1rem;margin-bottom:1rem;">'
     +'<div id="admEmpFormTitle" style="font-size:13px;font-weight:600;color:#e4cda8;margin-bottom:0.75rem;">Ny ansatt</div>'
     +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">'
     +input('admEmpName','Navn','Fullt navn')
     +input('admEmpRole','Tittel','Frisør')
     +'</div>'
     +input('admEmpPhone','Telefon','+47...')
-    +'<div style="font-size:10px;color:#7a9478;text-transform:uppercase;margin:0.5rem 0 0.4rem;">Arbeidstider</div>'
+    +'<div style="font-size:10px;color:#9a7a5a;text-transform:uppercase;margin:0.5rem 0 0.4rem;">Arbeidstider</div>'
     +'<div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0.4rem;margin-bottom:0.75rem;">'
     +[{k:1,l:'Mandag'},{k:2,l:'Tirsdag'},{k:3,l:'Onsdag'},{k:4,l:'Torsdag'},{k:5,l:'Fredag'},{k:6,l:'Lørdag'},{k:0,l:'Søndag'}].map(function(d){
       var oh=DATA.openingHours[d.k];
       var df=oh&&oh.open?(oh.from||'09:00'):'09:00';var dt=oh&&oh.open?(oh.to||'18:00'):'18:00';
-      return '<div style="background:#162019;border-radius:8px;padding:7px 8px;">'
+      return '<div style="background:#181208;border-radius:8px;padding:7px 8px;">'
         +'<label style="display:flex;align-items:center;gap:5px;margin-bottom:5px;cursor:pointer;">'
-        +'<input type="checkbox" id="empSch'+d.k+'" '+(d.k!==0?'checked':'')+' style="width:14px;height:14px;accent-color:#8ab48a;">'
-        +'<span style="font-size:11px;color:#a8c4a0;font-weight:600;">'+d.l+'</span></label>'
+        +'<input type="checkbox" id="empSch'+d.k+'" '+(d.k!==0?'checked':'')+' style="width:14px;height:14px;accent-color:#b09070;">'
+        +'<span style="font-size:11px;color:#b09070;font-weight:600;">'+d.l+'</span></label>'
         +'<div style="display:flex;gap:3px;">'
-        +'<input type="time" id="empFrom'+d.k+'" value="'+df+'" style="flex:1;padding:4px;background:#0d1610;border:1px solid #1e2e21;border-radius:5px;font-size:11px;color:#e4cda8;">'
-        +'<input type="time" id="empTo'+d.k+'" value="'+dt+'" style="flex:1;padding:4px;background:#0d1610;border:1px solid #1e2e21;border-radius:5px;font-size:11px;color:#e4cda8;">'
+        +'<input type="time" id="empFrom'+d.k+'" value="'+df+'" style="flex:1;padding:4px;background:#100c08;border:1px solid #2a1e12;border-radius:5px;font-size:11px;color:#e4cda8;">'
+        +'<input type="time" id="empTo'+d.k+'" value="'+dt+'" style="flex:1;padding:4px;background:#100c08;border:1px solid #2a1e12;border-radius:5px;font-size:11px;color:#e4cda8;">'
         +'</div></div>';
     }).join('')
     +'</div>'
-    +'<div style="display:flex;gap:0.5rem;">'+btn('Lagre ansatt','admSaveEmp()')+btn('Avbryt','admCancelEmp()','#7a9478')+'</div>'
+    +'<div style="display:flex;gap:0.5rem;">'+btn('Lagre ansatt','admSaveEmp()')+btn('Avbryt','admCancelEmp()','#9a7a5a')+'</div>'
     +'</div>';
 
-  return '<div style="margin-bottom:0.75rem;">'+btn('+ Ny ansatt','admNewEmp()','#8ab48a')+'</div>'
+  return '<div style="margin-bottom:0.75rem;">'+btn('+ Ny ansatt','admNewEmp()','#b09070')+'</div>'
     +form
     +'<div style="font-size:14px;font-weight:600;color:#e4cda8;margin-bottom:0.75rem;">Ansatte ('+DATA.employees.length+')</div>'
     +empHtml;
@@ -3919,13 +3983,13 @@ function _buildTreatRows(list,accentColor){
       var ti=DATA.treatments.indexOf(t);
       catRows+='<div style="display:flex;align-items:center;justify-content:space-between;padding:9px 10px;border-bottom:1px solid rgba(30,46,33,0.5);flex-wrap:wrap;gap:6px;">'
         +'<div style="flex:1;min-width:120px;">'
-        +'<div style="font-size:12px;font-weight:500;color:'+(t.active?'#e4cda8':'#3a5a38')+';">'+t.name+'</div>'
-        +'<div style="font-size:10px;color:#7a9478;">'+t.duration+' min · '+t.cat+'</div>'
+        +'<div style="font-size:12px;font-weight:500;color:'+(t.active?'#e4cda8':'#3a2c1a')+';">'+t.name+'</div>'
+        +'<div style="font-size:10px;color:#9a7a5a;">'+t.duration+' min · '+t.cat+'</div>'
         +'</div>'
         +'<div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap;">'
         +'<span onclick="admInlinePrice('+ti+',this)" title="Klikk for å redigere pris" style="font-size:13px;font-weight:700;color:'+accentColor+';min-width:64px;text-align:right;cursor:pointer;padding:3px 6px;border-radius:6px;transition:background 0.15s;" onmouseenter=\"this.style.background=\'rgba(184,148,96,0.1)\'\" onmouseleave=\"this.style.background=\'\">'+t.price+' kr</span>'
         +btn('Rediger','admEditTreat('+ti+')')
-        +btn(t.active?'Pause':'Aktiver','admToggleTreat('+ti+')',t.active?'#e8c04a':'#27ae60')
+        +btn(t.active?'Pause':'Aktiver','admToggleTreat('+ti+')',t.active?'#e8c04a':'#c0925a')
         +btn('✕','admDelTreat('+ti+')','#c0392b')
         +'</div></div>';
     });
@@ -3936,32 +4000,32 @@ function _buildTreatRows(list,accentColor){
 function _buildTreatForm(isNails){
   var hairCats='<option>Klipp</option><option>Farge</option><option>Behandling</option><option>Skjegg</option><option>Vipper / Bryn</option><option>Extension / Permanent</option>';
   var nailCats='<option>Gelenegler</option><option>Akrylnegler</option><option>Neglefjerning</option><option>Manikyr</option><option>Pedikyr</option><option>Negldesign / Kunst</option><option>Franskefransk</option><option>Babybomer</option>';
-  return '<div id="admTreatForm" style="display:none;background:#111f14;border:1px solid '+(isNails?'rgba(201,125,110,0.3)':'#1e2e21')+';border-radius:14px;padding:1rem;margin-bottom:1rem;">'
+  return '<div id="admTreatForm" style="display:none;background:#1a1410;border:1px solid '+(isNails?'rgba(201,125,110,0.3)':'#2a1e12')+';border-radius:14px;padding:1rem;margin-bottom:1rem;">'
     +'<div id="admTreatFormTitle" style="font-size:13px;font-weight:600;color:#e4cda8;margin-bottom:0.75rem;"></div>'
     +input('admTreatName','Navn','Behandlingsnavn')
     +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;">'
     +input('admTreatPrice','Pris (kr)','499','number')
     +input('admTreatDur','Varighet (min)','30','number')
     +'</div>'
-    +'<div style="margin-bottom:0.6rem;"><label style="display:block;font-size:10px;color:#7a9478;text-transform:uppercase;margin-bottom:3px;">Kategori</label>'
-    +'<select id="admTreatCat" style="width:100%;padding:9px 11px;background:#162019;border:1px solid #1e2e21;border-radius:8px;font-size:16px;color:#e4cda8;box-sizing:border-box;">'
+    +'<div style="margin-bottom:0.6rem;"><label style="display:block;font-size:10px;color:#9a7a5a;text-transform:uppercase;margin-bottom:3px;">Kategori</label>'
+    +'<select id="admTreatCat" style="width:100%;padding:9px 11px;background:#181208;border:1px solid #2a1e12;border-radius:8px;font-size:16px;color:#e4cda8;box-sizing:border-box;">'
     +(isNails?nailCats:hairCats)
     +'</select></div>'
     +'<input type="hidden" id="admTreatType" value="'+(isNails?'nails':'frisør')+'">'
-    +'<div style="display:flex;gap:0.5rem;">'+btn('Lagre','admSaveTreat()')+btn('Avbryt','admCancelTreat()','#7a9478')+'</div>'
+    +'<div style="display:flex;gap:0.5rem;">'+btn('Lagre','admSaveTreat()')+btn('Avbryt','admCancelTreat()','#9a7a5a')+'</div>'
     +'</div>';
 }
 function viewBehandlinger(){
   admTreatTab='frisør';
   var list=DATA.treatments.filter(function(t){return !t.type||t.type==='frisør';});
-  var rows=_buildTreatRows(list,'#9ec49a');
+  var rows=_buildTreatRows(list,'#b8915a');
   return '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;">'
-    +'<div style="font-size:11px;color:#7a9478;">'+list.length+' tjenester – Yeganeh Style</div>'
-    +btn('+ Ny tjeneste','admNewTreat()','#8ab48a')
+    +'<div style="font-size:11px;color:#9a7a5a;">'+list.length+' tjenester – Yeganeh Style</div>'
+    +btn('+ Ny tjeneste','admNewTreat()','#b09070')
     +'</div>'
     +_buildTreatForm(false)
     +'<div style="background:#0d1a0f;border:1px solid rgba(140,108,60,0.18);border-radius:14px;overflow:hidden;">'
-    +(rows||'<div style="padding:2rem;text-align:center;color:#3a5a38;">Ingen tjenester. Klikk "+ Ny tjeneste".</div>')
+    +(rows||'<div style="padding:2rem;text-align:center;color:#3a2c1a;">Ingen tjenester. Klikk "+ Ny tjeneste".</div>')
     +'</div>';
 }
 function viewNails(){
@@ -3969,7 +4033,7 @@ function viewNails(){
   var list=DATA.treatments.filter(function(t){return t.type==='nails';});
   var rows=_buildTreatRows(list,'#c97d6e');
   return '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;">'
-    +'<div style="font-size:11px;color:#7a9478;">'+list.length+' tjenester – MH Nails</div>'
+    +'<div style="font-size:11px;color:#9a7a5a;">'+list.length+' tjenester – MH Nails</div>'
     +btn('+ Ny tjeneste','admNewTreat()','#c97d6e')
     +'</div>'
     +_buildTreatForm(true)
@@ -3985,7 +4049,7 @@ window.admInlinePrice=function(i,el){
   var cur=t.price;
   var inp=document.createElement('input');
   inp.type='number';inp.value=cur;
-  inp.style.cssText='width:70px;padding:3px 6px;background:#162019;border:1px solid #9ec49a55;border-radius:6px;font-size:13px;font-weight:700;color:#9ec49a;font-family:inherit;text-align:right;';
+  inp.style.cssText='width:70px;padding:3px 6px;background:#181208;border:1px solid #b8915a55;border-radius:6px;font-size:13px;font-weight:700;color:#b8915a;font-family:inherit;text-align:right;';
   el.replaceWith(inp);
   inp.focus();inp.select();
   function save(){
@@ -4013,54 +4077,54 @@ function viewBedriftskunder(){
   var pending=reqs.filter(function(r){return r.status==='ny'||r.status==='pending';});
   var html='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:0.5rem;">'
     +'<div><div style="font-size:16px;font-weight:700;color:#e4cda8;">Bedriftskunder</div>'
-    +'<div style="font-size:11px;color:#7a9478;margin-top:2px;">'+pending.length+' venter godkjenning · '+clients.length+' aktive</div></div>'
-    +'<button onclick="if(window.admRefreshData)window.admRefreshData();" style="'+btnCss('#3a6a3a')+'">↺ Oppdater</button>'
+    +'<div style="font-size:11px;color:#9a7a5a;margin-top:2px;">'+pending.length+' venter godkjenning · '+clients.length+' aktive</div></div>'
+    +'<button onclick="if(window.admRefreshData)window.admRefreshData();" style="'+btnCss('#4a3020')+'">↺ Oppdater</button>'
     +'</div>';
   if(pending.length){
     html+='<div style="font-size:11px;font-weight:700;color:#e8c04a;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.6rem;">Søknader – venter godkjenning ('+pending.length+')</div>';
     reqs.forEach(function(r,i){
       if(r.status!=='ny'&&r.status!=='pending') return;
       var isFlag=r.flagged;
-      html+='<div style="background:#111f14;border:1px solid '+(isFlag?'#e8c04a55':'#e8c04a33')+';border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
+      html+='<div style="background:#1a1410;border:1px solid '+(isFlag?'#e8c04a55':'#e8c04a33')+';border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
         +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.5rem;">'
-        +'<div><b style="font-size:14px;color:#e4cda8;">'+r.firma+'</b>'+(r.org?'<span style="font-size:10px;color:#7a9478;margin-left:8px;">org.'+r.org+'</span>':'')+'</div>'
+        +'<div><b style="font-size:14px;color:#e4cda8;">'+r.firma+'</b>'+(r.org?'<span style="font-size:10px;color:#9a7a5a;margin-left:8px;">org.'+r.org+'</span>':'')+'</div>'
         +'<div style="display:flex;gap:4px;align-items:center;">'+(isFlag?'<span style="font-size:9px;background:#e8c04a22;border:1px solid #e8c04a55;border-radius:6px;padding:2px 7px;color:#e8c04a;">⚠ Flagget</span>':'')+badge('ny')+'</div>'
         +'</div>'
         +(isFlag?'<div style="font-size:11px;background:rgba(232,192,74,0.07);border:1px solid rgba(232,192,74,0.2);border-radius:8px;padding:7px 10px;margin-bottom:0.6rem;color:#b8944a;">'+r.flag_reason+'</div>':'')
-        +'<div style="font-size:11px;color:#7a9478;line-height:1.8;">'
-        +(r.brreg_navn&&r.brreg_navn!==r.firma?'Registrert navn: <b style="color:#a8c4a0;">'+r.brreg_navn+'</b><br>':'')
+        +'<div style="font-size:11px;color:#9a7a5a;line-height:1.8;">'
+        +(r.brreg_navn&&r.brreg_navn!==r.firma?'Registrert navn: <b style="color:#b09070;">'+r.brreg_navn+'</b><br>':'')
         +(r.kontakt?'Kontaktperson: '+r.kontakt+'<br>':'')
-        +(r.tlf?'Tlf: <a href="tel:'+r.tlf+'" style="color:#7a9478;">'+r.tlf+'</a><br>':'')
-        +(r.epost?'E-post: <a href="mailto:'+r.epost+'" style="color:#9ec49a;">'+r.epost+'</a><br>':'')
+        +(r.tlf?'Tlf: <a href="tel:'+r.tlf+'" style="color:#9a7a5a;">'+r.tlf+'</a><br>':'')
+        +(r.epost?'E-post: <a href="mailto:'+r.epost+'" style="color:#b8915a;">'+r.epost+'</a><br>':'')
         +'Mottatt: '+r.dato+'</div>'
         +'<div style="display:flex;gap:4px;margin-top:0.6rem;flex-wrap:wrap;">'
-        +btn('✓ Godkjenn','admB2bApprove('+i+')','#27ae60')
+        +btn('✓ Godkjenn','admB2bApprove('+i+')','#c0925a')
         +btn('✕ Avvis','admB2bReject('+i+')','#c0392b')
         +(r.epost?btn('✉ E-post',"window.location.href='mailto:"+r.epost+"'",'#2980b9'):'')
         +'</div></div>';
     });
   }
-  html+='<div style="font-size:11px;font-weight:700;color:#7a9478;letter-spacing:0.08em;text-transform:uppercase;margin:'+(pending.length?'1.25rem':'0')+' 0 0.6rem;">Godkjente bedriftskunder ('+clients.length+')</div>';
+  html+='<div style="font-size:11px;font-weight:700;color:#9a7a5a;letter-spacing:0.08em;text-transform:uppercase;margin:'+(pending.length?'1.25rem':'0')+' 0 0.6rem;">Godkjente bedriftskunder ('+clients.length+')</div>';
   if(!clients.length){
-    html+='<div style="background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:2rem;text-align:center;color:#3a5a38;">Ingen godkjente bedriftskunder ennå.<br><span style="font-size:11px;">Godkjenn søknader ovenfor.</span></div>';
+    html+='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:2rem;text-align:center;color:#3a2c1a;">Ingen godkjente bedriftskunder ennå.<br><span style="font-size:11px;">Godkjenn søknader ovenfor.</span></div>';
   } else {
     clients.forEach(function(c,j){
-      html+='<div style="background:#111f14;border:1px solid '+(c.active?'#1e2e21':'#c0392b33')+';border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
+      html+='<div style="background:#1a1410;border:1px solid '+(c.active?'#2a1e12':'#c0392b33')+';border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
         +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.5rem;">'
-        +'<div><b style="font-size:14px;color:#e4cda8;">'+c.firma+'</b>'+(c.org?'<span style="font-size:10px;color:#7a9478;margin-left:8px;">org.'+c.org+'</span>':'')+'</div>'
+        +'<div><b style="font-size:14px;color:#e4cda8;">'+c.firma+'</b>'+(c.org?'<span style="font-size:10px;color:#9a7a5a;margin-left:8px;">org.'+c.org+'</span>':'')+'</div>'
         +badge(c.active?'godkjent':'sperret')+'</div>'
-        +'<div style="font-size:11px;color:#7a9478;line-height:1.8;">'
+        +'<div style="font-size:11px;color:#9a7a5a;line-height:1.8;">'
         +(c.kontakt?'Kontaktperson: '+c.kontakt+'<br>':'')
-        +(c.tlf?'Tlf: <a href="tel:'+c.tlf+'" style="color:#7a9478;">'+c.tlf+'</a><br>':'')
-        +(c.epost?'E-post: <a href="mailto:'+c.epost+'" style="color:#9ec49a;">'+c.epost+'</a><br>':'')
+        +(c.tlf?'Tlf: <a href="tel:'+c.tlf+'" style="color:#9a7a5a;">'+c.tlf+'</a><br>':'')
+        +(c.epost?'E-post: <a href="mailto:'+c.epost+'" style="color:#b8915a;">'+c.epost+'</a><br>':'')
         +(c.discount?(function(){var trs=[{p:25,l:'👑 Elite'},{p:20,l:'💎 Platinum'},{p:15,l:'🥇 Gold'},{p:10,l:'🥈 Silver'},{p:5,l:'🥉 Bronze'}];var tl='';for(var x=0;x<trs.length;x++){if(c.discount>=trs[x].p){tl=trs[x].l;break;}}return '<b style="color:#e8c04a;">'+tl+' · '+c.discount+'% rabatt</b><br>';})():'Ingen rabatt satt<br>')
         +(c.offer_status==='pending_offer'?'<b style="color:#c97d6e;">📩 Ønsker pristilbud!</b><br>':'')
-        +(c.offer_status==='offer_sent'?'<b style="color:#9ec49a;">📬 Tilbud sendt ('+c.offer_discount+'%)</b><br>':'')
-        +(c.offer_status==='offer_accepted'?'<b style="color:#27ae60;">✓ Tilbud akseptert</b><br>':'')
+        +(c.offer_status==='offer_sent'?'<b style="color:#b8915a;">📬 Tilbud sendt ('+c.offer_discount+'%)</b><br>':'')
+        +(c.offer_status==='offer_accepted'?'<b style="color:#c0925a;">✓ Tilbud akseptert</b><br>':'')
         +'Godkjent: '+(c.approvedDate||'-')+'</div>'
         +'<div style="display:flex;gap:4px;margin-top:0.6rem;flex-wrap:wrap;">'
         +(c.offer_status==='pending_offer'?btn('📩 Send tilbud','admB2bSendOffer('+j+')','#c97d6e'):btn('% Rabatt','admB2bDiscount('+j+')','#e8c04a'))
-        +(c.active?btn('Sperre','admB2bSuspend('+j+')','#c0392b'):btn('Aktiver','admB2bToggle('+j+')','#27ae60'))
+        +(c.active?btn('Sperre','admB2bSuspend('+j+')','#c0392b'):btn('Aktiver','admB2bToggle('+j+')','#c0925a'))
         +(c.epost?btn('✉ E-post',"window.location.href='mailto:"+c.epost+"'",'#2980b9'):'')
         +btn('Slett','admB2bDel('+j+')','#c0392b')
         +'</div></div>';
@@ -4075,15 +4139,15 @@ function viewForesporsler(){
   var reqs=window.B2B_REQUESTS||[];
   if(!reqs.length){
     return '<div style="font-size:14px;font-weight:600;color:#e4cda8;margin-bottom:0.75rem;">Bedriftsforespørsler</div>'
-      +'<div style="background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:2rem;text-align:center;color:#3a5a38;">Ingen forespørsler ennå.<br><span style="font-size:11px;">Når bedrifter sender forespørsel via Bedriftsportalen, dukker de opp her.</span></div>';
+      +'<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:2rem;text-align:center;color:#3a2c1a;">Ingen forespørsler ennå.<br><span style="font-size:11px;">Når bedrifter sender forespørsel via Bedriftsportalen, dukker de opp her.</span></div>';
   }
   var html='',i;
   for(i=0;i<reqs.length;i++){
     var r=reqs[i];
-    html+='<div style="background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
+    html+='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">'
       +'<b style="font-size:14px;color:#e4cda8;">'+r.firma+'</b>'+badge(r.status)+'</div>'
-      +'<div style="font-size:11px;color:#7a9478;line-height:1.6;">'
+      +'<div style="font-size:11px;color:#9a7a5a;line-height:1.6;">'
       +(r.org?'Org.nr: '+r.org+'<br>':'')
       +(r.kontakt?'Kontakt: '+r.kontakt+'<br>':'')
       +(r.tlf?'Tlf: '+r.tlf+'<br>':'')
@@ -4108,9 +4172,9 @@ function viewAnmeldelser(){
     for(var p=0;p<pending.length;p++){
       var idx=pending[p],r=revs[idx];
       var stars='';for(var s=0;s<5;s++) stars+=s<r.rating?'★':'☆';
-      html+='<div style="background:#111f14;border:1px solid #d4a01744;border-radius:14px;padding:1rem;margin-bottom:0.6rem;">'
+      html+='<div style="background:#1a1410;border:1px solid #d4a01744;border-radius:14px;padding:1rem;margin-bottom:0.6rem;">'
         +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><b style="color:#e4cda8;">'+r.name+'</b><span style="color:#e8c04a;">'+stars+'</span></div>'
-        +'<div style="font-size:12px;color:#a8c4a0;margin-bottom:0.6rem;">'+r.text+'</div>'
+        +'<div style="font-size:12px;color:#b09070;margin-bottom:0.6rem;">'+r.text+'</div>'
         +'<div style="display:flex;gap:4px;">'+btn('Publiser','admRevOk('+idx+')')+btn('Slett','admRevDel('+idx+')','#c0392b')+'</div>'
         +'</div>';
     }
@@ -4119,9 +4183,9 @@ function viewAnmeldelser(){
   for(var q=0;q<published.length;q++){
     var pidx=published[q],pr=revs[pidx];
     var pstars='';for(var t=0;t<5;t++) pstars+=t<pr.rating?'★':'☆';
-    html+='<div style="background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:1rem;margin-bottom:0.6rem;">'
+    html+='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:1rem;margin-bottom:0.6rem;">'
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><b style="color:#e4cda8;">'+pr.name+'</b><span style="color:#e8c04a;">'+pstars+'</span></div>'
-      +'<div style="font-size:12px;color:#a8c4a0;margin-bottom:0.6rem;">'+pr.text+'</div>'
+      +'<div style="font-size:12px;color:#b09070;margin-bottom:0.6rem;">'+pr.text+'</div>'
       +'<div>'+btn('Skjul','admRevHide('+pidx+')','#c0392b')+'</div>'
       +'</div>';
   }
@@ -4135,12 +4199,12 @@ function viewChat(){
     for(var i=0;i<DATA.chats.length;i++){
       var c=DATA.chats[i];
       var last=c.messages[c.messages.length-1];
-      list+='<div onclick="admOpenChat('+c.id+')" style="padding:0.85rem 1rem;border-bottom:1px solid #1e2e2155;cursor:pointer;display:flex;justify-content:space-between;align-items:center;">'
-        +'<div><b style="color:#e4cda8;font-size:13px;">'+c.customer+'</b><br><span style="font-size:11px;color:#7a9478;">'+last.text.substring(0,40)+'...</span></div>'
+      list+='<div onclick="admOpenChat('+c.id+')" style="padding:0.85rem 1rem;border-bottom:1px solid #2a1e1255;cursor:pointer;display:flex;justify-content:space-between;align-items:center;">'
+        +'<div><b style="color:#e4cda8;font-size:13px;">'+c.customer+'</b><br><span style="font-size:11px;color:#9a7a5a;">'+last.text.substring(0,40)+'...</span></div>'
         +(c.unread>0?'<span style="background:#c97d6e;color:#fff;font-size:10px;font-weight:700;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 5px;">'+c.unread+'</span>':'')
         +'</div>';
     }
-    html=card('Kundechat',list||'<div style="padding:2rem;text-align:center;color:#3a5a38;">Ingen meldinger</div>');
+    html=card('Kundechat',list||'<div style="padding:2rem;text-align:center;color:#3a2c1a;">Ingen meldinger</div>');
   } else {
     var chat=null;
     for(var j=0;j<DATA.chats.length;j++) if(DATA.chats[j].id===activeChatId) chat=DATA.chats[j];
@@ -4151,15 +4215,15 @@ function viewChat(){
       var mine=m.from==='admin';
       msgs+='<div style="display:flex;justify-content:'+(mine?'flex-end':'flex-start')+';margin-bottom:8px;">'
         +'<div style="max-width:75%;padding:8px 12px;border-radius:14px;font-size:13px;line-height:1.4;'
-        +(mine?'background:rgba(138,180,138,0.2);color:#e0caa8;border:1px solid rgba(138,180,138,0.3);':'background:#162019;color:#e4cda8;border:1px solid #1e2e21;')
-        +'">'+m.text+'<div style="font-size:9px;color:#7a9478;margin-top:3px;text-align:right;">'+m.time+'</div></div></div>';
+        +(mine?'background:rgba(138,180,138,0.2);color:#e0caa8;border:1px solid rgba(138,180,138,0.3);':'background:#181208;color:#e4cda8;border:1px solid #2a1e12;')
+        +'">'+m.text+'<div style="font-size:9px;color:#9a7a5a;margin-top:3px;text-align:right;">'+m.time+'</div></div></div>';
     }
-    html='<div style="margin-bottom:0.5rem;">'+btn('< Tilbake','admBackChat()','#7a9478')+'</div>'
+    html='<div style="margin-bottom:0.5rem;">'+btn('< Tilbake','admBackChat()','#9a7a5a')+'</div>'
       +card(chat.customer,
         '<div style="padding:1rem;max-height:50vh;overflow-y:auto;" id="admChatMsgs">'+msgs+'</div>'
-        +'<div style="padding:0.75rem;border-top:1px solid #1e2e21;display:flex;gap:0.5rem;">'
-        +'<input id="admChatInput" placeholder="Skriv melding..." style="flex:1;padding:10px 13px;background:#162019;border:1px solid #1e2e21;border-radius:20px;font-size:16px;color:#e4cda8;" onkeydown="if(event.key===\'Enter\')admSendMsg()">'
-        +'<button onclick="admSendMsg()" style="padding:10px 18px;border-radius:20px;background:rgba(138,180,138,0.2);border:1px solid rgba(138,180,138,0.4);color:#9ec49a;font-size:13px;font-weight:600;cursor:pointer;">Send</button>'
+        +'<div style="padding:0.75rem;border-top:1px solid #2a1e12;display:flex;gap:0.5rem;">'
+        +'<input id="admChatInput" placeholder="Skriv melding..." style="flex:1;padding:10px 13px;background:#181208;border:1px solid #2a1e12;border-radius:20px;font-size:16px;color:#e4cda8;" onkeydown="if(event.key===\'Enter\')admSendMsg()">'
+        +'<button onclick="admSendMsg()" style="padding:10px 18px;border-radius:20px;background:rgba(138,180,138,0.2);border:1px solid rgba(138,180,138,0.4);color:#b8915a;font-size:13px;font-weight:600;cursor:pointer;">Send</button>'
         +'</div>');
   }
   return html;
@@ -4175,33 +4239,33 @@ function viewKunder(){
     return (c.name||'').toLowerCase().indexOf(search)>=0||(c.email||'').toLowerCase().indexOf(search)>=0||(c.phone||'').indexOf(search)>=0;
   });
   var html='<div style="display:flex;gap:0.5rem;margin-bottom:0.75rem;">'
-    +'<input id="admKundeSearch" type="search" placeholder="Søk navn, e-post, telefon..." value="'+search+'" oninput="admKundeFilter()" style="flex:1;padding:10px 13px;background:#162019;border:1px solid #1e2e21;border-radius:10px;font-size:16px;color:#e4cda8;box-sizing:border-box;">'
-    +btn('+ Ny kunde','admNewKunde()','#8ab48a')
+    +'<input id="admKundeSearch" type="search" placeholder="Søk navn, e-post, telefon..." value="'+search+'" oninput="admKundeFilter()" style="flex:1;padding:10px 13px;background:#181208;border:1px solid #2a1e12;border-radius:10px;font-size:16px;color:#e4cda8;box-sizing:border-box;">'
+    +btn('+ Ny kunde','admNewKunde()','#b09070')
     +'</div>';
   html+='<div style="font-size:14px;font-weight:600;color:#e4cda8;margin-bottom:0.75rem;">Kunder ('+filtered.length+')</div>';
-  if(!filtered.length) return html+'<div style="background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:2rem;text-align:center;color:#3a5a38;">Ingen kunder funnet.</div>';
+  if(!filtered.length) return html+'<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:2rem;text-align:center;color:#3a2c1a;">Ingen kunder funnet.</div>';
   for(var i=0;i<filtered.length;i++){
     var c=filtered[i];
     var ri=DATA.customers.indexOf(c);
     var cBks=DATA.bookings.filter(function(b){return b.customer===c.name;});
     var upcoming=cBks.filter(function(b){return b.status!=='fullfort'&&b.status!=='avlyst';});
-    html+='<div style="background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
+    html+='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
       +'<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem;">'
       +'<div>'
       +'<div style="font-size:14px;font-weight:600;color:#e4cda8;">'+c.name+'</div>'
-      +'<div style="font-size:11px;color:#7a9478;line-height:1.8;">'
-      +(c.phone?'<a href="tel:'+c.phone+'" style="color:#7a9478;text-decoration:none;">'+c.phone+'</a><br>':'')
-      +(c.email?'<a href="mailto:'+c.email+'" style="color:#7a9478;text-decoration:none;">'+c.email+'</a>':'')
+      +'<div style="font-size:11px;color:#9a7a5a;line-height:1.8;">'
+      +(c.phone?'<a href="tel:'+c.phone+'" style="color:#9a7a5a;text-decoration:none;">'+c.phone+'</a><br>':'')
+      +(c.email?'<a href="mailto:'+c.email+'" style="color:#9a7a5a;text-decoration:none;">'+c.email+'</a>':'')
       +'</div>'
       +'</div>'
       +'<div style="text-align:right;">'
-      +'<b style="font-size:15px;color:#9ec49a;">'+(c.total||0).toLocaleString('no-NO')+' kr</b><br>'
-      +'<span style="font-size:11px;color:#7a9478;">'+(c.orders||0)+' ordre · '+cBks.length+' timer</span><br>'
+      +'<b style="font-size:15px;color:#b8915a;">'+(c.total||0).toLocaleString('no-NO')+' kr</b><br>'
+      +'<span style="font-size:11px;color:#9a7a5a;">'+(c.orders||0)+' ordre · '+cBks.length+' timer</span><br>'
       +(upcoming.length?'<span style="font-size:10px;color:#e8c04a;">'+upcoming.length+' kommende</span>':'')
       +'</div>'
       +'</div>'
-      +(c.note?'<div style="background:#162019;border-left:3px solid #8ab48a;border-radius:0 8px 8px 0;padding:7px 10px;font-size:11px;color:#a8c4a0;margin-bottom:0.5rem;"><b>Notat:</b> '+c.note+'</div>':'')
-      +(upcoming.length?'<div style="font-size:10px;color:#8ab48a;margin-bottom:0.4rem;">Neste time: '+upcoming[0].date+' '+upcoming[0].time+' – '+upcoming[0].service+'</div>':'')
+      +(c.note?'<div style="background:#181208;border-left:3px solid #b09070;border-radius:0 8px 8px 0;padding:7px 10px;font-size:11px;color:#b09070;margin-bottom:0.5rem;"><b>Notat:</b> '+c.note+'</div>':'')
+      +(upcoming.length?'<div style="font-size:10px;color:#b09070;margin-bottom:0.4rem;">Neste time: '+upcoming[0].date+' '+upcoming[0].time+' – '+upcoming[0].service+'</div>':'')
       +'<div style="display:flex;gap:3px;flex-wrap:wrap;">'
       +btn('Notat','admKundeNote('+ri+')','#e8c04a')
       +btn('Rediger','admEditKunde('+ri+')')
@@ -4215,9 +4279,9 @@ function viewRabatt(){
   var rows='',i;
   for(i=0;i<DATA.discounts.length;i++){
     var d=DATA.discounts[i];
-    rows+='<div style="background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:0.85rem 1rem;margin-bottom:0.6rem;display:flex;justify-content:space-between;align-items:center;">'
-      +'<div><b style="font-family:monospace;font-size:14px;color:#9ec49a;letter-spacing:0.05em;">'+d.code+'</b><br>'
-      +'<span style="font-size:11px;color:#7a9478;">'+d.value+(d.type==='prosent'?'%':' kr')+' rabatt &middot; brukt '+d.used+' ganger &middot; utloper '+d.expires+'</span></div>'
+    rows+='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:0.85rem 1rem;margin-bottom:0.6rem;display:flex;justify-content:space-between;align-items:center;">'
+      +'<div><b style="font-family:monospace;font-size:14px;color:#b8915a;letter-spacing:0.05em;">'+d.code+'</b><br>'
+      +'<span style="font-size:11px;color:#9a7a5a;">'+d.value+(d.type==='prosent'?'%':' kr')+' rabatt &middot; brukt '+d.used+' ganger &middot; utloper '+d.expires+'</span></div>'
       +btn('Slett','admDelDc('+i+')','#c0392b')
       +'</div>';
   }
@@ -4227,7 +4291,7 @@ function viewRabatt(){
     +input('admDcVal','Rabatt','20','number')
     +'</div>'
     +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;">'
-    +'<div style="margin-bottom:0.6rem;"><label style="display:block;font-size:10px;color:#7a9478;text-transform:uppercase;margin-bottom:3px;">Type</label><select id="admDcType" style="width:100%;padding:9px 11px;background:#162019;border:1px solid #1e2e21;border-radius:8px;font-size:16px;color:#e4cda8;box-sizing:border-box;"><option value="prosent">Prosent</option><option value="kr">Kroner</option></select></div>'
+    +'<div style="margin-bottom:0.6rem;"><label style="display:block;font-size:10px;color:#9a7a5a;text-transform:uppercase;margin-bottom:3px;">Type</label><select id="admDcType" style="width:100%;padding:9px 11px;background:#181208;border:1px solid #2a1e12;border-radius:8px;font-size:16px;color:#e4cda8;box-sizing:border-box;"><option value="prosent">Prosent</option><option value="kr">Kroner</option></select></div>'
     +input('admDcExp','Utloper','','date')
     +'</div>'
     +btn('Opprett kode','admSaveDc()')
@@ -4243,13 +4307,13 @@ function viewRetur(){
     var act='';
     if(r.status==='aapen') act=btn('Godkjenn retur','admRetOk('+i+')');
     else if(r.status==='godkjent') act=btn('Send refusjon ('+r.amount+' kr)','admRetRef('+i+')','#d4a017');
-    else act='<span style="font-size:11px;color:#27ae60;">Refundert '+r.amount+' kr</span>';
-    html+='<div style="background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
+    else act='<span style="font-size:11px;color:#c0925a;">Refundert '+r.amount+' kr</span>';
+    html+='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">'
       +'<b style="font-size:14px;color:#e4cda8;">'+r.id+'</b>'+badge(r.status)+'</div>'
       +'<div style="font-size:13px;color:#e4cda8;margin-bottom:2px;"><b>'+r.customer+'</b></div>'
-      +'<div style="font-size:12px;color:#a8c4a0;margin-bottom:0.3rem;">'+r.product+' &middot; <b>'+r.amount+' kr</b></div>'
-      +'<div style="font-size:11px;color:#7a9478;margin-bottom:0.6rem;">Aarsak: '+r.reason+'</div>'
+      +'<div style="font-size:12px;color:#b09070;margin-bottom:0.3rem;">'+r.product+' &middot; <b>'+r.amount+' kr</b></div>'
+      +'<div style="font-size:11px;color:#9a7a5a;margin-bottom:0.6rem;">Aarsak: '+r.reason+'</div>'
       +'<div>'+act+'</div>'
       +'</div>';
   }
@@ -4258,15 +4322,15 @@ function viewRetur(){
 
 function viewOkonomi(){
   return '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:1rem;">'
-    +stat('Inntekt i aar','382 400 kr','#8ab48a')
+    +stat('Inntekt i aar','382 400 kr','#b09070')
     +stat('Denne mnd','48 320 kr')
     +stat('Refundert','4 280 kr','#c97d6e')
     +stat('Rabatter','2 160 kr','#e8c04a')
     +'</div>'
     +card('Betalingsmetoder',tbl(['Metode','Antall','Belop'],
-      '<tr><td style="padding:8px 10px;border-bottom:1px solid #1e2e2155;">Vipps</td><td style="padding:8px 10px;border-bottom:1px solid #1e2e2155;">142</td><td style="padding:8px 10px;border-bottom:1px solid #1e2e2155;">168 400 kr</td></tr>'
-      +'<tr><td style="padding:8px 10px;border-bottom:1px solid #1e2e2155;">Kort</td><td style="padding:8px 10px;border-bottom:1px solid #1e2e2155;">98</td><td style="padding:8px 10px;border-bottom:1px solid #1e2e2155;">124 800 kr</td></tr>'
-      +'<tr><td style="padding:8px 10px;border-bottom:1px solid #1e2e2155;">Klarna</td><td style="padding:8px 10px;border-bottom:1px solid #1e2e2155;">45</td><td style="padding:8px 10px;border-bottom:1px solid #1e2e2155;">62 200 kr</td></tr>'
+      '<tr><td style="padding:8px 10px;border-bottom:1px solid #2a1e1255;">Vipps</td><td style="padding:8px 10px;border-bottom:1px solid #2a1e1255;">142</td><td style="padding:8px 10px;border-bottom:1px solid #2a1e1255;">168 400 kr</td></tr>'
+      +'<tr><td style="padding:8px 10px;border-bottom:1px solid #2a1e1255;">Kort</td><td style="padding:8px 10px;border-bottom:1px solid #2a1e1255;">98</td><td style="padding:8px 10px;border-bottom:1px solid #2a1e1255;">124 800 kr</td></tr>'
+      +'<tr><td style="padding:8px 10px;border-bottom:1px solid #2a1e1255;">Klarna</td><td style="padding:8px 10px;border-bottom:1px solid #2a1e1255;">45</td><td style="padding:8px 10px;border-bottom:1px solid #2a1e1255;">62 200 kr</td></tr>'
       +'<tr><td style="padding:8px 10px;">Apple Pay</td><td style="padding:8px 10px;">24</td><td style="padding:8px 10px;">27 000 kr</td></tr>'))
     +'<div>'+btn('Last ned CSV-rapport','admCSV()')+'</div>';
 }
@@ -4307,7 +4371,7 @@ function _admPersist(){
   var s=window.sb;
   if(s){
     DATA.employees.forEach(function(emp){
-      s.from('employees').upsert({id:emp.id,name:emp.name,role:emp.role,phone:emp.phone||'',color:emp.color||'#9ec49a',schedule:emp.schedule,active:emp.active!==false},{onConflict:'id'}).then(function(){},function(){});
+      s.from('employees').upsert({id:emp.id,name:emp.name,role:emp.role,phone:emp.phone||'',color:emp.color||'#b8915a',schedule:emp.schedule,active:emp.active!==false},{onConflict:'id'}).then(function(){},function(){});
     });
     DATA.treatments.forEach(function(t){
       s.from('treatments').upsert({id:t.id,name:t.name,cat:t.cat,price:t.price,duration:t.duration,active:t.active!==false,type:t.type||'frisør',stylist:t.stylist||''},{onConflict:'id'}).then(function(){},function(){});
@@ -4340,7 +4404,7 @@ function _admLoad(){
   if(s){
     s.from('employees').select('*').order('sort_order').then(function(res){
       if(res.data&&res.data.length){
-        DATA.employees=res.data.map(function(r){return{id:r.id,name:r.name,role:r.role||'Frisør',phone:r.phone||'',color:r.color||'#9ec49a',schedule:r.schedule||{},active:r.active!==false};});
+        DATA.employees=res.data.map(function(r){return{id:r.id,name:r.name,role:r.role||'Frisør',phone:r.phone||'',color:r.color||'#b8915a',schedule:r.schedule||{},active:r.active!==false};});
         try{localStorage.setItem(LS_KEY,JSON.stringify({employees:DATA.employees,treatments:DATA.treatments,discounts:DATA.discounts,blocks:DATA.blocks}));}catch(e){}
       }
     },function(){});
@@ -4551,17 +4615,17 @@ window.admLabel=function(id,carrier){
   if(!o) return;
   // Step 1: choose carrier if not chosen
   if(!carrier){
-    el('admBody').innerHTML='<div style="margin-bottom:0.75rem;">'+btn('Tilbake',"admGo('ordre')",'#7a9478')+'</div>'
-      +'<div style="background:#111f14;border:1px solid #1e2e21;border-radius:14px;padding:1.25rem;max-width:420px;margin:0 auto;">'
+    el('admBody').innerHTML='<div style="margin-bottom:0.75rem;">'+btn('Tilbake',"admGo('ordre')",'#9a7a5a')+'</div>'
+      +'<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:1.25rem;max-width:420px;margin:0 auto;">'
       +'<div style="font-size:14px;font-weight:600;color:#e4cda8;margin-bottom:0.3rem;">Velg fraktselskap</div>'
-      +'<div style="font-size:11px;color:#7a9478;margin-bottom:1rem;">Ordre '+o.id+' til '+o.customer+'</div>'
-      +'<div onclick="admLabel(\''+id+'\',\'posten\')" style="display:flex;align-items:center;gap:0.75rem;background:#162019;border:1px solid #1e2e21;border-radius:12px;padding:0.9rem 1rem;cursor:pointer;margin-bottom:0.6rem;">'
+      +'<div style="font-size:11px;color:#9a7a5a;margin-bottom:1rem;">Ordre '+o.id+' til '+o.customer+'</div>'
+      +'<div onclick="admLabel(\''+id+'\',\'posten\')" style="display:flex;align-items:center;gap:0.75rem;background:#181208;border:1px solid #2a1e12;border-radius:12px;padding:0.9rem 1rem;cursor:pointer;margin-bottom:0.6rem;">'
       +'<div style="width:40px;height:40px;background:#e32d22;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:16px;">P</div>'
-      +'<div><b style="font-size:13px;color:#e4cda8;">Posten / Bring</b><br><span style="font-size:11px;color:#7a9478;">Pakke i postkassen &middot; 2-4 dager &middot; 75 kr</span></div>'
+      +'<div><b style="font-size:13px;color:#e4cda8;">Posten / Bring</b><br><span style="font-size:11px;color:#9a7a5a;">Pakke i postkassen &middot; 2-4 dager &middot; 75 kr</span></div>'
       +'</div>'
-      +'<div onclick="admLabel(\''+id+'\',\'postnord\')" style="display:flex;align-items:center;gap:0.75rem;background:#162019;border:1px solid #1e2e21;border-radius:12px;padding:0.9rem 1rem;cursor:pointer;">'
+      +'<div onclick="admLabel(\''+id+'\',\'postnord\')" style="display:flex;align-items:center;gap:0.75rem;background:#181208;border:1px solid #2a1e12;border-radius:12px;padding:0.9rem 1rem;cursor:pointer;">'
       +'<div style="width:40px;height:40px;background:#00a0d6;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:14px;">PN</div>'
-      +'<div><b style="font-size:13px;color:#e4cda8;">PostNord</b><br><span style="font-size:11px;color:#7a9478;">MyPack Collect &middot; 1-3 dager &middot; 69 kr</span></div>'
+      +'<div><b style="font-size:13px;color:#e4cda8;">PostNord</b><br><span style="font-size:11px;color:#9a7a5a;">MyPack Collect &middot; 1-3 dager &middot; 69 kr</span></div>'
       +'</div>'
       +'</div>';
     return;
@@ -4602,7 +4666,7 @@ window.admLabel=function(id,carrier){
     +'<div style="display:flex;gap:2px;height:46px;align-items:flex-end;justify-content:center;">'+bars+'</div>'
     +'<div style="font-family:monospace;font-size:10px;text-align:center;letter-spacing:0.25em;margin-top:3px;">'+trackNum+'</div>'
     +'</div>';
-  el('admBody').innerHTML='<div style="margin-bottom:0.75rem;">'+btn('Tilbake',"admGo('ordre')",'#7a9478')+btn('Bytt fraktselskap',"admLabel('"+id+"')",'#7a9478')+'</div>'
+  el('admBody').innerHTML='<div style="margin-bottom:0.75rem;">'+btn('Tilbake',"admGo('ordre')",'#9a7a5a')+btn('Bytt fraktselskap',"admLabel('"+id+"')",'#9a7a5a')+'</div>'
     +labelHtml
     +'<div style="max-width:420px;margin:0.75rem auto 0;display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;">'
     +btn('Skriv ut etikett','admPrintLabel()')
@@ -4764,7 +4828,7 @@ window.admSaveEmp=function(){
     var cb=el('empSch'+k);var fr=el('empFrom'+k);var to=el('empTo'+k);
     sch[k]=(cb&&cb.checked&&fr&&to)?fr.value+'-'+to.value:'Stengt';
   });
-  var colors=['#9ec49a','#60a8da','#e8c04a','#c97d6e','#b48ac9'];
+  var colors=['#b8915a','#60a8da','#e8c04a','#c97d6e','#b48ac9'];
   var emp={id:Date.now(),name:name,role:el('admEmpRole').value.trim()||'Frisør',phone:el('admEmpPhone').value.trim(),color:colors[DATA.employees.length%colors.length],schedule:sch};
   if(editEmpId!==null)DATA.employees[editEmpId]=emp;else DATA.employees.push(emp);
   editEmpId=null;_admPersist();go('ansatte');if(window.showToast)window.showToast('Ansatt lagret ✓');
@@ -4838,26 +4902,26 @@ window.admB2bDiscount=function(i){
   var overlay=document.createElement('div');
   overlay.id='discOverlay';
   overlay.style.cssText='position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;padding:1rem;';
-  var tiers=[{pct:5,lbl:'Bronze',col:'#cd7f32'},{pct:10,lbl:'Silver',col:'#c0c0c0'},{pct:15,lbl:'Gold',col:'#e8c04a'},{pct:20,lbl:'Platinum',col:'#9ec49a'},{pct:25,lbl:'Elite',col:'#c97d6e'}];
+  var tiers=[{pct:5,lbl:'Bronze',col:'#cd7f32'},{pct:10,lbl:'Silver',col:'#c0c0c0'},{pct:15,lbl:'Gold',col:'#e8c04a'},{pct:20,lbl:'Platinum',col:'#b8915a'},{pct:25,lbl:'Elite',col:'#c97d6e'}];
   var tierBtns=tiers.map(function(t){
     var active=cur===t.pct;
-    return '<button onclick="document.getElementById(\'discInp\').value='+t.pct+';document.querySelectorAll(\'.tier-btn\').forEach(function(b){b.style.background=\'transparent\';b.style.borderColor=\'rgba(140,108,60,0.26)\';b.style.color=\'#7a9478\'});this.style.background=\''+t.col+'22\';this.style.borderColor=\''+t.col+'99\';this.style.color=\''+t.col+'\'" class="tier-btn" style="flex:1;padding:10px 6px;background:'+(active?t.col+'22':'transparent')+';border:1px solid '+(active?t.col+'99':'rgba(140,108,60,0.26)')+';border-radius:10px;cursor:pointer;font-family:inherit;color:'+(active?t.col:'#7a9478')+';transition:all 0.15s;">'
+    return '<button onclick="document.getElementById(\'discInp\').value='+t.pct+';document.querySelectorAll(\'.tier-btn\').forEach(function(b){b.style.background=\'transparent\';b.style.borderColor=\'rgba(140,108,60,0.26)\';b.style.color=\'#9a7a5a\'});this.style.background=\''+t.col+'22\';this.style.borderColor=\''+t.col+'99\';this.style.color=\''+t.col+'\'" class="tier-btn" style="flex:1;padding:10px 6px;background:'+(active?t.col+'22':'transparent')+';border:1px solid '+(active?t.col+'99':'rgba(140,108,60,0.26)')+';border-radius:10px;cursor:pointer;font-family:inherit;color:'+(active?t.col:'#9a7a5a')+';transition:all 0.15s;">'
       +'<div style="font-size:16px;font-weight:800;color:inherit;">'+t.pct+'%</div>'
       +'<div style="font-size:9px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:inherit;margin-top:2px;">'+t.lbl+'</div>'
       +'</button>';
   }).join('');
   overlay.innerHTML='<div style="background:#0d1a0f;border:1px solid rgba(140,108,60,0.26);border-radius:20px;padding:1.5rem;width:100%;max-width:420px;">'
     +'<div style="font-size:14px;font-weight:700;color:#e4cda8;margin-bottom:4px;">B2B-rabatt</div>'
-    +'<div style="font-size:11px;color:#7a9478;margin-bottom:1.25rem;">'+c.firma+'</div>'
+    +'<div style="font-size:11px;color:#9a7a5a;margin-bottom:1.25rem;">'+c.firma+'</div>'
     +'<div style="display:flex;gap:6px;margin-bottom:1.25rem;">'+tierBtns+'</div>'
     +'<div style="margin-bottom:1rem;">'
-    +'<label style="font-size:10px;color:#7a9478;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:6px;">Egendefinert (0–30%)</label>'
-    +'<input id="discInp" type="range" min="0" max="30" value="'+cur+'" oninput="document.getElementById(\'discVal\').textContent=this.value+\'%\'" style="width:100%;accent-color:#9ec49a;">'
+    +'<label style="font-size:10px;color:#9a7a5a;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:6px;">Egendefinert (0–30%)</label>'
+    +'<input id="discInp" type="range" min="0" max="30" value="'+cur+'" oninput="document.getElementById(\'discVal\').textContent=this.value+\'%\'" style="width:100%;accent-color:#b8915a;">'
     +'<div style="text-align:center;font-size:22px;font-weight:800;color:#e8c04a;margin-top:4px;" id="discVal">'+cur+'%</div>'
     +'</div>'
     +'<div style="display:flex;gap:0.5rem;">'
     +'<button onclick="(function(){var v=parseInt(document.getElementById(\'discInp\').value,10);DATA.b2bClients['+i+'].discount=v;if(window.sb&&DATA.b2bClients['+i+'].epost){window.sb.from(\'b2b_applications\').update({discount:v}).eq(\'email\',DATA.b2bClients['+i+'].epost).then(function(){});}document.getElementById(\'discOverlay\').remove();go(\'bedriftskunder\');if(window.showToast)window.showToast(DATA.b2bClients['+i+'].firma+\': \'+v+\'% rabatt satt\');})()" style="flex:1;padding:12px;background:rgba(60,100,50,0.4);border:1px solid rgba(120,190,100,0.4);border-radius:12px;font-size:13px;font-weight:700;color:#e0caa8;cursor:pointer;font-family:inherit;">Lagre rabatt</button>'
-    +'<button onclick="document.getElementById(\'discOverlay\').remove()" style="padding:12px 16px;background:transparent;border:1px solid rgba(80,120,70,0.25);border-radius:12px;font-size:13px;color:#7a9478;cursor:pointer;font-family:inherit;">Avbryt</button>'
+    +'<button onclick="document.getElementById(\'discOverlay\').remove()" style="padding:12px 16px;background:transparent;border:1px solid rgba(80,120,70,0.25);border-radius:12px;font-size:13px;color:#9a7a5a;cursor:pointer;font-family:inherit;">Avbryt</button>'
     +'</div>'
     +'</div>';
   document.body.appendChild(overlay);
@@ -4871,7 +4935,7 @@ window.admB2bSendOffer=function(i){
   var overlay=document.createElement('div');
   overlay.id='offerOverlay';
   overlay.style.cssText='position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.75);display:flex;align-items:center;justify-content:center;padding:1rem;';
-  var tiers=[{pct:5,lbl:'Bronze',col:'#cd7f32'},{pct:10,lbl:'Silver',col:'#a8b8b8'},{pct:15,lbl:'Gold',col:'#e8c04a'},{pct:20,lbl:'Platinum',col:'#9ec49a'},{pct:25,lbl:'Elite',col:'#c97d6e'}];
+  var tiers=[{pct:5,lbl:'Bronze',col:'#cd7f32'},{pct:10,lbl:'Silver',col:'#a8b8b8'},{pct:15,lbl:'Gold',col:'#e8c04a'},{pct:20,lbl:'Platinum',col:'#b8915a'},{pct:25,lbl:'Elite',col:'#c97d6e'}];
   var tierBtns=tiers.map(function(t){
     return '<button onclick="document.getElementById(\'offerInp\').value='+t.pct+';document.getElementById(\'offerVal\').textContent=\''+t.pct+'%\';document.querySelectorAll(\'.otier\').forEach(function(b){b.style.background=\'transparent\';b.style.borderColor=\'rgba(140,108,60,0.18)\'});this.style.background=\''+t.col+'22\';this.style.borderColor=\''+t.col+'88\'" class="otier" style="flex:1;padding:8px 4px;background:transparent;border:1px solid rgba(140,108,60,0.18);border-radius:10px;cursor:pointer;font-family:inherit;color:'+t.col+';">'
       +'<div style="font-size:15px;font-weight:900;">'+t.pct+'%</div>'
@@ -4884,12 +4948,12 @@ window.admB2bSendOffer=function(i){
     +'<div style="font-size:11px;color:#c97d6e;font-weight:600;margin-bottom:1.25rem;">'+c.firma+' ønsker en bedre avtale</div>'
     +'<div style="display:flex;gap:5px;margin-bottom:1rem;">'+tierBtns+'</div>'
     +'<div style="margin-bottom:1rem;">'
-    +'<label style="font-size:10px;color:#7a9478;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:5px;">Tilbudt rabatt</label>'
+    +'<label style="font-size:10px;color:#9a7a5a;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:5px;">Tilbudt rabatt</label>'
     +'<input id="offerInp" type="range" min="1" max="30" value="'+defaultDisc+'" oninput="document.getElementById(\'offerVal\').textContent=this.value+\'%\'" style="width:100%;accent-color:#c97d6e;">'
     +'<div style="text-align:center;font-size:28px;font-weight:900;color:#c97d6e;margin-top:2px;" id="offerVal">'+defaultDisc+'%</div>'
     +'</div>'
     +'<div style="margin-bottom:1.25rem;">'
-    +'<label style="font-size:10px;color:#7a9478;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:5px;">Melding til bedriften (valgfritt)</label>'
+    +'<label style="font-size:10px;color:#9a7a5a;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:5px;">Melding til bedriften (valgfritt)</label>'
     +'<textarea id="offerMsg" placeholder="f.eks. Gjelder fra neste måned. Minimum 10 besøk per år." style="width:100%;box-sizing:border-box;background:#081209;border:1px solid rgba(80,120,70,0.25);border-radius:10px;padding:8px;color:#c0d4bc;font-size:12px;font-family:inherit;resize:none;height:64px;"></textarea>'
     +'</div>'
     +'<div style="display:flex;gap:0.5rem;">'
@@ -4906,7 +4970,7 @@ window.admB2bSendOffer=function(i){
       +'go(\'bedriftskunder\');'
       +'if(window.showToast)window.showToast(\'Tilbud sendt til \'+DATA.b2bClients['+i+'].firma+\': \'+v+\'%\');'
     +'})()" style="flex:1;padding:12px;background:rgba(201,125,110,0.25);border:1px solid rgba(201,125,110,0.4);border-radius:12px;font-size:13px;font-weight:700;color:#e8c4b8;cursor:pointer;font-family:inherit;">📩 Send tilbud til bedriften</button>'
-    +'<button onclick="document.getElementById(\'offerOverlay\').remove()" style="padding:12px 16px;background:transparent;border:1px solid rgba(140,108,60,0.18);border-radius:12px;font-size:13px;color:#7a9478;cursor:pointer;font-family:inherit;">Avbryt</button>'
+    +'<button onclick="document.getElementById(\'offerOverlay\').remove()" style="padding:12px 16px;background:transparent;border:1px solid rgba(140,108,60,0.18);border-radius:12px;font-size:13px;color:#9a7a5a;cursor:pointer;font-family:inherit;">Avbryt</button>'
     +'</div></div>';
   document.body.appendChild(overlay);
   overlay.addEventListener('click',function(e){if(e.target===overlay)overlay.remove();});
@@ -4959,7 +5023,7 @@ function admEditP(id){
   var d=el('admPDesc'); if(d) d.value=p.desc||'';
   var ce=el('admPCat'); if(ce) ce.value=p.cat||'shampoo';
   var prev=el('admPImgPrev');
-  if(prev) prev.innerHTML=p.img?'<img src="'+p.img+'" style="width:56px;height:56px;border-radius:8px;object-fit:cover;border:1px solid #1e2e21;">':'';
+  if(prev) prev.innerHTML=p.img?'<img src="'+p.img+'" style="width:56px;height:56px;border-radius:8px;object-fit:cover;border:1px solid #2a1e12;">':'';
   window._admEditImgUrl=p.img||null;
   var fi=el('admPImg'); if(fi) fi.value='';
   var form=el('admProdForm'); if(form) form.style.display='';
@@ -4969,7 +5033,7 @@ function admPImgPreview(ev){
   var reader=new FileReader();
   reader.onload=function(e){
     var prev=el('admPImgPrev');
-    if(prev) prev.innerHTML='<img src="'+e.target.result+'" style="width:56px;height:56px;border-radius:8px;object-fit:cover;border:1px solid #1e2e21;">';
+    if(prev) prev.innerHTML='<img src="'+e.target.result+'" style="width:56px;height:56px;border-radius:8px;object-fit:cover;border:1px solid #2a1e12;">';
   };
   reader.readAsDataURL(file);
 }
@@ -5088,7 +5152,7 @@ function admLabel(id){
     +'<tr><td style="padding:5px 0;color:#666;font-weight:700;">Total</td><td style="padding:5px 0;font-weight:700;font-size:15px;">'+o.total+' kr</td></tr>'
     +'</table></div>'
     +'<div style="margin-top:1.5rem;font-size:11px;color:#888;">Dato: '+o.date+' &middot; Yeganeh Style, Flaenbakken 2, 2072 Råholt</div>'
-    +'<br><button onclick="window.print()" style="background:#1a3a1a;color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;">Skriv ut etikett</button>'
+    +'<br><button onclick="window.print()" style="background:#2a1a0e;color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;">Skriv ut etikett</button>'
     +'</body></html>');
   w.document.close();
 }
@@ -5321,7 +5385,7 @@ if(window.renderNailsGrid) window.renderNailsGrid();
     });
     var stylistCard='<div style="display:flex;align-items:center;gap:12px;padding:12px 0 16px;border-bottom:1px solid rgba(80,120,70,0.15);margin-bottom:6px;">'
       +'<div style="width:44px;height:44px;border-radius:50%;background:'+stylistCol+'22;border:2px solid '+stylistCol+'66;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;color:'+stylistCol+';flex-shrink:0;">'+stylistInitial+'</div>'
-      +'<div><div style="font-size:14px;font-weight:700;color:#e4cda8;">'+stylistName+'</div><div style="font-size:11px;color:#7a9478;">'+stylistRole+' · Yeganeh Style</div></div>'
+      +'<div><div style="font-size:14px;font-weight:700;color:#e4cda8;">'+stylistName+'</div><div style="font-size:11px;color:#9a7a5a;">'+stylistRole+' · Yeganeh Style</div></div>'
       +'</div>';
     return '<div class="timma-step-label">Steg 2 av 5</div>'
       +'<div class="timma-step-h">Velg behandling</div>'
@@ -5415,11 +5479,11 @@ if(window.renderNailsGrid) window.renderNailsGrid();
     var slots=ST.svc?getSlots(ST.date,ST.svc.duration):[];
     var pills=slots.length
       ? slots.map(function(s){ return '<button class="timma-time-pill'+(ST.time===s?' sel':'')+'" onclick="timmaSelTime(\''+s+'\')">'+s+'</button>'; }).join('')
-      : '<div style="color:#3a5a38;font-size:13px;padding:1rem 0;">Ingen ledige tider denne dagen.</div>';
+      : '<div style="color:#3a2c1a;font-size:13px;padding:1rem 0;">Ingen ledige tider denne dagen.</div>';
     var dateLabel=ST.date?new Date(ST.date).toLocaleDateString('nb-NO',{weekday:'long',day:'numeric',month:'long'}):'';
     return '<div class="timma-step-label">Steg 4 av 5</div>'
       +'<div class="timma-step-h">Velg tid</div>'
-      +'<div style="font-size:12px;color:#7a9478;margin-bottom:1rem;text-transform:capitalize;">'+dateLabel+'</div>'
+      +'<div style="font-size:12px;color:#9a7a5a;margin-bottom:1rem;text-transform:capitalize;">'+dateLabel+'</div>'
       +'<div class="timma-time-grid">'+pills+'</div>'
       +cta('Fyll inn kontaktinfo →','timmaNext()',!ST.time);
   }
@@ -5498,8 +5562,8 @@ function renderInnhold(){
     tag=tag||'input';
     var v=(val||'').replace(/"/g,'&quot;').replace(/</g,'&lt;');
     if(tag==='textarea')
-      return '<div style="margin-bottom:0.75rem;"><label style="display:block;font-size:10px;color:#7a9478;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">'+label+'</label><textarea id="ic_'+id+'" rows="2" placeholder="'+(ph||'')+'" style="width:100%;padding:9px 11px;background:#162019;border:1px solid #1e2e21;border-radius:8px;font-size:15px;color:#e4cda8;box-sizing:border-box;resize:vertical;font-family:inherit;">'+v+'</textarea></div>';
-    return '<div style="margin-bottom:0.75rem;"><label style="display:block;font-size:10px;color:#7a9478;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">'+label+'</label><input id="ic_'+id+'" type="text" value="'+v+'" placeholder="'+(ph||'')+'" style="width:100%;padding:9px 11px;background:#162019;border:1px solid #1e2e21;border-radius:8px;font-size:15px;color:#e4cda8;box-sizing:border-box;"></div>';
+      return '<div style="margin-bottom:0.75rem;"><label style="display:block;font-size:10px;color:#9a7a5a;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">'+label+'</label><textarea id="ic_'+id+'" rows="2" placeholder="'+(ph||'')+'" style="width:100%;padding:9px 11px;background:#181208;border:1px solid #2a1e12;border-radius:8px;font-size:15px;color:#e4cda8;box-sizing:border-box;resize:vertical;font-family:inherit;">'+v+'</textarea></div>';
+    return '<div style="margin-bottom:0.75rem;"><label style="display:block;font-size:10px;color:#9a7a5a;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">'+label+'</label><input id="ic_'+id+'" type="text" value="'+v+'" placeholder="'+(ph||'')+'" style="width:100%;padding:9px 11px;background:#181208;border:1px solid #2a1e12;border-radius:8px;font-size:15px;color:#e4cda8;box-sizing:border-box;"></div>';
   };
   var hero=d.heroH1||'Profesjonell pleie.<br><em>Synlige resultater.</em>';
   document.getElementById('admBody').innerHTML=

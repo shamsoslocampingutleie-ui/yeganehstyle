@@ -3361,6 +3361,7 @@ var calView='måned';
 var nailCalDate=new Date();
 var nailCalView='måned';
 var nailsTab='kalender';
+var hadiTab='kalender';
 var editTreatId=null;
 var editEmpId=null;
 DATA.b2bClients=[];
@@ -3490,7 +3491,7 @@ var TABS=[
   {id:'oversikt',label:'Oversikt'},
   {id:'ordre',label:'Bestillinger'},
   {id:'produkter',label:'Produkter'},
-  {id:'kalender',label:'💇 Frisør'},
+  {id:'kalender',label:'✂ Hadi'},
   {id:'timer',label:'Timer'},
   {id:'behandlinger',label:'Behandlinger'},
   {id:'nails',label:'💅 MH Nails'},
@@ -3762,6 +3763,30 @@ function viewProdukter(){
 function catLabel(c){var m={shampoo:'Shampoo',conditioner:'Conditioner',behandling:'Behandling',styling:'Styling'};return m[c]||c;}
 
 function viewKalender(){
+  var subTabStyle=function(id){
+    var active=hadiTab===id;
+    return 'background:'+(active?'rgba(200,160,60,0.2)':'rgba(255,255,255,0.03)')+';border:1px solid '+(active?'rgba(212,168,80,0.5)':'rgba(200,160,80,0.15)')+';border-radius:10px;padding:7px 16px;font-size:12px;font-weight:'+(active?'700':'400')+';color:'+(active?'#f0d060':'#a08850')+';cursor:pointer;font-family:inherit;';
+  };
+  var subTabs='<div style="display:flex;gap:6px;margin-bottom:1rem;">'
+    +'<button onclick="admSetHadiTab(\'kalender\')" style="'+subTabStyle('kalender')+'">📅 Kalender</button>'
+    +'<button onclick="admSetHadiTab(\'tjenester\')" style="'+subTabStyle('tjenester')+'">✂ Tjenester</button>'
+    +'</div>';
+
+  if(hadiTab==='tjenester'){
+    admTreatTab='frisør';
+    var list=DATA.treatments.filter(function(t){return !t.type||t.type==='frisør';});
+    var rows=_buildTreatRows(list,'#b8915a');
+    return subTabs
+      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;">'
+      +'<div style="font-size:11px;color:#c8a870;">'+list.length+' tjenester – Hadi</div>'
+      +btn('+ Ny tjeneste','admNewTreat()','#b09070')
+      +'</div>'
+      +_buildTreatForm(false)
+      +'<div style="background:#1a1208;border:1px solid rgba(200,160,60,0.18);border-radius:14px;overflow:hidden;">'
+      +(rows||'<div style="padding:2rem;text-align:center;color:#b09060;">Ingen tjenester. Klikk "+ Ny tjeneste".</div>')
+      +'</div>';
+  }
+
   var months=['Januar','Februar','Mars','April','Mai','Juni','Juli','August','September','Oktober','November','Desember'];
   var label=calView==='måned'
     ? months[calDate.getMonth()]+' '+calDate.getFullYear()
@@ -3775,7 +3800,7 @@ function viewKalender(){
       return '<button onclick="admCalView(\''+v+'\')" style="padding:6px 10px;background:'+(active?'rgba(200,160,60,0.25)':'transparent')+';border:0;border-right:1px solid rgba(186,152,98,0.12);color:'+(active?'#f0d060':'#c8a870')+';font-size:11px;font-weight:'+(active?'700':'500')+';cursor:pointer;font-family:inherit;">'+lbl+'</button>';
     }).join('')
     +'</div>';
-  var html='<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem;">'
+  var html=subTabs+'<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.5rem;margin-bottom:1rem;">'
     +'<div style="display:flex;align-items:center;gap:4px;">'
     +'<button onclick="admCalPrev()" style="'+btnCss('#181208')+'padding:6px 10px;font-size:16px;">◀</button>'
     +'<button onclick="admCalToday()" style="'+btnCss('#181208')+'font-size:11px;">I dag</button>'
@@ -4887,6 +4912,7 @@ window.admNailCalToday=function(){nailCalDate=new Date();go('nails');};
 window.admNailCalView=function(v){nailCalView=v;go('nails');};
 window.admNailCalDay=function(iso){var p=iso.split('-');nailCalDate=new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2]));nailCalView='dag';go('nails');};
 window.admSetNailsTab=function(t){nailsTab=t;go('nails');};
+window.admSetHadiTab=function(t){hadiTab=t;go('kalender');};
 window.admEditBkInline=function(i){
   var b=DATA.bookings[i];if(!b) return;
   var newStat=prompt('Status for '+b.customer+':\n(ny / bekreftet / fullfort / avlyst)',b.status);

@@ -1283,6 +1283,8 @@ nav { }
 </head>
 <body>
 <a href="#main-content" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:9999;background:#100c08;color:#b8915a;padding:8px 16px;border-radius:0 0 8px 0;" onfocus="this.style.left='0';this.style.width='auto';this.style.height='auto';" onblur="this.style.left='-9999px';this.style.width='1px';this.style.height='1px';">Hopp til innhold</a>
+<!-- CAMPAIGN BANNER -->
+<div id="siteBanner" style="display:none;background:#b8915a;color:#0c0906;text-align:center;padding:9px 1rem;font-size:13px;font-weight:600;letter-spacing:0.02em;position:relative;z-index:300;"></div>
 <!-- NAV -->
 <nav>
   <!-- Logo -->
@@ -5004,29 +5006,37 @@ window.admKundeNote=function(i){
 function admNewP(){
   editProdId=null;
   var t=el('admProdFormTitle'); if(t) t.textContent='Nytt produkt';
-  ['admPName','admPPrice','admPStock','admPDesc'].forEach(function(id){var e=el(id);if(e)e.value='';});
+  ['admPName','admPBrand','admPPrice','admPOldPrice','admPStock','admPDesc','admPEmoji','admPSort'].forEach(function(id){var e=el(id);if(e)e.value='';});
   var c=el('admPCat'); if(c) c.value='shampoo';
-  var prev=el('admPImgPrev'); if(prev) prev.innerHTML='';
+  var bg=el('admPBadge'); if(bg) bg.value='';
+  var vis=el('admPVisible'); if(vis) vis.checked=true;
+  var prev=el('admPImgPrev'); if(prev) prev.innerHTML='<span style="font-size:24px;">🖼</span>';
   var fi=el('admPImg'); if(fi) fi.value='';
   window._admEditImgUrl=null;
-  var form=el('admProdForm'); if(form) form.style.display='';
+  var form=el('admProdForm'); if(form){form.style.display='';form.scrollIntoView({behavior:'smooth',block:'nearest'});}
 }
 function admEditP(id){
   var prods=window.PRODUCTS||[], p=null;
   for(var i=0;i<prods.length;i++) if(String(prods[i].id)===String(id)){p=prods[i];break;}
   if(!p) return;
   editProdId=id;
-  var t=el('admProdFormTitle'); if(t) t.textContent='Rediger produkt';
+  var t=el('admProdFormTitle'); if(t) t.textContent='Rediger: '+p.name;
   var ne=el('admPName'); if(ne) ne.value=p.name||'';
+  var br=el('admPBrand'); if(br) br.value=p.brand||'NAK Hair';
   var pr=el('admPPrice'); if(pr) pr.value=p.price||'';
+  var op=el('admPOldPrice'); if(op) op.value=p.oldPrice||'';
   var st=el('admPStock'); if(st) st.value=p.stock!=null?p.stock:'';
   var d=el('admPDesc'); if(d) d.value=p.desc||'';
   var ce=el('admPCat'); if(ce) ce.value=p.cat||'shampoo';
+  var bg=el('admPBadge'); if(bg) bg.value=p.badge||'';
+  var em=el('admPEmoji'); if(em) em.value=p.emoji||'';
+  var so=el('admPSort'); if(so) so.value=p.sort_order!=null?p.sort_order:0;
+  var vis=el('admPVisible'); if(vis) vis.checked=p.visible!==false;
   var prev=el('admPImgPrev');
-  if(prev) prev.innerHTML=p.img?'<img src="'+p.img+'" style="width:56px;height:56px;border-radius:8px;object-fit:cover;border:1px solid #2a1e12;">':'';
+  if(prev) prev.innerHTML=p.img?'<img src="'+p.img+'" style="width:64px;height:64px;border-radius:12px;object-fit:cover;">':'<span style="font-size:24px;">'+(p.emoji||'🖼')+'</span>';
   window._admEditImgUrl=p.img||null;
   var fi=el('admPImg'); if(fi) fi.value='';
-  var form=el('admProdForm'); if(form) form.style.display='';
+  var form=el('admProdForm'); if(form){form.style.display='';form.scrollIntoView({behavior:'smooth',block:'nearest'});}
 }
 function admPImgPreview(ev){
   var file=ev.target.files[0]; if(!file) return;
@@ -5039,38 +5049,46 @@ function admPImgPreview(ev){
 }
 function admSaveP(){
   var s=window.sb; if(!s){if(window.showToast)window.showToast('Ikke tilkoblet');return;}
-  var nameEl=el('admPName'), priceEl=el('admPPrice'), stockEl=el('admPStock'), descEl=el('admPDesc'), catEl=el('admPCat');
-  var name=(nameEl?nameEl.value:'').trim();
-  var price=parseFloat(((priceEl?priceEl.value:'')||'').replace(',','.'));
-  var stock=parseInt((stockEl?stockEl.value:'0')||'0')||0;
-  var desc=(descEl?descEl.value:'').trim();
-  var cat=(catEl?catEl.value:'')||'shampoo';
-  if(!name){alert('Fyll inn produktnavn');return;}
-  if(!price||isNaN(price)){alert('Fyll inn gyldig pris');return;}
+  var gv=function(id){var e=el(id);return e?e.value.trim():'';};
+  var name=gv('admPName');
+  var brand=gv('admPBrand')||'NAK Hair';
+  var price=parseFloat((gv('admPPrice')||'0').replace(',','.'));
+  var oldPrice=parseFloat((gv('admPOldPrice')||'0').replace(',','.'));
+  var stock=parseInt(gv('admPStock')||'0')||0;
+  var desc=gv('admPDesc');
+  var cat=gv('admPCat')||'shampoo';
+  var badge=gv('admPBadge')||null;
+  var emoji=gv('admPEmoji')||'';
+  var sortOrder=parseInt(gv('admPSort')||'0')||0;
+  var visEl=el('admPVisible'); var visible=visEl?visEl.checked:true;
+  if(!name){if(window.showToast)window.showToast('⚠ Fyll inn produktnavn');return;}
+  if(!price||isNaN(price)){if(window.showToast)window.showToast('⚠ Fyll inn gyldig pris');return;}
   var fileInput=el('admPImg');
   var file=fileInput&&fileInput.files&&fileInput.files[0]?fileInput.files[0]:null;
+  var savBtn=document.querySelector('#admProdForm button[onclick="admSaveP()"]');
+  if(savBtn){savBtn.disabled=true;savBtn.textContent='Lagrer...';}
   function _reload(){
-    s.from('products').select('*').eq('visible',true).order('sort_order').then(function(res){
-      if(res.data&&res.data.length){
-        window.PRODUCTS=res.data.map(function(p){return{id:p.id,name:p.name,brand:p.brand||'NAK Hair',cat:p.category,price:p.price,oldPrice:p.old_price,emoji:p.emoji||'',desc:p.description,badge:p.badge,stock:p.stock,img:p.image_url||null};});
-        renderProducts();
+    s.from('products').select('*').order('sort_order').then(function(res){
+      if(res.data){
+        window.PRODUCTS=res.data.map(function(p){return{id:p.id,name:p.name,brand:p.brand||'NAK Hair',cat:p.category,price:p.price,oldPrice:p.old_price||null,emoji:p.emoji||'',desc:p.description||'',badge:p.badge||null,stock:p.stock!=null?p.stock:20,visible:p.visible!==false,sort_order:p.sort_order||0,img:p.image_url||null};});
+        if(typeof renderProducts==='function') renderProducts();
       }
-      el('admProdForm').style.display='none';
+      var f=el('admProdForm'); if(f) f.style.display='none';
       go('produkter');
-      if(window.showToast)window.showToast('Produkt lagret ✓');
+      if(window.showToast)window.showToast('✓ Produkt lagret');
     });
   }
   function _doSave(imgUrl){
-    var data={name:name,price:price,stock:stock,description:desc,category:cat,brand:'NAK Hair',visible:true};
+    var data={name:name,brand:brand,price:price,old_price:oldPrice||null,stock:stock,description:desc,category:cat,badge:badge||null,emoji:emoji||null,sort_order:sortOrder,visible:visible};
     if(imgUrl) data.image_url=imgUrl;
     if(editProdId){
       s.from('products').update(data).eq('id',editProdId).then(function(r){
-        if(r.error){alert('Feil: '+r.error.message);return;}
+        if(r.error){if(window.showToast)window.showToast('Feil: '+r.error.message);if(savBtn){savBtn.disabled=false;savBtn.textContent='💾 Lagre produkt';}return;}
         _reload();
       });
     } else {
-      s.from('products').insert(data).select('*').then(function(r){
-        if(r.error){alert('Feil: '+r.error.message);return;}
+      s.from('products').insert(data).then(function(r){
+        if(r.error){if(window.showToast)window.showToast('Feil: '+r.error.message);if(savBtn){savBtn.disabled=false;savBtn.textContent='💾 Lagre produkt';}return;}
         _reload();
       });
     }
@@ -5156,6 +5174,92 @@ function admLabel(id){
     +'</body></html>');
   w.document.close();
 }
+
+// ── INNHOLD EDITOR ──
+var INNHOLD_LS='ys_innhold_v2';
+function loadIC(){try{return JSON.parse(localStorage.getItem(INNHOLD_LS)||'{}');}catch(e){return{};}}
+function saveIC(d){try{localStorage.setItem(INNHOLD_LS,JSON.stringify(d));}catch(e){}}
+
+function viewInnhold(){
+  var d=loadIC();
+  var inpStyle='width:100%;padding:9px 11px;background:#100c08;border:1px solid #2a1e12;border-radius:8px;font-size:15px;color:#e4cda8;box-sizing:border-box;font-family:inherit;';
+  var taStyle=inpStyle+'resize:vertical;';
+  var lbl=function(t){return '<label style="display:block;font-size:10px;color:#9a7a5a;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;">'+t+'</label>';};
+  var row=function(id,label,val,ph,tag,rows){
+    val=(val||'').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+    if(tag==='textarea') return '<div style="margin-bottom:0.75rem;">'+lbl(label)+'<textarea id="ic_'+id+'" rows="'+(rows||2)+'" placeholder="'+(ph||'')+'" style="'+taStyle+'">'+val+'</textarea></div>';
+    return '<div style="margin-bottom:0.75rem;">'+lbl(label)+'<input id="ic_'+id+'" type="text" value="'+val+'" placeholder="'+(ph||'')+'" style="'+inpStyle+'"></div>';
+  };
+  var gv=function(id){return (d[id]||'');};
+
+  var saveBtn='<button onclick="window._saveIC()" style="width:100%;padding:13px;background:#b8915a22;border:1px solid #b8915a66;border-radius:12px;color:#f0e4ce;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:0.04em;">💾 Lagre alle endringer</button>';
+
+  return card('✏ Tekst og innhold på nettsiden',
+    '<div style="padding:0.9rem;">'
+    +'<div style="font-size:11px;color:#9a7a5a;margin-bottom:1rem;padding:8px 12px;background:#100c08;border-radius:8px;border-left:3px solid #b8915a;">ℹ Endringer lagres lokalt (nettleser). Oppdater siden for å se dem på forsiden.</div>'
+    +row('tagline','Tagline / slagord',gv('tagline'),'f.eks. Profesjonell pleie. Synlige resultater.')
+    +row('omOss','Om oss (footer/about)',gv('omOss'),'Kort tekst om salongen...','textarea',3)
+    +'</div>'
+  )
+  +card('📞 Kontaktinformasjon',
+    '<div style="padding:0.9rem;">'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;">'
+    +row('tlf','Telefon',gv('tlf')||'+47 978 55 154','+47 000 00 000')
+    +row('epost','E-post',gv('epost')||'post@yeganehstyle.no','post@...')
+    +'</div>'
+    +row('adresse','Adresse',gv('adresse')||'Flaenbakken 2, 2072 Råholt','Gateadresse...')
+    +'</div>'
+  )
+  +card('🕐 Åpningstider',
+    '<div style="padding:0.9rem;">'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;">'
+    +row('apnManFre','Man–Fre',gv('apnManFre')||'09:00–18:00','09:00–18:00')
+    +row('apnTor','Torsdag',gv('apnTor')||'09:00–20:00','09:00–20:00')
+    +row('apnLor','Lørdag',gv('apnLor')||'10:00–16:00','10:00–16:00')
+    +row('apnSon','Søndag',gv('apnSon')||'Stengt','Stengt')
+    +'</div>'
+    +'</div>'
+  )
+  +card('📱 Sosiale medier',
+    '<div style="padding:0.9rem;">'
+    +row('instagram','Instagram URL',gv('instagram')||'https://www.instagram.com/yeganehstyle/','https://instagram.com/...')
+    +row('facebook','Facebook URL',gv('facebook')||'https://www.facebook.com/yeganehstyle/','https://facebook.com/...')
+    +'</div>'
+  )
+  +card('📢 Kampanjebanner (vises øverst på siden)',
+    '<div style="padding:0.9rem;">'
+    +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:0.75rem;">'
+    +'<input type="checkbox" id="ic_bannerAktiv" '+(gv('bannerAktiv')==='1'?'checked':'')+' style="width:18px;height:18px;accent-color:#b8915a;cursor:pointer;">'
+    +'<label for="ic_bannerAktiv" style="font-size:13px;color:#b09070;cursor:pointer;">Aktiver kampanjebanner</label>'
+    +'</div>'
+    +row('bannerTekst','Bannertekst',gv('bannerTekst'),'f.eks. 🎉 Sommer-tilbud! 20% på alle NAK Hair-produkter i juli')
+    +'</div>'
+  )
+  +'<div style="margin-top:0.5rem;">'+saveBtn+'</div>';
+}
+window._saveIC=function(){
+  var gv=function(id){var e=document.getElementById('ic_'+id);return e?e.value.trim():'';};
+  var gcb=function(id){var e=document.getElementById('ic_'+id);return e&&e.checked?'1':'0';};
+  var d={
+    tagline:gv('tagline'),omOss:gv('omOss'),
+    tlf:gv('tlf'),epost:gv('epost'),adresse:gv('adresse'),
+    apnManFre:gv('apnManFre'),apnTor:gv('apnTor'),apnLor:gv('apnLor'),apnSon:gv('apnSon'),
+    instagram:gv('instagram'),facebook:gv('facebook'),
+    bannerAktiv:gcb('bannerAktiv'),bannerTekst:gv('bannerTekst')
+  };
+  saveIC(d);
+  // Apply banner immediately
+  var banner=document.getElementById('siteBanner');
+  if(banner){
+    if(d.bannerAktiv==='1'&&d.bannerTekst){
+      banner.textContent=d.bannerTekst;
+      banner.style.display='';
+    } else {
+      banner.style.display='none';
+    }
+  }
+  if(window.showToast) window.showToast('✓ Innhold lagret');
+};
 
 window.admInit=function(){go('oversikt');};
 window._admLoad=_admLoad;
@@ -5545,68 +5649,17 @@ if(window.renderNailsGrid) window.renderNailsGrid();
     if(window.showToast)window.showToast('Booking sendt!');
   };
 
-// ── INNHOLD EDITOR ──
-var INNHOLD_KEY='ys_innhold';
-function loadInnhold(){
-  try{return JSON.parse(localStorage.getItem(INNHOLD_KEY)||'{}');}catch(e){return {};}
-}
-function applyInnhold(){
-  var d=loadInnhold();
-  if(d.heroLabel){var el=document.getElementById('heroLabel');if(el)el.textContent=d.heroLabel;}
-  if(d.heroH1){var el=document.getElementById('heroH1');if(el)el.innerHTML=d.heroH1;}
-  if(d.heroSub){var el=document.getElementById('heroSub');if(el)el.textContent=d.heroSub;}
-}
-function renderInnhold(){
-  var d=loadInnhold();
-  var f=function(id,label,val,ph,tag){
-    tag=tag||'input';
-    var v=(val||'').replace(/"/g,'&quot;').replace(/</g,'&lt;');
-    if(tag==='textarea')
-      return '<div style="margin-bottom:0.75rem;"><label style="display:block;font-size:10px;color:#9a7a5a;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">'+label+'</label><textarea id="ic_'+id+'" rows="2" placeholder="'+(ph||'')+'" style="width:100%;padding:9px 11px;background:#181208;border:1px solid #2a1e12;border-radius:8px;font-size:15px;color:#e4cda8;box-sizing:border-box;resize:vertical;font-family:inherit;">'+v+'</textarea></div>';
-    return '<div style="margin-bottom:0.75rem;"><label style="display:block;font-size:10px;color:#9a7a5a;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">'+label+'</label><input id="ic_'+id+'" type="text" value="'+v+'" placeholder="'+(ph||'')+'" style="width:100%;padding:9px 11px;background:#181208;border:1px solid #2a1e12;border-radius:8px;font-size:15px;color:#e4cda8;box-sizing:border-box;"></div>';
-  };
-  var hero=d.heroH1||'Profesjonell pleie.<br><em>Synlige resultater.</em>';
-  document.getElementById('admBody').innerHTML=
-    card('Hero – Tittel og tekst',
-      '<div style="padding:0.75rem;">'+
-      f('heroLabel','Label over tittel',d.heroLabel||'NAK Hair — Eksklusivt i salongen','Label...')+
-      f('heroH1','Tittel (HTML tillatt)',hero,'Tittel...','textarea')+
-      f('heroSub','Undertekst',d.heroSub||'Eksklusive produkter og tjenester for hår som reflekterer deg.','Undertekst...')+
-      '</div>'
-    )+
-    card('Kontaktinformasjon',
-      '<div style="padding:0.75rem;">'+
-      f('kontaktAdresse','Adresse',d.kontaktAdresse||'Råholt','Adresse...')+
-      f('kontaktTlf','Telefon',d.kontaktTlf||'+47 978 55 154','Tlf...')+
-      f('kontaktEpost','E-post',d.kontaktEpost||'yeganeh@yeganehstyle.no','E-post...')+
-      '</div>'
-    )+
-    card('Åpningstider',
-      '<div style="padding:0.75rem;">'+
-      f('apnMan','Mandag–fredag',d.apnMan||'09:00–18:00','f.eks. 09:00–18:00')+
-      f('apnLor','Lørdag',d.apnLor||'10:00–16:00','f.eks. 10:00–16:00')+
-      f('apnSon','Søndag',d.apnSon||'Stengt','f.eks. Stengt')+
-      '</div>'
-    )+
-    '<button onclick="window.saveInnhold()" style="width:100%;padding:13px;background:rgba(138,180,138,0.15);border:1px solid rgba(138,180,138,0.35);border-radius:12px;color:#e0caa8;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">Lagre endringer</button>';
-}
-function saveInnhold(){
-  var get=function(id){var e=document.getElementById('ic_'+id);return e?e.value.trim():'';};
-  var d={
-    heroLabel:get('heroLabel'),heroH1:get('heroH1'),heroSub:get('heroSub'),
-    kontaktAdresse:get('kontaktAdresse'),kontaktTlf:get('kontaktTlf'),kontaktEpost:get('kontaktEpost'),
-    apnMan:get('apnMan'),apnLor:get('apnLor'),apnSon:get('apnSon')
-  };
-  try{localStorage.setItem(INNHOLD_KEY,JSON.stringify(d));}catch(e){}
-  applyInnhold();
-  if(window.showToast)window.showToast('Innhold lagret ✓');
-}
-
-window.renderInnhold=renderInnhold;
-window.saveInnhold=saveInnhold;
-window.applyInnhold=applyInnhold;
+// Apply banner on page load
+(function(){
+  try{
+    var d=JSON.parse(localStorage.getItem('ys_innhold_v2')||'{}');
+    if(d.bannerAktiv==='1'&&d.bannerTekst){
+      var b=document.getElementById('siteBanner');
+      if(b){b.textContent=d.bannerTekst;b.style.display='';}
+    }
+  }catch(e){}
+})();
 })();
 </script>
-<script>document.addEventListener('DOMContentLoaded',function(){if(window.applyInnhold)window.applyInnhold();});</script>
 </body>
 </html>

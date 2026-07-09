@@ -3882,9 +3882,11 @@ function _buildVarselBanner(filterFn,accentCol,name){
     +'</div>';
 }
 
-function _buildPersonScheduleView(empId, accent){
-  var emp=DATA.employees.find(function(e){return e.id===empId;});
-  if(!emp) return '<p style="color:#a08060;">Fant ikke ansatt.</p>';
+function _buildPersonScheduleView(empName, accent, displayName){
+  var emp=DATA.employees.find(function(e){return e.name===empName;});
+  if(!emp) return '<p style="color:#a08060;">Fant ikke ansatt ('+empName+').</p>';
+  var label=displayName||emp.name;
+  var key=empName.replace(/\s/g,'_');
   var days=[
     {key:1,label:'Mandag'},
     {key:2,label:'Tirsdag'},
@@ -3896,37 +3898,37 @@ function _buildPersonScheduleView(empId, accent){
   ];
   var ac=accent||'#d4a840';
   var rows=days.map(function(d){
-    var val=emp.schedule[d.key]||'Stengt';
+    var val=(emp.schedule&&emp.schedule[d.key])||'Stengt';
     var isOpen=val!=='Stengt';
     var fromT='09:00', toT='17:00';
     if(isOpen){var parts=val.split('-');fromT=parts[0]||'09:00';toT=parts[1]||'17:00';}
     var chk=isOpen?'checked':'';
     return '<div style="display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid rgba(200,160,60,0.1);">'
       +'<label style="display:flex;align-items:center;gap:6px;cursor:pointer;width:90px;flex-shrink:0;">'
-      +'<input type="checkbox" id="sch_open_'+empId+'_'+d.key+'" '+chk+' onchange="admSchToggle('+empId+','+d.key+')" style="accent-color:'+ac+';width:16px;height:16px;cursor:pointer;">'
+      +'<input type="checkbox" id="sch_open_'+key+'_'+d.key+'" '+chk+' onchange="admSchToggle(\''+key+'\','+d.key+')" style="accent-color:'+ac+';width:16px;height:16px;cursor:pointer;">'
       +'<span style="font-size:13px;color:#e4cda8;font-weight:500;">'+d.label+'</span>'
       +'</label>'
-      +'<div id="sch_times_'+empId+'_'+d.key+'" style="display:flex;align-items:center;gap:6px;'+(isOpen?'':'opacity:0.3;pointer-events:none;')+'">'
-      +'<input type="time" id="sch_from_'+empId+'_'+d.key+'" value="'+fromT+'" style="background:#1a1208;border:1px solid rgba(200,160,60,0.3);border-radius:8px;color:#e4cda8;padding:5px 8px;font-size:13px;font-family:inherit;">'
+      +'<div id="sch_times_'+key+'_'+d.key+'" style="display:flex;align-items:center;gap:6px;'+(isOpen?'':'opacity:0.3;pointer-events:none;')+'">'
+      +'<input type="time" id="sch_from_'+key+'_'+d.key+'" value="'+fromT+'" style="background:#1a1208;border:1px solid rgba(200,160,60,0.3);border-radius:8px;color:#e4cda8;padding:5px 8px;font-size:13px;font-family:inherit;">'
       +'<span style="color:#8a6a40;font-size:12px;">–</span>'
-      +'<input type="time" id="sch_to_'+empId+'_'+d.key+'" value="'+toT+'" style="background:#1a1208;border:1px solid rgba(200,160,60,0.3);border-radius:8px;color:#e4cda8;padding:5px 8px;font-size:13px;font-family:inherit;">'
+      +'<input type="time" id="sch_to_'+key+'_'+d.key+'" value="'+toT+'" style="background:#1a1208;border:1px solid rgba(200,160,60,0.3);border-radius:8px;color:#e4cda8;padding:5px 8px;font-size:13px;font-family:inherit;">'
       +'</div>'
-      +'<span id="sch_closed_'+empId+'_'+d.key+'" style="font-size:12px;color:#6a4a30;'+(isOpen?'display:none;':'')+'">Stengt</span>'
+      +'<span id="sch_closed_'+key+'_'+d.key+'" style="font-size:12px;color:#6a4a30;'+(isOpen?'display:none;':'')+'">Stengt</span>'
       +'</div>';
   }).join('');
   return '<div style="background:rgba(26,18,8,0.8);border:1px solid rgba(200,160,60,0.2);border-radius:14px;overflow:hidden;margin-bottom:1rem;">'
-    +'<div style="padding:12px 14px;border-bottom:1px solid rgba(200,160,60,0.15);font-size:12px;font-weight:700;color:'+ac+';">⏰ '+emp.name+' – Tilgjengelig i salong</div>'
+    +'<div style="padding:12px 14px;border-bottom:1px solid rgba(200,160,60,0.15);font-size:12px;font-weight:700;color:'+ac+';">⏰ '+label+' – Tilgjengelig i salong</div>'
     +rows
     +'</div>'
     +'<div style="text-align:right;">'
-    +'<button onclick="admSavePersonSchedule('+empId+')" style="background:'+ac+';border:0;border-radius:10px;color:#0c0906;font-weight:700;font-size:13px;padding:10px 22px;cursor:pointer;font-family:inherit;">Lagre åpningstider ✓</button>'
+    +'<button onclick="admSavePersonSchedule(\''+empName+'\')" style="background:'+ac+';border:0;border-radius:10px;color:#0c0906;font-weight:700;font-size:13px;padding:10px 22px;cursor:pointer;font-family:inherit;">Lagre åpningstider ✓</button>'
     +'</div>';
 }
 
-window.admSchToggle=function(empId,dayKey){
-  var chk=document.getElementById('sch_open_'+empId+'_'+dayKey);
-  var timesDiv=document.getElementById('sch_times_'+empId+'_'+dayKey);
-  var closedLbl=document.getElementById('sch_closed_'+empId+'_'+dayKey);
+window.admSchToggle=function(key,dayKey){
+  var chk=document.getElementById('sch_open_'+key+'_'+dayKey);
+  var timesDiv=document.getElementById('sch_times_'+key+'_'+dayKey);
+  var closedLbl=document.getElementById('sch_closed_'+key+'_'+dayKey);
   if(!chk||!timesDiv) return;
   var open=chk.checked;
   timesDiv.style.opacity=open?'1':'0.3';
@@ -3934,16 +3936,18 @@ window.admSchToggle=function(empId,dayKey){
   if(closedLbl) closedLbl.style.display=open?'none':'';
 };
 
-window.admSavePersonSchedule=function(empId){
-  var emp=DATA.employees.find(function(e){return e.id===empId;});
+window.admSavePersonSchedule=function(empName){
+  var emp=DATA.employees.find(function(e){return e.name===empName;});
   if(!emp) return;
+  var key=empName.replace(/\s/g,'_');
+  if(!emp.schedule) emp.schedule={};
   var days=[1,2,3,4,5,6,0];
   days.forEach(function(d){
-    var chk=document.getElementById('sch_open_'+empId+'_'+d);
+    var chk=document.getElementById('sch_open_'+key+'_'+d);
     if(!chk) return;
     if(chk.checked){
-      var f=document.getElementById('sch_from_'+empId+'_'+d);
-      var t=document.getElementById('sch_to_'+empId+'_'+d);
+      var f=document.getElementById('sch_from_'+key+'_'+d);
+      var t=document.getElementById('sch_to_'+key+'_'+d);
       emp.schedule[d]=(f?f.value:'09:00')+'-'+(t?t.value:'17:00');
     } else {
       emp.schedule[d]='Stengt';
@@ -3964,7 +3968,7 @@ function viewKalender(){
     +'<button onclick="admSetHadiTab(\'aapningstider\')" style="'+subTabStyle('aapningstider')+'">🕐 Åpningstider</button>'
     +'</div>';
 
-  if(hadiTab==='aapningstider') return subTabs+_buildPersonScheduleView(2,'#d4a840');
+  if(hadiTab==='aapningstider') return subTabs+_buildPersonScheduleView('Yeganeh','#d4a840','Hadi');
 
   if(hadiTab==='tjenester'){
     admTreatTab='frisør';
@@ -4358,7 +4362,7 @@ function viewNails(){
     +'<button onclick="admSetNailsTab(\'tjenester\')" style="'+subTabStyle('tjenester')+'">💅 Tjenester</button>'
     +'<button onclick="admSetNailsTab(\'aapningstider\')" style="'+subTabStyle('aapningstider')+'">🕐 Åpningstider</button>'
     +'</div>';
-  if(nailsTab==='aapningstider') return subTabs+_buildPersonScheduleView(3,'#c97d6e');
+  if(nailsTab==='aapningstider') return subTabs+_buildPersonScheduleView('MH Nails','#c97d6e');
   if(nailsTab==='kalender'){
     return subTabs+viewNailsKalender();
   }

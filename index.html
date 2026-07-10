@@ -3150,18 +3150,19 @@ function renderPortal(){
     content+='</div></div>';
 
   } else if(B2B_TAB==='produkter'){
+    var tierPct=tier.pct; // alltid bruk nivåets offisielle rabatt, ikke rå acc.discount
     var allProds=window.PRODUCTS||[];
     var prodCats={};
     allProds.forEach(function(p){var c=p.cat||'Annet';if(!prodCats[c])prodCats[c]=[];prodCats[c].push(p);});
     var catLabels={shampoo:'🧴 Shampoo',conditioner:'🫧 Conditioner',behandling:'💆‍♀️ Behandling',styling:'🪮 Styling'};
     content='<div class="b2p-card"><div class="b2p-card-title">NAK Hair – Alle produkter</div>'
-      +'<div style="font-size:11px;color:#c8a870;margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid rgba(186,152,98,0.09);">Priser ink. mva · Din bedriftsrabatt: <b style="color:#e8c04a;">'+(disc?disc+'%':'–')+'</b></div>';
+      +'<div style="font-size:11px;color:#c8a870;margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:1px solid rgba(186,152,98,0.09);">Priser ink. mva · '+tier.icon+' <b style="color:'+tier.col+';">'+tier.lbl+'</b> · Din rabatt: <b style="color:#e8c04a;">'+(tierPct?tierPct+'%':'–')+'</b></div>';
     Object.keys(prodCats).forEach(function(cat){
       var catLabel=catLabels[cat]||cat;
       content+='<div style="margin-bottom:1.25rem;"><div class="b2p-cat-head">'+catLabel+'</div>';
       prodCats[cat].forEach(function(p){
-        var retail=p.oldPrice||p.price;
-        var b2bPrice=disc?Math.round(p.price*(1-disc/100)):p.price;
+        var retail=p.price;
+        var b2bPrice=tierPct?Math.round(retail*(1-tierPct/100)):retail;
         var save=retail-b2bPrice;
         var badgeHtml=p.badge==='sale'?'<span style="background:rgba(212,120,105,0.25);border:1px solid rgba(212,120,105,0.5);border-radius:4px;padding:1px 6px;font-size:9px;color:#f0a898;font-weight:700;margin-left:5px;">TILBUD</span>':p.badge==='best'?'<span style="background:rgba(200,160,60,0.15);border:1px solid rgba(200,160,60,0.4);border-radius:4px;padding:1px 6px;font-size:9px;color:#e8c04a;font-weight:700;margin-left:5px;">⭐ BEST</span>':'';
         content+='<div class="b2p-price-row" style="align-items:center;">'
@@ -3171,9 +3172,9 @@ function renderPortal(){
           +'<div style="font-size:10px;color:#c8a870;">'+esc(p.brand)+'</div></div>'
           +'</div>'
           +'<div style="text-align:right;flex-shrink:0;padding-left:8px;">'
-          +'<div class="b2p-retail">'+retail+' kr</div>'
+          +(tierPct?'<div class="b2p-retail">'+retail+' kr</div>':'')
           +'<div class="b2p-b2bprice">'+b2bPrice+' kr</div>'
-          +(disc&&save>0?'<div class="b2p-disc-badge">Spar '+save+' kr</div>':'')
+          +(tierPct&&save>0?'<div class="b2p-disc-badge">−'+tierPct+'% · Spar '+save+' kr</div>':'')
           +'</div></div>';
       });
       content+='</div>';

@@ -5535,11 +5535,19 @@ function viewInnhold(){
 
   var saveBtn='<button onclick="window._saveIC()" style="width:100%;padding:13px;background:#b8915a22;border:1px solid #b8915a66;border-radius:12px;color:#f0e4ce;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;letter-spacing:0.04em;">💾 Lagre alle endringer</button>';
 
-  return card('✏ Tekst og innhold på nettsiden',
+  return card('📢 Viktig beskjed til kunder',
     '<div style="padding:0.9rem;">'
-    +'<div style="font-size:11px;color:#c8a870;margin-bottom:1rem;padding:8px 12px;background:#100c08;border-radius:8px;border-left:3px solid #b8915a;">ℹ Endringer lagres lokalt (nettleser). Oppdater siden for å se dem på forsiden.</div>'
-    +row('tagline','Tagline / slagord',gv('tagline'),'f.eks. Profesjonell pleie. Synlige resultater.')
-    +row('omOss','Om oss (footer/about)',gv('omOss'),'Kort tekst om salongen...','textarea',3)
+    +'<div style="font-size:11px;color:#c8a870;margin-bottom:1rem;padding:8px 12px;background:#100c08;border-radius:8px;border-left:3px solid #b8915a;">ℹ Beskjeden vises som en synlig stripe øverst på siden. La feltet stå tomt for å skjule den.</div>'
+    +'<div style="margin-bottom:0.75rem;">'
+    +'<label style="font-size:10px;font-weight:700;color:#c8a870;text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:6px;">Type beskjed</label>'
+    +'<select id="ic_beskjedType" style="width:100%;padding:10px 12px;background:#1a1208;border:1px solid rgba(140,108,60,0.3);border-radius:10px;color:#e0d4b8;font-size:14px;font-family:inherit;">'
+    +'<option value="info" '+(gv('beskjedType')==='info'||!gv('beskjedType')?'selected':'')+'>ℹ Info</option>'
+    +'<option value="ferie" '+(gv('beskjedType')==='ferie'?'selected':'')+'>🌴 Ferie / stengt</option>'
+    +'<option value="sykdom" '+(gv('beskjedType')==='sykdom'?'selected':'')+'>🤒 Sykdom</option>'
+    +'<option value="viktig" '+(gv('beskjedType')==='viktig'?'selected':'')+'>⚠️ Viktig</option>'
+    +'</select>'
+    +'</div>'
+    +row('beskjedTekst','Beskjed (la stå tom for å skjule)',gv('beskjedTekst'),'f.eks. Salongen er stengt 14.–21. juli pga. ferie. Velkommen tilbake 22. juli!','textarea',3)
     +'</div>'
   )
   +card('📞 Kontaktinformasjon',
@@ -5582,18 +5590,22 @@ window._saveIC=function(){
   var gv=function(id){var e=document.getElementById('ic_'+id);return e?e.value.trim():'';};
   var gcb=function(id){var e=document.getElementById('ic_'+id);return e&&e.checked?'1':'0';};
   var d={
-    tagline:gv('tagline'),omOss:gv('omOss'),
+    beskjedTekst:gv('beskjedTekst'),beskjedType:gv('beskjedType')||'info',
     tlf:gv('tlf'),epost:gv('epost'),adresse:gv('adresse'),
     apnManFre:gv('apnManFre'),apnTor:gv('apnTor'),apnLor:gv('apnLor'),apnSon:gv('apnSon'),
     instagram:gv('instagram'),facebook:gv('facebook'),
     bannerAktiv:gcb('bannerAktiv'),bannerTekst:gv('bannerTekst')
   };
   saveIC(d);
-  // Apply banner immediately
+  // Apply viktig beskjed banner immediately
   var banner=document.getElementById('siteBanner');
   if(banner){
-    if(d.bannerAktiv==='1'&&d.bannerTekst){
-      banner.textContent=d.bannerTekst;
+    var typeColors={info:{bg:'#b8915a',fg:'#0c0906'},ferie:{bg:'#2d6a4f',fg:'#d8f3dc'},sykdom:{bg:'#9b2335',fg:'#ffe0e3'},viktig:{bg:'#7d4a00',fg:'#fff3cd'}};
+    var tc=typeColors[d.beskjedType]||typeColors.info;
+    if(d.beskjedTekst){
+      banner.textContent=d.beskjedTekst;
+      banner.style.background=tc.bg;
+      banner.style.color=tc.fg;
       banner.style.display='';
     } else {
       banner.style.display='none';
@@ -6002,9 +6014,19 @@ if(window.renderNailsGrid) window.renderNailsGrid();
 (function(){
   try{
     var d=JSON.parse(localStorage.getItem('ys_innhold_v2')||'{}');
-    if(d.bannerAktiv==='1'&&d.bannerTekst){
-      var b=document.getElementById('siteBanner');
-      if(b){b.textContent=d.bannerTekst;b.style.display='';}
+    var b=document.getElementById('siteBanner');
+    if(!b)return;
+    // Viktig beskjed har prioritet over kampanjebanner
+    if(d.beskjedTekst){
+      var typeColors={info:{bg:'#b8915a',fg:'#0c0906'},ferie:{bg:'#2d6a4f',fg:'#d8f3dc'},sykdom:{bg:'#9b2335',fg:'#ffe0e3'},viktig:{bg:'#7d4a00',fg:'#fff3cd'}};
+      var tc=typeColors[d.beskjedType||'info']||typeColors.info;
+      b.textContent=d.beskjedTekst;
+      b.style.background=tc.bg;
+      b.style.color=tc.fg;
+      b.style.display='';
+    } else if(d.bannerAktiv==='1'&&d.bannerTekst){
+      b.textContent=d.bannerTekst;
+      b.style.display='';
     }
   }catch(e){}
 })();

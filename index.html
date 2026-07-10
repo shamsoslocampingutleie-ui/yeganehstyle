@@ -65,7 +65,7 @@
     {"@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "09:00", "closes": "20:00"},
     {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "16:00"}
   ],
-  "aggregateRating": {"@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "214", "bestRating": "5"},
+  "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.5", "reviewCount": "66", "bestRating": "5"},
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Frisørtjenester",
@@ -1314,7 +1314,7 @@ nav { }
   </a>
 
   <!-- Desktop dropdown nav -->
-  <nav class="nav-links" aria-label="Hovedmeny">
+  <div class="nav-links" role="navigation" aria-label="Hovedmeny">
 
     <!-- Produkter -->
     <div class="nav-item">
@@ -1359,7 +1359,7 @@ nav { }
       </div>
     </div>
 
-  </nav>
+  </div>
 
   <!-- Right: cart + hamburger -->
   <div class="nav-right">
@@ -1491,7 +1491,7 @@ nav { }
   <div id="reviewsAll" style="margin-top:1.25rem;"></div>
 </div>
 
-<div class="section-wrap" id="forsideTjenester" style="display:none">
+<div class="section-wrap" id="forsideTjenester">
   <div class="section-glass">
     <p class="section-eyebrow">Tjenester</p>
     <h2 class="section-title">Book behandling</h2>
@@ -1670,15 +1670,6 @@ nav { }
   </div>
 </div>
 
-<!-- TREATMENTS (anchor for menu) -->
-<div class="section-wrap" id="tjenester" style="display:none;padding-top:0.5rem;padding-bottom:0.5rem;">
-  <div class="section-glass">
-    <p class="section-eyebrow">Se alle tjenester</p>
-    <p class="section-sub" style="font-size:12px;color:var(--gray)">Scroll opp for full behandlingsliste, eller book direkte via knappen over.</p>
-  </div>
-</div>
-
-<div id="mhnails" style="display:none;"></div>
 
 
 
@@ -2031,6 +2022,7 @@ nav { }
 <div class="toast" id="toast"></div>
 
 <script>
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 // ── SUPABASE — loaded async, init via callback ──
 var SB_URL='https://cauftwsojtumogyshmqq.supabase.co';
 var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNhdWZ0d3NvanR1bW9neXNobXFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1OTUzMzgsImV4cCI6MjA5NzE3MTMzOH0.KPjNLzetQGtXfJN9Ps-d5ma4KYX0XN2ey47KTmVObKs';
@@ -2122,12 +2114,12 @@ function _prodCardHtml(p){
   else if(p.badge==='new') bHtml='<span class="prod-badge badge-new">Ny</span>';
   else if(p.badge==='sale') bHtml='<span class="prod-badge badge-sale">Tilbud</span>';
   var oldHtml=p.oldPrice?'<span class="old">'+p.oldPrice+' kr</span>':'';
-  var imgInner=p.img?'<img src="'+p.img+'" alt="'+p.name+'" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">':(p.emoji?'<span class="prod-emoji">'+p.emoji+'</span>':'<span style="font-family:Cormorant Garamond,serif;font-size:2rem;color:var(--accent);">'+p.name.charAt(0)+'</span>');
-  return '<div class="product-card" onclick="openProduct(\''+p.id+'\')">'
+  var imgInner=p.img?'<img src="'+esc(p.img)+'" alt="'+esc(p.name)+'" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">':(p.emoji?'<span class="prod-emoji">'+esc(p.emoji)+'</span>':'<span style="font-family:Cormorant Garamond,serif;font-size:2rem;color:var(--accent);">'+esc(p.name.charAt(0))+'</span>');
+  return '<div class="product-card" onclick="openProduct(\''+esc(String(p.id))+'\')">'
     +'<div class="prod-img">'+bHtml+imgInner+'</div>'
     +'<div class="prod-info">'
-    +'<div class="prod-brand">'+p.brand+'</div>'
-    +'<div class="prod-name">'+p.name+'</div>'
+    +'<div class="prod-brand">'+esc(p.brand)+'</div>'
+    +'<div class="prod-name">'+esc(p.name)+'</div>'
     +'<div class="prod-foot">'
     +'<div class="prod-price">'+oldHtml+p.price+' kr</div>'
     +'<button class="add-btn" onclick="addToCart(\''+p.id+'\',event)">+ Legg til</button>'
@@ -2142,7 +2134,6 @@ function renderProducts(){
   var html=''; for(var i=0;i<popular.length;i++) html+=_prodCardHtml(popular[i]);
   grid.innerHTML=html;
 }
-function filterCat(cat){activeFilter=cat;showAll=false;goTo('produkter');renderProducts();}
 function filterTab(cat,btn){
   activeFilter=cat;showAll=false;
   var tabs=document.querySelectorAll('.prod-tab');
@@ -2518,8 +2509,9 @@ function renderNailsGrid(){
   }).join('');
 }
 function openService(svc){
-  openBooking();
-  setTimeout(function(){document.getElementById('serviceSelect').value=svc;},50);
+  if(window.openTimma){window.openTimma();return;}
+  openModal('bookingModal');
+  setTimeout(function(){var s=document.getElementById('serviceSelect');if(s)s.value=svc;},50);
 }
 function confirmBooking(){
   var sel=document.getElementById('serviceSelect');
@@ -2553,39 +2545,7 @@ function confirmBooking(){
   document.getElementById('bookingForm').style.display='none';
   document.getElementById('bookingSuccess').classList.add('show');
 }
-function openB2B(){if(window.openB2BPortalFn)window.openB2BPortalFn();else openModal('b2bModal');}
-function confirmB2B(){
-  var firma=(document.getElementById('b2bFirma').value||'').trim();
-  if(!firma){showToast('Fyll inn firmanavn');return;}
-  var b2bPayload={
-    firma:firma,
-    org_nr:(document.getElementById('b2bOrg').value||'').trim(),
-    kontakt:(document.getElementById('b2bKontakt').value||'').trim(),
-    phone:(document.getElementById('b2bTlf').value||'').trim(),
-    email:(document.getElementById('b2bEpost').value||'').trim(),
-    status:'ny'
-  };
-  if(sb) sb.from('b2b_requests').insert(b2bPayload).then(function(){});
-  if(!window.B2B_REQUESTS) window.B2B_REQUESTS=[];
-  var now=new Date();
-  window.B2B_REQUESTS.unshift({
-    id:'#F'+(window.B2B_REQUESTS.length+1),
-    firma:firma,
-    org:(document.getElementById('b2bOrg').value||'').trim(),
-    kontakt:(document.getElementById('b2bKontakt').value||'').trim(),
-    tlf:(document.getElementById('b2bTlf').value||'').trim(),
-    epost:(document.getElementById('b2bEpost').value||'').trim(),
-    dato:now.toLocaleDateString('no-NO'),
-    status:'ny'
-  });
-  document.getElementById('b2bFirma').value='';
-  document.getElementById('b2bOrg').value='';
-  document.getElementById('b2bKontakt').value='';
-  document.getElementById('b2bTlf').value='';
-  document.getElementById('b2bEpost').value='';
-  closeModal('b2bModal');
-  showToast('Forespørsel sendt! Vi tar kontakt snart.');
-}
+function openB2B(){if(window.openB2BPortalFn)window.openB2BPortalFn();}
 var INFO={
   personvern:'<h2>Personvern</h2><p style="color:var(--gray);font-size:13px;line-height:1.8;margin-top:1rem">Yeganeh Style AS behandler personopplysninger i samsvar med GDPR. Vi samler kun inn nødvendig informasjon for å gjennomføre bookinger og ordrer.</p>',
   vilkar:'<h2>Vilkår</h2><p style="color:var(--gray);font-size:13px;line-height:1.8;margin-top:1rem">Avbestilling av time må skje senest 24 timer i forkant. Produkter kan returneres innen 14 dager i uåpnet stand.</p>',
@@ -2650,9 +2610,9 @@ function _buildRevCard(r){
   var stars='';
   for(var s=0;s<5;s++) stars+=s<r.rating?'★':'☆';
   return '<div class="review-card">'
-    +'<div class="review-head"><span class="review-name">'+r.name+'</span><span class="review-stars">'+stars+'</span></div>'
-    +'<div class="review-text">'+r.text+'</div>'
-    +'<div class="review-date">'+r.date+'</div>'
+    +'<div class="review-head"><span class="review-name">'+esc(r.name)+'</span><span class="review-stars">'+stars+'</span></div>'
+    +'<div class="review-text">'+esc(r.text)+'</div>'
+    +'<div class="review-date">'+esc(r.date)+'</div>'
     +'</div>';
 }
 
@@ -4498,8 +4458,8 @@ function viewAnmeldelser(){
       var idx=pending[p],r=revs[idx];
       var stars='';for(var s=0;s<5;s++) stars+=s<r.rating?'★':'☆';
       html+='<div style="background:#1a1410;border:1px solid #d4a01744;border-radius:14px;padding:1rem;margin-bottom:0.6rem;">'
-        +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><b style="color:#e4cda8;">'+r.name+'</b><span style="color:#e8c04a;">'+stars+'</span></div>'
-        +'<div style="font-size:12px;color:#b09070;margin-bottom:0.6rem;">'+r.text+'</div>'
+        +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><b style="color:#e4cda8;">'+esc(r.name)+'</b><span style="color:#e8c04a;">'+stars+'</span></div>'
+        +'<div style="font-size:12px;color:#b09070;margin-bottom:0.6rem;">'+esc(r.text)+'</div>'
         +'<div style="display:flex;gap:4px;">'+btn('Publiser','admRevOk('+idx+')')+btn('Slett','admRevDel('+idx+')','#c0392b')+'</div>'
         +'</div>';
     }
@@ -4509,8 +4469,8 @@ function viewAnmeldelser(){
     var pidx=published[q],pr=revs[pidx];
     var pstars='';for(var t=0;t<5;t++) pstars+=t<pr.rating?'★':'☆';
     html+='<div style="background:#1a1410;border:1px solid #2a1e12;border-radius:14px;padding:1rem;margin-bottom:0.6rem;">'
-      +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><b style="color:#e4cda8;">'+pr.name+'</b><span style="color:#e8c04a;">'+pstars+'</span></div>'
-      +'<div style="font-size:12px;color:#b09070;margin-bottom:0.6rem;">'+pr.text+'</div>'
+      +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;"><b style="color:#e4cda8;">'+esc(pr.name)+'</b><span style="color:#e8c04a;">'+pstars+'</span></div>'
+      +'<div style="font-size:12px;color:#b09070;margin-bottom:0.6rem;">'+esc(pr.text)+'</div>'
       +'<div>'+btn('Skjul','admRevHide('+pidx+')','#c0392b')+'</div>'
       +'</div>';
   }

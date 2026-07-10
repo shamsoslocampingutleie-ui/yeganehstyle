@@ -1327,7 +1327,7 @@ nav { }
         <a role="menuitem" onclick="goTo('produkter');filterTab('shampoo',null)">Nyheter</a>
         <a role="menuitem" onclick="goTo('produkter');filterTab('behandling',null)">Etter behandling</a>
         <div class="dd-divider"></div>
-        <a role="menuitem" onclick="goTo('produkter');filterTab('styling',null)">Tilbud</a>
+        <a role="menuitem" onclick="window.openProdOverlay('sale')">Tilbud</a>
       </div>
     </div>
 
@@ -1344,7 +1344,7 @@ nav { }
 
     <!-- Tilbud -->
     <div class="nav-item">
-      <a onclick="goTo('produkter');filterTab('styling',null);return false;" href="#">Tilbud</a>
+      <a onclick="window.openProdOverlay('sale');return false;" href="#">Tilbud</a>
     </div>
 
     <!-- Booking -->
@@ -5608,7 +5608,8 @@ if(window.renderNailsGrid) window.renderNailsGrid();
     shampoo:{icon:'🧴',name:'Shampoo'},
     conditioner:{icon:'🫧',name:'Conditioner'},
     behandling:{icon:'💆‍♀️',name:'Behandling'},
-    styling:{icon:'🪮',name:'Styling'}
+    styling:{icon:'🪮',name:'Styling'},
+    sale:   {icon:'🏷️',name:'Tilbud'}
   };
 
   window.openProdOverlay=function(startCat){
@@ -5665,7 +5666,7 @@ if(window.renderNailsGrid) window.renderNailsGrid();
     _setTitle(info.name);
     _setBack(true);
     var prods=window.PRODUCTS||[];
-    var items=cat==='alle'?prods:prods.filter(function(p){return p.cat===cat;});
+    var items=cat==='alle'?prods:cat==='sale'?prods.filter(function(p){return p.badge==='sale';}):prods.filter(function(p){return p.cat===cat;});
     var html='<div class="prod-ov-grid">';
     for(var i=0;i<items.length;i++) html+=_prodCardHtml(items[i]);
     html+='</div>';

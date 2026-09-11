@@ -1039,7 +1039,7 @@ input[type="date"] {
   border: 1px solid var(--border-bright);
   padding: 10px 18px; border-radius: 24px;
   font-size: 12px; font-weight: 500;
-  z-index: 500; opacity: 0;
+  z-index: 10000; opacity: 0;
   transition: all 0.3s; pointer-events: none; white-space: nowrap;
 }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
@@ -1780,7 +1780,7 @@ nav { }
         </select>
       </div>
       <div class="form-row date-time">
-        <div class="form-group"><label>Dato</label><input type="date" id="bookDate"></div>
+        <div class="form-group"><label for="bookDate">Dato</label><input type="date" id="bookDate"></div>
         <div class="form-group"><label>Tid</label>
           <select id="bookTime">
             <option>09:00</option><option>09:30</option><option>10:00</option>
@@ -1791,11 +1791,11 @@ nav { }
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group"><label>Fornavn</label><input type="text" id="bookFornavn" placeholder="Ola"></div>
-        <div class="form-group"><label>Etternavn</label><input type="text" id="bookEtternavn" placeholder="Nordmann"></div>
+        <div class="form-group"><label for="bookFornavn">Fornavn</label><input type="text" id="bookFornavn" placeholder="Ola"></div>
+        <div class="form-group"><label for="bookEtternavn">Etternavn</label><input type="text" id="bookEtternavn" placeholder="Nordmann"></div>
       </div>
-      <div class="form-group"><label>Telefon</label><input type="tel" id="bookTlf" placeholder="+47 000 00 000"></div>
-      <div class="form-group"><label>E-post</label><input type="email" id="bookEmail" placeholder="din@epost.no"></div>
+      <div class="form-group"><label for="bookTlf">Telefon</label><input type="tel" id="bookTlf" placeholder="+47 000 00 000"></div>
+      <div class="form-group"><label for="bookEmail">E-post</label><input type="email" id="bookEmail" placeholder="din@epost.no"></div>
       <button class="confirm-btn" onclick="confirmBooking()">Bekreft bestilling</button>
     </div>
     <div class="success-msg" id="bookingSuccess">
@@ -1879,14 +1879,14 @@ nav { }
     <div id="reviewForm">
       <h2 style="margin-bottom:0.25rem">Skriv en anmeldelse</h2>
       <p style="font-size:12px;color:var(--gray);margin-bottom:1.25rem">Del din opplevelse med andre.</p>
-      <div class="form-group"><label>Navn</label><input type="text" id="revName" placeholder="Ditt navn"></div>
+      <div class="form-group"><label for="revName">Navn</label><input type="text" id="revName" placeholder="Ditt navn"></div>
       <div class="form-group">
         <label>Vurdering</label>
         <div class="star-picker" id="starPicker">
           <span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span>
         </div>
       </div>
-      <div class="form-group"><label>Din anmeldelse</label><textarea id="revText" rows="4" placeholder="Fortell om besøket ditt..." style="width:100%;padding:10px;background:rgba(14,34,15,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;resize:vertical;"></textarea></div>
+      <div class="form-group"><label for="revText">Din anmeldelse</label><textarea id="revText" rows="4" placeholder="Fortell om besøket ditt..." style="width:100%;padding:10px;background:rgba(14,34,15,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;resize:vertical;"></textarea></div>
       <button class="confirm-btn" onclick="submitReview()">Send anmeldelse</button>
     </div>
     <div class="success-msg" id="reviewSuccess">
@@ -1924,15 +1924,15 @@ nav { }
       <!-- Kundeinfo -->
       <p style="font-size:11px;color:var(--gray);margin-bottom:0.6rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase">Leveringsinformasjon</p>
       <div class="form-row date-time">
-        <div class="form-group"><label>Fornavn</label><input type="text" id="ckFornavn" placeholder="Ola" autocomplete="given-name" class="form-group input" style="width:100%;padding:10px;background:rgba(14,34,15,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;min-width:0"></div>
-        <div class="form-group"><label>Etternavn</label><input type="text" id="ckEtternavn" placeholder="Nordmann" autocomplete="family-name" style="width:100%;padding:10px;background:rgba(14,34,15,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;min-width:0"></div>
+        <div class="form-group"><label for="ckFornavn">Fornavn</label><input type="text" id="ckFornavn" placeholder="Ola" autocomplete="given-name" style="width:100%;padding:10px;background:rgba(14,34,15,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;min-width:0"></div>
+        <div class="form-group"><label for="ckEtternavn">Etternavn</label><input type="text" id="ckEtternavn" placeholder="Nordmann" autocomplete="family-name" style="width:100%;padding:10px;background:rgba(14,34,15,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;min-width:0"></div>
       </div>
-      <div class="form-group"><label>E-post</label><input type="email" id="ckEpost" placeholder="din@epost.no" autocomplete="email" inputmode="email"></div>
-      <div class="form-group"><label>Telefon</label><input type="tel" id="ckTelefon" placeholder="+47 000 00 000" autocomplete="tel" inputmode="tel"></div>
-      <div class="form-group"><label>Gateadresse</label><input type="text" id="ckAdresse" placeholder="Storgata 1" autocomplete="street-address"></div>
+      <div class="form-group"><label for="ckEpost">E-post</label><input type="email" id="ckEpost" placeholder="din@epost.no" autocomplete="email" inputmode="email"></div>
+      <div class="form-group"><label for="ckTelefon">Telefon</label><input type="tel" id="ckTelefon" placeholder="+47 000 00 000" autocomplete="tel" inputmode="tel"></div>
+      <div class="form-group"><label for="ckAdresse">Gateadresse</label><input type="text" id="ckAdresse" placeholder="Storgata 1" autocomplete="street-address"></div>
       <div class="form-row date-time">
-        <div class="form-group"><label>Postnummer</label><input type="text" id="ckPostnr" placeholder="0000" maxlength="4" autocomplete="postal-code" inputmode="numeric" style="width:100%;padding:10px;background:rgba(14,34,15,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;min-width:0"></div>
-        <div class="form-group"><label>Sted</label><input type="text" id="ckSted" placeholder="Oslo" autocomplete="address-level2" style="width:100%;padding:10px;background:rgba(14,34,15,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;min-width:0"></div>
+        <div class="form-group"><label for="ckPostnr">Postnummer</label><input type="text" id="ckPostnr" placeholder="0000" maxlength="4" autocomplete="postal-code" inputmode="numeric" style="width:100%;padding:10px;background:rgba(14,34,15,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;min-width:0"></div>
+        <div class="form-group"><label for="ckSted">Sted</label><input type="text" id="ckSted" placeholder="Oslo" autocomplete="address-level2" style="width:100%;padding:10px;background:rgba(14,34,15,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;min-width:0"></div>
       </div>
 
       <!-- Ordresammendrag -->
@@ -1996,8 +1996,8 @@ nav { }
       </div>
       <!-- LOGIN STEP -->
       <div id="adminLoginStep">
-        <div class="form-group"><label>E-postadresse</label><input type="email" id="adminEmail" placeholder="din@epost.no" autocomplete="email" onkeydown="if(event.key==='Enter')doAdminLogin()"></div>
-        <div class="form-group"><label>Passord</label><input type="password" id="adminPassword" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doAdminLogin()"></div>
+        <div class="form-group"><label for="adminEmail">E-postadresse</label><input type="email" id="adminEmail" placeholder="din@epost.no" autocomplete="email" onkeydown="if(event.key==='Enter')doAdminLogin()"></div>
+        <div class="form-group"><label for="adminPassword">Passord</label><input type="password" id="adminPassword" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')doAdminLogin()"></div>
         <div id="adminErr" style="color:#e07060;font-size:12px;margin-bottom:0.75rem;display:none;padding:8px 12px;background:rgba(224,112,96,0.08);border-radius:8px;border:1px solid rgba(224,112,96,0.2);">Noe gikk galt. Prøv igjen.</div>
         <button class="confirm-btn" onclick="doAdminLogin()" style="width:100%;">Logg inn →</button>
         <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(98,186,106,0.1);display:flex;flex-direction:column;align-items:center;gap:8px;">
@@ -2009,7 +2009,7 @@ nav { }
       <!-- FORGOT PASSWORD STEP -->
       <div id="adminForgotStep" style="display:none;">
         <p style="font-size:13px;color:var(--text-dim);margin-bottom:1.2rem;text-align:center;">Skriv inn e-postadressen din, så sender vi en lenke for å sette nytt passord.</p>
-        <div class="form-group"><label>E-postadresse</label><input type="email" id="adminForgotEmail" placeholder="din@epost.no" autocomplete="email" onkeydown="if(event.key==='Enter')doSendReset()"></div>
+        <div class="form-group"><label for="adminForgotEmail">E-postadresse</label><input type="email" id="adminForgotEmail" placeholder="din@epost.no" autocomplete="email" onkeydown="if(event.key==='Enter')doSendReset()"></div>
         <div id="adminForgotErr" style="color:#e07060;font-size:12px;margin-bottom:0.75rem;display:none;padding:8px 12px;background:rgba(224,112,96,0.08);border-radius:8px;border:1px solid rgba(224,112,96,0.2);"></div>
         <div id="adminForgotOk" style="color:#98dda6;font-size:13px;margin-bottom:0.75rem;display:none;padding:8px 12px;background:rgba(109,202,138,0.08);border-radius:8px;border:1px solid rgba(109,202,138,0.2);text-align:center;">E-post sendt! Sjekk innboksen din.</div>
         <button class="confirm-btn" onclick="doSendReset()" id="forgotSendBtn" style="width:100%;">Send tilbakestillingslenke →</button>
@@ -2021,8 +2021,8 @@ nav { }
       <!-- SET NEW PASSWORD STEP -->
       <div id="adminSetPwStep" style="display:none;">
         <p style="font-size:13px;color:var(--text-dim);margin-bottom:1.2rem;text-align:center;">Velg et nytt passord for kontoen din.</p>
-        <div class="form-group"><label>Nytt passord</label><input type="password" id="adminNewPw" placeholder="Minst 8 tegn" autocomplete="new-password" onkeydown="if(event.key==='Enter')doSetNewPw()"></div>
-        <div class="form-group"><label>Bekreft passord</label><input type="password" id="adminNewPw2" placeholder="Gjenta passord" autocomplete="new-password" onkeydown="if(event.key==='Enter')doSetNewPw()"></div>
+        <div class="form-group"><label for="adminNewPw">Nytt passord</label><input type="password" id="adminNewPw" placeholder="Minst 8 tegn" autocomplete="new-password" onkeydown="if(event.key==='Enter')doSetNewPw()"></div>
+        <div class="form-group"><label for="adminNewPw2">Bekreft passord</label><input type="password" id="adminNewPw2" placeholder="Gjenta passord" autocomplete="new-password" onkeydown="if(event.key==='Enter')doSetNewPw()"></div>
         <div id="adminSetPwErr" style="color:#e07060;font-size:12px;margin-bottom:0.75rem;display:none;padding:8px 12px;background:rgba(224,112,96,0.08);border-radius:8px;border:1px solid rgba(224,112,96,0.2);"></div>
         <button class="confirm-btn" onclick="doSetNewPw()" id="setPwBtn" style="width:100%;">Lagre nytt passord →</button>
       </div>
@@ -3197,7 +3197,7 @@ function renderPortal(){
         var badgeHtml=p.badge==='sale'?'<span style="background:rgba(212,120,105,0.25);border:1px solid rgba(212,120,105,0.5);border-radius:4px;padding:1px 6px;font-size:9px;color:#f0a898;font-weight:700;margin-left:5px;">TILBUD</span>':p.badge==='best'?'<span style="background:rgba(60,200,93,0.15);border:1px solid rgba(60,200,93,0.4);border-radius:4px;padding:1px 6px;font-size:9px;color:#4ae877;font-weight:700;margin-left:5px;">⭐ BEST</span>':'';
         content+='<div class="b2p-price-row" style="align-items:center;">'
           +'<div style="display:flex;align-items:center;gap:8px;flex:1;min-width:0;">'
-          +(p.img?'<img src="'+esc(p.img)+'" style="width:38px;height:38px;border-radius:8px;object-fit:cover;flex-shrink:0;">':'<div style="width:38px;height:38px;border-radius:8px;background:rgba(98,186,106,0.1);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">'+esc(p.emoji||'📦')+'</div>')
+          +(p.img?'<img src="'+esc(p.img)+'" alt="'+esc(p.name)+'" style="width:38px;height:38px;border-radius:8px;object-fit:cover;flex-shrink:0;">':'<div style="width:38px;height:38px;border-radius:8px;background:rgba(98,186,106,0.1);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">'+esc(p.emoji||'📦')+'</div>')
           +'<div style="min-width:0;"><div class="b2p-price-name" style="white-space:normal;">'+esc(p.name)+badgeHtml+'</div>'
           +'<div style="font-size:10px;color:#70c87b;">'+esc(p.brand)+'</div></div>'
           +'</div>'
@@ -5505,7 +5505,7 @@ function admEditP(id){
   var so=el('admPSort'); if(so) so.value=p.sort_order!=null?p.sort_order:0;
   var vis=el('admPVisible'); if(vis) vis.checked=p.visible!==false;
   var prev=el('admPImgPrev');
-  if(prev) prev.innerHTML=p.img?'<img src="'+p.img+'" style="width:64px;height:64px;border-radius:12px;object-fit:cover;">':'<span style="font-size:24px;">'+(p.emoji||'🖼')+'</span>';
+  if(prev) prev.innerHTML=p.img?'<img src="'+esc(p.img)+'" alt="'+esc(p.name||'')+'" style="width:64px;height:64px;border-radius:12px;object-fit:cover;">':'<span style="font-size:24px;">'+(p.emoji||'🖼')+'</span>';
   window._admEditImgUrl=p.img||null;
   var fi=el('admPImg'); if(fi) fi.value='';
   var form=el('admProdForm'); if(form){form.style.display='';form.scrollIntoView({behavior:'smooth',block:'nearest'});}
@@ -5515,7 +5515,7 @@ function admPImgPreview(ev){
   var reader=new FileReader();
   reader.onload=function(e){
     var prev=el('admPImgPrev');
-    if(prev) prev.innerHTML='<img src="'+e.target.result+'" style="width:56px;height:56px;border-radius:8px;object-fit:cover;border:1px solid #142a12;">';
+    if(prev) prev.innerHTML='<img src="'+e.target.result+'" alt="'+esc(file.name)+'" style="width:56px;height:56px;border-radius:8px;object-fit:cover;border:1px solid #142a12;">';
   };
   reader.readAsDataURL(file);
 }

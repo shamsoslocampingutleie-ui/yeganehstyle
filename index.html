@@ -2182,10 +2182,10 @@ function updateCartUI(){
   for(var i=0;i<cart.length;i++){
     var item=cart[i];
     html+='<div class="cart-item">'
-      +'<div class="cart-item-img">'+item.emoji+'</div>'
+      +'<div class="cart-item-img">'+esc(item.emoji)+'</div>'
       +'<div class="cart-item-info">'
-      +'<div class="cart-item-brand">'+item.brand+'</div>'
-      +'<div class="cart-item-name">'+item.name+'</div>'
+      +'<div class="cart-item-brand">'+esc(item.brand)+'</div>'
+      +'<div class="cart-item-name">'+esc(item.name)+'</div>'
       +'<div class="cart-item-row">'
       +'<div class="qty-ctrl">'
       +'<button class="qty-btn" onclick="changeQty(\''+item.id+'\',-1)">−</button>'
@@ -2486,13 +2486,13 @@ function openProduct(id){
   var stock=p.stock!=null?p.stock:20;
   var stockHtml=stock>0?'<span style="color:#70c87b">● På lager</span>':'<span style="color:#e07060">● Utsolgt</span>';
   var visual=p.img
-    ? '<div style="text-align:center;background:rgba(14,34,15,0.9);border-radius:14px;padding:0;margin-bottom:1.25rem;overflow:hidden"><img src="'+p.img+'" alt="'+p.name+'" style="width:100%;max-height:240px;object-fit:cover"></div>'
-    : '<div style="text-align:center;font-size:5rem;background:rgba(14,34,15,0.9);border-radius:14px;padding:2rem;margin-bottom:1.25rem">'+(p.emoji||'<span style="font-family:Cormorant Garamond,serif;color:var(--accent)">'+p.name.charAt(0)+'</span>')+'</div>';
+    ? '<div style="text-align:center;background:rgba(14,34,15,0.9);border-radius:14px;padding:0;margin-bottom:1.25rem;overflow:hidden"><img src="'+esc(p.img)+'" alt="'+esc(p.name)+'" style="width:100%;max-height:240px;object-fit:cover"></div>'
+    : '<div style="text-align:center;font-size:5rem;background:rgba(14,34,15,0.9);border-radius:14px;padding:2rem;margin-bottom:1.25rem">'+(p.emoji?esc(p.emoji):'<span style="font-family:Cormorant Garamond,serif;color:var(--accent)">'+esc(p.name.charAt(0))+'</span>')+'</div>';
   document.getElementById('productModalContent').innerHTML=
     visual
-    +'<p style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;font-weight:700">'+p.brand+'</p>'
-    +'<h2>'+p.name+'</h2>'
-    +'<p style="font-size:13px;color:var(--gray);margin:.5rem 0 .75rem">'+p.desc+'</p>'
+    +'<p style="font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;font-weight:700">'+esc(p.brand)+'</p>'
+    +'<h2>'+esc(p.name)+'</h2>'
+    +'<p style="font-size:13px;color:var(--gray);margin:.5rem 0 .75rem">'+esc(p.desc)+'</p>'
     +'<p style="font-size:11px;margin-bottom:1rem">'+stockHtml+'</p>'
     +'<div style="font-size:1.4rem;font-weight:700;margin-bottom:0.5rem">'+oldHtml+p.price+' kr'+saveHtml+'</div>'
     +'<p style="font-size:11px;color:var(--gray);margin-bottom:1.25rem">Gratis frakt over 499 kr · Levering 2–4 virkedager</p>'
@@ -3158,7 +3158,7 @@ function renderPortal(){
       +'</div>'
       +'<div style="margin-top:1.5rem;padding-top:1rem;border-top:1px solid rgba(98,186,106,0.1);">'
       +'<div style="font-size:11px;font-weight:700;color:#70c87b;margin-bottom:0.6rem;text-transform:uppercase;letter-spacing:0.08em;">Ordrehistorikk</div>';
-    var myOrders=(DATA.bookings||[]).filter(function(b){return b.phone&&acc.kontakt;}).slice(0,5);
+    var myOrders=(DATA.bookings||[]).filter(function(b){return acc.phone&&b.phone===acc.phone;}).slice(0,5);
     if(myOrders.length){
       myOrders.forEach(function(b){
         content+='<div style="display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid rgba(60,140,65,0.08);font-size:11px;color:#70c87b;">'
@@ -3989,7 +3989,7 @@ function viewKalender(){
     +'<button onclick="admSetHadiTab(\'aapningstider\')" style="'+subTabStyle('aapningstider')+'">🕐 Åpningstider</button>'
     +'</div>';
 
-  if(hadiTab==='aapningstider') return subTabs+_buildPersonScheduleView('Yeganeh','#40d461','Hadi');
+  if(hadiTab==='aapningstider') return subTabs+_buildPersonScheduleView('Hadi','#40d461');
 
   if(hadiTab==='tjenester'){
     admTreatTab='frisør';

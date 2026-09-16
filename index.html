@@ -614,25 +614,6 @@ a.contact-card:hover { border-color: var(--accent); }
 }
 .section-sub { font-size: 13px; color: var(--text-dim); line-height: 1.55; }
 
-/* ── PRODUCT TABS ── */
-.prod-tabs {
-  display: flex; gap: 0.4rem; flex-wrap: wrap;
-  margin: 1.1rem 0;
-}
-.prod-tab {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid var(--border);
-  border-radius: 18px; padding: 8px 16px;
-  font-size: 13px; color: var(--text-dim);
-  cursor: pointer; transition: all 0.2s; white-space: nowrap;
-}
-.prod-tab:hover { color: var(--text); border-color: var(--border-bright); }
-.prod-tab.active {
-  background: rgba(60,200,93,0.18);
-  border-color: rgba(80,212,102,0.55);
-  color: #60f090; font-weight: 600;
-}
-
 /* ── PRODUCT GRID ── */
 .product-grid {
   display: grid;
@@ -691,17 +672,6 @@ a.contact-card:hover { border-color: var(--accent); }
   -webkit-tap-highlight-color: transparent;
 }
 .add-btn:hover { background: rgba(80,200,100,0.28); border-color: rgba(80,200,100,0.65); }
-
-.see-all-row {
-  display: flex; align-items: center; justify-content: space-between;
-  padding-top: 0.9rem; border-top: 1px solid var(--border);
-}
-.see-all-btn {
-  background: none; border: none;
-  font-size: 12px; color: var(--gray);
-  text-decoration: underline; cursor: pointer;
-}
-.delivery-note { font-size: 11px; color: var(--muted); }
 
 /* ── SERVICE CATEGORY HEADERS ── */
 .svc-category {
@@ -1242,7 +1212,6 @@ nav { }
   .prod-name { font-size: 12px; margin: 3px 0 8px; }
   .prod-price { font-size: 13px; }
   .add-btn { padding: 6px 10px; font-size: 11px; border-radius: 14px; }
-  .see-all-row { padding-top: 0.75rem; }
 
   /* ── REVIEWS ── */
   .reviews-list { gap: 0.45rem; }
@@ -1334,9 +1303,9 @@ nav { }
         <svg class="chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <div class="nav-dropdown" role="menu">
-        <a role="menuitem" onclick="goTo('produkter');filterTab('alle',null)">Bestselgende</a>
-        <a role="menuitem" onclick="goTo('produkter');filterTab('shampoo',null)">Nyheter</a>
-        <a role="menuitem" onclick="goTo('produkter');filterTab('behandling',null)">Etter behandling</a>
+        <a role="menuitem" onclick="window.openProdOverlay('best')">Bestselgende</a>
+        <a role="menuitem" onclick="window.openProdOverlay('new')">Nyheter</a>
+        <a role="menuitem" onclick="window.openProdOverlay('behandling')">Etter behandling</a>
         <div class="dd-divider"></div>
         <a role="menuitem" onclick="window.openProdOverlay('sale')">Tilbud</a>
       </div>
@@ -2109,17 +2078,13 @@ var PRODUCTS = [
 ];
 window.PRODUCTS = PRODUCTS;
 
-var cart=[], showAll=false, activeFilter='alle';
+var cart=[];
 
 var today=new Date().toISOString().split('T')[0];
 document.getElementById('bookDate').min=today;
 document.getElementById('bookDate').value=today;
 renderProducts();
 
-function getVisible(){
-  var items=activeFilter==='alle'?PRODUCTS:PRODUCTS.filter(function(p){return p.cat===activeFilter;});
-  return showAll?items:items.slice(0,8);
-}
 function _prodCardHtml(p){
   var bHtml='';
   if(p.badge==='best') bHtml='<span class="prod-badge badge-best">Bestselger</span>';
@@ -2145,17 +2110,6 @@ function renderProducts(){
   if(!popular.length) popular=all.slice(0,4); // fallback: first 4
   var html=''; for(var i=0;i<popular.length;i++) html+=_prodCardHtml(popular[i]);
   grid.innerHTML=html;
-}
-function filterTab(cat,btn){
-  activeFilter=cat;showAll=false;
-  var tabs=document.querySelectorAll('.prod-tab');
-  for(var i=0;i<tabs.length;i++) tabs[i].classList.remove('active');
-  if(btn) btn.classList.add('active');
-  renderProducts();
-}
-function toggleAll(){
-  showAll=!showAll;renderProducts();
-  document.getElementById('seeAllBtn').textContent=showAll?'Vis færre':'Se hele sortimentet';
 }
 window.renderProducts=renderProducts;
 function addToCart(id,e){
@@ -2197,7 +2151,8 @@ function updateCartUI(){
   }
   iEl.innerHTML=html;
   var sum=0;for(var i=0;i<cart.length;i++) sum+=cart[i].price*cart[i].qty;
-  document.getElementById('cartTotal').textContent=sum+' kr';
+  var ship=sum>=499?0:59;
+  document.getElementById('cartTotal').textContent=(sum+ship)+' kr';
   // Free shipping progress (threshold 499 kr)
   var fpEl=document.getElementById('freeShipProgress');
   if(fpEl){
@@ -2212,7 +2167,7 @@ function updateCartUI(){
   }
   // Dynamic shipping line
   var shipEl=document.getElementById('cartShipping');
-  if(shipEl) shipEl.textContent=sum>=499?'Gratis':'59 kr';
+  if(shipEl) shipEl.textContent=ship===0?'Gratis':ship+' kr';
 }
 function changeQty(id,delta){
   var sid=String(id);
@@ -2749,7 +2704,6 @@ function closeModal(id){
 function overlayClick(e,id){if(e.target===document.getElementById(id))closeModal(id);}
 function openMenu(){document.getElementById('mobileMenu').classList.add('open');}
 function closeMenu(){document.getElementById('mobileMenu').classList.remove('open');}
-function goTo(id){var el=document.getElementById(id);if(el)el.scrollIntoView({behavior:'smooth'});}
 function showToast(msg){
   var t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
   setTimeout(function(){t.classList.remove('show');},2500);
@@ -5781,7 +5735,9 @@ if(window.renderNailsGrid) window.renderNailsGrid();
     conditioner:{icon:'🫧',name:'Conditioner'},
     behandling:{icon:'💆‍♀️',name:'Behandling'},
     styling:{icon:'🪮',name:'Styling'},
-    sale:   {icon:'🏷️',name:'Tilbud'}
+    sale:   {icon:'🏷️',name:'Tilbud'},
+    best:   {icon:'⭐',name:'Bestselgende'},
+    new:    {icon:'🆕',name:'Nyheter'}
   };
 
   window.openProdOverlay=function(startCat){
@@ -5838,7 +5794,7 @@ if(window.renderNailsGrid) window.renderNailsGrid();
     _setTitle(info.name);
     _setBack(true);
     var prods=window.PRODUCTS||[];
-    var items=cat==='alle'?prods:cat==='sale'?prods.filter(function(p){return p.badge==='sale';}):prods.filter(function(p){return p.cat===cat;});
+    var items=cat==='alle'?prods:(cat==='sale'||cat==='best'||cat==='new')?prods.filter(function(p){return p.badge===cat;}):prods.filter(function(p){return p.cat===cat;});
     var html='<div class="prod-ov-grid">';
     for(var i=0;i<items.length;i++) html+=_prodCardHtml(items[i]);
     html+='</div>';

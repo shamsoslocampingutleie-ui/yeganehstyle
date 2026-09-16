@@ -1683,98 +1683,6 @@ nav { }
 </footer>
 
 <!-- MODALS -->
-<div class="modal-overlay" id="bookingModal" onclick="overlayClick(event,'bookingModal')">
-  <div class="modal">
-    <div class="modal-handle"></div>
-    <button aria-label="Lukk" class="modal-close" onclick="closeModal('bookingModal')">✕</button>
-    <div id="bookingForm">
-      <h2>Book time</h2>
-      <div class="form-group"><label>Behandling</label>
-        <select id="serviceSelect">
-          <option value="">Velg behandling...</option>
-          <optgroup label="Klipp">
-            <option value="herreklipp_fra">Herreklipp fra – 499 kr</option>
-            <option value="dameklipp_full">Dameklipp fra – 699 kr</option>
-            <option value="herreklipp_skinfade">Herreklipp – skin fade fra – 629 kr</option>
-            <option value="herreklipp_sax">Herreklipp med sax fra – 629 kr</option>
-            <option value="dameklipp_vask">Dameklipp, vask, styling, føn fra – 919 kr</option>
-            <option value="barneklipp_gutt">Barneklipp (gutt) fra 6år – 449 kr</option>
-            <option value="barneklipp_jenter">Barneklipp (jenter) fra – 549 kr</option>
-            <option value="herreklipp_skjegg">Herreklipp og skjegg fra – 869 kr</option>
-            <option value="skinfade_skjegg">Skinfade og skjegg fra – 869 kr</option>
-            <option value="maskinklipp">Hel Maskinklipp fra – 359 kr</option>
-            <option value="vask_fohn">Vask og føhn fra – 399 kr</option>
-            <option value="pannelugg">Pannelugg fra – 349 kr</option>
-            <option value="hårvask">Hårvask fra – 199 kr</option>
-          </optgroup>
-          <optgroup label="Farge">
-            <option value="farge_ettervekst_pakke">Farge ettervekst pakke til 3cm – 1 990 kr</option>
-            <option value="farge_pakke_kort">Farge pakke kort – 2 590 kr</option>
-            <option value="farge_pakke_halvlangt">Farge pakke halvlangt – 2 990 kr</option>
-            <option value="farge_pakke_langt">Farge pakke langt hår – 3 690 kr</option>
-            <option value="farge_pakke_ekstra">Farge pakke ekstra langt – 4 290 kr</option>
-            <option value="bare_farge_ettervekst">Bare farge ettervekst fra – 1 490 kr</option>
-            <option value="bare_farge">Bare farge fra – 1 790 kr</option>
-          </optgroup>
-          <optgroup label="Multicolor / Striper">
-            <option value="striper_fra">Striper fra (bare striper) – 1 990 kr</option>
-            <option value="striper_kort_30">Striper pakke kort hår til 30cm – 2 990 kr</option>
-            <option value="striper_kort_hetta">Striper pakke kort hår hetta – 2 490 kr</option>
-            <option value="striper_halvlangt">Striper pakke halvlangt hår – 2 990 kr</option>
-            <option value="striper_langt">Striper pakke langt hår – 3 590 kr</option>
-            <option value="striper_ekstra_langt">Striper pakke extra langt hår – 4 990 kr</option>
-            <option value="balayage">Balayage fra – 3 490 kr</option>
-          </optgroup>
-          <optgroup label="Vipper / Bryn">
-            <option value="bryn_farge_forming">Farge og forming av bryn – 399 kr</option>
-          </optgroup>
-          <optgroup label="Hårextention og permanent">
-            <option value="permanent_kort">Permanent og klipp (kort) fra – 1 990 kr</option>
-            <option value="permanent_mellom">Permanent og klipp (mellomlangt) fra – 2 490 kr</option>
-          </optgroup>
-          <optgroup label="Skjegg">
-            <option value="skjeggtrim">Skjeggtrim fra – 449 kr</option>
-          </optgroup>
-          <optgroup label="Annen hårbehandling">
-            <option value="keratin_mellom">Keratine mellomlangt hår fra – 2 990 kr</option>
-            <option value="keratin_langt">Keratin behandling langt hår fra – 4 990 kr</option>
-            <option value="hårkur">Hårkur fra – 399 kr</option>
-          </optgroup>
-          <optgroup label="MH Nails – Neglepleie">
-            <option value="gelenegler">Gelénegler fra – 599 kr</option>
-            <option value="negledesign">Negledesign fra – 699 kr</option>
-            <option value="manikyr">Manikyr fra – 449 kr</option>
-            <option value="gelefjerning">Fjerning av gelé fra – 249 kr</option>
-          </optgroup>
-        </select>
-      </div>
-      <div class="form-row date-time">
-        <div class="form-group"><label for="bookDate">Dato</label><input type="date" id="bookDate"></div>
-        <div class="form-group"><label>Tid</label>
-          <select id="bookTime">
-            <option>09:00</option><option>09:30</option><option>10:00</option>
-            <option>10:30</option><option>11:00</option><option>11:30</option>
-            <option>12:00</option><option>13:00</option><option>14:00</option>
-            <option>15:00</option><option>15:30</option><option>16:00</option>
-          </select>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label for="bookFornavn">Fornavn</label><input type="text" id="bookFornavn" placeholder="Ola"></div>
-        <div class="form-group"><label for="bookEtternavn">Etternavn</label><input type="text" id="bookEtternavn" placeholder="Nordmann"></div>
-      </div>
-      <div class="form-group"><label for="bookTlf">Telefon</label><input type="tel" id="bookTlf" placeholder="+47 000 00 000"></div>
-      <div class="form-group"><label for="bookEmail">E-post</label><input type="email" id="bookEmail" placeholder="din@epost.no"></div>
-      <button class="confirm-btn" onclick="confirmBooking()">Bekreft bestilling</button>
-    </div>
-    <div class="success-msg" id="bookingSuccess">
-      <div class="success-icon" style="color:#70c87b;font-size:2rem;">&check;</div>
-      <h3>Booking bekreftet!</h3>
-      <p>Vi gleder oss til å se deg. Bekreftelse sendt til din telefon.</p>
-    </div>
-  </div>
-</div>
-
 <div class="modal-overlay" id="productModal" onclick="overlayClick(event,'productModal')">
   <div class="modal">
     <div class="modal-handle"></div>
@@ -2080,9 +1988,6 @@ window.PRODUCTS = PRODUCTS;
 
 var cart=[];
 
-var today=new Date().toISOString().split('T')[0];
-document.getElementById('bookDate').min=today;
-document.getElementById('bookDate').value=today;
 renderProducts();
 
 function _prodCardHtml(p){
@@ -2455,10 +2360,7 @@ function openProduct(id){
   openModal('productModal');
 }
 function openBooking(){
-  if(window.openTimma){ window.openTimma(); return; }
-  document.getElementById('bookingForm').style.display='block';
-  document.getElementById('bookingSuccess').classList.remove('show');
-  openModal('bookingModal');
+  window.open('https://timma.no/salong/yeganeh-style-as','_blank','noopener');
 }
 function renderNailsGrid(){
   var g=document.getElementById('nailsGrid'); if(!g) return;
@@ -2475,43 +2377,7 @@ function renderNailsGrid(){
       +'</div>';
   }).join('');
 }
-function openService(svc){
-  if(window.openTimma){window.openTimma();return;}
-  openModal('bookingModal');
-  setTimeout(function(){var s=document.getElementById('serviceSelect');if(s)s.value=svc;},50);
-}
-function confirmBooking(){
-  var sel=document.getElementById('serviceSelect');
-  if(!sel.value){showToast('Velg en behandling');return;}
-  var fornavn=(document.getElementById('bookFornavn').value||'').trim();
-  var etternavn=(document.getElementById('bookEtternavn').value||'').trim();
-  var tlf=(document.getElementById('bookTlf').value||'').trim();
-  var epost=(document.getElementById('bookEmail').value||'').trim();
-  if(!fornavn){showToast('Fyll inn fornavn');return;}
-  if(!tlf){showToast('Fyll inn telefon');return;}
-  var svcText=sel.options[sel.selectedIndex].text;
-  var svcName=svcText.split(' – ')[0];
-  var svcPrice=svcText.indexOf(' – ')>-1?svcText.split(' – ')[1]:'';
-  var dato=document.getElementById('bookDate').value;
-  var datoFmt=dato?dato.split('-').reverse().join('.'):'';
-  var bookingData={
-    customer_name:(fornavn+' '+etternavn).trim(),
-    phone:tlf,email:epost||null,service:svcName,service_price:svcPrice,
-    booking_date:dato,
-    booking_time:document.getElementById('bookTime').value,
-    status:'ny'
-  };
-  if(sb) sb.from('bookings').insert(bookingData).then(function(){});
-  if(window.ADMIN_ADD_BOOKING){
-    window.ADMIN_ADD_BOOKING({
-      customer:bookingData.customer_name,phone:tlf,email:epost,
-      service:svcName,price:svcPrice,date:datoFmt,
-      time:document.getElementById('bookTime').value
-    });
-  }
-  document.getElementById('bookingForm').style.display='none';
-  document.getElementById('bookingSuccess').classList.add('show');
-}
+function openService(svc){ openBooking(); }
 function openB2B(){if(window.openB2BPortalFn)window.openB2BPortalFn();}
 var INFO={
   personvern:'<h2>Personvern</h2><p style="color:var(--gray);font-size:13px;line-height:1.8;margin-top:1rem">Yeganeh Style AS behandler personopplysninger i samsvar med GDPR. Vi samler kun inn nødvendig informasjon for å gjennomføre bookinger og ordrer.</p>',
@@ -2521,7 +2387,6 @@ var INFO={
 };
 function openInfo(key){document.getElementById('infoContent').innerHTML=INFO[key]||'';openModal('infoModal');}
 function openContact(){openModal('contactModal');}
-function openBookingWithService(svc){openModal('bookingModal');var sel=document.getElementById('serviceSelect');if(sel){for(var i=0;i<sel.options.length;i++){if(sel.options[i].value===svc){sel.selectedIndex=i;break;}}}}
 
 
 // ── REVIEWS ──
@@ -5111,15 +4976,6 @@ window.ADMIN_ADD_ORDER=function(o){
     date:now.toLocaleDateString('no-NO'),
     customer:o.customer,phone:o.phone,email:o.email,address:o.address,
     items:o.items,total:o.total,status:'ny',payment:o.payment
-  });
-};
-window.ADMIN_ADD_BOOKING=function(b){
-  DATA.bookings.unshift({
-    id:'#B'+(DATA.bookings.length+30),
-    date:b.date||'-',time:b.time||'-',
-    customer:b.customer,phone:b.phone,
-    service:b.service,price:b.price||'-',
-    status:'ny'
   });
 };
 window.admRevOk=function(i){

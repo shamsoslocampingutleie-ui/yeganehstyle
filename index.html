@@ -925,6 +925,9 @@ input[type="date"] {
   border-left: 1px solid var(--border);
 }
 .cart-panel.open { transform: translateX(0); }
+@media (max-width: 480px) {
+  .cart-panel { width: 100vw; border-left: none; }
+}
 .cart-header {
   padding: 1.25rem; border-bottom: 1px solid var(--border);
   display: flex; align-items: center; justify-content: space-between;
@@ -1660,8 +1663,8 @@ nav { }
   <div class="footer-grid" style="grid-template-columns:repeat(2,1fr);">
     <div class="footer-col">
       <h4>Tjenester</h4>
-      <a onclick="openBooking()">✂ Frisør – Hadi</a>
-      <a onclick="openTimma()">💅 MH Nails – Neglepleie</a>
+      <a onclick="openBooking()">Frisør – Hadi</a>
+      <a onclick="openTimma()">MH Nails – Neglepleie</a>
     </div>
   </div>
   <div class="footer-bottom">
@@ -1921,6 +1924,7 @@ var currentUser=null;
 window._onSbLoad=function(){
   try{ sb=supabase.createClient(SB_URL,SB_KEY); window.sb=sb; }
   catch(e){ console.warn('Supabase init failed',e); return; }
+  if(window._refreshSiteBanner) window._refreshSiteBanner();
 
   sb.auth.getSession().then(function(res){
     if(res.data&&res.data.session){ currentUser=res.data.session.user; }
@@ -3204,25 +3208,38 @@ window.b2bDoRegister=async function(){
   if(!email||!email.includes('@')){showE('b2rErr','Fyll inn gyldig e-postadresse.');return;}
   if(pass.length<8){showE('b2rErr','Passordet må ha minst 8 tegn.');return;}
   if(pass!==pass2){showE('b2rErr','Passordene stemmer ikke overens.');return;}
+  var refill=function(){
+    var e;
+    if(e=document.getElementById('b2rOrg'))e.value=org;
+    if(e=document.getElementById('b2rFirma'))e.value=firma;
+    if(e=document.getElementById('b2rKontakt'))e.value=kontakt;
+    if(e=document.getElementById('b2rPhone'))e.value=phone;
+    if(e=document.getElementById('b2rEmail'))e.value=email;
+  };
   var brreg=BST.brreg;
   if(!brreg||brreg.organisasjonsnummer.toString()!==org){
     showSpin('Verifiserer org.nr...');
     brreg=await brregLookup(org);
-    if(!brreg){BST.tab='register';renderAuth();showE('b2rErr','Org.nr ikke funnet. Klikk "Sjekk →" for å bekrefte.');return;}
+    if(!brreg){BST.tab='register';renderAuth();refill();showE('b2rErr','Org.nr ikke funnet. Klikk "Sjekk →" for å bekrefte.');return;}
     BST.brreg=brreg;
   }
-  if(brreg.konkurs||brreg.underAvvikling){BST.tab='register';renderAuth();showE('b2rErr','Selskapet er under konkurs/avvikling og kan ikke opprette bedriftskonto.');return;}
+  if(brreg.konkurs||brreg.underAvvikling){BST.tab='register';renderAuth();refill();showE('b2rErr','Selskapet er under konkurs/avvikling og kan ikke opprette bedriftskonto.');return;}
   var sc=smartCheck({firma:firma,email:email,phone:phone},brreg);
-  if(!window.sb){BST.tab='register';renderAuth();showE('b2rErr','Tilkoblingsfeil. Prøv igjen.');return;}
+  if(!window.sb){BST.tab='register';renderAuth();refill();showE('b2rErr','Tilkoblingsfeil. Prøv igjen.');return;}
   showSpin('Oppretter konto...');
   var r=await window.sb.auth.signUp({
     email:email,password:pass,
     options:{data:{role:'b2b',firma:firma,org_nr:org,kontakt:kontakt,phone:phone,status:'pending',brreg_navn:brreg.navn,flagged:sc.flagged,flag_reasons:sc.reasons.join('; ')}}
   });
   if(r.error){
-    BST.tab='register';renderAuth();
+    BST.tab='register';renderAuth();refill();
     var m=r.error.message||'';
-    showE('b2rErr',m.toLowerCase().includes('already')||m.toLowerCase().includes('registered')?'Denne e-postadressen er allerede registrert. Logg inn i stedet.':'Registrering feilet: '+m);
+    var ml=m.toLowerCase();
+    var friendly=ml.includes('already')||ml.includes('registered')?'Denne e-postadressen er allerede registrert. Logg inn i stedet.'
+      :ml.includes('rate limit')?'For mange registreringsforsøk akkurat nå. Vent noen minutter og prøv igjen.'
+      :ml.includes('invalid')&&ml.includes('email')?'E-postadressen er ikke gyldig. Sjekk at den er stavet riktig.'
+      :'Registrering feilet: '+m;
+    showE('b2rErr',friendly);
     return;
   }
   window.sb.from('b2b_applications').insert({firma:firma,org_nr:org,kontakt:kontakt,email:email,phone:phone,status:'pending',discount:0,brreg_data:brreg,brreg_navn:brreg.navn,flagged:sc.flagged,flag_reason:sc.reasons.join('; ')}).then(function(){});
@@ -4728,6 +4745,11 @@ function _admLoad(){
     s.from('schedule_blocks').select('*').order('date').then(function(res){
       if(res.data) DATA.blocks=res.data.map(function(r){return{date:r.date,note:r.note||''};});
     },function(){});
+    s.from('site_content').select('*').eq('id',1).maybeSingle().then(function(res){
+      if(res.data&&res.data.data){
+        try{localStorage.setItem(INNHOLD_LS,JSON.stringify(res.data.data));}catch(e){}
+      }
+    },function(){});
   }
 }
 
@@ -5141,7 +5163,12 @@ window.admNewBooking=function(){
 };
 
 // ── OPENING HOURS ACTIONS ──
-window.admOhToggle=function(day,open){DATA.openingHours[day].open=open;go('apningstider');};
+window.admOhToggle=function(day,open){
+  var oh=DATA.openingHours[day];
+  oh.open=open;
+  if(open){ if(!oh.from) oh.from='09:00'; if(!oh.to) oh.to='18:00'; }
+  go('apningstider');
+};
 window.admOhFrom=function(day,val){DATA.openingHours[day].from=val;};
 window.admOhTo=function(day,val){DATA.openingHours[day].to=val;};
 window.admSaveOh=function(){_admPersist();if(window.showToast)window.showToast('Åpningstider lagret ✓');};
@@ -5178,7 +5205,8 @@ window.admSaveEmp=function(){
     sch[k]=(cb&&cb.checked&&fr&&to)?fr.value+'-'+to.value:'Stengt';
   });
   var colors=['#5ab85e','#60a8da','#4ae877','#c97d6e','#b48ac9'];
-  var emp={id:Date.now(),name:name,role:el('admEmpRole').value.trim()||'Frisør',phone:el('admEmpPhone').value.trim(),color:colors[DATA.employees.length%colors.length],schedule:sch};
+  var prev=editEmpId!==null?DATA.employees[editEmpId]:{};
+  var emp={id:prev.id||Date.now(),name:name,role:el('admEmpRole').value.trim()||'Frisør',phone:el('admEmpPhone').value.trim(),color:prev.color||colors[DATA.employees.length%colors.length],schedule:sch,active:prev.active!==false,sort_order:prev.sort_order||0};
   if(editEmpId!==null)DATA.employees[editEmpId]=emp;else DATA.employees.push(emp);
   editEmpId=null;_admPersist();go('ansatte');if(window.showToast)window.showToast('Ansatt lagret ✓');
 };
@@ -5532,7 +5560,10 @@ function admLabel(id){
 // ── INNHOLD EDITOR ──
 var INNHOLD_LS='ys_innhold_v2';
 function loadIC(){try{return JSON.parse(localStorage.getItem(INNHOLD_LS)||'{}');}catch(e){return{};}}
-function saveIC(d){try{localStorage.setItem(INNHOLD_LS,JSON.stringify(d));}catch(e){}}
+function saveIC(d){
+  try{localStorage.setItem(INNHOLD_LS,JSON.stringify(d));}catch(e){}
+  if(window.sb) window.sb.from('site_content').upsert({id:1,data:d},{onConflict:'id'}).then(function(){},function(){});
+}
 
 function viewInnhold(){
   var d=loadIC();
@@ -6053,10 +6084,10 @@ if(window.renderNailsGrid) window.renderNailsGrid();
 
 // Apply banner on page load
 (function(){
-  try{
-    var d=JSON.parse(localStorage.getItem('ys_innhold_v2')||'{}');
-    var b=document.getElementById('siteBanner');
-    if(!b)return;
+  var b=document.getElementById('siteBanner');
+  if(!b)return;
+  function render(d){
+    b.style.display='none';
     // Viktig beskjed har prioritet over kampanjebanner
     if(d.beskjedTekst){
       var typeColors={info:{bg:'#5ab85e',fg:'#070c06'},ferie:{bg:'#2d6a4f',fg:'#d8f3dc'},sykdom:{bg:'#9b2335',fg:'#ffe0e3'},viktig:{bg:'#7d4a00',fg:'#fff3cd'}};
@@ -6067,9 +6098,22 @@ if(window.renderNailsGrid) window.renderNailsGrid();
       b.style.display='';
     } else if(d.bannerAktiv==='1'&&d.bannerTekst){
       b.textContent=d.bannerTekst;
+      b.style.background='';
+      b.style.color='';
       b.style.display='';
     }
-  }catch(e){}
+  }
+  try{render(JSON.parse(localStorage.getItem('ys_innhold_v2')||'{}'));}catch(e){}
+  window._refreshSiteBanner=function(){
+    if(!window.sb) return;
+    window.sb.from('site_content').select('*').eq('id',1).maybeSingle().then(function(res){
+      if(res.data&&res.data.data){
+        try{localStorage.setItem('ys_innhold_v2',JSON.stringify(res.data.data));}catch(e){}
+        render(res.data.data);
+      }
+    },function(){});
+  };
+  window._refreshSiteBanner();
 })();
 })();
 </script>

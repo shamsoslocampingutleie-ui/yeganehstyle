@@ -3428,7 +3428,6 @@ var TABS=[
   {id:'oversikt',label:'Oversikt'},
   {id:'ordre',label:'Bestillinger'},
   {id:'produkter',label:'Produkter'},
-  {id:'kalender',label:'✂ Hadi'},
   {id:'nails',label:'💅 MH Nails'},
   {id:'ansatte',label:'Ansatte'},
   {id:'apningstider',label:'Åpningstider'},
@@ -3540,7 +3539,7 @@ function viewOversikt(){
   var rows='';
   for(i=0;i<Math.min(4,DATA.orders.length);i++){
     var o=DATA.orders[i];
-    rows+='<tr><td style="padding:8px 10px;border-bottom:1px solid #142a1255;"><b>'+o.id+'</b></td><td style="padding:8px 10px;border-bottom:1px solid #142a1255;">'+o.customer+'</td><td style="padding:8px 10px;border-bottom:1px solid #142a1255;">'+o.total+' kr</td><td style="padding:8px 10px;border-bottom:1px solid #142a1255;">'+badge(o.status)+'</td></tr>';
+    rows+='<tr><td style="padding:8px 10px;border-bottom:1px solid #142a1255;"><b>'+esc(o.id)+'</b></td><td style="padding:8px 10px;border-bottom:1px solid #142a1255;">'+esc(o.customer)+'</td><td style="padding:8px 10px;border-bottom:1px solid #142a1255;">'+esc(o.total)+' kr</td><td style="padding:8px 10px;border-bottom:1px solid #142a1255;">'+badge(o.status)+'</td></tr>';
   }
   return '<div style="display:grid;grid-template-columns:1fr 1fr;gap:0.6rem;margin-bottom:1rem;">'
     +stat('I dag','2 448 kr','#75b070')
@@ -3568,9 +3567,9 @@ function viewOrdre(){
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem;">'
       +'<div><b style="font-size:14px;color:#a8e4ae;">'+o.id+'</b> <span style="font-size:11px;color:#70c87b;">'+o.date+'</span></div>'
       +badge(o.status)+'</div>'
-      +'<div style="font-size:13px;color:#a8e4ae;margin-bottom:2px;"><b>'+o.customer+'</b></div>'
-      +'<div style="font-size:11px;color:#70c87b;margin-bottom:0.5rem;">'+o.phone+' &middot; '+o.email+'<br>'+o.address+'</div>'
-      +'<div style="font-size:12px;color:#75b070;background:#08180a;border-radius:8px;padding:0.5rem 0.7rem;margin-bottom:0.6rem;">'+o.items+'</div>'
+      +'<div style="font-size:13px;color:#a8e4ae;margin-bottom:2px;"><b>'+esc(o.customer)+'</b></div>'
+      +'<div style="font-size:11px;color:#70c87b;margin-bottom:0.5rem;">'+esc(o.phone)+' &middot; '+esc(o.email)+'<br>'+esc(o.address)+'</div>'
+      +'<div style="font-size:12px;color:#75b070;background:#08180a;border-radius:8px;padding:0.5rem 0.7rem;margin-bottom:0.6rem;">'+esc(o.items)+'</div>'
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem;">'
       +'<span style="font-size:11px;color:#70c87b;">'+o.payment+'</span>'
       +'<b style="font-size:15px;color:#a8e4ae;">'+o.total+' kr</b></div>'
@@ -3592,10 +3591,10 @@ function viewTimer(){
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">'
       +'<div><b style="font-size:15px;color:#a8e4ae;">'+b.time+'</b> <span style="font-size:11px;color:#70c87b;">'+b.date+'</span></div>'
       +badge(b.status)+'</div>'
-      +'<div style="font-size:13px;color:#a8e4ae;"><b>'+b.customer+'</b> <span style="font-size:11px;color:#70c87b;">'+b.phone+'</span></div>'
+      +'<div style="font-size:13px;color:#a8e4ae;"><b>'+esc(b.customer)+'</b> <span style="font-size:11px;color:#70c87b;">'+esc(b.phone)+'</span></div>'
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin:0.4rem 0 0.6rem;">'
-      +'<span style="font-size:12px;color:#75b070;">'+b.service+'</span>'
-      +'<b style="font-size:13px;color:#5ab85e;">'+b.price+'</b></div>'
+      +'<span style="font-size:12px;color:#75b070;">'+esc(b.service)+'</span>'
+      +'<b style="font-size:13px;color:#5ab85e;">'+esc(b.price)+'</b></div>'
       +'<div style="display:flex;flex-wrap:wrap;gap:2px;">'+actions+'</div>'
       +'</div>';
   }
@@ -3720,8 +3719,8 @@ function _buildVarselBanner(filterFn,accentCol,name){
     return '<div style="display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid rgba(80,200,100,0.1);">'
       +(isNy?'<span style="width:6px;height:6px;border-radius:50%;background:#c0392b;flex-shrink:0;"></span>':'<span style="width:6px;height:6px;border-radius:50%;background:'+accentCol+';opacity:0.4;flex-shrink:0;"></span>')
       +'<div style="flex:1;min-width:0;">'
-      +'<span style="font-size:13px;font-weight:600;color:#c0f0c8;">'+b.customer+'</span>'
-      +'<span style="font-size:11px;color:#70c87b;margin-left:8px;">'+b.service+'</span>'
+      +'<span style="font-size:13px;font-weight:600;color:#c0f0c8;">'+esc(b.customer)+'</span>'
+      +'<span style="font-size:11px;color:#70c87b;margin-left:8px;">'+esc(b.service)+'</span>'
       +'</div>'
       +'<div style="text-align:right;flex-shrink:0;">'
       +'<div style="font-size:12px;color:'+accentCol+';font-weight:600;">'+b.date.replace(/\d{4}-/,'').replace('-','.')+' · '+b.time+'</div>'
@@ -4370,20 +4369,20 @@ function viewBedriftskunder(){
       var isFlag=r.flagged;
       html+='<div style="background:#121a10;border:1px solid '+(isFlag?'#4ae87755':'#4ae87733')+';border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
         +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.5rem;">'
-        +'<div><b style="font-size:14px;color:#a8e4ae;">'+r.firma+'</b>'+(r.org?'<span style="font-size:10px;color:#70c87b;margin-left:8px;">org.'+r.org+'</span>':'')+'</div>'
+        +'<div><b style="font-size:14px;color:#a8e4ae;">'+esc(r.firma)+'</b>'+(r.org?'<span style="font-size:10px;color:#70c87b;margin-left:8px;">org.'+esc(r.org)+'</span>':'')+'</div>'
         +'<div style="display:flex;gap:4px;align-items:center;">'+(isFlag?'<span style="font-size:9px;background:#4ae87722;border:1px solid #4ae87755;border-radius:6px;padding:2px 7px;color:#4ae877;">⚠ Flagget</span>':'')+badge('ny')+'</div>'
         +'</div>'
-        +(isFlag?'<div style="font-size:11px;background:rgba(74,232,119,0.07);border:1px solid rgba(74,232,119,0.2);border-radius:8px;padding:7px 10px;margin-bottom:0.6rem;color:#4ab85d;">'+r.flag_reason+'</div>':'')
+        +(isFlag?'<div style="font-size:11px;background:rgba(74,232,119,0.07);border:1px solid rgba(74,232,119,0.2);border-radius:8px;padding:7px 10px;margin-bottom:0.6rem;color:#4ab85d;">'+esc(r.flag_reason)+'</div>':'')
         +'<div style="font-size:11px;color:#70c87b;line-height:1.8;">'
-        +(r.brreg_navn&&r.brreg_navn!==r.firma?'Registrert navn: <b style="color:#75b070;">'+r.brreg_navn+'</b><br>':'')
-        +(r.kontakt?'Kontaktperson: '+r.kontakt+'<br>':'')
-        +(r.tlf?'Tlf: <a href="tel:'+r.tlf+'" style="color:#70c87b;">'+r.tlf+'</a><br>':'')
-        +(r.epost?'E-post: <a href="mailto:'+r.epost+'" style="color:#5ab85e;">'+r.epost+'</a><br>':'')
-        +'Mottatt: '+r.dato+'</div>'
+        +(r.brreg_navn&&r.brreg_navn!==r.firma?'Registrert navn: <b style="color:#75b070;">'+esc(r.brreg_navn)+'</b><br>':'')
+        +(r.kontakt?'Kontaktperson: '+esc(r.kontakt)+'<br>':'')
+        +(r.tlf?'Tlf: <a href="tel:'+esc(r.tlf)+'" style="color:#70c87b;">'+esc(r.tlf)+'</a><br>':'')
+        +(r.epost?'E-post: <a href="mailto:'+esc(r.epost)+'" style="color:#5ab85e;">'+esc(r.epost)+'</a><br>':'')
+        +'Mottatt: '+esc(r.dato)+'</div>'
         +'<div style="display:flex;gap:4px;margin-top:0.6rem;flex-wrap:wrap;">'
         +btn('✓ Godkjenn','admB2bApprove('+i+')','#5bc05a')
         +btn('✕ Avvis','admB2bReject('+i+')','#c0392b')
-        +(r.epost?btn('✉ E-post',"window.location.href='mailto:"+r.epost+"'",'#2980b9'):'')
+        +(r.epost?'<a href="mailto:'+esc(r.epost)+'" style="display:inline-block;padding:5px 10px;border-radius:12px;font-size:11px;font-weight:600;cursor:pointer;background:#2980b922;border:1px solid #2980b955;color:#2980b9;margin:1px;text-decoration:none;">✉ E-post</a>':'')
         +'</div></div>';
     });
   }
@@ -4394,21 +4393,21 @@ function viewBedriftskunder(){
     clients.forEach(function(c,j){
       html+='<div style="background:#121a10;border:1px solid '+(c.active?'#142a12':'#c0392b33')+';border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
         +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.5rem;">'
-        +'<div><b style="font-size:14px;color:#a8e4ae;">'+c.firma+'</b>'+(c.org?'<span style="font-size:10px;color:#70c87b;margin-left:8px;">org.'+c.org+'</span>':'')+'</div>'
+        +'<div><b style="font-size:14px;color:#a8e4ae;">'+esc(c.firma)+'</b>'+(c.org?'<span style="font-size:10px;color:#70c87b;margin-left:8px;">org.'+esc(c.org)+'</span>':'')+'</div>'
         +badge(c.active?'godkjent':'sperret')+'</div>'
         +'<div style="font-size:11px;color:#70c87b;line-height:1.8;">'
-        +(c.kontakt?'Kontaktperson: '+c.kontakt+'<br>':'')
-        +(c.tlf?'Tlf: <a href="tel:'+c.tlf+'" style="color:#70c87b;">'+c.tlf+'</a><br>':'')
-        +(c.epost?'E-post: <a href="mailto:'+c.epost+'" style="color:#5ab85e;">'+c.epost+'</a><br>':'')
+        +(c.kontakt?'Kontaktperson: '+esc(c.kontakt)+'<br>':'')
+        +(c.tlf?'Tlf: <a href="tel:'+esc(c.tlf)+'" style="color:#70c87b;">'+esc(c.tlf)+'</a><br>':'')
+        +(c.epost?'E-post: <a href="mailto:'+esc(c.epost)+'" style="color:#5ab85e;">'+esc(c.epost)+'</a><br>':'')
         +(c.discount?(function(){var trs=[{p:25,l:'👑 Elite'},{p:20,l:'💎 Platinum'},{p:15,l:'🥇 Gold'},{p:10,l:'🥈 Silver'},{p:5,l:'🥉 Bronze'}];var tl='';for(var x=0;x<trs.length;x++){if(c.discount>=trs[x].p){tl=trs[x].l;break;}}return '<b style="color:#4ae877;">'+tl+' · '+c.discount+'% rabatt</b><br>';})():'Ingen rabatt satt<br>')
         +(c.offer_status==='pending_offer'?'<b style="color:#c97d6e;">📩 Ønsker pristilbud!</b><br>':'')
         +(c.offer_status==='offer_sent'?'<b style="color:#5ab85e;">📬 Tilbud sendt ('+c.offer_discount+'%)</b><br>':'')
         +(c.offer_status==='offer_accepted'?'<b style="color:#5bc05a;">✓ Tilbud akseptert</b><br>':'')
-        +'Godkjent: '+(c.approvedDate||'-')+'</div>'
+        +'Godkjent: '+esc(c.approvedDate||'-')+'</div>'
         +'<div style="display:flex;gap:4px;margin-top:0.6rem;flex-wrap:wrap;">'
         +(c.offer_status==='pending_offer'?btn('📩 Send tilbud','admB2bSendOffer('+j+')','#c97d6e'):btn('% Rabatt','admB2bDiscount('+j+')','#4ae877'))
         +(c.active?btn('Sperre','admB2bSuspend('+j+')','#c0392b'):btn('Aktiver','admB2bToggle('+j+')','#5bc05a'))
-        +(c.epost?btn('✉ E-post',"window.location.href='mailto:"+c.epost+"'",'#2980b9'):'')
+        +(c.epost?'<a href="mailto:'+esc(c.epost)+'" style="display:inline-block;padding:5px 10px;border-radius:12px;font-size:11px;font-weight:600;cursor:pointer;background:#2980b922;border:1px solid #2980b955;color:#2980b9;margin:1px;text-decoration:none;">✉ E-post</a>':'')
         +btn('Slett','admB2bDel('+j+')','#c0392b')
         +'</div></div>';
     });
@@ -4429,16 +4428,16 @@ function viewForesporsler(){
     var r=reqs[i];
     html+='<div style="background:#121a10;border:1px solid #142a12;border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">'
-      +'<b style="font-size:14px;color:#a8e4ae;">'+r.firma+'</b>'+badge(r.status)+'</div>'
+      +'<b style="font-size:14px;color:#a8e4ae;">'+esc(r.firma)+'</b>'+badge(r.status)+'</div>'
       +'<div style="font-size:11px;color:#70c87b;line-height:1.6;">'
-      +(r.org?'Org.nr: '+r.org+'<br>':'')
-      +(r.kontakt?'Kontakt: '+r.kontakt+'<br>':'')
-      +(r.tlf?'Tlf: '+r.tlf+'<br>':'')
-      +(r.epost?'E-post: '+r.epost+'<br>':'')
-      +'Mottatt: '+r.dato+'</div>'
+      +(r.org?'Org.nr: '+esc(r.org)+'<br>':'')
+      +(r.kontakt?'Kontakt: '+esc(r.kontakt)+'<br>':'')
+      +(r.tlf?'Tlf: '+esc(r.tlf)+'<br>':'')
+      +(r.epost?'E-post: '+esc(r.epost)+'<br>':'')
+      +'Mottatt: '+esc(r.dato)+'</div>'
       +'<div style="display:flex;gap:3px;margin-top:0.6rem;flex-wrap:wrap;">'
       +(r.status==='ny'?btn('Marker behandlet','admReqDone('+i+')'):'')
-      +(r.epost?btn('Send e-post',"window.location.href='mailto:"+r.epost+"'",'#2980b9'):'')
+      +(r.epost?'<a href="mailto:'+esc(r.epost)+'" style="display:inline-block;padding:5px 10px;border-radius:12px;font-size:11px;font-weight:600;cursor:pointer;background:#2980b922;border:1px solid #2980b955;color:#2980b9;margin:1px;text-decoration:none;">Send e-post</a>':'')
       +btn('Slett','admReqDel('+i+')','#c0392b')
       +'</div></div>';
   }
@@ -4593,10 +4592,10 @@ function viewRetur(){
     else act='<span style="font-size:11px;color:#5bc05a;">Refundert '+r.amount+' kr</span>';
     html+='<div style="background:#121a10;border:1px solid #142a12;border-radius:14px;padding:1rem;margin-bottom:0.75rem;">'
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">'
-      +'<b style="font-size:14px;color:#a8e4ae;">'+r.id+'</b>'+badge(r.status)+'</div>'
-      +'<div style="font-size:13px;color:#a8e4ae;margin-bottom:2px;"><b>'+r.customer+'</b></div>'
-      +'<div style="font-size:12px;color:#75b070;margin-bottom:0.3rem;">'+r.product+' &middot; <b>'+r.amount+' kr</b></div>'
-      +'<div style="font-size:11px;color:#70c87b;margin-bottom:0.6rem;">Aarsak: '+r.reason+'</div>'
+      +'<b style="font-size:14px;color:#a8e4ae;">'+esc(r.id)+'</b>'+badge(r.status)+'</div>'
+      +'<div style="font-size:13px;color:#a8e4ae;margin-bottom:2px;"><b>'+esc(r.customer)+'</b></div>'
+      +'<div style="font-size:12px;color:#75b070;margin-bottom:0.3rem;">'+esc(r.product)+' &middot; <b>'+esc(r.amount)+' kr</b></div>'
+      +'<div style="font-size:11px;color:#70c87b;margin-bottom:0.6rem;">Aarsak: '+esc(r.reason)+'</div>'
       +'<div>'+act+'</div>'
       +'</div>';
   }
@@ -4951,7 +4950,7 @@ window.admLabel=function(id,carrier){
     el('admBody').innerHTML='<div style="margin-bottom:0.75rem;">'+btn('Tilbake',"admGo('ordre')",'#70c87b')+'</div>'
       +'<div style="background:#121a10;border:1px solid #142a12;border-radius:14px;padding:1.25rem;max-width:420px;margin:0 auto;">'
       +'<div style="font-size:14px;font-weight:600;color:#a8e4ae;margin-bottom:0.3rem;">Velg fraktselskap</div>'
-      +'<div style="font-size:11px;color:#70c87b;margin-bottom:1rem;">Ordre '+o.id+' til '+o.customer+'</div>'
+      +'<div style="font-size:11px;color:#70c87b;margin-bottom:1rem;">Ordre '+esc(o.id)+' til '+esc(o.customer)+'</div>'
       +'<div onclick="admLabel(\''+id+'\',\'posten\')" style="display:flex;align-items:center;gap:0.75rem;background:#08180a;border:1px solid #142a12;border-radius:12px;padding:0.9rem 1rem;cursor:pointer;margin-bottom:0.6rem;">'
       +'<div style="width:40px;height:40px;background:#e32d22;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:16px;">P</div>'
       +'<div><b style="font-size:13px;color:#a8e4ae;">Posten / Bring</b><br><span style="font-size:11px;color:#70c87b;">Pakke i postkassen &middot; 2-4 dager &middot; 75 kr</span></div>'
@@ -4984,13 +4983,13 @@ window.admLabel=function(id,carrier){
     +'</div>'
     +'<div style="display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #111;padding-bottom:0.75rem;margin-bottom:0.75rem;">'
     +'<div><div style="font-size:9px;color:#888;text-transform:uppercase;">Avsender</div><div style="font-size:13px;font-weight:700;">Yeganeh Style AS</div><div style="font-size:10px;color:#555;">Flaenbakken 2, 2072 Raaholt</div></div>'
-    +'<div style="text-align:right;font-size:10px;color:#555;">Ordre<br><b style="font-size:14px;color:#111;">'+o.id+'</b></div>'
+    +'<div style="text-align:right;font-size:10px;color:#555;">Ordre<br><b style="font-size:14px;color:#111;">'+esc(o.id)+'</b></div>'
     +'</div>'
     +'<div style="font-size:9px;color:#888;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:2px;">Mottaker</div>'
-    +'<div style="font-size:17px;font-weight:700;margin-bottom:2px;">'+o.customer+'</div>'
-    +'<div style="font-size:13px;line-height:1.5;margin-bottom:0.75rem;">'+o.address+'<br>Tlf: '+o.phone+'</div>'
+    +'<div style="font-size:17px;font-weight:700;margin-bottom:2px;">'+esc(o.customer)+'</div>'
+    +'<div style="font-size:13px;line-height:1.5;margin-bottom:0.75rem;">'+esc(o.address)+'<br>Tlf: '+esc(o.phone)+'</div>'
     +'<div style="background:#f4f4f4;border-radius:8px;padding:0.6rem 0.8rem;font-size:11px;margin-bottom:0.75rem;">'
-    +'<b>Innhold:</b> '+o.items+'<br><b>Verdi:</b> '+o.total+' kr &middot; <b>Vekt:</b> ca 0.8 kg'
+    +'<b>Innhold:</b> '+esc(o.items)+'<br><b>Verdi:</b> '+esc(o.total)+' kr &middot; <b>Vekt:</b> ca 0.8 kg'
     +'</div>'
     +'<div style="border-top:2px solid #111;padding-top:0.75rem;margin-bottom:0.6rem;">'
     +'<div style="font-size:9px;color:#888;">SPORINGSNUMMER</div>'
@@ -5262,7 +5261,7 @@ window.admB2bDiscount=function(i){
   }).join('');
   overlay.innerHTML='<div style="background:#061007;border:1px solid rgba(60,140,65,0.26);border-radius:20px;padding:1.5rem;width:100%;max-width:420px;">'
     +'<div style="font-size:14px;font-weight:700;color:#a8e4ae;margin-bottom:4px;">B2B-rabatt</div>'
-    +'<div style="font-size:11px;color:#70c87b;margin-bottom:1.25rem;">'+c.firma+'</div>'
+    +'<div style="font-size:11px;color:#70c87b;margin-bottom:1.25rem;">'+esc(c.firma)+'</div>'
     +'<div style="display:flex;gap:6px;margin-bottom:1.25rem;">'+tierBtns+'</div>'
     +'<div style="margin-bottom:1rem;">'
     +'<label style="font-size:10px;color:#70c87b;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:6px;">Egendefinert (0–30%)</label>'
@@ -5295,7 +5294,7 @@ window.admB2bSendOffer=function(i){
   var defaultDisc=Math.max(cur+5,10);
   overlay.innerHTML='<div style="background:#061007;border:1px solid rgba(201,125,110,0.3);border-radius:20px;padding:1.5rem;width:100%;max-width:440px;">'
     +'<div style="font-size:14px;font-weight:700;color:#a8e4ae;margin-bottom:3px;">📩 Send pristilbud</div>'
-    +'<div style="font-size:11px;color:#c97d6e;font-weight:600;margin-bottom:1.25rem;">'+c.firma+' ønsker en bedre avtale</div>'
+    +'<div style="font-size:11px;color:#c97d6e;font-weight:600;margin-bottom:1.25rem;">'+esc(c.firma)+' ønsker en bedre avtale</div>'
     +'<div style="display:flex;gap:5px;margin-bottom:1rem;">'+tierBtns+'</div>'
     +'<div style="margin-bottom:1rem;">'
     +'<label style="font-size:10px;color:#70c87b;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;display:block;margin-bottom:5px;">Tilbudt rabatt</label>'
@@ -5516,15 +5515,15 @@ function admLabel(id){
     +'<h2 style="margin:0 0 1rem;font-size:1.1rem;letter-spacing:0.04em;">FRAKTETIKETT — YEGANEH STYLE</h2>'
     +'<div style="border:2px solid #333;border-radius:8px;padding:1.2rem;">'
     +'<table style="border-collapse:collapse;width:100%;font-size:13px;">'
-    +'<tr><td style="padding:5px 0;color:#666;width:90px;">Bestilling</td><td style="padding:5px 0;font-weight:700;">'+o.id+'</td></tr>'
-    +'<tr><td style="padding:5px 0;color:#666;">Kunde</td><td style="padding:5px 0;font-weight:600;">'+o.customer+'</td></tr>'
-    +'<tr><td style="padding:5px 0;color:#666;">Adresse</td><td style="padding:5px 0;">'+o.address+'</td></tr>'
-    +'<tr><td style="padding:5px 0;color:#666;">Telefon</td><td style="padding:5px 0;">'+o.phone+'</td></tr>'
-    +'<tr><td style="padding:5px 0;color:#666;">Produkter</td><td style="padding:5px 0;">'+o.items+'</td></tr>'
-    +'<tr><td style="padding:5px 0;color:#666;">Betaling</td><td style="padding:5px 0;">'+o.payment+'</td></tr>'
-    +'<tr><td style="padding:5px 0;color:#666;font-weight:700;">Total</td><td style="padding:5px 0;font-weight:700;font-size:15px;">'+o.total+' kr</td></tr>'
+    +'<tr><td style="padding:5px 0;color:#666;width:90px;">Bestilling</td><td style="padding:5px 0;font-weight:700;">'+esc(o.id)+'</td></tr>'
+    +'<tr><td style="padding:5px 0;color:#666;">Kunde</td><td style="padding:5px 0;font-weight:600;">'+esc(o.customer)+'</td></tr>'
+    +'<tr><td style="padding:5px 0;color:#666;">Adresse</td><td style="padding:5px 0;">'+esc(o.address)+'</td></tr>'
+    +'<tr><td style="padding:5px 0;color:#666;">Telefon</td><td style="padding:5px 0;">'+esc(o.phone)+'</td></tr>'
+    +'<tr><td style="padding:5px 0;color:#666;">Produkter</td><td style="padding:5px 0;">'+esc(o.items)+'</td></tr>'
+    +'<tr><td style="padding:5px 0;color:#666;">Betaling</td><td style="padding:5px 0;">'+esc(o.payment)+'</td></tr>'
+    +'<tr><td style="padding:5px 0;color:#666;font-weight:700;">Total</td><td style="padding:5px 0;font-weight:700;font-size:15px;">'+esc(o.total)+' kr</td></tr>'
     +'</table></div>'
-    +'<div style="margin-top:1.5rem;font-size:11px;color:#888;">Dato: '+o.date+' &middot; Yeganeh Style, Flaenbakken 2, 2072 Råholt</div>'
+    +'<div style="margin-top:1.5rem;font-size:11px;color:#888;">Dato: '+esc(o.date)+' &middot; Yeganeh Style, Flaenbakken 2, 2072 Råholt</div>'
     +'<br><button onclick="window.print()" style="background:#132a0e;color:#fff;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:600;">Skriv ut etikett</button>'
     +'</body></html>');
   w.document.close();

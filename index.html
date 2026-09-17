@@ -29,9 +29,9 @@
 <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-<link rel="preconnect" href="https://cauftwsojtumogyshmqq.supabase.co" crossorigin>
+<link rel="preconnect" href="https://jlpctmebyxthhwjttysh.supabase.co" crossorigin>
 <!-- Preload hero logo (LCP element) -->
-<link rel="preload" as="image" href="https://cauftwsojtumogyshmqq.supabase.co/storage/v1/object/public/product-images/logo-white.png" fetchpriority="high">
+<link rel="preload" as="image" href="https://jlpctmebyxthhwjttysh.supabase.co/storage/v1/object/public/product-images/logo-white.png" fetchpriority="high">
 <!-- Preload critical fonts -->
 <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtKky2F7g.woff2">
@@ -1289,7 +1289,7 @@ nav { }
 <nav>
   <!-- Logo -->
   <a href="#" class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" aria-label="Yeganeh Style – til toppen">
-    <img src="https://cauftwsojtumogyshmqq.supabase.co/storage/v1/object/public/product-images/logo-white.png"
+    <img src="https://jlpctmebyxthhwjttysh.supabase.co/storage/v1/object/public/product-images/logo-white.png"
          alt="Yeganeh Style" class="nav-logo-img" fetchpriority="high">
   </a>
 
@@ -1357,7 +1357,7 @@ nav { }
 <div class="mobile-menu" id="mobileMenu">
   <div class="mm-header">
     <span class="mm-logo">
-      <img src="https://cauftwsojtumogyshmqq.supabase.co/storage/v1/object/public/product-images/logo-white.png"
+      <img src="https://jlpctmebyxthhwjttysh.supabase.co/storage/v1/object/public/product-images/logo-white.png"
            alt="Yeganeh Style" style="height:26px;width:auto;opacity:0.9;">
     </span>
     <button class="mobile-menu-close" onclick="closeMenu()" aria-label="Lukk meny">✕</button>
@@ -1386,7 +1386,7 @@ nav { }
 <!-- HERO -->
 <section class="hero" id="hjem">
   <div class="hero-inner">
-    <img class="hero-logo" src="https://cauftwsojtumogyshmqq.supabase.co/storage/v1/object/public/product-images/logo-white.png" alt="Yeganeh Style AS" draggable="false" fetchpriority="high">
+    <img class="hero-logo" src="https://jlpctmebyxthhwjttysh.supabase.co/storage/v1/object/public/product-images/logo-white.png" alt="Yeganeh Style AS" draggable="false" fetchpriority="high">
     <p class="hero-tagline">Vi bryr oss om deg</p>
 
     <div class="hero-divider"></div>
@@ -1913,8 +1913,8 @@ nav { }
 <script>
 function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 // ── SUPABASE — loaded async, init via callback ──
-var SB_URL='https://cauftwsojtumogyshmqq.supabase.co';
-var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNhdWZ0d3NvanR1bW9neXNobXFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE1OTUzMzgsImV4cCI6MjA5NzE3MTMzOH0.KPjNLzetQGtXfJN9Ps-d5ma4KYX0XN2ey47KTmVObKs';
+var SB_URL='https://jlpctmebyxthhwjttysh.supabase.co';
+var SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpscGN0bWVieXh0aGh3anR0eXNoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk2MDU2MjcsImV4cCI6MjEwNTE4MTYyN30.n727x3Ukk0M6ZjIYYXliGgGcY20PY0Kzjp1MXs--cAw';
 var sb=null;
 var currentUser=null;
 
@@ -3362,6 +3362,22 @@ window.admRefreshData=function(){
       if(window.admCurrentTab==='timer') if(window.admGoTab) window.admGoTab('timer');
     }
   });
+  s.from('returns').select('*').order('created_at',{ascending:false}).then(function(r){
+    if(r.data){
+      DATA.returns=r.data.map(function(x,i){
+        return {id:x.display_id||('#R'+i),customer:x.customer,product:x.product,amount:x.amount,reason:x.reason,status:x.status||'aapen',supaId:x.id};
+      });
+      if(window.admCurrentTab==='retur') if(window.admGoTab) window.admGoTab('retur');
+    }
+  });
+  s.from('customers').select('*').order('created_at',{ascending:false}).then(function(r){
+    if(r.data){
+      DATA.customers=r.data.map(function(c){
+        return {id:c.id,name:c.name,phone:c.phone||'',email:c.email||'',orders:c.orders||0,total:c.total||0,note:c.note||''};
+      });
+      if(window.admCurrentTab==='kunder') if(window.admGoTab) window.admGoTab('kunder');
+    }
+  });
   s.from('b2b_requests').select('*').order('created_at',{ascending:false}).then(function(r){
     if(r.data&&r.data.length){
       window.B2B_REQUESTS=r.data.map(function(b,i){
@@ -4643,6 +4659,19 @@ function _admPersist(){
     DATA.treatments.forEach(function(t){
       s.from('treatments').upsert({id:t.id,name:t.name,cat:t.cat,price:t.price,duration:t.duration,active:t.active!==false,type:t.type||'frisør',stylist:t.stylist||'',discount:t.discount||0},{onConflict:'id'}).then(function(){},function(){});
     });
+    DATA.discounts.forEach(function(d){
+      s.from('discounts').upsert({code:d.code,value:d.value,type:d.type,used:d.used||0,expires:d.expires,active:d.active!==false},{onConflict:'code'}).then(function(){},function(){});
+    });
+    if(DATA.openingHours){
+      Object.keys(DATA.openingHours).forEach(function(day){
+        var oh=DATA.openingHours[day];
+        s.from('opening_hours').upsert({day:parseInt(day,10),open:!!oh.open,from_time:oh.from||'',to_time:oh.to||''},{onConflict:'day'}).then(function(){},function(){});
+      });
+    }
+    // Schedule blocks: replace-all (small, infrequently changed list, no stable per-row id in DATA.blocks)
+    s.from('schedule_blocks').delete().gte('date','0000-01-01').then(function(){
+      if(DATA.blocks.length) s.from('schedule_blocks').insert(DATA.blocks.map(function(b){return{date:b.date,note:b.note||''};})).then(function(){},function(){});
+    },function(){});
   }
 }
 function _admLoad(){
@@ -4664,7 +4693,7 @@ function _admLoad(){
     }
     if(store.discounts&&store.discounts.length) DATA.discounts=store.discounts;
     if(store.blocks) DATA.blocks=store.blocks;
-    if(store.ohData) DATA.ohData=store.ohData;
+    if(store.openingHours) DATA.openingHours=store.openingHours;
   }catch(e){}
   // Also try Supabase (async, update DATA if we get results)
   var s=window.sb;
@@ -4672,7 +4701,7 @@ function _admLoad(){
     s.from('employees').select('*').order('sort_order').then(function(res){
       if(res.data&&res.data.length){
         DATA.employees=res.data.map(function(r){return{id:r.id,name:r.name,role:r.role||'Frisør',phone:r.phone||'',color:r.color||'#5ab85e',schedule:r.schedule||{},active:r.active!==false};});
-        try{localStorage.setItem(LS_KEY,JSON.stringify({employees:DATA.employees,treatments:DATA.treatments,discounts:DATA.discounts,blocks:DATA.blocks}));}catch(e){}
+        try{localStorage.setItem(LS_KEY,JSON.stringify({employees:DATA.employees,treatments:DATA.treatments,discounts:DATA.discounts,blocks:DATA.blocks,openingHours:DATA.openingHours}));}catch(e){}
       }
     },function(){});
     s.from('treatments').select('*').order('sort_order').then(function(res){
@@ -4682,8 +4711,23 @@ function _admLoad(){
         var sbNails=sbTreats.filter(function(t){return t.type==='nails';});
         var defaultNails2=DATA.treatments.filter(function(t){return t.type==='nails';});
         DATA.treatments=sbTreats.filter(function(t){return t.type!=='nails';}).concat(sbNails.length?sbNails:defaultNails2);
-        try{localStorage.setItem(LS_KEY,JSON.stringify({employees:DATA.employees,treatments:DATA.treatments,discounts:DATA.discounts,blocks:DATA.blocks}));}catch(e){}
+        try{localStorage.setItem(LS_KEY,JSON.stringify({employees:DATA.employees,treatments:DATA.treatments,discounts:DATA.discounts,blocks:DATA.blocks,openingHours:DATA.openingHours}));}catch(e){}
       }
+    },function(){});
+    s.from('discounts').select('*').then(function(res){
+      if(res.data&&res.data.length){
+        DATA.discounts=res.data.map(function(r){return{code:r.code,value:r.value,type:r.type,used:r.used||0,expires:r.expires,active:r.active!==false};});
+      }
+    },function(){});
+    s.from('opening_hours').select('*').then(function(res){
+      if(res.data&&res.data.length){
+        var oh={};
+        res.data.forEach(function(r){oh[r.day]={open:!!r.open,from:r.from_time||'',to:r.to_time||''};});
+        DATA.openingHours=oh;
+      }
+    },function(){});
+    s.from('schedule_blocks').select('*').order('date').then(function(res){
+      if(res.data) DATA.blocks=res.data.map(function(r){return{date:r.date,note:r.note||''};});
     },function(){});
   }
 }
@@ -4699,8 +4743,17 @@ window.admOrd=function(id,status){
   go('ordre');
   if(window.showToast) window.showToast('Ordre '+id+': '+status);
 };
-window.admBk=function(i,s){DATA.bookings[i].status=s;go('timer');};
-window.admBkDel=function(i){var n=DATA.bookings[i]?DATA.bookings[i].customer:'';DATA.bookings.splice(i,1);go('timer');if(window.showToast)window.showToast('Time avlyst'+(n?': '+n:''));};
+window.admBk=function(i,status){
+  var b=DATA.bookings[i]; if(!b) return;
+  b.status=status;
+  if(window.sb&&b.supaId) window.sb.from('bookings').update({status:status}).eq('id',b.supaId).then(function(){},function(){});
+  go('timer');
+};
+window.admBkDel=function(i){
+  var b=DATA.bookings[i]; var n=b?b.customer:'';
+  if(window.sb&&b&&b.supaId) window.sb.from('bookings').delete().eq('id',b.supaId).then(function(){},function(){});
+  DATA.bookings.splice(i,1);go('timer');if(window.showToast)window.showToast('Time avlyst'+(n?': '+n:''));
+};
 var admImgData=null;
 var admImgFile=null;
 window.admPImgPreview=function(e){
@@ -4840,9 +4893,22 @@ window.admSaveDc=function(){
   _admPersist();go('rabatt');
   if(window.showToast) window.showToast('Kode opprettet: '+code);
 };
-window.admDelDc=function(i){var c=DATA.discounts[i]?DATA.discounts[i].code:'';DATA.discounts.splice(i,1);go('rabatt');if(window.showToast)window.showToast('Kode slettet'+(c?': '+c:''));};
-window.admRetOk=function(i){DATA.returns[i].status='godkjent';go('retur');};
-window.admRetRef=function(i){DATA.returns[i].status='refundert';go('retur');if(window.showToast)window.showToast('Refusjon sendt: '+DATA.returns[i].amount+' kr');};
+window.admDelDc=function(i){
+  var c=DATA.discounts[i]?DATA.discounts[i].code:'';
+  DATA.discounts.splice(i,1);
+  if(window.sb&&c) window.sb.from('discounts').delete().eq('code',c).then(function(){},function(){});
+  go('rabatt');if(window.showToast)window.showToast('Kode slettet'+(c?': '+c:''));
+};
+window.admRetOk=function(i){
+  DATA.returns[i].status='godkjent';
+  if(window.sb&&DATA.returns[i].supaId) window.sb.from('returns').update({status:'godkjent'}).eq('id',DATA.returns[i].supaId).then(function(){},function(){});
+  go('retur');
+};
+window.admRetRef=function(i){
+  DATA.returns[i].status='refundert';
+  if(window.sb&&DATA.returns[i].supaId) window.sb.from('returns').update({status:'refundert'}).eq('id',DATA.returns[i].supaId).then(function(){},function(){});
+  go('retur');if(window.showToast)window.showToast('Refusjon sendt: '+DATA.returns[i].amount+' kr');
+};
 window.admOpenChat=function(id){
   activeChatId=id;
   for(var i=0;i<DATA.chats.length;i++) if(DATA.chats[i].id===id) DATA.chats[i].unread=0;
@@ -5265,7 +5331,9 @@ window.admKundeFilter=function(){go('kunder');};
 window.admNewKunde=function(){
   var name=prompt('Fullt navn:');if(!name) return;
   var phone=prompt('Telefon:');var email=prompt('E-post:');
-  DATA.customers.push({id:Date.now(),name:name,phone:phone||'',email:email||'',orders:0,total:0,note:''});
+  var c={id:Date.now(),name:name,phone:phone||'',email:email||'',orders:0,total:0,note:''};
+  DATA.customers.push(c);
+  if(window.sb) window.sb.from('customers').insert(c).then(function(){},function(){});
   go('kunder');if(window.showToast)window.showToast('Kunde opprettet: '+name);
 };
 window.admEditKunde=function(i){
@@ -5273,15 +5341,20 @@ window.admEditKunde=function(i){
   var name=prompt('Navn:',c.name);if(name===null) return;
   var phone=prompt('Telefon:',c.phone);var email=prompt('E-post:',c.email);
   c.name=name;c.phone=phone||'';c.email=email||'';
+  if(window.sb) window.sb.from('customers').update({name:c.name,phone:c.phone,email:c.email}).eq('id',c.id).then(function(){},function(){});
   go('kunder');if(window.showToast)window.showToast('Kunde oppdatert');
 };
 window.admDelKunde=function(i){
-  if(!confirm('Slette kunde '+DATA.customers[i].name+'?'))return;
+  var c=DATA.customers[i];
+  if(!confirm('Slette kunde '+c.name+'?'))return;
+  if(window.sb) window.sb.from('customers').delete().eq('id',c.id).then(function(){},function(){});
   DATA.customers.splice(i,1);go('kunder');if(window.showToast)window.showToast('Kunde slettet');
 };
 window.admKundeNote=function(i){
   var c=DATA.customers[i];var note=prompt('Notat for '+c.name+':',c.note||'');
-  if(note===null) return;c.note=note;go('kunder');if(window.showToast)window.showToast('Notat lagret');
+  if(note===null) return;c.note=note;
+  if(window.sb) window.sb.from('customers').update({note:c.note}).eq('id',c.id).then(function(){},function(){});
+  go('kunder');if(window.showToast)window.showToast('Notat lagret');
 };
 
 // ── PRODUKT-CRUD ──

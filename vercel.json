@@ -12,7 +12,7 @@
         { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.gstatic.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https://jlpctmebyxthhwjttysh.supabase.co; connect-src 'self' https://jlpctmebyxthhwjttysh.supabase.co wss://jlpctmebyxthhwjttysh.supabase.co https://data.brreg.no; frame-ancestors 'self'; object-src 'none'; base-uri 'self'"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.gstatic.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https://jlpctmebyxthhwjttysh.supabase.co; connect-src 'self' https://jlpctmebyxthhwjttysh.supabase.co wss://jlpctmebyxthhwjttysh.supabase.co https://data.brreg.no; frame-src https://maps.google.com https://www.google.com; frame-ancestors 'self'; object-src 'none'; base-uri 'self'"
         }
       ]
     },

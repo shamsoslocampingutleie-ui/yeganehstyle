@@ -1313,6 +1313,18 @@ nav { }
   <!-- Desktop dropdown nav -->
   <div class="nav-links" role="navigation" aria-label="Hovedmeny">
 
+    <!-- Booking -->
+    <div class="nav-item">
+      <button type="button" aria-haspopup="true">
+        Booking
+        <svg class="chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="nav-dropdown" role="menu">
+        <a role="menuitem" onclick="openBooking()">Frisør</a>
+        <a role="menuitem" onclick="openTimma()">Negler</a>
+      </div>
+    </div>
+
     <!-- Produkter -->
     <div class="nav-item">
       <button type="button" aria-haspopup="true">
@@ -1328,6 +1340,11 @@ nav { }
       </div>
     </div>
 
+    <!-- Tilbud -->
+    <div class="nav-item">
+      <a onclick="window.openProdOverlay('sale');return false;" href="#">Tilbud</a>
+    </div>
+
     <!-- Bedrift -->
     <div class="nav-item">
       <button type="button" aria-haspopup="true">
@@ -1336,23 +1353,6 @@ nav { }
       </button>
       <div class="nav-dropdown" role="menu">
         <a role="menuitem" onclick="openModal('adminModal')">Logg inn</a>
-      </div>
-    </div>
-
-    <!-- Tilbud -->
-    <div class="nav-item">
-      <a onclick="window.openProdOverlay('sale');return false;" href="#">Tilbud</a>
-    </div>
-
-    <!-- Booking -->
-    <div class="nav-item">
-      <button type="button" aria-haspopup="true">
-        Booking
-        <svg class="chevron" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </button>
-      <div class="nav-dropdown" role="menu">
-        <a role="menuitem" onclick="openBooking()">Frisør</a>
-        <a role="menuitem" onclick="openTimma()">Negler</a>
       </div>
     </div>
 

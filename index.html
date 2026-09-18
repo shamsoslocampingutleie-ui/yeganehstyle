@@ -449,6 +449,19 @@ nav {
 }
 .popular-see-all:hover { border-color: var(--accent); }
 
+/* Quick category/brand links row below products */
+.quick-cat-row {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: 0.6rem; margin-top: 1.75rem; padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.quick-cat-row a {
+  font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 400;
+  color: var(--gray); cursor: pointer; text-decoration: none; transition: color 0.2s;
+}
+.quick-cat-row a:hover { color: var(--accent); }
+.quick-cat-sep { color: var(--border); font-size: 0.9rem; }
+
 /* ── CAT STRIP ── */
 .cat-strip-wrap {
   position: relative; z-index: 1;
@@ -1457,6 +1470,17 @@ nav { }
     <button class="popular-see-all" onclick="openProdOverlay()">Se alle →</button>
   </div>
   <div class="product-grid" id="productGrid"></div>
+  <div class="quick-cat-row">
+    <a onclick="filterCat('hairoil')">Hårkur og olje</a>
+    <span class="quick-cat-sep">·</span>
+    <a onclick="filterCat('shampoobalsam')">Shampoo &amp; balsam</a>
+    <span class="quick-cat-sep">·</span>
+    <a onclick="filterCat('styling')">Styling</a>
+    <span class="quick-cat-sep">·</span>
+    <a onclick="filterCat('nakbarber')">Nak barber</a>
+    <span class="quick-cat-sep">·</span>
+    <a onclick="filterCat('roh')">ROH</a>
+  </div>
 </div>
 
 <!-- BEHANDLINGER PÅ FORSIDEN -->
@@ -5731,7 +5755,17 @@ if(window.renderNailsGrid) window.renderNailsGrid();
     styling:{icon:'🪮',name:'Styling'},
     sale:   {icon:'🏷️',name:'Tilbud'},
     best:   {icon:'⭐',name:'Bestselgende'},
-    new:    {icon:'🆕',name:'Nyheter'}
+    new:    {icon:'🆕',name:'Nyheter'},
+    hairoil:{icon:'💆‍♀️',name:'Hårkur og olje'},
+    shampoobalsam:{icon:'🧴',name:'Shampoo & balsam'},
+    nakbarber:{icon:'💈',name:'NAK Barber'},
+    roh:    {icon:'✨',name:'ROH'}
+  };
+  var CAT_FILTERS={
+    hairoil:function(p){return p.cat==='behandling';},
+    shampoobalsam:function(p){return p.cat==='shampoo'||p.cat==='conditioner';},
+    nakbarber:function(p){return p.brand==='NAK Barber';},
+    roh:function(p){return p.brand==='ROH';}
   };
 
   window.openProdOverlay=function(startCat){
@@ -5788,7 +5822,7 @@ if(window.renderNailsGrid) window.renderNailsGrid();
     _setTitle(info.name);
     _setBack(true);
     var prods=window.PRODUCTS||[];
-    var items=cat==='alle'?prods:(cat==='sale'||cat==='best'||cat==='new')?prods.filter(function(p){return p.badge===cat;}):prods.filter(function(p){return p.cat===cat;});
+    var items=cat==='alle'?prods:(cat==='sale'||cat==='best'||cat==='new')?prods.filter(function(p){return p.badge===cat;}):CAT_FILTERS[cat]?prods.filter(CAT_FILTERS[cat]):prods.filter(function(p){return p.cat===cat;});
     var html='<div class="prod-ov-grid">';
     for(var i=0;i<items.length;i++) html+=_prodCardHtml(items[i]);
     html+='</div>';

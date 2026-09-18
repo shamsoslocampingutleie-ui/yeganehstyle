@@ -832,7 +832,7 @@ footer {
 
 /* ── MODALS ── */
 .modal-overlay {
-  position: fixed; inset: 0; z-index: 200;
+  position: fixed; inset: 0; z-index: 600;
   background: rgba(0,0,0,0.75);
   display: flex; align-items: flex-end; justify-content: center;
   opacity: 0; pointer-events: none; transition: opacity 0.25s;
@@ -2040,12 +2040,24 @@ function _prodCardHtml(p){
     +btnHtml
     +'</div></div></div>';
 }
+function _pickRotatingProducts(all,n){
+  if(!all.length) return [];
+  var epochDay=Math.floor(Date.now()/86400000);
+  var seed=Math.floor(epochDay/2); // rotates every 2 days, same for all visitors that day-pair
+  var arr=all.slice();
+  var rng=seed||1;
+  function rand(){ rng=(rng*1103515245+12345)&0x7fffffff; return rng/0x7fffffff; }
+  for(var i=arr.length-1;i>0;i--){
+    var j=Math.floor(rand()*(i+1));
+    var tmp=arr[i];arr[i]=arr[j];arr[j]=tmp;
+  }
+  return arr.slice(0,Math.min(n,arr.length));
+}
 function renderProducts(){
-  // Homepage: show only popular (badge=best) products, max 4
+  // Homepage: 4 products rotating every 2 days from the full catalog
   var grid=document.getElementById('productGrid'); if(!grid) return;
   var all=window.PRODUCTS||[];
-  var popular=all.filter(function(p){return p.badge==='best';}).slice(0,4);
-  if(!popular.length) popular=all.slice(0,4); // fallback: first 4
+  var popular=_pickRotatingProducts(all,4);
   var html=''; for(var i=0;i<popular.length;i++) html+=_prodCardHtml(popular[i]);
   grid.innerHTML=html;
 }

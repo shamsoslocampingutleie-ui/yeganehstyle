@@ -1996,11 +1996,16 @@ renderProducts();
 
 function _prodCardHtml(p){
   var bHtml='';
-  if(p.badge==='best') bHtml='<span class="prod-badge badge-best">Bestselger</span>';
+  var stock=p.stock!=null?p.stock:20;
+  if(stock<=0) bHtml='<span class="prod-badge" style="background:#3a2020;color:#e0a0a0;">Utsolgt</span>';
+  else if(p.badge==='best') bHtml='<span class="prod-badge badge-best">Bestselger</span>';
   else if(p.badge==='new') bHtml='<span class="prod-badge badge-new">Ny</span>';
   else if(p.badge==='sale') bHtml='<span class="prod-badge badge-sale">Tilbud</span>';
   var oldHtml=p.oldPrice?'<span class="old">'+p.oldPrice+' kr</span>':'';
   var imgInner=p.img?'<img src="'+esc(p.img)+'" alt="'+esc(p.name)+'" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;">':(p.emoji?'<span class="prod-emoji">'+esc(p.emoji)+'</span>':'<span style="font-family:Cormorant Garamond,serif;font-size:2rem;color:var(--accent);">'+esc(p.name.charAt(0))+'</span>');
+  var btnHtml=stock>0
+    ?'<button class="add-btn" onclick="addToCart(\''+p.id+'\',event)">+ Legg til</button>'
+    :'<button class="add-btn" disabled style="opacity:0.5;cursor:not-allowed;">Utsolgt</button>';
   return '<div class="product-card" onclick="openProduct(\''+esc(String(p.id))+'\')">'
     +'<div class="prod-img">'+bHtml+imgInner+'</div>'
     +'<div class="prod-info">'
@@ -2008,7 +2013,7 @@ function _prodCardHtml(p){
     +'<div class="prod-name">'+esc(p.name)+'</div>'
     +'<div class="prod-foot">'
     +'<div class="prod-price">'+oldHtml+p.price+' kr</div>'
-    +'<button class="add-btn" onclick="addToCart(\''+p.id+'\',event)">+ Legg til</button>'
+    +btnHtml
     +'</div></div></div>';
 }
 function renderProducts(){
@@ -2027,9 +2032,14 @@ function addToCart(id,e){
   var p=null;
   for(var i=0;i<PRODUCTS.length;i++){if(String(PRODUCTS[i].id)===sid){p=PRODUCTS[i];break;}}
   if(!p) return;
+  var stock=p.stock!=null?p.stock:20;
+  if(stock<=0){showToast('Produktet er utsolgt');return;}
   var ex=null;
   for(var i=0;i<cart.length;i++){if(String(cart[i].id)===sid){ex=cart[i];break;}}
-  if(ex) ex.qty++;
+  if(ex){
+    if(ex.qty>=stock){showToast('Kun '+stock+' på lager');return;}
+    ex.qty++;
+  }
   else cart.push({id:p.id,name:p.name,brand:p.brand,price:p.price,emoji:p.emoji,qty:1});
   updateCartUI();showToast(p.name+' lagt til');
 }
@@ -2080,7 +2090,17 @@ function updateCartUI(){
 }
 function changeQty(id,delta){
   var sid=String(id);
-  for(var i=0;i<cart.length;i++){if(String(cart[i].id)===sid){cart[i].qty+=delta;if(cart[i].qty<=0)cart.splice(i,1);break;}}
+  for(var i=0;i<cart.length;i++){
+    if(String(cart[i].id)===sid){
+      if(delta>0){
+        var p=null;
+        for(var j=0;j<PRODUCTS.length;j++){if(String(PRODUCTS[j].id)===sid){p=PRODUCTS[j];break;}}
+        var stock=p&&p.stock!=null?p.stock:20;
+        if(cart[i].qty>=stock){showToast('Kun '+stock+' på lager');return;}
+      }
+      cart[i].qty+=delta;if(cart[i].qty<=0)cart.splice(i,1);break;
+    }
+  }
   updateCartUI();
 }
 function openCart(){document.getElementById('cartPanel').classList.add('open');document.getElementById('cartOverlay').classList.add('open');}
@@ -2155,7 +2175,20 @@ function confirmPayment(){
     payment_method:payNames[selectedPay]||'Kort',
     status:'ny'
   };
-  if(sb) sb.from('orders').insert(orderData).then(function(){});
+  if(sb){
+    sb.from('orders').insert(orderData).then(function(){});
+    cart.forEach(function(c){
+      sb.rpc('decrement_product_stock',{p_id:c.id,p_qty:c.qty}).then(function(){},function(){});
+      for(var i=0;i<PRODUCTS.length;i++){
+        if(String(PRODUCTS[i].id)===String(c.id)){
+          var cur=PRODUCTS[i].stock!=null?PRODUCTS[i].stock:20;
+          PRODUCTS[i].stock=Math.max(0,cur-c.qty);
+          break;
+        }
+      }
+    });
+    renderProducts();
+  }
   if(window.ADMIN_ADD_ORDER && cart.length){
     window.ADMIN_ADD_ORDER({
       customer:fullName,phone:telefon,email:epost,
@@ -2360,7 +2393,9 @@ function openProduct(id){
     +'<p style="font-size:11px;margin-bottom:1rem">'+stockHtml+'</p>'
     +'<div style="font-size:1.4rem;font-weight:700;margin-bottom:0.5rem">'+oldHtml+p.price+' kr'+saveHtml+'</div>'
     +'<p style="font-size:11px;color:var(--gray);margin-bottom:1.25rem">Gratis frakt over 499 kr · Levering 2–4 virkedager</p>'
-    +'<button class="confirm-btn" onclick="addToCart(\''+p.id+'\');closeModal(\'productModal\')">Legg i handlekurv</button>';
+    +(stock>0
+      ?'<button class="confirm-btn" onclick="addToCart(\''+p.id+'\');closeModal(\'productModal\')">Legg i handlekurv</button>'
+      :'<button class="confirm-btn" disabled style="opacity:0.5;cursor:not-allowed;">Utsolgt</button>');
   openModal('productModal');
 }
 function openBooking(){

@@ -1999,7 +1999,7 @@ window._onSbLoad=function(){
   });
 
   // Refresh products from DB (replaces static list)
-  sb.from('products').select('*').eq('visible',true).order('sort_order').then(function(res){
+  sb.from('products_view').select('*').eq('visible',true).order('sort_order').then(function(res){
     if(res.data&&res.data.length){
       window.PRODUCTS=res.data.map(function(p){
         return {id:p.id,name:p.name,brand:p.brand||'NAK Hair',cat:p.category,price:p.price,oldPrice:p.old_price,emoji:p.emoji||'',desc:p.description,badge:p.badge,stock:p.stock,img:p.image_url||null,b2bPrice:p.b2b_price!=null?p.b2b_price:null};
@@ -3505,7 +3505,8 @@ window.admRefreshData=function(){
         var d=new Date(o.created_at);
         var fmt=d.getDate()+'.'+(d.getMonth()+1)+'.'+d.getFullYear();
         var items=Array.isArray(o.items)?o.items.map(function(i){return i.name+' x'+i.qty;}).join(', '):(o.items||'');
-        return {id:'#'+o.id.split('-')[0].toUpperCase(),supaId:o.id,date:fmt,createdAt:o.created_at,customer:o.customer_name,phone:o.phone,email:o.email,address:o.address,items:items,total:o.total,status:o.status||'ny',payment:o.payment_method||'Kort'};
+        var itemsList=Array.isArray(o.items)?o.items:[];
+        return {id:'#'+o.id.split('-')[0].toUpperCase(),supaId:o.id,date:fmt,createdAt:o.created_at,customer:o.customer_name,phone:o.phone,email:o.email,address:o.address,items:items,itemsList:itemsList,total:o.total,status:o.status||'ny',payment:o.payment_method||'Kort'};
       });
       if(window.admCurrentTab==='ordre'||window.admCurrentTab==='oversikt') if(window.admGoTab) window.admGoTab(window.admCurrentTab);
     }
@@ -3570,7 +3571,7 @@ window.admRefreshData=function(){
       if(window.renderReviews) window.renderReviews();
     }
   });
-  s.from('products').select('*').order('sort_order').then(function(r){
+  s.from('products_view').select('*').order('sort_order').then(function(r){
     if(r.data&&r.data.length){
       window.PRODUCTS=r.data.map(function(p){
         return {id:p.id,name:p.name,brand:p.brand||'NAK Hair',cat:p.category,price:p.price,oldPrice:p.old_price,emoji:p.emoji||'',desc:p.description,badge:p.badge,stock:p.stock,img:p.image_url||null,visible:p.visible,b2bPrice:p.b2b_price!=null?p.b2b_price:null};
@@ -3730,6 +3731,22 @@ function viewOversikt(){
     +card('Siste bestillinger',tbl(['#','Kunde','Belop','Status'],rows));
 }
 
+function _orderItemsHtml(o){
+  var list=o.itemsList&&o.itemsList.length?o.itemsList:null;
+  if(!list) return '<div style="font-size:12px;color:#75b070;background:#08180a;border-radius:8px;padding:0.5rem 0.7rem;margin-bottom:0.6rem;">'+esc(o.items)+'</div>';
+  var prods=window.PRODUCTS||[];
+  var rows='';
+  for(var j=0;j<list.length;j++){
+    var it=list[j];
+    var p=null;
+    for(var k=0;k<prods.length;k++){ if(prods[k].name===it.name){ p=prods[k]; break; } }
+    var thumb=(p&&p.img)
+      ?'<img src="'+esc(p.img)+'" alt="'+esc(it.name)+'" style="width:32px;height:32px;border-radius:7px;object-fit:cover;flex-shrink:0;">'
+      :'<div style="width:32px;height:32px;border-radius:7px;background:rgba(98,186,106,0.1);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;">'+esc((p&&p.emoji)||'📦')+'</div>';
+    rows+='<div style="display:flex;align-items:center;gap:8px;'+(j?'margin-top:6px;':'')+'">'+thumb+'<span style="font-size:12px;color:#75b070;">'+esc(it.name)+' &times;'+esc(it.qty)+'</span></div>';
+  }
+  return '<div style="background:#08180a;border-radius:8px;padding:0.5rem 0.7rem;margin-bottom:0.6rem;">'+rows+'</div>';
+}
 function viewOrdre(){
   var html='',i;
   for(i=0;i<DATA.orders.length;i++){
@@ -3746,7 +3763,7 @@ function viewOrdre(){
       +badge(o.status)+'</div>'
       +'<div style="font-size:13px;color:#a8e4ae;margin-bottom:2px;"><b>'+esc(o.customer)+'</b></div>'
       +'<div style="font-size:11px;color:#70c87b;margin-bottom:0.5rem;">'+esc(o.phone)+' &middot; '+esc(o.email)+'<br>'+esc(o.address)+'</div>'
-      +'<div style="font-size:12px;color:#75b070;background:#08180a;border-radius:8px;padding:0.5rem 0.7rem;margin-bottom:0.6rem;">'+esc(o.items)+'</div>'
+      +_orderItemsHtml(o)
       +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem;">'
       +'<span style="font-size:11px;color:#70c87b;">'+o.payment+'</span>'
       +'<b style="font-size:15px;color:#a8e4ae;">'+o.total+' kr</b></div>'
@@ -5621,7 +5638,7 @@ function admSaveP(){
   var savBtn=document.querySelector('#admProdForm button[onclick="admSaveP()"]');
   if(savBtn){savBtn.disabled=true;savBtn.textContent='Lagrer...';}
   function _reload(){
-    s.from('products').select('*').order('sort_order').then(function(res){
+    s.from('products_view').select('*').order('sort_order').then(function(res){
       if(res.data){
         window.PRODUCTS=res.data.map(function(p){return{id:p.id,name:p.name,brand:p.brand||'NAK Hair',cat:p.category,price:p.price,oldPrice:p.old_price||null,emoji:p.emoji||'',desc:p.description||'',badge:p.badge||null,stock:p.stock!=null?p.stock:20,visible:p.visible!==false,sort_order:p.sort_order||0,img:p.image_url||null,b2bPrice:p.b2b_price!=null?p.b2b_price:null};});
         if(typeof renderProducts==='function') renderProducts();

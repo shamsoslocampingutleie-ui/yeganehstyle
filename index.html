@@ -5542,25 +5542,36 @@ window.admDelTreat=function(i){if(!confirm('Slette behandlingen?'))return;DATA.t
 // ── B2B CLIENT ACTIONS ──
 window.admB2bApprove=function(i){
   var req=window.B2B_REQUESTS&&window.B2B_REQUESTS[i];if(!req) return;
-  req.status='godkjent';
-  var disc=parseInt(prompt('Sett B2B-rabatt (%) for '+req.firma+':','0')||'0',10);
-  DATA.b2bClients.push({firma:req.firma,org:req.org||'',kontakt:req.kontakt||'',tlf:req.tlf||'',epost:req.epost||'',active:true,discount:disc,supaId:req.supaId,approvedDate:new Date().toLocaleDateString('no-NO')});
   var s=window.sb||null;
-  if(s){
-    if(req.supaId) s.from('b2b_requests').update({status:'godkjent'}).eq('id',req.supaId).then(function(){});
-    s.from('b2b_applications').update({status:'approved',discount:disc,approved_at:new Date().toISOString()}).eq('email',req.epost).then(function(){});
+  if(!s||!req.epost){
+    if(window.showToast) window.showToast('⚠ Ikke tilkoblet database — godkjenning ble IKKE lagret. Prøv igjen.');
+    return;
   }
-  go('bedriftskunder');if(window.showToast)window.showToast('Bedriftskunde godkjent: '+req.firma+(disc?' ('+disc+'% rabatt)':''));
+  s.from('b2b_applications').update({status:'approved',discount:0,approved_at:new Date().toISOString()}).eq('email',req.epost).then(function(r){
+    if(r.error){
+      if(window.showToast) window.showToast('⚠ Godkjenning feilet: '+r.error.message);
+      return;
+    }
+    req.status='godkjent';
+    DATA.b2bClients.push({firma:req.firma,org:req.org||'',kontakt:req.kontakt||'',tlf:req.tlf||'',epost:req.epost||'',active:true,discount:0,supaId:req.supaId,approvedDate:new Date().toLocaleDateString('no-NO')});
+    if(req.supaId) s.from('b2b_requests').update({status:'godkjent'}).eq('id',req.supaId).then(function(){});
+    go('bedriftskunder');
+    if(window.showToast) window.showToast('Bedriftskunde godkjent: '+req.firma+' — sett rabatt med "% Rabatt"-knappen');
+  });
 };
 window.admB2bReject=function(i){
   var req=window.B2B_REQUESTS&&window.B2B_REQUESTS[i];if(!req) return;
-  req.status='avvist';
   var s=window.sb||null;
-  if(s){
-    if(req.supaId) s.from('b2b_requests').update({status:'avvist'}).eq('id',req.supaId).then(function(){});
-    s.from('b2b_applications').update({status:'rejected'}).eq('email',req.epost).then(function(){});
+  if(!s||!req.epost){
+    if(window.showToast) window.showToast('⚠ Ikke tilkoblet database — avvisning ble IKKE lagret. Prøv igjen.');
+    return;
   }
-  go('bedriftskunder');if(window.showToast)window.showToast('Søknad avvist');
+  s.from('b2b_applications').update({status:'rejected'}).eq('email',req.epost).then(function(r){
+    if(r.error){ if(window.showToast) window.showToast('⚠ Avvisning feilet: '+r.error.message); return; }
+    req.status='avvist';
+    if(req.supaId) s.from('b2b_requests').update({status:'avvist'}).eq('id',req.supaId).then(function(){});
+    go('bedriftskunder');if(window.showToast)window.showToast('Søknad avvist');
+  });
 };
 window.admB2bSuspend=function(i){
   var c=DATA.b2bClients[i];if(!c) return;

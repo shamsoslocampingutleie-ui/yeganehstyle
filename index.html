@@ -2929,6 +2929,32 @@ function renderSuspended(){
 
 // ── PORTAL ──
 var B2B_TAB='bestilling';
+var B2B_MSGS=[];
+function b2bLoadMessages(){
+  var acc=BST.account||{};
+  var email=acc.epost||acc.email;
+  if(!window.sb||!email) return;
+  window.sb.from('b2b_messages').select('*').eq('b2b_email',email).order('created_at').then(function(r){
+    if(r.data){
+      B2B_MSGS=r.data;
+      var unreadIds=r.data.filter(function(m){return m.sender==='admin'&&!m.read_by_customer;}).map(function(m){return m.id;});
+      if(unreadIds.length) window.sb.from('b2b_messages').update({read_by_customer:true}).in('id',unreadIds).then(function(){});
+      if(B2B_TAB==='meldinger') renderPortal();
+    }
+  });
+}
+window.b2bSendMsg=function(){
+  var acc=BST.account||{};
+  var email=acc.epost||acc.email;
+  var inp=document.getElementById('b2bMsgInput');
+  var text=inp?inp.value.trim():'';
+  if(!text||!window.sb||!email) return;
+  inp.value='';
+  window.sb.from('b2b_messages').insert({b2b_email:email,sender:'customer',message:text}).then(function(r){
+    if(!r.error) b2bLoadMessages();
+    else if(window.showToast) window.showToast('Kunne ikke sende melding');
+  });
+};
 var B2B_PREVIEW_DISC=null;
 var B2B_TIERS=[
   {pct:0,  spend:0,      lbl:'Standard', col:'#408a41', icon:'○',  next:5,  nextSpend:10000, nextLbl:'Bronze'},
@@ -3058,8 +3084,8 @@ function renderPortal(){
     +allTiersHtml;
 
   // Tab nav
-  var tabs=[['bestilling','📦 Bestill'],['produkter','🛍️ Produkter'],['konto','👤 Konto']];
-  var tabNav='<div style="display:grid;grid-template-columns:repeat(3,1fr);border:1px solid rgba(98,186,106,0.15);border-radius:12px;overflow:hidden;margin-bottom:1.25rem;">';
+  var tabs=[['bestilling','📦 Bestill'],['produkter','🛍️ Produkter'],['meldinger','💬 Meldinger'],['konto','👤 Konto']];
+  var tabNav='<div style="display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(98,186,106,0.15);border-radius:12px;overflow:hidden;margin-bottom:1.25rem;">';
   tabs.forEach(function(t,idx){
     var active=B2B_TAB===t[0];
     tabNav+='<button onclick="b2bTab(\''+t[0]+'\')" style="padding:10px 4px;background:'+(active?'rgba(60,200,93,0.2)':'transparent')+';border:0;'+(idx<tabs.length-1?'border-right:1px solid rgba(98,186,106,0.1);':'')+';color:'+(active?'#60f09c':'#70c87b')+';font-size:11px;font-weight:'+(active?'700':'500')+';cursor:pointer;font-family:inherit;">'+t[1]+'</button>';
@@ -3184,6 +3210,27 @@ function renderPortal(){
     if(!allProds.length) content+='<div style="color:#70c87b;font-size:13px;padding:1rem 0;">Laster produkter...</div>';
     content+='<div style="margin-top:1rem;padding-top:0.75rem;border-top:1px solid rgba(98,186,106,0.1);font-size:11px;color:#60b065;">For å bestille: send e-post eller ring oss.</div></div>';
 
+  } else if(B2B_TAB==='meldinger'){
+    var msgsHtml='';
+    if(!B2B_MSGS.length){
+      msgsHtml='<div style="padding:2rem;text-align:center;color:#60b065;font-size:13px;">Ingen meldinger ennå. Skriv under for å starte en samtale med oss.</div>';
+    } else {
+      B2B_MSGS.forEach(function(m){
+        var mine=m.sender==='customer';
+        var mtime=new Date(m.created_at).toLocaleString('no-NO',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+        msgsHtml+='<div style="display:flex;justify-content:'+(mine?'flex-end':'flex-start')+';margin-bottom:8px;">'
+          +'<div style="max-width:80%;padding:9px 13px;border-radius:14px;font-size:13px;line-height:1.4;'
+          +(mine?'background:rgba(60,200,93,0.18);color:#b0f0c3;border:1px solid rgba(60,200,93,0.35);':'background:#08180a;color:#a8e4ae;border:1px solid #142a12;')
+          +'">'+esc(m.message)+'<div style="font-size:9px;color:#70c87b;margin-top:3px;text-align:right;">'+mtime+'</div></div></div>';
+      });
+    }
+    content='<div class="b2p-card">'
+      +'<div class="b2p-card-title">💬 Meldinger med Yeganeh Style</div>'
+      +'<div id="b2bMsgList" style="padding:0.5rem 0.25rem;max-height:50vh;overflow-y:auto;">'+msgsHtml+'</div>'
+      +'<div style="display:flex;gap:0.5rem;padding-top:0.75rem;border-top:1px solid rgba(98,186,106,0.1);">'
+      +'<input id="b2bMsgInput" placeholder="Skriv en melding..." onkeydown="if(event.key===\'Enter\')b2bSendMsg()" style="flex:1;padding:10px 13px;background:#08180a;border:1px solid #142a12;border-radius:20px;font-size:16px;color:#a8e4ae;">'
+      +'<button onclick="b2bSendMsg()" style="padding:10px 18px;border-radius:20px;background:rgba(60,200,93,0.22);border:1px solid rgba(60,200,93,0.45);color:#60f090;font-size:13px;font-weight:600;cursor:pointer;">Send</button>'
+      +'</div></div>';
   } else if(B2B_TAB==='konto'){
     var reqSent=acc.offer_requested&&acc.offer_status!=='offer_sent';
     var allTiers='<div style="display:flex;flex-direction:column;gap:6px;margin:1rem 0;">';
@@ -3251,7 +3298,7 @@ function b2pInfoRow(label,val){
     +'</div>';
 }
 
-window.b2bTab=function(t){ B2B_TAB=t; renderPortal(); };
+window.b2bTab=function(t){ B2B_TAB=t; if(t==='meldinger') b2bLoadMessages(); renderPortal(); };
 
 window.b2bRequestOffer=function(){
   var acc=BST.account||{};
@@ -4561,7 +4608,61 @@ function updateFrontendPrice(i,newPrice){
   }
 }
 
+var ADM_B2B_CHAT_EMAIL=null, ADM_B2B_CHAT_FIRMA='', ADM_B2B_MSGS=[];
+window.admOpenB2BChat=function(email){
+  ADM_B2B_CHAT_EMAIL=email;
+  var c=(DATA.b2bClients||[]).filter(function(x){return x.epost===email;})[0];
+  ADM_B2B_CHAT_FIRMA=(c&&c.firma)||email;
+  ADM_B2B_MSGS=[];
+  admLoadB2BChat();
+  go('bedriftskunder');
+};
+window.admCloseB2BChat=function(){ ADM_B2B_CHAT_EMAIL=null; go('bedriftskunder'); };
+function admLoadB2BChat(){
+  if(!window.sb||!ADM_B2B_CHAT_EMAIL) return;
+  window.sb.from('b2b_messages').select('*').eq('b2b_email',ADM_B2B_CHAT_EMAIL).order('created_at').then(function(r){
+    if(r.data){
+      ADM_B2B_MSGS=r.data;
+      var unreadIds=r.data.filter(function(m){return m.sender==='customer'&&!m.read_by_admin;}).map(function(m){return m.id;});
+      if(unreadIds.length) window.sb.from('b2b_messages').update({read_by_admin:true}).in('id',unreadIds).then(function(){});
+      if(window.admCurrentTab==='bedriftskunder') go('bedriftskunder');
+    }
+  });
+}
+window.admSendB2BMsg=function(){
+  var inp=el('admB2BMsgInput');
+  var text=inp?inp.value.trim():'';
+  if(!text||!window.sb||!ADM_B2B_CHAT_EMAIL) return;
+  inp.value='';
+  window.sb.from('b2b_messages').insert({b2b_email:ADM_B2B_CHAT_EMAIL,sender:'admin',message:text}).then(function(r){
+    if(!r.error) admLoadB2BChat();
+    else if(window.showToast) window.showToast('Kunne ikke sende melding');
+  });
+};
+function viewB2BChatThread(){
+  var msgsHtml='';
+  if(!ADM_B2B_MSGS.length){
+    msgsHtml='<div style="padding:2rem;text-align:center;color:#60b065;">Ingen meldinger ennå.</div>';
+  } else {
+    ADM_B2B_MSGS.forEach(function(m){
+      var mine=m.sender==='admin';
+      var mtime=new Date(m.created_at).toLocaleString('no-NO',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});
+      msgsHtml+='<div style="display:flex;justify-content:'+(mine?'flex-end':'flex-start')+';margin-bottom:8px;">'
+        +'<div style="max-width:75%;padding:8px 12px;border-radius:14px;font-size:13px;line-height:1.4;'
+        +(mine?'background:rgba(60,200,93,0.2);color:#b0f0c3;border:1px solid rgba(60,200,93,0.35);':'background:#08180a;color:#a8e4ae;border:1px solid #142a12;')
+        +'">'+esc(m.message)+'<div style="font-size:9px;color:#70c87b;margin-top:3px;text-align:right;">'+mtime+'</div></div></div>';
+    });
+  }
+  return '<div style="margin-bottom:0.5rem;">'+btn('< Tilbake','admCloseB2BChat()','#70c87b')+'</div>'
+    +card('💬 '+esc(ADM_B2B_CHAT_FIRMA),
+      '<div style="padding:1rem;max-height:50vh;overflow-y:auto;" id="admB2BMsgs">'+msgsHtml+'</div>'
+      +'<div style="padding:0.75rem;border-top:1px solid #142a12;display:flex;gap:0.5rem;">'
+      +'<input id="admB2BMsgInput" placeholder="Skriv melding..." style="flex:1;padding:10px 13px;background:#08180a;border:1px solid #142a12;border-radius:20px;font-size:16px;color:#a8e4ae;" onkeydown="if(event.key===\'Enter\')admSendB2BMsg()">'
+      +'<button onclick="admSendB2BMsg()" style="padding:10px 18px;border-radius:20px;background:rgba(60,200,93,0.22);border:1px solid rgba(60,200,93,0.45);color:#60f090;font-size:13px;font-weight:600;cursor:pointer;">Send</button>'
+      +'</div>');
+}
 function viewBedriftskunder(){
+  if(ADM_B2B_CHAT_EMAIL) return viewB2BChatThread();
   var clients=DATA.b2bClients||[];
   var reqs=window.B2B_REQUESTS||[];
   var pending=reqs.filter(function(r){return r.status==='ny'||r.status==='pending';});
@@ -4614,6 +4715,7 @@ function viewBedriftskunder(){
         +'Godkjent: '+esc(c.approvedDate||'-')+'</div>'
         +'<div style="display:flex;gap:4px;margin-top:0.6rem;flex-wrap:wrap;">'
         +(c.offer_status==='pending_offer'?btn('📩 Send tilbud','admB2bSendOffer('+j+')','#c97d6e'):btn('% Rabatt','admB2bDiscount('+j+')','#4ae877'))
+        +(c.epost?btn('💬 Meldinger',"admOpenB2BChat('"+esc(c.epost)+"')",'#5ab85e'):'')
         +(c.active?btn('Sperre','admB2bSuspend('+j+')','#c0392b'):btn('Aktiver','admB2bToggle('+j+')','#5bc05a'))
         +(c.epost?'<a href="mailto:'+esc(c.epost)+'" style="display:inline-block;padding:5px 10px;border-radius:12px;font-size:11px;font-weight:600;cursor:pointer;background:#2980b922;border:1px solid #2980b955;color:#2980b9;margin:1px;text-decoration:none;">✉ E-post</a>':'')
         +btn('Slett','admB2bDel('+j+')','#c0392b')

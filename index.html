@@ -478,7 +478,8 @@ nav {
   color: var(--gray); cursor: pointer; text-decoration: none; transition: color 0.2s;
 }
 .quick-cat-row a:hover { color: var(--accent); }
-.quick-cat-sep { color: var(--border); font-size: 0.9rem; }
+.quick-cat-row a:not(:last-child)::after { content: '·'; color: var(--border); margin-left: 0.6rem; }
+.quick-cat-sep { display: none; }
 
 /* ── CAT STRIP ── */
 .cat-strip-wrap {

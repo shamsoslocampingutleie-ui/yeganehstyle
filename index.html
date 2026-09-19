@@ -3208,7 +3208,7 @@ function renderPortal(){
       content+='</div>';
     });
     if(!allProds.length) content+='<div style="color:#70c87b;font-size:13px;padding:1rem 0;">Laster produkter...</div>';
-    content+='<div style="margin-top:1rem;padding-top:0.75rem;border-top:1px solid rgba(98,186,106,0.1);font-size:11px;color:#60b065;">For å bestille: send e-post eller ring oss.</div></div>';
+    content+='<div style="margin-top:1rem;padding-top:0.75rem;border-top:1px solid rgba(98,186,106,0.1);font-size:11px;color:#60b065;">For å bestille: ring oss på <a href="tel:+4797855154" style="color:#5ab85e;font-weight:600;">+47 978 55 154</a></div></div>';
 
   } else if(B2B_TAB==='meldinger'){
     var msgsHtml='';
@@ -4691,6 +4691,7 @@ function viewBedriftskunder(){
         +'<div style="display:flex;gap:4px;margin-top:0.6rem;flex-wrap:wrap;">'
         +btn('✓ Godkjenn','admB2bApprove('+i+')','#5bc05a')
         +btn('✕ Avvis','admB2bReject('+i+')','#c0392b')
+        +btn('🗑 Slett','admB2bDelReq('+i+')','#c0392b')
         +(r.epost?'<a href="mailto:'+esc(r.epost)+'" style="display:inline-block;padding:5px 10px;border-radius:12px;font-size:11px;font-weight:600;cursor:pointer;background:#2980b922;border:1px solid #2980b955;color:#2980b9;margin:1px;text-decoration:none;">✉ E-post</a>':'')
         +'</div></div>';
     });
@@ -5504,13 +5505,34 @@ window.admSaveEmp=function(){
   var colors=['#5ab85e','#60a8da','#4ae877','#c97d6e','#b48ac9'];
   var prev=editEmpId!==null?DATA.employees[editEmpId]:{};
   var emp={id:prev.id||Date.now(),name:name,role:el('admEmpRole').value.trim()||'Frisør',phone:el('admEmpPhone').value.trim(),color:prev.color||colors[DATA.employees.length%colors.length],schedule:sch,active:prev.active!==false,sort_order:prev.sort_order||0};
-  if(editEmpId!==null)DATA.employees[editEmpId]=emp;else DATA.employees.push(emp);
-  editEmpId=null;_admPersist();go('ansatte');if(window.showToast)window.showToast('Ansatt lagret ✓');
+  var s=window.sb||null;
+  var idx=editEmpId;
+  function commit(){
+    if(idx!==null)DATA.employees[idx]=emp;else DATA.employees.push(emp);
+    editEmpId=null;_admPersist();go('ansatte');if(window.showToast)window.showToast('Ansatt lagret ✓');
+  }
+  if(s){
+    s.from('employees').upsert({id:emp.id,name:emp.name,role:emp.role,phone:emp.phone||'',color:emp.color||'#5ab85e',schedule:emp.schedule,active:emp.active!==false},{onConflict:'id'}).then(function(r){
+      if(r.error){ if(window.showToast) window.showToast('⚠ Lagring feilet: '+r.error.message); return; }
+      commit();
+    });
+  } else {
+    commit();
+  }
 };
 window.admCancelEmp=function(){el('admEmpForm').style.display='none';};
 window.admDelEmp=function(i){
-  if(!confirm('Slette ansatt '+DATA.employees[i].name+'?'))return;
-  DATA.employees.splice(i,1);_admPersist();go('ansatte');if(window.showToast)window.showToast('Ansatt fjernet');
+  var emp=DATA.employees[i]; if(!emp) return;
+  if(!confirm('Slette ansatt '+emp.name+'?'))return;
+  var s=window.sb||null;
+  if(s&&emp.id){
+    s.from('employees').delete().eq('id',emp.id).then(function(r){
+      if(r.error){ if(window.showToast) window.showToast('⚠ Sletting feilet: '+r.error.message); return; }
+      DATA.employees.splice(i,1);_admPersist();go('ansatte');if(window.showToast)window.showToast('Ansatt fjernet');
+    });
+  } else {
+    DATA.employees.splice(i,1);_admPersist();go('ansatte');if(window.showToast)window.showToast('Ansatt fjernet');
+  }
 };
 
 // ── TREATMENT ACTIONS ──
@@ -5571,6 +5593,21 @@ window.admB2bReject=function(i){
     req.status='avvist';
     if(req.supaId) s.from('b2b_requests').update({status:'avvist'}).eq('id',req.supaId).then(function(){});
     go('bedriftskunder');if(window.showToast)window.showToast('Søknad avvist');
+  });
+};
+window.admB2bDelReq=function(i){
+  var req=window.B2B_REQUESTS&&window.B2B_REQUESTS[i];if(!req) return;
+  if(!confirm('Slette søknaden fra '+req.firma+' permanent?'))return;
+  var s=window.sb||null;
+  if(!s||!req.epost){
+    if(window.showToast) window.showToast('⚠ Ikke tilkoblet database — sletting ble IKKE lagret. Prøv igjen.');
+    return;
+  }
+  s.from('b2b_applications').delete().eq('email',req.epost).then(function(r){
+    if(r.error){ if(window.showToast) window.showToast('⚠ Sletting feilet: '+r.error.message); return; }
+    if(req.supaId) s.from('b2b_requests').delete().eq('id',req.supaId).then(function(){});
+    window.B2B_REQUESTS=window.B2B_REQUESTS.filter(function(x){return x!==req;});
+    go('bedriftskunder');if(window.showToast)window.showToast('Søknad slettet');
   });
 };
 window.admB2bSuspend=function(i){

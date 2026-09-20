@@ -2249,7 +2249,6 @@ function confirmPayment(){
     if(payBtn){payBtn.disabled=false;payBtn.textContent='Send bestilling';}
     if(r.error){showToast('Klarte ikke å sende bestillingen. Prøv igjen.');return;}
     cart.forEach(function(c){
-      sb.rpc('decrement_product_stock',{p_id:c.id,p_qty:c.qty}).then(function(){},function(){});
       for(var i=0;i<PRODUCTS.length;i++){
         if(String(PRODUCTS[i].id)===String(c.id)){
           var cur=PRODUCTS[i].stock!=null?PRODUCTS[i].stock:20;

@@ -32,7 +32,7 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://jlpctmebyxthhwjttysh.supabase.co" crossorigin>
 <!-- Preload hero logo (LCP element) -->
-<link rel="preload" as="image" href="https://jlpctmebyxthhwjttysh.supabase.co/storage/v1/render/image/public/product-images/logo-white.png?width=480&quality=85" fetchpriority="high">
+<link rel="preload" as="image" href="https://jlpctmebyxthhwjttysh.supabase.co/storage/v1/render/image/public/product-images/logo-white.png?width=480&height=185&resize=contain&quality=85&format=webp" fetchpriority="high">
 <!-- Preload critical fonts -->
 <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/inter/v20/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7W0Q5nw.woff2">
 <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/cormorantgaramond/v21/co3bmX5slCNuHLi8bLeY9MK7whWMhyjYqXtKky2F7g.woff2">
@@ -1335,7 +1335,7 @@ nav { }
 <nav>
   <!-- Logo -->
   <a href="#" class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;" aria-label="Yeganeh Style – til toppen">
-    <img src="https://jlpctmebyxthhwjttysh.supabase.co/storage/v1/render/image/public/product-images/logo-white.png?width=220&quality=80"
+    <img src="https://jlpctmebyxthhwjttysh.supabase.co/storage/v1/render/image/public/product-images/logo-white.png?width=220&height=85&resize=contain&quality=80&format=webp"
          alt="Yeganeh Style" class="nav-logo-img" fetchpriority="high">
   </a>
 
@@ -1403,7 +1403,7 @@ nav { }
 <div class="mobile-menu" id="mobileMenu">
   <div class="mm-header">
     <span class="mm-logo">
-      <img src="https://jlpctmebyxthhwjttysh.supabase.co/storage/v1/render/image/public/product-images/logo-white.png?width=120&quality=75"
+      <img src="https://jlpctmebyxthhwjttysh.supabase.co/storage/v1/render/image/public/product-images/logo-white.png?width=120&height=46&resize=contain&quality=75&format=webp"
            alt="Yeganeh Style" style="height:26px;width:auto;opacity:0.9;">
     </span>
     <button class="mobile-menu-close" onclick="closeMenu()" aria-label="Lukk meny">✕</button>
@@ -1432,7 +1432,7 @@ nav { }
 <!-- HERO -->
 <section class="hero" id="hjem">
   <div class="hero-inner">
-    <img class="hero-logo" src="https://jlpctmebyxthhwjttysh.supabase.co/storage/v1/render/image/public/product-images/logo-white.png?width=480&quality=85" alt="Yeganeh Style AS" draggable="false" fetchpriority="high">
+    <img class="hero-logo" src="https://jlpctmebyxthhwjttysh.supabase.co/storage/v1/render/image/public/product-images/logo-white.png?width=480&height=185&resize=contain&quality=85&format=webp" alt="Yeganeh Style AS" draggable="false" fetchpriority="high">
     <p class="hero-tagline">Vi bryr oss om deg</p>
 
     <div class="hero-divider"></div>
@@ -1968,7 +1968,8 @@ function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'
 // Resize/compress Supabase Storage images on the fly instead of shipping full-res originals as thumbnails.
 function imgT(url,w,q){
   if(!url||url.indexOf('/storage/v1/object/public/')===-1) return url;
-  return url.replace('/storage/v1/object/public/','/storage/v1/render/image/public/')+'?width='+(w||300)+'&quality='+(q||75);
+  w=w||300;
+  return url.replace('/storage/v1/object/public/','/storage/v1/render/image/public/')+'?width='+w+'&height='+w+'&resize=contain&quality='+(q||75)+'&format=webp';
 }
 // ── SUPABASE — loaded async, init via callback ──
 var SB_URL='https://jlpctmebyxthhwjttysh.supabase.co';

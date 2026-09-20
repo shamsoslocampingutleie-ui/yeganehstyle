@@ -2032,6 +2032,29 @@ window._onSbLoad=function(){
       renderReviews();
     }
   });
+
+  // Refresh employees/treatments/opening hours from DB so public booking always
+  // reflects the admin's current data, not the static fallback baked into this file.
+  sb.from('employees').select('*').order('sort_order').then(function(res){
+    if(res.data&&res.data.length&&window.DATA){
+      window.DATA.employees=res.data.map(function(r){return{id:r.id,name:r.name,role:r.role||'Frisør',phone:r.phone||'',color:r.color||'#5ab85e',schedule:r.schedule||{},active:r.active!==false};});
+    }
+  });
+  sb.from('treatments').select('*').order('sort_order').then(function(res){
+    if(res.data&&res.data.length&&window.DATA){
+      var sbTreats=res.data.map(function(r){return{id:r.id,name:r.name,cat:r.cat||'Klipp',price:r.price||0,duration:r.duration||30,active:r.active!==false,type:r.type||'frisør',stylist:r.stylist||''};});
+      var sbNails=sbTreats.filter(function(t){return t.type==='nails';});
+      var defaultNails=window.DATA.treatments.filter(function(t){return t.type==='nails';});
+      window.DATA.treatments=sbTreats.filter(function(t){return t.type!=='nails';}).concat(sbNails.length?sbNails:defaultNails);
+    }
+  });
+  sb.from('opening_hours').select('*').then(function(res){
+    if(res.data&&res.data.length&&window.DATA){
+      var oh={};
+      res.data.forEach(function(r){oh[r.day]={open:!!r.open,from:r.from_time||'',to:r.to_time||''};});
+      window.DATA.openingHours=oh;
+    }
+  });
 };
 
 // Real products load async from Supabase (see _onSbLoad below). Starts empty —

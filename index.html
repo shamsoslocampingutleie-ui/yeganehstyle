@@ -1433,7 +1433,6 @@ nav { }
   <div class="hero-inner">
     <img class="hero-logo" src="https://jlpctmebyxthhwjttysh.supabase.co/storage/v1/object/public/product-images/logo-white.png" alt="Yeganeh Style AS" draggable="false" fetchpriority="high">
     <p class="hero-tagline">Vi bryr oss om deg</p>
-    <div class="open-status" id="openStatus"><span class="dot"></span><span id="openStatusText">Sjekker åpningstider…</span></div>
 
     <div class="hero-divider"></div>
     <div class="hero-btns">
@@ -1441,6 +1440,8 @@ nav { }
       <button class="hero-btn" onclick="openProdOverlay()">Produkter</button>
       <button class="hero-btn" onclick="openB2B()">Bedrift</button>
     </div>
+    <div class="open-status" id="openStatus"><span class="dot"></span><span id="openStatusText">Sjekker åpningstider…</span></div>
+    <div style="font-size:10px;color:var(--muted);margin-top:6px;">Nettbutikken er alltid åpen — kun salongbesøk er tidsbegrenset</div>
   </div>
 </section>
 
@@ -2013,8 +2014,10 @@ window._onSbLoad=function(){
       window.PRODUCTS=res.data.map(function(p){
         return {id:p.id,name:p.name,brand:p.brand||'NAK Hair',cat:p.category,price:p.price,oldPrice:p.old_price,emoji:p.emoji||'',desc:p.description,badge:p.badge,stock:p.stock,img:p.image_url||null,b2bPrice:p.b2b_price!=null?p.b2b_price:null};
       });
-      renderProducts();
     }
+    window._productsReady=true;
+    renderProducts();
+    if(window._prodOvRefresh) window._prodOvRefresh();
   });
 
   // Refresh reviews from DB
@@ -2030,24 +2033,10 @@ window._onSbLoad=function(){
   });
 };
 
-var PRODUCTS = [
-  {id:1,name:'Scalp Relief Shampoo',brand:'NAK Hair',cat:'shampoo',price:289,emoji:'🧴',desc:'Beroligende for sensitiv hodebunne',badge:'best',stock:20},
-  {id:2,name:'Hydrate Me Shampoo',brand:'NAK Hair',cat:'shampoo',price:259,emoji:'💧',desc:'Intensiv fuktighetsgivende rens',badge:null,stock:20},
-  {id:3,name:'Colour Protect Shampoo',brand:'NAK Hair',cat:'shampoo',price:279,emoji:'🌈',desc:'Bevarer farge og glans lenger',badge:'new',stock:20},
-  {id:4,name:'Nourish Shampoo',brand:'NAK Hair',cat:'shampoo',price:269,emoji:'🌿',desc:'Nærende formel for tørt hår',badge:null,stock:20},
-  {id:5,name:'Hydrate Me Conditioner',brand:'NAK Hair',cat:'conditioner',price:269,emoji:'🫧',desc:'Dyp fuktighetsbehandling',badge:'best',stock:20},
-  {id:6,name:'Smooth Shine Conditioner',brand:'NAK Hair',cat:'conditioner',price:249,emoji:'✨',desc:'Glatter og gir høyglans',badge:null,stock:20},
-  {id:7,name:'Nourish Conditioner',brand:'NAK Hair',cat:'conditioner',price:259,emoji:'🌾',desc:'Rik kondisjonering for tørt hår',badge:'new',stock:20},
-  {id:8,name:'Repair Treatment',brand:'NAK Hair',cat:'behandling',price:349,emoji:'💆',desc:'Intensiv reparerende hårmaske',badge:'new',stock:20},
-  {id:9,name:'Keratin Masque',brand:'NAK Hair',cat:'behandling',price:399,emoji:'💎',desc:'Keratinrik dybdebehandling',badge:null,stock:20},
-  {id:10,name:'Bond Complex',brand:'NAK Hair',cat:'behandling',price:449,emoji:'⚗️',desc:'Profesjonell hårbindingspleie',badge:'sale',oldPrice:519,stock:20},
-  {id:11,name:'Argan Oil Serum',brand:'NAK Hair',cat:'behandling',price:319,emoji:'🌺',desc:'Luksus argan-olje serum',badge:null,stock:20},
-  {id:12,name:'Styling Cream',brand:'NAK Hair',cat:'styling',price:229,emoji:'💅',desc:'Lett krem for definiering og hold',badge:null,stock:20},
-  {id:13,name:'Texture Spray',brand:'NAK Hair',cat:'styling',price:199,emoji:'💨',desc:'Volum og tekstur uten klebrighet',badge:'best',stock:20},
-  {id:14,name:'Heat Protect Spray',brand:'NAK Hair',cat:'styling',price:239,emoji:'🔥',desc:'Beskytter mot varme opptil 230 grader',badge:null,stock:20},
-  {id:15,name:'Glossing Serum',brand:'NAK Hair',cat:'styling',price:279,emoji:'💫',desc:'Anti-frizz serum for ultraglans',badge:'new',stock:20},
-  {id:16,name:'Volume Mousse',brand:'NAK Hair',cat:'styling',price:219,emoji:'🫙',desc:'Lett mousse for løft og hold',badge:null,stock:20}
-];
+// Real products load async from Supabase (see _onSbLoad below). Starts empty —
+// never show placeholder demo products, since a customer could add a fake one
+// to cart before real data arrives.
+var PRODUCTS = [];
 window.PRODUCTS = PRODUCTS;
 
 var cart=[];
@@ -2093,6 +2082,7 @@ function renderProducts(){
   // Homepage: 4 products rotating every 2 days from the full catalog
   var grid=document.getElementById('productGrid'); if(!grid) return;
   var all=window.PRODUCTS||[];
+  if(!all.length){ grid.innerHTML='<p style="color:var(--gray);text-align:center;padding:2rem;grid-column:1/-1;">Laster produkter…</p>'; return; }
   var popular=_pickRotatingProducts(all,4);
   var html=''; for(var i=0;i<popular.length;i++) html+=_prodCardHtml(popular[i]);
   grid.innerHTML=html;
@@ -6106,7 +6096,9 @@ if(window.renderNailsGrid) window.renderNailsGrid();
     if(body){body.innerHTML=html;body.scrollTop=0;}
   }
 
+  var _curCat=null;
   function _showCat(cat){
+    _curCat=cat;
     var info=CAT_INFO[cat]||{icon:'',name:cat};
     _setTitle(info.name);
     _setBack(true);
@@ -6115,12 +6107,17 @@ if(window.renderNailsGrid) window.renderNailsGrid();
     var html='<div class="prod-ov-grid">';
     for(var i=0;i<items.length;i++) html+=_prodCardHtml(items[i]);
     html+='</div>';
-    if(!items.length) html='<p style="color:var(--gray);text-align:center;padding:2rem;">Ingen produkter her ennå.</p>';
+    if(!items.length) html='<p style="color:var(--gray);text-align:center;padding:2rem;">'+(window._productsReady?'Ingen produkter her ennå.':'Laster produkter…')+'</p>';
     var body=document.getElementById('prodOvBody');
     if(body){body.innerHTML=html;body.scrollTop=0;}
   }
 
   window._prodOvShowCat=_showCat;
+  window._prodOvRefresh=function(){
+    var ov=document.getElementById('prodOverlay');
+    if(!ov||!ov.classList.contains('open')) return;
+    if(_curCat) _showCat(_curCat); else _showCats();
+  };
 
   // Close on back gesture / escape
   document.addEventListener('keydown',function(e){

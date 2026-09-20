@@ -350,7 +350,7 @@ nav {
   font-family: 'Inter', sans-serif;
   font-size: 12px; font-weight: 600; letter-spacing: 0.02em;
   padding: 7px 16px; border-radius: 20px;
-  margin: -1.6rem 0 2rem;
+  margin: 1.75rem 0 0;
   background: rgba(255,255,255,0.05);
   border: 1px solid rgba(100,200,107,0.25);
   color: var(--text-dim);
@@ -452,6 +452,7 @@ nav {
 .prod-cat-card:hover { border-color: var(--accent); background: rgba(96,184,101,0.07); }
 .prod-cat-card:active { transform: scale(0.97); }
 .prod-cat-icon { font-size: 2.2rem; line-height: 1; }
+.prod-cat-photo { width: 60px; height: 60px; border-radius: 14px; object-fit: cover; }
 .prod-cat-name { font-size: 13px; font-weight: 500; color: var(--text); letter-spacing: 0.02em; }
 .prod-cat-count { font-size: 11px; color: var(--gray); }
 .prod-ov-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 0.75rem; }
@@ -6084,9 +6085,15 @@ if(window.renderNailsGrid) window.renderNailsGrid();
     var html='<div class="prod-cat-grid">';
     cats.forEach(function(cat){
       var info=CAT_INFO[cat]||{icon:'•',name:cat};
-      var count=cat==='alle'?prods.length:prods.filter(function(p){return p.cat===cat;}).length;
+      var inCat=cat==='alle'?prods:prods.filter(function(p){return p.cat===cat;});
+      var count=inCat.length;
+      var thumb=null;
+      for(var t=0;t<inCat.length;t++){ if(inCat[t].img){ thumb=inCat[t].img; break; } }
+      var iconHtml=thumb
+        ?'<img src="'+esc(thumb)+'" alt="" loading="lazy" class="prod-cat-photo">'
+        :'<div class="prod-cat-icon">'+info.icon+'</div>';
       html+='<div class="prod-cat-card" onclick="window._prodOvShowCat(\''+cat+'\')">'
-        +'<div class="prod-cat-icon">'+info.icon+'</div>'
+        +iconHtml
         +'<div class="prod-cat-name">'+info.name+'</div>'
         +'<div class="prod-cat-count">'+count+' produkter</div>'
         +'</div>';

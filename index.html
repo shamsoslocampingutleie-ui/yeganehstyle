@@ -1882,43 +1882,31 @@ nav { }
       <div class="order-summary" id="orderSummary" style="margin:0.75rem 0"></div>
 
       <!-- Betalingsmetode -->
-      <p style="font-size:11px;color:var(--gray);margin-bottom:0.6rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase">Betalingsmetode</p>
+      <p style="font-size:11px;color:var(--gray);margin-bottom:0.6rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase">Ønsket betalingsmåte</p>
       <div class="pay-methods">
         <div class="pay-method selected" onclick="selectPay(this,'vipps')">
           <div class="pay-method-icon" style="font-weight:700;font-size:11px;color:#ff5b24;">Vipps</div>
-          <div><div class="pay-method-label">Vipps</div><div class="pay-method-sub">Betal med Vipps</div></div>
+          <div><div class="pay-method-label">Vipps</div><div class="pay-method-sub">Vi sender Vipps-krav</div></div>
           <div class="pay-radio"></div>
         </div>
-        <div class="pay-method" onclick="selectPay(this,'klarna')">
-          <div class="pay-method-icon" style="font-weight:700;font-size:11px;color:#ffb3c7;">Klarna</div>
-          <div><div class="pay-method-label">Klarna</div><div class="pay-method-sub">Del opp eller betal nå</div></div>
-          <div class="pay-radio"></div>
-        </div>
-        <div class="pay-method" onclick="selectPay(this,'apple')">
-          <div class="pay-method-icon" style="font-weight:700;font-size:11px;color:#a8e4ae;">Pay</div>
-          <div><div class="pay-method-label">Apple Pay</div><div class="pay-method-sub">Touch ID / Face ID</div></div>
+        <div class="pay-method" onclick="selectPay(this,'faktura')">
+          <div class="pay-method-icon" style="font-weight:700;font-size:11px;color:#ffb3c7;">Faktura</div>
+          <div><div class="pay-method-label">Faktura</div><div class="pay-method-sub">Vi sender faktura</div></div>
           <div class="pay-radio"></div>
         </div>
         <div class="pay-method" onclick="selectPay(this,'card')">
-          <div class="pay-method-icon" style="font-weight:700;font-size:11px;color:#60a8da;">Kort</div>
-          <div><div class="pay-method-label">Kort</div><div class="pay-method-sub">Visa / Mastercard</div></div>
+          <div class="pay-method-icon" style="font-weight:700;font-size:11px;color:#60a8da;">Kort/kontant</div>
+          <div><div class="pay-method-label">Kort/kontant</div><div class="pay-method-sub">Betal ved henting</div></div>
           <div class="pay-radio"></div>
         </div>
       </div>
-      <div id="cardFields" style="display:none">
-        <div class="form-group"><label>Kortnummer</label><input type="text" placeholder="0000 0000 0000 0000" maxlength="19" oninput="fmtCard(this)"></div>
-        <div class="form-row date-time">
-          <div class="form-group"><label>Utløper</label><input type="text" placeholder="MM/ÅÅ" maxlength="5" style="width:100%;padding:10px;background:rgba(14,34,15,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;min-width:0"></div>
-          <div class="form-group"><label>CVC</label><input type="text" placeholder="•••" maxlength="3" style="width:100%;padding:10px;background:rgba(14,34,15,0.9);border:1px solid var(--border);border-radius:10px;font-size:16px;color:var(--text);font-family:inherit;min-width:0"></div>
-        </div>
-        <div class="form-group"><label>Navn på kort</label><input type="text" placeholder="Fullt navn"></div>
-      </div>
-      <button class="confirm-btn" id="payBtn" onclick="confirmPayment()">Betal nå</button>
+      <p style="font-size:11px;color:var(--muted);margin:-0.3rem 0 0.9rem;line-height:1.5;">Vi tar kontakt for å bekrefte og kreve inn betaling (ingen kortopplysninger samles inn her).</p>
+      <button class="confirm-btn" id="payBtn" onclick="confirmPayment()">Send bestilling</button>
     </div>
     <div class="success-msg" id="checkoutSuccess">
       <div class="success-icon" style="color:#70c87b;font-size:2rem;">&check;</div>
       <h3>Bestilling mottatt!</h3>
-      <p id="checkoutSuccessMsg">Kvittering sendes til din e-post. Levering 2–4 virkedager.</p>
+      <p id="checkoutSuccessMsg">Vi tar kontakt for å bekrefte bestillingen og avtale betaling. Kvittering sendes til din e-post.</p>
     </div>
   </div>
 </div>
@@ -2207,13 +2195,11 @@ function openCheckout(){
   var grand=sum+ship;
   html+='<div class="order-row total"><span>Totalt</span><span>'+grand+' kr</span></div>';
   document.getElementById('orderSummary').innerHTML=html;
-  document.getElementById('payBtn').textContent='Betal '+grand+' kr';
+  document.getElementById('payBtn').textContent='Send bestilling ('+grand+' kr)';
   var cf=document.getElementById('checkoutForm');
   var cs=document.getElementById('checkoutSuccess');
   cf.removeAttribute('style');
   cs.className='success-msg';
-  // Reset card fields
-  document.getElementById('cardFields').style.display='none';
   var methods=document.querySelectorAll('.pay-method');
   for(var i=0;i<methods.length;i++) methods[i].classList.remove('selected');
   if(methods.length) methods[0].classList.add('selected');
@@ -2227,12 +2213,6 @@ function selectPay(el,method){
   var all=document.querySelectorAll('.pay-method');
   for(var i=0;i<all.length;i++) all[i].classList.remove('selected');
   el.classList.add('selected');
-  var cf=document.getElementById('cardFields');
-  if(cf) cf.style.display=method==='card'?'block':'none';
-}
-function fmtCard(inp){
-  var v=inp.value.replace(/\D/g,'').substring(0,16);
-  inp.value=v.replace(/(.{4})/g,'$1 ').trim();
 }
 function confirmPayment(){
   var fornavn=document.getElementById('ckFornavn').value.trim();
@@ -2245,6 +2225,7 @@ function confirmPayment(){
   if(!epost){showToast('Fyll inn e-post');return;}
   if(!telefon){showToast('Fyll inn telefon');return;}
   if(!adresse||!postnr||!sted){showToast('Fyll inn fullstendig adresse');return;}
+  if(!sb){showToast('Kunne ikke koble til. Prøv igjen.');return;}
   // Build order for admin
   var items='',sum=0;
   for(var i=0;i<cart.length;i++){
@@ -2252,18 +2233,21 @@ function confirmPayment(){
     sum+=cart[i].price*cart[i].qty;
   }
   var ship=sum>=499?0:59;
-  var payNames={vipps:'Vipps',klarna:'Klarna',apple:'Apple Pay',card:'Kort'};
+  var payNames={vipps:'Vipps',faktura:'Faktura',card:'Kort/kontant'};
   var fullName=(fornavn+' '+document.getElementById('ckEtternavn').value.trim()).trim();
   var orderData={
     customer_name:fullName,email:epost,phone:telefon,
     address:adresse+', '+postnr+' '+sted,
-    items:cart.map(function(c){return {name:c.name,qty:c.qty,price:c.price};}),
+    items:cart.map(function(c){return {id:c.id,name:c.name,qty:c.qty,price:c.price};}),
     total:sum+ship,shipping:ship,
-    payment_method:payNames[selectedPay]||'Kort',
+    payment_method:payNames[selectedPay]||'Vipps',
     status:'ny'
   };
-  if(sb){
-    sb.from('orders').insert(orderData).then(function(){});
+  var payBtn=document.getElementById('payBtn');
+  if(payBtn){payBtn.disabled=true;payBtn.textContent='Sender...';}
+  sb.from('orders').insert(orderData).then(function(r){
+    if(payBtn){payBtn.disabled=false;payBtn.textContent='Send bestilling';}
+    if(r.error){showToast('Klarte ikke å sende bestillingen. Prøv igjen.');return;}
     cart.forEach(function(c){
       sb.rpc('decrement_product_stock',{p_id:c.id,p_qty:c.qty}).then(function(){},function(){});
       for(var i=0;i<PRODUCTS.length;i++){
@@ -2275,21 +2259,21 @@ function confirmPayment(){
       }
     });
     renderProducts();
-  }
-  if(window.ADMIN_ADD_ORDER && cart.length){
-    window.ADMIN_ADD_ORDER({
-      customer:fullName,phone:telefon,email:epost,
-      address:adresse+', '+postnr+' '+sted,
-      items:items,total:sum+ship,
-      payment:payNames[selectedPay]||'Kort'
-    });
-  }
-  var cf=document.getElementById('checkoutForm');
-  var cs=document.getElementById('checkoutSuccess');
-  document.getElementById('checkoutSuccessMsg').textContent='Kvittering sendes til '+epost+'. Levering til '+adresse+', '+postnr+' '+sted+' innen 2–4 virkedager.';
-  cf.style.display='none';
-  cs.className='success-msg show';
-  cart=[];updateCartUI();
+    if(window.ADMIN_ADD_ORDER && cart.length){
+      window.ADMIN_ADD_ORDER({
+        customer:fullName,phone:telefon,email:epost,
+        address:adresse+', '+postnr+' '+sted,
+        items:items,total:sum+ship,
+        payment:payNames[selectedPay]||'Vipps'
+      });
+    }
+    var cf=document.getElementById('checkoutForm');
+    var cs=document.getElementById('checkoutSuccess');
+    document.getElementById('checkoutSuccessMsg').textContent='Vi tar kontakt for å bekrefte bestillingen og avtale betaling ('+(payNames[selectedPay]||'Vipps')+'). Levering til '+adresse+', '+postnr+' '+sted+' innen 2–4 virkedager.';
+    cf.style.display='none';
+    cs.className='success-msg show';
+    cart=[];updateCartUI();
+  });
 }
 
 function doAdminLogin(){

@@ -66,7 +66,7 @@
     {"@type": "OpeningHoursSpecification", "dayOfWeek": "Thursday", "opens": "09:00", "closes": "20:00"},
     {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "16:00"}
   ],
-  "aggregateRating": {"@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "33", "bestRating": "5"},
+  "aggregateRating": {"@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "109", "bestRating": "5"},
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
     "name": "Frisørtjenester",
@@ -1521,7 +1521,7 @@ nav { }
   <div class="section-glass">
     <div class="section-eyebrow">Anmeldelser</div>
     <h2 class="section-title">Hva kundene sier</h2>
-    <p class="section-sub" id="reviewSummary">5,0 stjerner · 33 Google-anmeldelser</p>
+    <p class="section-sub" id="reviewSummary">5,0 stjerner · 109 kundeanmeldelser</p>
   </div>
   <div class="reviews-list" id="reviewsPreview"></div>
   <div style="text-align:center;margin-top:1rem;display:flex;flex-wrap:wrap;justify-content:center;gap:0.6rem;">
@@ -2576,7 +2576,83 @@ var REVIEWS=[
   {name:'Morthen Hopaneng',rating:5,text:'Good and affordable.',date:'2021',approved:true},
   {name:'Althea Lesure',rating:5,text:'I have never liked going to the hairdresser — I am more relaxed at the dentist! But here I felt completely comfortable and left with great hair.',date:'2023',approved:true},
   {name:'Lene Rognlien Nymoen',rating:5,text:'Fantastic service and finally a hairdresser who cut what he thought suited me 😊 Really happy with both my haircut and my little boy\'s 😊',date:'2019',approved:true},
-  {name:'Ingar Hagen',rating:5,text:'The service is fantastic, you\'ll want to come back again.',date:'2019',approved:true}
+  {name:'Ingar Hagen',rating:5,text:'The service is fantastic, you\'ll want to come back again.',date:'2019',approved:true},
+  {name:'Heidi F',rating:5,text:'Veldig dyktig og hyggelig frisør!!',date:'Mai 2026',approved:true},
+  {name:'Heidi F',rating:5,text:'Kom med masse gode tips for friskt hår, og frøkna var kjempefornøyd med klippen!',date:'Mai 2026',approved:true},
+  {name:'Mads I',rating:5,text:'Veldig fornøyd med Hadi og jobben han gjør. Utmerket frisør!',date:'April 2026',approved:true},
+  {name:'Anette D',rating:5,text:'Veldig hyggelig.',date:'April 2026',approved:true},
+  {name:'Ida M',rating:5,text:'Alltid hyggelig, dyktig frisør',date:'Mars 2026',approved:true},
+  {name:'Tor E',rating:5,text:'Helt topp som vanlig.',date:'Desember 2025',approved:true},
+  {name:'Piia R',rating:5,text:'Veldig fornøyd! Hadi var nøye og flink, forklarte godt hva som passet meg. Kjøpte gode produkter som er lette å bruke. Hyggelig og morsom opplevelse. Topp service!⭐️⭐️⭐️⭐️⭐️',date:'2025',approved:true},
+  {name:'Mads I',rating:5,text:'Veldig fornøyd med skinfade klippen, dyktig frisør 😁',date:'2025',approved:true},
+  {name:'Anne J',rating:5,text:'Alltid fornøyd med Hadi!',date:'2025',approved:true},
+  {name:'Mads I',rating:5,text:'Kjempe fornøyd med skin fade og service hos frisøren 😁',date:'2025',approved:true},
+  {name:'Tor E',rating:5,text:'Beste frisør jeg har hatt .',date:'2025',approved:true},
+  {name:'Maria I',rating:5,text:'Han liker jobben sin og det gjør at man blir fornøyd med resultatet.',date:'2025',approved:true},
+  {name:'Audun S',rating:5,text:'Gir det lille ekstra, og alltid i godt humør',date:'2025',approved:true},
+  {name:'Dan T',rating:5,text:'Hundre prosent ! 10/10 . Jeg er veldig kritisk og vanskelig kunde men jeg har ingenting å pirke på. Hadi gjør det skikkelig hver gang! 👍👍',date:'2025',approved:true},
+  {name:'Evy M',rating:5,text:'Hyggelig frisør, meget nøye, lar deg ikke gå før frisyren er 100%',date:'2025',approved:true},
+  {name:'Audun S',rating:5,text:'Hyggelig, morsom og flink',date:'2025',approved:true},
+  {name:'Ida M',rating:5,text:'Alltid fornøyd.',date:'2024',approved:true},
+  {name:'Tor E',rating:5,text:'Beste frisør vi har hatt like bra hver gang.',date:'2024',approved:true},
+  {name:'Mads I',rating:5,text:'Meget dyktig frisør. Har vært her regelmessig i et års tid og ingen ting å klage på👍🏻 imøtekommende og hyggelig.',date:'2024',approved:true},
+  {name:'Guro G',rating:5,text:'God service, hyggelig tone og flott resultat på gutt 15.',date:'2024',approved:true},
+  {name:'Clive H',rating:5,text:'Veldig flott klipp og fantastisk god service. Anbefales!',date:'2024',approved:true},
+  {name:'Per-andre R',rating:5,text:'Proff og blid håndtering fra Frisør. Anbefales.',date:'2024',approved:true},
+  {name:'Martin G',rating:5,text:'Kjempeflink frisør, tok seg god tid på meg og lærte meg til og med hvordan jeg kan ta bedre vare på håret i fremtiden👍',date:'2024',approved:true},
+  {name:'Kent R',rating:5,text:'Veldig profesjonell, god på anbefalinger',date:'2024',approved:true},
+  {name:'Dan T',rating:5,text:'Hadi klipper med lidenskap og stolthet og han gjør den mest gjennomførte og fin-detaljerte skinfaden hver gang . Har prøvd alle frisører på Romerike , men blir ikke så fornøyd som jeg blir hos Hadi. Så har funnet min frisør her, og endelig en som ikke er slurvete og som jeg må også klippe selv når kommer hjem. Alltid fornøyd og både får høre at jeg ser bra ut og føler det selv når jeg har klippet meg her.',date:'2024',approved:true},
+  {name:'Anders H',rating:5,text:'Rask, proffesjonell og hyggelig. Grei pris.',date:'2024',approved:true},
+  {name:'Martin F',rating:5,text:'Tipp topp og sinnsykt bra kvalitet og ikke minst servicen er beste:) Stiller alltid opp om det er sent eller tidlig!',date:'2024',approved:true},
+  {name:'Jørgen',rating:5,text:'Perfekt fade🔥',date:'2024',approved:true},
+  {name:'Kent R',rating:5,text:'Effektiv og hyggelig, bra pris',date:'2024',approved:true},
+  {name:'Roger L',rating:5,text:'Meget godt fornøyd med klipp hver gang.',date:'2024',approved:true},
+  {name:'André E',rating:5,text:'Dette er en fantastisk frisør jeg kan anbefale på det varmeste! Profesjonell og har god humor. Tar seg god tid med kunden.',date:'2024',approved:true},
+  {name:'Jørgen',rating:5,text:'Helt perfekt klipp!🔥',date:'2024',approved:true},
+  {name:'Fredrick',rating:5,text:'Helt fantastisk!',date:'2024',approved:true},
+  {name:'Jeanette O',rating:5,text:'Helt fantastisk! Anbefaler han på det sterkeste! Skal absolutt gå til han hver gang jeg skal klippe meg.',date:'2024',approved:true},
+  {name:'Siniša M',rating:5,text:'Hadi er best',date:'2024',approved:true},
+  {name:'Frode L',rating:5,text:'Super service av Hadid! God sommer.👍',date:'2024',approved:true},
+  {name:'Fredrick',rating:5,text:'Helt fantastisk hyggelig mann med humor! Vet hva han driver med og snakker om. Veldig fornøyd med servicen!',date:'2024',approved:true},
+  {name:'Roger L',rating:5,text:'Alltid fornøyd når jeg har vært der og fått standard herreklipp. Hyggelig som alltid :)',date:'2024',approved:true},
+  {name:'Eivind M',rating:5,text:'Flott og artig frisør. Gjør jobben grundig! Anbefales',date:'2024',approved:true},
+  {name:'Mads I',rating:5,text:'Meget fornøyd med klipp & service',date:'2024',approved:true},
+  {name:'Petra B',rating:5,text:'Kjempefornøyd, som alltid da jeg har vært der.',date:'2023',approved:true},
+  {name:'Jan A',rating:5,text:'En frisør som virkelig kan klippe😀😀',date:'2023',approved:true},
+  {name:'Roger L',rating:5,text:'Rask og effektiv med godt resultat. Perfekt med timebestilling på nett. Grei pris. Gir derfor samlet 5 stjerner.',date:'2023',approved:true},
+  {name:'Siniša M',rating:5,text:'Altid like gøy å komme til Hadi',date:'2023',approved:true},
+  {name:'Jørgen',rating:5,text:'Varmeste faden jeg har fått🙏🔥🔥',date:'2023',approved:true},
+  {name:'Clive H',rating:5,text:'Veldig flott klipp i hyggelig atmosfære og med god og vennlig stemning. 6 av 6 på terningen. Kan absolutt anbefales. 👍🏼',date:'2023',approved:true},
+  {name:'Kenneth B',rating:5,text:'Helt suveren klipp og kundebehandling 👌',date:'2023',approved:true},
+  {name:'Marte B',rating:5,text:'Han ble superfin og var skikkelig fornøyd med klippen og hvordan Hadi klippet og fikset håret.',date:'2023',approved:true},
+  {name:'Ida M',rating:5,text:'Alltid fornøyd',date:'2023',approved:true},
+  {name:'Ida M',rating:5,text:'Alltid hyggelig og profesjonelt',date:'2023',approved:true},
+  {name:'Vegar S',rating:5,text:'Dyktig frisør og meget fornøyd',date:'2022',approved:true},
+  {name:'Karla J',rating:5,text:'Veldig hyggelig frisør, god pris og bra beliggenhet. Anbefales!!',date:'2022',approved:true},
+  {name:'Kenneth B',rating:5,text:'Fantastisk mann som kan alle aspekter av sin jobb.',date:'2022',approved:true},
+  {name:'Roger L',rating:5,text:'Dyktig frisør. Kan anbefales.',date:'2022',approved:true},
+  {name:'Siniša M',rating:5,text:'Alltid like hyggelig å komme tilbake til Hadi som gjør dagen bedre med sitt unik humor og profesjonalisme. Det jeg liker best at Hadi kommer med gode råd og tilpasser frisyre etter det hva som passer best, dvs. ingen standard klipp da vi alle er unike og forskjellige.',date:'2022',approved:true},
+  {name:'Terje J',rating:5,text:'Første gang jeg var hos. Veldig koselig og pratsom fyr, godt humor og ikke minst, han gjorde en veldig god jobb. Dyktig frisør.',date:'2022',approved:true},
+  {name:'Vegar S',rating:5,text:'Hyggelig, proft og anbefales på det sterkeste.',date:'2022',approved:true},
+  {name:'Marcus F',rating:5,text:'Er alltid en glede å klippe seg på Salon Cabedelo. Hyggelig eier og bra priser. Anbefales virkelig',date:'2022',approved:true},
+  {name:'Ida M',rating:5,text:'Profesjonell og fantastisk service',date:'2022',approved:true},
+  {name:'John K',rating:5,text:'Hei Hadi. Takk for fantastisk kundeservice, hårklipp, og kurs i hårpleie/behandling av hodebunn. Kommer tilbake når det er tid for neste klipp:-)',date:'2021',approved:true},
+  {name:'Marcus F',rating:5,text:'Beste frisør på Råholt',date:'2021',approved:true},
+  {name:'Roger L',rating:5,text:'Fornøyd kunde :) flink frisør. Lett å bestille time på nett for å få det til å passe inn i en hektisk hverdag.',date:'2021',approved:true},
+  {name:'Willy H',rating:5,text:'Veldig fornøyd😀',date:'2021',approved:true},
+  {name:'Ida M',rating:5,text:'Lytter til kunden, er kreativ. Avslappende.',date:'2021',approved:true},
+  {name:'Marcus F',rating:5,text:'Super flink frisør som anbefales på det varmeste. God service og lave priser',date:'2021',approved:true},
+  {name:'Dan T',rating:5,text:'Proffeste klippen til laveste pris! Kan man ønske seg mer? Han fikser det for deg om du ikke er fornøyd, hvis du sier fra. Du trenger ikke være redd for å klippe deg her!',date:'2021',approved:true},
+  {name:'Marcus F',rating:5,text:'Veldig flink frisør og kan anbefale på det varmeste. Bra priser også.',date:'2021',approved:true},
+  {name:'Ida M',rating:5,text:'Dyktig frisør, alltid hyggelig å komme dit. Føler meg godt ivaretatt som kunde.',date:'2021',approved:true},
+  {name:'Rune W',rating:5,text:'Hyggelig og effektiv frisør.',date:'2021',approved:true},
+  {name:'Tove G',rating:5,text:'Akkurat kommet fra frisør Hadi. Mitt første besøk der og det blir heller ikke det siste.😄 Veldig fornøyd. Kan anbefale andre ett besøk der også. Koselig miljø og humøret mitt var også på topp etter besøket.🌞 Prøv gjerne den digitale timebestilling 👍. Hilsen fra en fornøyd kunde Tove T',date:'2021',approved:true},
+  {name:'Dag S',rating:5,text:'👍🏻',date:'2021',approved:true},
+  {name:'Diana J',rating:5,text:'Fin service!',date:'2021',approved:true},
+  {name:'Ida M',rating:5,text:'Dyktig og effektiv. Lytter til kundens ønsker, og kommer med kreative forslag.',date:'2021',approved:true},
+  {name:'Bojan A',rating:5,text:'Alltid god stemning og perfekt resultat',date:'2021',approved:true},
+  {name:'Per T',rating:5,text:'Bra service og trivelig frisør!',date:'2021',approved:true},
+  {name:'Lille-tove G',rating:5,text:'Kjæmpe fornøyd.',date:'2021',approved:true}
 ];
 window.REVIEWS=REVIEWS;
 var selectedStars=5;
@@ -2632,7 +2708,7 @@ function renderReviews(){
   var sum=0;for(var j=0;j<approved.length;j++) sum+=approved[j].rating;
   var avg=(sum/approved.length).toFixed(1).replace('.',',');
   var sumEl=document.getElementById('reviewSummary');
-  if(sumEl) sumEl.textContent=avg+' stjerner · '+approved.length+' Google-anmeldelser';
+  if(sumEl) sumEl.textContent=avg+' stjerner · '+approved.length+' kundeanmeldelser';
   var btn=document.getElementById('visAlleBtn');
   if(btn) btn.textContent='Vis alle '+approved.length+' anmeldelser';
 }
